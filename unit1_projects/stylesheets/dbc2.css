@@ -93,8 +93,11 @@ li {
 	color: #B26C02;
 }
 
-a:link {
-	color: #066AB2;
+.sidebar a:link {
+	color: lightgrey;
+}
+.sidebar a:visited {
+	color: darkgrey;
 }
 
 
