@@ -136,6 +136,7 @@ footer a:link {
 	margin: 5px;
 }
 #footerleft {
+	float: left;
 	display: inline-block;
 	margin: 2px 6px;
 }
@@ -150,7 +151,7 @@ footer a:link {
 	float: left;
 	width: 69%;
 	height: auto;
-	margin: 8px 0px;
+	margin: 8px 0px 20px;
 	padding: 0px 15px 15px;
 	border: 10px double #B26C02;
 	border-radius: 20px;
@@ -164,7 +165,7 @@ footer a:link {
 	float: right;
 	width: 30%;
 	height: auto;
-	margin: 8px auto;
+	margin: 8px auto 22px;
 	padding: 10px 15px;
 	border: 10px double lightgrey;
 	border-radius: 20px;
