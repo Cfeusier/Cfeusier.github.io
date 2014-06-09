@@ -4,10 +4,10 @@ body {
 	margin: auto;
 	padding-bottom: 58px;
 }
-html::after {
+html::before {
 	content: "";
 	background: url("http://blog.teamtreehouse.com/wp-content/uploads/2013/10/photo1.jpg") no-repeat center center fixed;
-	opacity: 0.11;
+	opacity: 0.19;
 	top: 0;
 	left: 0;
 	bottom: 0;
