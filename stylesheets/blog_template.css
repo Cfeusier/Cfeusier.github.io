@@ -7,7 +7,23 @@ body {
 html::before {
 	content: "";
 	background: url("http://blog.teamtreehouse.com/wp-content/uploads/2013/10/photo1.jpg") no-repeat center center fixed;
-	opacity: 0.19;
+	opacity: 0.1;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	z-index: -1;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#bottomwrap::before {
+	content: "";
+	background: url("http://blog.teamtreehouse.com/wp-content/uploads/2013/10/photo1.jpg") no-repeat center center fixed;
+	opacity: 0.1;
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -79,7 +95,7 @@ footer {
 	margin: auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, blockquote {
 	font-family: 'Cabin', sans-serif;
 	margin: 10px 0;
 }
@@ -95,6 +111,15 @@ h2 a {
 	color: #B26C02;
 }
 
+blockquote {
+	color: #B26C02;
+}
+
+h2 {
+	color: #402C21;
+	opacity: 0.9;
+}
+
 li {
 	font-family: 'Cabin', sans-serif;
 	color: lightgrey;
@@ -103,6 +128,10 @@ li {
 }
 
 .bodycontent p {
+	color: #402C21;
+	text-align: left;
+}
+.bodycontent li {
 	color: #402C21;
 	text-align: left;
 }
@@ -159,7 +188,6 @@ footer a:link {
 	border-radius: 20px;
 	box-sizing: border-box;
 	text-align: center;
-
 }
 
 #bodysidebar {
@@ -201,7 +229,7 @@ ul {
 .bodycontent a {
 	font-family: 'Cabin', sans-serif;
 	color: #B26C02;
-	font-size: 8pt;
+	font-size: 12pt;
 	margin: 8px auto 8px auto;
 	text-align: left;
 	box-sizing: border-box;
@@ -216,4 +244,33 @@ ul {
 
 a.postlinklist {
 	font-size: 12pt;
+}
+
+@media (max-width: 900px) {
+	#bodysidebar {
+		background-color: #B26C02;
+		width: 100%;
+		height: auto;
+		margin: auto auto 15px;
+		padding: 10px 15px;
+		border: 10px double lightgrey;
+		border-radius: 20px;
+		box-sizing: border-box;
+	}
+	.bodycontent {
+		width: 100%;
+		height: auto;
+		margin: 8px 0px 15px;
+		padding: 0px 15px 15px;
+		border: 10px double #B26C02;
+		border-radius: 20px;
+		box-sizing: border-box;
+		text-align: center;
+	}
+	#authorimg {
+		margin: auto 10px;
+		width: 20%;
+		float: left;
+		display: inline-block;
+	}
 }
