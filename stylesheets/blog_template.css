@@ -27,6 +27,7 @@ header {
 	border: 10px double lightgrey;
 	border-bottom-left-radius: 45px;
 	box-sizing: border-box;
+	-webkit-transform: translate3d(0, 0, 0);
 }
 
 header a:link {
@@ -48,7 +49,7 @@ header a:link {
 
 #navright {
 	float: right;
-	display: inline-block;
+	display: inline;
 	margin: 15px;
 }
 
