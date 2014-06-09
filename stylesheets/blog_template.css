@@ -192,8 +192,8 @@ footer a:link {
 	float: right;
 	width: 30%;
 	height: auto;
-	margin: 8px auto 22px;
-	padding: 10px 15px;
+	margin: 8px auto 0px;
+	padding: 10px 20px;
 	border: 10px double lightgrey;
 	border-radius: 20px;
 	box-sizing: border-box;
