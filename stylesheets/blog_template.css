@@ -49,8 +49,9 @@ header a:link {
 
 #navright {
 	float: right;
-	display: inline-block;
-	margin: 5px;
+	display: inline;
+	margin: auto;
+	padding: 10px;
 }
 
 footer {
