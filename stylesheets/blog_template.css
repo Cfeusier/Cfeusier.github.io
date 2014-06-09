@@ -44,7 +44,7 @@ header a:link {
 	text-shadow: 1px 0.5px black;
 	font-family: 'Cabin', sans-serif; font-weight: bold;
 	margin: 8px 22px;
-	display: inline-block;
+	display: inline;
 }
 
 #navright {
