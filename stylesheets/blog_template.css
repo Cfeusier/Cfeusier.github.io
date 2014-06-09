@@ -4,10 +4,11 @@ body {
 	margin: auto;
 	padding-bottom: 58px;
 }
+
 html::before {
 	content: "";
-	background: url("http://blog.teamtreehouse.com/wp-content/uploads/2013/10/photo1.jpg") no-repeat center center fixed;
-	opacity: 0.1;
+	background: url("../images/code_background.jpg") center center fixed;
+	opacity: 0.09;
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -22,7 +23,7 @@ html::before {
 
 #bottomwrap::before {
 	content: "";
-	background: url("http://blog.teamtreehouse.com/wp-content/uploads/2013/10/photo1.jpg") no-repeat center center fixed;
+	background: url("../images/code_background.jpg") center center fixed;
 	opacity: 0.1;
 	top: 0;
 	left: 0;
@@ -34,7 +35,7 @@ html::before {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-}
+}	
 
 header {
 	background-color: #B26C02;
@@ -146,6 +147,10 @@ li {
 	border-radius: 20px;
 	box-sizing: border-box;
 	clear: both;
+}
+
+#about_section p {
+	font-size: 13pt;
 }
 
 footer a:link {

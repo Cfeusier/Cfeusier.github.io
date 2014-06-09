@@ -1,5 +1,6 @@
 body {
 	background-color: #99D4FF;
+	margin: 0;
 }
 
 header {
@@ -10,40 +11,27 @@ footer {
 	clear: both;
 
 	text-align: left;
-	padding: 12px;
-	margin: auto;
+	padding: 0 12px;
+	margin: 0px;
+}
+
+footer a {
+	color: #066AB2;
+}
+footer p {
+	font-size: 11px;
 }
 
 #wrap {
 	text-align: center;
-	width: 98%;
+	width: 97%;
 	margin: auto;
-}
-
-#maincontent {
-	float: left;
-	background-color: #99D4FF;
-	width: 75%;
-	height: auto;
-	border: 1px solid white;
-	border-radius: 30px;
-	margin-bottom: 20px;
-	margin-top: 10px;
-}
-
-.sidebar {
-	float: right;
-	background-color: #B26C02;
-	width: 23%;
-	height: auto;
-	margin: 10px 1px;
-	border: 1px solid white;
-	border-radius: 30px;
 }
 
 #footerleft {
 	float: left;
-	margin: 10px 10px 30px 10px;
+	margin: 10px 10px 10px 10px;
+	width: 70%;
 }
 
 #footerright {
@@ -51,10 +39,87 @@ footer {
 	margin: 10px 10px 30px 10px;
 }
 
+#footerright p {
+	margin: 20px 0;
+}
+
+#footerright a {
+	margin: 3px;
+}
+
 #titleheader {
 	text-align: center;
 }
 
+#maincontent {
+	float: right;
+	background-color: #99D4FF;
+	width: 73%;
+	height: auto;
+	border: 1px solid white;
+	border-radius: 30px;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+.sidebar {
+	float: left;
+	background-color: #B26C02;
+	width: 23%;
+	height: auto;
+	margin: 0px 1px;
+	border: 1px solid white;
+	border-radius: 30px;
+	padding: 8px;
+}
+
+@media (max-width: 900px) {
+	.sidebar {
+		background-color: #B26C02;
+		width: 96%;
+		height: auto;
+		margin: auto;
+		border: 1px solid white;
+		border-radius: 30px;
+		margin-bottom: 10px;
+	}
+	#maincontent {
+		float: right;
+		background-color: #99D4FF;
+		width: 96%;
+		height: auto;
+		border: 1px solid white;
+		border-radius: 30px;
+		margin-bottom: 10px;
+	}
+	#footerleft {
+		float: none;
+		margin: 0px 10px 10px 10px;
+		width: 96%;
+	}
+	#footerleft p {
+		margin: 0px 10px 10px 10px;
+	}
+
+	#footerright {
+		margin: 0px 10px 30px 10px;
+		display: inline-block;
+		width: 96%;
+	}
+	#footerright p {
+		margin: 10px 10px 10px 10px;
+	}
+	#footerright::before {
+		content: "";
+		display: block;
+		border: 1px dotted #B26C02;
+		margin: auto;
+		width: 90%;
+	}
+	footer {
+		padding: 0px;
+	}
+}
 
 .happystartimg {
 	height: 250px;
@@ -70,11 +135,6 @@ footer {
 	margin: 20px;
 	font-size: 16pt;
 }
-
-
-
-
-
 
 /* Global Elements */
 
