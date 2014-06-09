@@ -5,26 +5,18 @@ body {
 	padding-bottom: 58px;
 }
 
-html::before {
-	content: "";
-	background: url("../images/code_background.jpg") center center fixed;
-	opacity: 0.09;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	position: absolute;
-	z-index: -1;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+html {
+	min-height: 100%;
+	position: relative;
 }
 
-#bottomwrap::before {
+html::before {
 	content: "";
-	background: url("../images/code_background.jpg") center center fixed;
-	opacity: 0.1;
+	background: url("../images/code_background.jpg") repeat center center fixed;
+	background-repeat: repeat-y;
+	width: 100%; 
+	height: 100%;
+	opacity: 0.09;
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -108,7 +100,7 @@ p, a {
 	margin: 8px auto 8px auto;
 }
 
-h2 a {
+h2, h3 a {
 	color: #B26C02;
 }
 
@@ -116,7 +108,7 @@ blockquote {
 	color: #B26C02;
 }
 
-h2 {
+h2, h3 {
 	color: #402C21;
 	opacity: 0.9;
 }
@@ -277,5 +269,5 @@ a.postlinklist {
 		width: 20%;
 		float: left;
 		display: inline-block;
-	}
+	}	
 }
