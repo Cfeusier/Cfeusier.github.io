@@ -3,6 +3,7 @@ body {
 	height: 100%;
 	margin: auto;
 	padding-bottom: 58px;
+	box-sizing: border-box;
 }
 
 body::after {
@@ -73,12 +74,13 @@ footer {
 }
 
 #containermax {
-	/* box-sizing: border-box; */
+	box-sizing: border-box;
+	margin: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Cabin', sans-serif;
-	margin: 10px;
+	margin: 10px 0;
 }
 
 p, a {
@@ -99,14 +101,14 @@ li {
 	margin: 8px auto 8px auto;
 }
 
-#bodycontent p {
+.bodycontent p {
 	color: #402C21;
 	text-align: left;
 }
 
 #about_section{
 	background-color: #402C21;
-	margin: 8px auto;
+	margin: 0px auto;
 	width: 97%;
 	height: auto;
 	padding: 5px 15px;
@@ -139,15 +141,15 @@ footer a:link {
 	margin: 2px 6px;
 }
 
-#bodycontentwrap {
+.bodycontentwrap {
 	width: 97%;
 	margin: auto;
 	box-sizing: border-box;
 }
 
-#bodycontent {
+.bodycontent {
 	float: left;
-	width: 68%;
+	width: 69%;
 	height: auto;
 	margin: 8px 0px;
 	padding: 0px 15px 15px;
@@ -163,11 +165,11 @@ footer a:link {
 	float: right;
 	width: 30%;
 	height: auto;
-	margin: 8px 0px;
-	padding: 10px 10px;
+	margin: 8px auto;
+	padding: 10px 15px;
 	border: 10px double lightgrey;
 	border-radius: 20px;
-	box-sizing: border-box;	
+	box-sizing: border-box;
 }
 
 #authorimg {
@@ -194,10 +196,22 @@ ul {
 	color: #B26C02;
 }
 
-#bodycontent a {
+.bodycontent a {
 	font-family: 'Cabin', sans-serif;
 	color: #B26C02;
-	font-size: 11pt;
+	font-size: 8pt;
 	margin: 8px auto 8px auto;
 	text-align: left;
+	box-sizing: border-box;
+}
+
+#homeicon {
+	opacity: 0.62;
+	:hover {
+		opacity: 1;
+	}
+}
+
+a.postlinklist {
+	font-size: 12pt;
 }
