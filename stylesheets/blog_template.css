@@ -27,13 +27,11 @@ header {
 	border: 10px double lightgrey;
 	border-bottom-left-radius: 45px;
 	box-sizing: border-box;
-	-webkit-transform: translate3d(0, 0, 0);
 }
 
 header a:link {
-	text-decoration: none;
 	font-size: 9pt;
-	color: lightgrey;
+	color: #402C21;
 	font-family: 'Cabin', sans-serif;
 	margin: 4px;
 }
@@ -43,15 +41,14 @@ header a:link {
 	color: #402C21;
 	text-shadow: 1px 0.5px black;
 	font-family: 'Cabin', sans-serif; font-weight: bold;
-	margin: 8px 22px;
-	display: inline;
+	margin: -5px 0px 10px;
+	display: inline-block;
 }
 
 #navright {
 	float: right;
-	display: inline;
-	margin: auto;
-	padding: 2px;
+	display: inline-block;
+	margin: 15px;
 }
 
 footer {
