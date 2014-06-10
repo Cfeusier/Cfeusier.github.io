@@ -271,3 +271,8 @@ a.postlinklist {
 		display: inline-block;
 	}	
 }
+
+.subjectpageimg {
+	width: 95%;
+	border: 1.8px solid #B26C02;
+}
