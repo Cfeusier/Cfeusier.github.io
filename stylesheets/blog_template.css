@@ -137,8 +137,8 @@ li {
 	padding: 5px 15px;
 	border: 10px double #B26C02;
 	border-radius: 20px;
-	box-sizing: border-box;
 	clear: both;
+	box-sizing: border-box;
 }
 
 #about_section p {
