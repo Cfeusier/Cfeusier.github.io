@@ -6,7 +6,6 @@ body {
   font-weight: 300;
   line-height: 1.2em;
   margin: 0px auto;
-  min-width: 960px;
   width: 100%;
 }
 
@@ -22,6 +21,10 @@ a {
   -moz-transition: all 0.3s;
   transition: all 0.3s;
 }
+li {
+  list-style: none;
+}
+
 a:hover {
   color: #BC2F36;
 }
@@ -30,7 +33,6 @@ h1 {
   font-family: 'Audiowide', cursive;
   font-size: 2.2em;
   float: left;
-  line-height: 75px;
   text-shadow: 2px 2px rgba(255, 255, 255, 0.25);
 }
 
@@ -67,7 +69,7 @@ nav li {
 nav li a {
   color: #fff;
   margin: 0 10px;
-  padding: 5px 10px;
+  padding: 0px 10px;
   text-decoration: none;
 }
 nav li a:hover {
@@ -102,8 +104,12 @@ header {
 }
 header h1 {
   color: #FFEECC;
-  background: url('../images/icons/it.png') no-repeat 0 50%;
+  background: url('../images/icons/it.png') no-repeat 0 40%;
   padding-left: 40px;
+  margin-top: 14px;
+  margin-bottom: 10px;
+  width: 42%;
+  line-height: 1em;
 }
 header nav {
   float: right;
@@ -111,7 +117,10 @@ header nav {
   margin-left: 20px;
 }
 header nav li {
-  line-height: 75px;
+  line-height: 30px;
+}
+header nav ul {
+  height: auto;
 }
 header nav a {
   border-radius: 6px;
@@ -134,9 +143,9 @@ header:after {
   position: relative;
 }
 #main div.wrapper{
-    width: 100%;
-    max-width:1400px;
-    margin: 0 auto;
+  width: 100%;
+  max-width:1400px;
+  margin: 0 auto;
 }
 
 
@@ -278,12 +287,18 @@ footer {
   background-image: -webkit-linear-gradient(#00665F, #1D766F, #00665F);
   background-image: -moz-linear-gradient(#00665F, #1D766F, #00665F);
   background-image: linear-gradient(#00665F, #1D766F, #00665F);
+  padding: 20px;
 }
 
 footer nav {
-  float: left;
   font-size: 1.1em;
-  margin: 10px;
+  margin: 0 auto;
+}
+
+footer nav ul {
+  margin: 0px auto;
+  height: 100%;
+  -webkit-padding-start: 0px;
 }
 
 footer nav a:hover {
@@ -304,9 +319,112 @@ footer:after {
   font-family: 'EntypoRegular';
   src: url('font/Entypo-webfont.eot');
   src: url('font/Entypo-webfont.eot?#iefix') format('embedded-opentype'),
-       url('font/Entypo-webfont.woff') format('woff'),
-       url('font/Entypo-webfont.ttf') format('truetype'),
-       url('font/Entypo-webfont.svg#EntypoRegular') format('svg');
+  url('font/Entypo-webfont.woff') format('woff'),
+  url('font/Entypo-webfont.ttf') format('truetype'),
+  url('font/Entypo-webfont.svg#EntypoRegular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
+/* Media Queries */
+@media (max-width: 1010px) {
+  #famous article.woman {
+    width: 42%;
+    display: inline-block;
+    margin: 1% 1.5% 1%;
+    float: none;
+  }
+  #famous article.woman#firstlady {
+    margin: 1% 2%;
+    float: left;
+  }
+  #main div.wrapper {
+    width: 100%;
+  }
+  header nav li {
+    float: none;
+    display: block;
+    line-height: 0.7em;
+    text-decoration: underline;
+    margin-top: 8px;
+    font-size: 9pt;
+  }
+  header nav {
+    margin: 10px 20px 12px 0px;
+  }
+  header h1 {
+    width: 65%;
+  }
+
+  header nav ul {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 744px) {
+  #famous article.woman {
+    width: 88%;
+    margin: 1% auto 2%;
+    float: none;
+    display: block;
+  }
+  .jump, header nav{
+    display: none;
+  }
+  #famous article.woman#firstlady {
+    margin: 1% auto 2%;
+    float: none;
+    display: block;
+  }
+  header {
+    text-align: center;
+  }
+  header h1 {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 0px;
+    background: none;
+  }
+  #organizations > div > ul {
+    margin: 0;
+  }
+
+  #organizations img {
+    display: none;
+  }
+  #organizations ul li {
+    max-width: 100%;
+  }
+  #facts > div > ul {
+    margin: 0 23px;
+    padding-left: 0;
+  }
+  #facts ul li {
+    max-width: 100%;
+  }
+  footer nav {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1600px) {
+  #main section {
+    width: 100%;
+  }
+  #main div.wrapper {
+    max-width: 100%;
+    margin: 0px;
+  }
+  #famous article.woman {
+    width: 41%;
+    display: inline-block;
+    float: none;
+    margin: 1% 1.9% 1%;
+    padding: 2.5%;
+  }
+  #famous article.woman#firstlady {
+    float: left;
+  }
+}
+
+
