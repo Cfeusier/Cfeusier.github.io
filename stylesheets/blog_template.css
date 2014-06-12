@@ -243,6 +243,10 @@ a.postlinklist {
 	font-size: 12pt;
 }
 
+.exampleimg {
+	margin: 0 13px;
+}
+
 @media (max-width: 900px) {
 	#bodysidebar {
 		background-color: #B26C02;
@@ -275,4 +279,11 @@ a.postlinklist {
 .subjectpageimg {
 	width: 95%;
 	border: 1.8px solid #B26C02;
+}
+
+@media (max-width: 600px) {
+	.exampleimg {
+		width: 100%;
+		margin: 0 5px;
+	}
 }
