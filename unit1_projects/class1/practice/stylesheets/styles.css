@@ -9,8 +9,14 @@ body {
   width: 100%;
 }
 
+@font-face {
+  font-family: "Bitstream Vera Serif Bold";
+  src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
+}
+
 p {
   margin: 1em;
+  font-family: "";
 }
 
 a {
@@ -18,10 +24,18 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: black;
+}
+.nav li a:hover {
+  color: black;
+}
+
 h1 {
   font-size: 2.2em;
   float: left;
   line-height: 75px;
+  font-family: 'Audiowide', cursive;
 }
 
 h2 {
@@ -32,19 +46,21 @@ h2 {
   line-height: 80px;
   margin: 0 0 0.5em 0;
   text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 h3 {
   font-size: 1.4em;
   font-weight: 700;
   margin: 0 0 0.3em 0;
-  text-align: center;
+  text-align: center`  font-family: 'Quicksand', sans-serif;
 }
 
 h4 {
   color: rgb(120, 120, 120);
   font-size: 1em;
   text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 /* Navigation */
@@ -65,6 +81,7 @@ h4 {
   position: absolute;
   text-decoration: none;
   top: 0;
+  font-family: 'EntypoRegular';
 }
 .jump.up {
   left: 15px;
@@ -107,9 +124,9 @@ h4 {
   position: relative;
 }
 #main div.wrapper{
-    width: 100%;
-    max-width:1400px;
-    margin: 0 auto;
+  width: 100%;
+  max-width:1400px;
+  margin: 0 auto;
 }
 
 #main section:after {
@@ -157,6 +174,9 @@ h4 {
   padding-left: 5px;
   max-width: 50%;
 }
+#organizations ul li::before {
+  font-family: 'EntypoRegular';
+}
 #organizations img {
   position: absolute;
   right: 20px;
@@ -197,4 +217,18 @@ h4 {
   content: "";
   display: table;
   clear: both;
+}
+
+@media screen and (max-width: 960) {
+
+}
+@font-face {
+  font-family: 'EntypoRegular';
+  src: url('font/Entypo-webfont.eot');
+  src: url('font/Entypo-webfont.eot?#iefix') format('embedded-opentype'),
+  url('font/Entypo-webfont.woff') format('woff'),
+  url('font/Entypo-webfont.ttf') format('truetype'),
+  url('font/Entypo-webfont.svg#EntypoRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
