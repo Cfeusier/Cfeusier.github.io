@@ -14,7 +14,7 @@ html::before {
 	content: "";
 	background: url("../images/code_background.jpg") repeat center center fixed;
 	background-repeat: repeat-y;
-	width: 100%; 
+	width: 100%;
 	height: 100%;
 	opacity: 0.09;
 	top: 0;
@@ -27,14 +27,14 @@ html::before {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-}	
+}
 
 header {
 	background-color: #B26C02;
 	width: 100%;
 	height: auto;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	border: 10px double lightgrey;
 	border-bottom-left-radius: 45px;
 	box-sizing: border-box;
@@ -52,7 +52,7 @@ header a:link {
 	color: #402C21;
 	text-shadow: 1px 0.5px black;
 	font-family: 'Cabin', sans-serif; font-weight: bold;
-	margin: -5px 0px 10px;
+	margin: -5px 0 10px;
 	display: inline-block;
 }
 
@@ -273,7 +273,7 @@ a.postlinklist {
 		width: 20%;
 		float: left;
 		display: inline-block;
-	}	
+	}
 }
 
 .subjectpageimg {
