@@ -9,25 +9,21 @@ body {
   width: 100%;
 }
 
-@font-face {
-  font-family: "Bitstream Vera Serif Bold";
-  src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
-}
-
 p {
   margin: 1em;
-  font-family: "";
+  font-family: 'Raleway', sans-serif;
 }
 
 a {
   color: #1D766F;
   text-decoration: none;
+  font-family: 'Raleway', sans-serif;
 }
 
 a:hover {
   color: black;
 }
-.nav li a:hover {
+nav li a:hover {
   color: black;
 }
 
@@ -53,7 +49,8 @@ h3 {
   font-size: 1.4em;
   font-weight: 700;
   margin: 0 0 0.3em 0;
-  text-align: center`  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 h4 {
@@ -64,10 +61,10 @@ h4 {
 }
 
 /* Navigation */
-.nav li {
+nav li {
   float: left;
 }
-.nav li a {
+nav li a {
   color: #fff;
   margin: 0 10px;
   padding: 5px 10px;
@@ -92,25 +89,25 @@ h4 {
 
 
 /* Header */
-#header {
+header {
   background-color: #009D92;
   padding: 10px;
 }
-#header h1 {
+header h1 {
   color: #FFEECC;
   background: url('../images/icons/it.png') no-repeat 0 50%;
   padding-left: 40px;
 }
-#header .nav {
+header nav {
   float: right;
   font-size: 1.2em;
   margin-left: 20px;
 }
-#header .nav li {
+header nav li {
   line-height: 75px;
 }
 
-#header:after {
+header:after {
   /* clearfix hack */
   content: "";
   display: table;
@@ -119,17 +116,17 @@ h4 {
 
 
 /* Main */
-#main div {
+section {
   margin-bottom: 1em;
   position: relative;
 }
-#main div.wrapper{
+section div.wrapper{
   width: 100%;
   max-width:1400px;
   margin: 0 auto;
 }
 
-#main section:after {
+section:after {
   /* clearfix hack */
   content: "";
   display: table;
@@ -137,8 +134,8 @@ h4 {
 }
 
 
-/* Famous Women */
-#famous div.woman {
+/* Article Women */
+article div.woman {
   background-color: white;
   float: left;
   min-height: 250px;
@@ -147,11 +144,11 @@ h4 {
   width: 27.33%;
 }
 
-#famous div.break {
+article div.break {
   clear: both;
 }
 
-#famous div img {
+article div img {
   display: block;
   margin: 1em auto;
   width: 100%;
@@ -173,6 +170,7 @@ h4 {
   margin-bottom: 1em;
   padding-left: 5px;
   max-width: 50%;
+  font-family: 'Raleway', sans-serif;
 }
 #organizations ul li::before {
   font-family: 'EntypoRegular';
@@ -197,22 +195,23 @@ h4 {
   line-height: 1.3em;
   margin-bottom: 1em;
   padding-left: 5px;
+  font-family: 'Raleway', sans-serif;
 }
 
 
 
 /* Footer */
-#footer {
+footer {
   background-color: #00665F;
 }
 
-#footer .nav {
+footer nav {
   float: left;
   font-size: 1.1em;
   margin: 10px;
 }
 
-#footer:after {
+footer:after {
   /* clearfix hack */
   content: "";
   display: table;
