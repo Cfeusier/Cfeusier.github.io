@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="initial-scale=1" />
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+    <title>Clark Feusier | Wireframing and Designing This Website</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/blog_template.css">
+    <script type="text/javascript" src="../javascripts/modernizr.js"></script>
+</head>
+<body>
+    <div id="containermax">
+        <header>
+            <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
+                <a href="../index.html" style="margin: 0px; text-decoration: underline;"><img id="homeicon" style="border-bottom: 2px solid #402C21;" src="http://www.clipartbest.com/download?clipart=di7e57rxT" width="27px" height="27px"></a><a href="../index.html" id="brand">Clark Feusier</a>
+            </div>
+        </header>
+        <div class="bodycontentwrap">
+            <div class="bodycontent">
+                <section>
+                    <h2>Wireframing and Designing This Website</h2>
+                    <hr />
+                    <p>
+                        This week and this post is all about making this website "mine" -- particularly from a design perspective. This will involve coming up with a rough plan and wireframe to shoot for, and then implementing that model in HTML and CSS. Because I am finishing this post after implementing the design, I can provide some better insight on my choices and the process than if I had written this completely before redesigning my site. This site should continually evolve, but for now, I am relatively pleased with the result because it feels like my personality. So, here is the wireframe that acts as the target of the design:</p>
+                        <hr><br />
+                        <img id="wireframeimg" src="images/index_wireframe.png" alt="Wireframe image acting as Target of Design">
+                        <hr>
+                        <section>
+                            <p>
+                                <br />
+                                Doesn't look too hard, right? Well, it was. The CSS in my media queries to get the site to look good on different devices took quite a bit of tinkering. The plan that I followed to execute this was as follows:
+                            </p>
+                            <p>
+                                First, start with the header and footer. Add an image icon and link that to your homepage. Then, add some borders and colors. Finally, tweak the border-radius on the bottom-left.
+                            </p>
+                            <p>
+                                Next, add borders and colors to the main content area and the two sidebar containers. Add some border-radius to all of them on all sides. Repeat this for the dark full-width container at the bottom near the footer.
+                            </p>
+                            <p>
+                                That was pretty much all of it, except for chosing typography and writing rules of responsiveness. However, at the end it was too boring, so I chose a background, which I explain below.
+                            </p>
+                        </section>
+                        <section>
+                            <h3>The Background Choice...</h3>
+                            <p>
+                                A large part of this decision was my general nerd-like love of code. I am not referring to <em>coding</em> right now -- I am talking about how I love the <em><strong>look of code</strong></em>. Having come from a background in mathematics, physics, formal logic and the likes, I seem to have grown a strong aesthetic attachment to the syntaxes of artificial languages. There is something beautiful, complex yet elegant, powerful, and mystical about artificial languages -- I can't help but feel that when looking at code.
+                            </p>
+                            <p>
+                                So, I found some very standard and pretty Javascript to turn sideways and use as an translucent overlay that functions as a background. The trick at that point was making sure that it was opaque enough to see the code, but translucent enough that the typography on top of it was easily readable.
+                            </p>
+                        </section>
+                        <p>
+                            That was it. The funny thing is that after finishing this post, I am already ready to change the design! That will be left for another week :)
+                        </p>
+                    </section>
+                </div>
+                <div id="bodysidebar">
+                    <div id="authorimg">
+                        <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash3/t1.0-1/s320x320/548436_10101038017860745_492696320_n.jpg" alt="Clark Feusier's LinkedIn Profile" width="100%">
+                    </div>
+                    <h2 id="authortextheading">Makin' Stacks, Yo... Full-Stacks</h2>
+                    <p>
+                        I am a student at Dev Bootcamp in San Francisco, California. Born and raised in the San Francisco Bay Area.
+                        Educated at California Polytechnic State University, San Luis Obispo (physics and philosophy). Graduate education at the University of Chicago (metalogic and philosophy of science).
+                    </p>
+                    <hr />
+                    <div id="bottomhalfsidebar">
+                        <h3 id="bottomhalfheader">Play Time</h3>
+                        <li>Playing music, mainly piano</li>
+                        <li>Beer, wine, tea, coffee</li>
+                        <li>Hiking with Fiddle</li>
+                        <li>Philosophizing</li>
+                    </div>
+                </div>
+                <div id="bodysidebar" style="margin-bottom: 20px;">
+                    <h2 style="text-align: center;">Of the Week</h2>
+                    <p>
+                        Development Topic: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">HTML and CSS</span><br />
+                        Motivation: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Lazy artist = no masterpiece</span><br />
+                        Music: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">The White Buffalo</span><br />
+                    </p>
+                </div>
+            </div>
+            <div id="bottomwrap">
+                <div id="about_section">
+                    <p style="text-align:center;">
+                        My partner in crime is named Fiddle --
+                        She likes chasing lizards --
+                        Her best friend (other than me) is named Banjo --
+                        <a href="../fiddle.html">Say Hi!</a>
+                    </p>
+                </div>
+                <footer>
+                    <div id="footerleft">
+                        <a id="footerhome" href="../index.html">CF HOME</a>
+                    </div>
+                    <div id="footerright">
+                        <a href="http://github.com/Cfeusier">GitHub</a> |
+                        <a href="mailto:cfeusier@gmail.com">Email</a> |
+                        <a href="http://linkedin.com/in/clarkfeusier">LinkedIn</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
+    </html>

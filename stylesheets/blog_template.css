@@ -217,6 +217,10 @@ a.postlinklist {
 .exampleimg {
     margin: 0 13px;
 }
+#wireframeimg {
+    width:100%;
+}
+
 @media (max-width: 900px) {
     #bodysidebar {
         background-color: #B26C02;
