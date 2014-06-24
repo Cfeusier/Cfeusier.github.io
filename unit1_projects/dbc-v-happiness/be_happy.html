@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="shortcut icon" href="FAVICON LINK" type="image/x-icon" />
+    <!--[if lte IE 8]><script>(function(){var e="abbr,article,aside,audio,canvas,datalist,details,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i]);}}());</script><![endif]-->
+    <title>Happiness vs. DBC</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="be_happy.css">
+    <link rel="stylesheet" href="animate.min.css">
+    <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="my_solution.js"></script>
+</head>
+<body>
+    <div id="contentwrapper">
+
+        <!-- Dialogs -->
+        <div id="namedialog" title="What is your name?">
+            <form>
+                <fieldset>
+                    <input type="text" name="name" placeholder="name" id="name" class="text ui-widget-content ui-corner-all">
+                </fieldset>
+                <input id="submitname" type="button" name="submitname" value="Continue">
+            </form>
+        </div>
+
+        <div id="happyleveldialog" title="Current Happiness Level">
+            Rate your happiness with a number between 1 and 10 (10 is optimal happiness)
+            <form>
+                <fieldset>
+                    <input type="text" name="happylevelstart" placeholder="happiness 1 - 10" id="happylevelanswer" class="text ui-widget-content ui-corner-all">
+                </fieldset>
+                <input id="submithappylevelanswer" type="button" name="submithappylevelanswer" value="Continue">
+            </form>
+        </div>
+
+        <!-- Navigation and Header -->
+        <nav>
+            <h2 id="namelabel" style="display: inline;"></h2><span id="happylevellabel"> </span>
+        </nav>
+
+        <!-- Introduction Screen -->
+        <div id="introscreen">
+            <div id="gameframewrapper">
+                <button id="startgamebtn">Start the Game!</button>
+            </div>
+            <h3 id="vs">vs.</h3>
+            <div id="gameframediv">
+                <div id="playericon">
+                    <img src="neutral.png" alt="" id="neutralicon">
+                    <h1>Your Happiness</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weapon of Choice Screen -->
+        <div id="weaponscreen">
+            <h1 style="text-align: center;">Choose Your Weapon ... wisely</h1>
+            <div id="weaponswrapper">
+                <div class="weapondiv" id="macweapon">
+                    <h2>Macintosh</h2>
+                    <img src="mac_laptop.jpg" alt="" class="weaponimg" id="macimg">
+                </div>
+                <div class="weapondiv" id="windowsweapon">
+                    <h2>Windows</h2>
+                    <img src="windows_laptop.jpg" alt="" class="weaponimg" id="windowsimg">
+                </div>
+                <div class="weapondiv" id="ubuntuweapon">
+                    <h2>Ubuntu</h2>
+                    <img src="ubuntu_laptop.jpg" alt="" class="weaponimg" id="ubuntuimg">
+                </div>
+            </div>
+            <div id="weaponoptions" style="text-align:center;">
+                <h3 style="text-align: center;">Choose a Command</h3>
+                <ol style="padding: 0;">
+                    <li style="text-align: center; list-style: none;" >this.weapon = 'Macintosh';</li>
+                    <li style="text-align: center; list-style: none;" >this.weapon = 'Windows';</li>
+                    <li style="text-align: center; list-style: none;" >this.weapon = 'Ubuntu';</li>
+                </ol>
+            </div>
+            <div class="answerentry" id="weaponchoice">
+                <form>
+                    <input id="answerentryinputvalue" class="answerentryinput" type="text" placeholder="this.weapon = ...">
+                    <input id="weaponofchoice" name="weaponofchoice" type="button" value="Choose">
+                </form>
+            </div>
+        </div>
+
+        <!-- Windows Death Screen -->
+        <div id="windowsdeathscreen">
+            <h1 style="text-align: center;">Windows was a Bad Choice...</h1>
+            <h3 style="text-align: center;">might as well give up before you even start...</h3>
+            <img src="deadicon.png" style="opacity: 0.5;" width="20%;">
+            <h2 style="text-align: center;">Your happiness is DEAD</h2>
+            <br />
+            <br />
+            <a href="be_happy.html"><button class="startoverbtn">Start Over</button></a>
+        </div>
+
+        <!-- After Weapon Mac Screen -->
+        <div id="afterweaponmacscreen">
+            <h1 style="text-align: center;">+1 Happy Points -- You are off to a Good Start!</h1>
+            <h3 style="text-align: center;">unlike those idiots who chose Windows or Ubuntu...</h3>
+            <img src="happy.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Will you have a Job during Phase 0?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.work = true;</li>
+                <li style="text-align: center; list-style: none;" >this.work = false;</li>
+            </ol>
+            <form>
+                <input id="jobentryinputvalue" class="jobentryinput" type="text" placeholder="this.work = ...">
+                <input id="jobchoice" name="jobchoice" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After Weapon Ubuntu Screen -->
+        <div id="afterweaponubuntuscreen">
+            <h1 style="text-align: center;">Reset to 1 Happy Point -- Bad Decision</h1>
+            <h3 style="text-align: center;">I guess you like a challenge for no reason...</h3>
+            <img src="sad.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Will you have a Job during Phase 0?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.work = true;</li>
+                <li style="text-align: center; list-style: none;" >this.work = false;</li>
+            </ol>
+            <form>
+                <input id="jobentryinputvalue2" class="jobentryinput2" type="text" placeholder="this.work = ...">
+                <input id="jobchoice2" name="jobchoice2" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After Job Screen True -->
+        <div id="afterjobscreentrue">
+            <h1 style="text-align: center;">-2 Happy Points -- Bad Decision</h1>
+            <h3 style="text-align: center;">rice and beans might be better than work during phase 0...</h3>
+            <img src="sad.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Will you do Yoga even when not Mandatory?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.yoga = true;</li>
+                <li style="text-align: center; list-style: none;" >this.yoga = false;</li>
+            </ol>
+            <form>
+                <input id="yogaentryinputvalue" class="yogaentryinput" type="text" placeholder="this.yoga = ...">
+                <input id="yogachoice" name="yogachoice" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After Job Screen False -->
+        <div id="afterjobscreenfalse">
+            <h1 style="text-align: center;">+2 Happy Points -- Good Decision</h1>
+            <h3 style="text-align: center;">now you have no excuse for being unprepared...</h3>
+            <img src="happy.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Will you do Yoga even when not Mandatory?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.yoga = true;</li>
+                <li style="text-align: center; list-style: none;" >this.yoga = false;</li>
+            </ol>
+            <form>
+                <input id="yogaentryinputvalue2" class="yogaentryinput2" type="text" placeholder="this.yoga = ...">
+                <input id="yogachoice2" name="yogachoice2" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After Yoga Screen True -->
+        <div id="afteryogascreentrue">
+            <h1 style="text-align: center;">+1 Happy Point -- Mind and Body Balance</h1>
+            <h3 style="text-align: center;">aum.........</h3>
+            <img src="happy.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Will you work an average of 70+ hours per Week at DBC?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.fullHours = true;</li>
+                <li style="text-align: center; list-style: none;" >this.fullHours = false;</li>
+            </ol>
+            <form>
+                <input id="fullHoursentryinputvalue" class="fullHoursentryinput" type="text" placeholder="this.fullHours = ...">
+                <input id="fullHourschoice" name="fullHourschoice" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After Yoga Screen False -->
+        <div id="afteryogascreenfalse">
+            <h1 style="text-align: center;">-1 Happy Point -- Body fighting Mind</h1>
+            <h3 style="text-align: center;">you no like Gumby?</h3>
+            <img src="sad.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Will you work an average of 70+ hours per Week at DBC?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.fullHours = true;</li>
+                <li style="text-align: center; list-style: none;" >this.fullHours = false;</li>
+            </ol>
+            <form>
+                <input id="fullHoursentryinputvalue2" class="fullHoursentryinput2" type="text" placeholder="this.fullHours = ...">
+                <input id="fullHourschoice2" name="fullHourschoice2" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After fullHours Screen True -->
+        <div id="afterfullHoursscreentrue">
+            <h1 style="text-align: center;">+2 Happy Points -- Hard Work will Pay Off</h1>
+            <h3 style="text-align: center;">hard work-work...</h3>
+            <img src="happy.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Will you sleep more than 6 hours a night on average while at DBC?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.sleep = true;</li>
+                <li style="text-align: center; list-style: none;" >this.sleep = false;</li>
+            </ol>
+            <form>
+                <input id="sleepentryinputvalue" class="sleepentryinput" type="text" placeholder="this.sleep = ...">
+                <input id="sleepchoice" name="sleepchoice" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After fullHours Screen False -->
+        <div id="afterfullHoursscreenfalse">
+            <h1 style="text-align: center;">-2 Happy Points -- No Pain, No Gain</h1>
+            <h3 style="text-align: center;">lazy artists never create masterpieces</h3>
+            <img src="sad.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Will you sleep more than 6 hours a night on average while at DBC?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.sleep = true;</li>
+                <li style="text-align: center; list-style: none;" >this.sleep = false;</li>
+            </ol>
+            <form>
+                <input id="sleepentryinputvalue2" class="sleepentryinput2" type="text" placeholder="this.sleep = ...">
+                <input id="sleepchoice2" name="sleepchoice2" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After Sleep Screen True -->
+        <div id="aftersleepscreentrue">
+            <h1 style="text-align: center;">+2 Happy Points -- Sleep is the Lifeblood of Champions</h1>
+            <h3 style="text-align: center;">zzzZzzZZZzzzz...</h3>
+            <img src="happy.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Are you motivated beyond imagination?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.motivation = true;</li>
+                <li style="text-align: center; list-style: none;" >this.motivation = false;</li>
+            </ol>
+            <form>
+                <input id="motivationentryinputvalue" class="motivationentryinput" type="text" placeholder="this.motivation = ...">
+                <input id="motivationchoice" name="motivationchoice" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After Sleep Screen False -->
+        <div id="aftersleepscreenfalse">
+            <h1 style="text-align: center;">-2 Happy Points -- Night Owls don't See Clearly in Daylight</h1>
+            <h3 style="text-align: center;">a tired brain is a stupid brain...</h3>
+            <img src="sad.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <br />
+            <hr />
+            <h2 style="text-align: center;">Are you motivated beyond imagination?</h2>
+            <h4 style="text-align: center;">Chose a Command</h4>
+            <ol style="padding: 0;">
+                <li style="text-align: center; list-style: none;" >this.motivation = true;</li>
+                <li style="text-align: center; list-style: none;" >this.motivation = false;</li>
+            </ol>
+            <form>
+                <input id="motivationentryinputvalue2" class="motivationentryinput2" type="text" placeholder="this.motivation = ...">
+                <input id="motivationchoice2" name="motivationchoice2" type="button" value="Choose">
+            </form>
+        </div>
+
+        <!-- After Motivation Screen True -->
+        <div id="aftermotivationscreentrue">
+            <h1 style="text-align: center;">Congratulations - you have survived DBC</h1>
+            <h3 style="text-align: center;">motivation was all you needed</h3>
+            <img src="happy.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <a href="be_happy.html"><button class="startoverbtn">Play Again</button></a>
+            <hr />
+            <div id="finalreport">
+                <h2 style="text-align: center;">Final Report</h2>
+            </div>
+
+        </div>
+
+        <!-- After Motivation Screen False -->
+        <div id="aftermotivationscreenfalse">
+            <h1 style="text-align: center;">Walk Away Slowly...</h1>
+            <h3 style="text-align: center;">you aren't ready for this</h3>
+            <img src="sad.png" style="opacity: 0.5;" width="20%;">
+            <br />
+            <a href="be_happy.html"><button class="startoverbtn">Play Again</button></a>
+            <hr />
+            <h3>Without the proper motivation, DBC will CRUSH you ...</h3>
+            <div id="bootcrush">
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
