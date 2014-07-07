@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="initial-scale=1" />
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+    <title>Clark Feusier | Shakin' Class -- Pianos in Different Area Codes</title>
+    <link rel="stylesheet" type="text/css" href="../vendor/stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/blog_template.css">
+    <script type="text/javascript" src="../vendor/javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="../vendor/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
+    <link href="../vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="../vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="containermax">
+        <header>
+            <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
+                <a href="../index.html" style="margin: 0px; text-decoration: underline;"><img id="homeicon" style="border-bottom: 2px solid #402C21;" src="http://www.clipartbest.com/download?clipart=di7e57rxT" width="27px" height="27px"></a><a href="../index.html" id="brand">Clark Feusier</a>
+            </div>
+        </header>
+        <div class="bodycontentwrap">
+            <div class="bodycontent">
+                <div>
+                    <h2>Shakin' Class -- Pianos in Different Area Codes</h2>
+                    <hr />
+                    <p>
+                        There are a lot of ways to model objects in our world -- a globe to represent earth, a popsicle-stick art project to model a real building, a drawing to represent statue, a mathematical equation to model a beehive, a Minkowski spacetime diagram to model space and time, <em>ad infinitum</em>. One of the popular ways that scientists (computer, biological, etc.) model objects in reality is a <em>Class-based</em> system.
+                    </p>
+                    <p>
+                        Think of the taxonomies in biology (Life > Domain > Kingdom > Phylum ... Family > Genus > Species), or the 'basic' types in most programming languages (String, Array, Number, etc.) -- these taxonomies, and many more, tend to be built around <em>class</em> hierarchies. All <em>species</em> are instantiations (objects) of the <em><strong>Species</strong></em> class, which is a <em>subclass</em> of the <em><strong>Life</strong></em> class. That just means that all species share features common to all other species, as well as common to all other life.
+                    </p>
+                    <p>
+                        Classes are are used in <em><a href="http://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">Object Oriented Programming Languages (OOP)</a></em> to organize the <strong>types</strong> of data and behavior of data throughout a program. A <em><strong>class</strong></em> is basically the description of a type -- an <em><strong>object</strong></em> is just an entity of a certain type, or an "instantiation" of a class. For example, since I will be using pianos throughout this post:
+                    </p>
+                    <p>
+                        <em><strong>Class:</strong></em> Piano
+                        <br />
+                        <em><strong>Object:</strong></em> The 110 year old Chickering Grand Piano in my living room
+                    </p>
+                    <p>
+                        If I were trying to create a computer program, let's say a web application for a piano warehouse and reseller, then I might want to show a bunch of different pianos in the webapp with the pianos' respective information. In this case, there might be a bunch of different pianos, all different brands, sounds, woods, colors, etc. All of these pianos are <em><strong>pianos</strong></em>! Or, less redundantly on the surface, all of these piano objects are of the class <em><strong>Piano</strong></em>.
+                    </p>
+                    <p>
+                        I could write a <em><strong>Piano</strong></em> class that has a description of what all piano objects will share -- some basic data and basic behavior. Then, when I want to show a piano in the webapp, I can <em>instantiate</em> an object of the <em><strong>Piano</strong></em> class -- that piano object will then be available for use with all the features and behavior of a piano.
+                    </p>
+                    <p>
+                        I could choose to <em>play</em> the piano, <em>buy</em> the piano, <em>sell</em> the piano, etc., all within my program if I decide to give the <em><strong>Piano</strong></em> class those abilities.
+                    </p>
+                    <p>
+                        Now that we have a general idea of what a <em>class</em> is, let's discuss when to use a class in a computer program.
+                    </p>
+                    <hr />
+                    <h3>When to Use a Class</h3>
+                    <p>
+                        Classes are fairly magical for <em>inheritance</em>, <em>encapsulation</em>, <em>reuse</em>, and other goodies -- so, classes get heavily overused, especially by n00bs. Far from being a panacea, classes can be used with care and in the proper situations. There are many times when a module might be better for inheritance, encapsulation, and reuse. Depending on the language (our examples and discussions will center around Ruby, primarily), there might be a better tool for the job than a class.
+                    </p>
+                    <p>
+                        A class should be used if a program entity is a type of thing that shares other important characteristics with other program entities. But that is not enough -- a class should only be used if the shared characteristics are because the entities are all of the same <em>type</em>, or all stand in a <em><strong>is-a</strong></em> relationship with a type -- e.g., I <strong>am a</strong> <em>person</em>, a <em>person</em> <strong>is a</strong> <em>sentient being</em>, a <em>sentient being</em> <strong>is a</strong> <em>living organism</em>, etc.
+                    </p>
+                    <p>
+                        If your shared charactersitics are reusable but not because of a 'is-a' relationship, then you should probably using a different programming pattern than class-based inheritance.
+                    </p>
+                    <p>
+                        If you are familiar with any semantic web technologies, you might recognize this 'is-a' relationship vs. other relationships distinction. The semantic web folksonomies like RDF and OWL use class-based (is-a) relationships to structure data, while the formal semantic ontologies like SUMO and MILO use more granular relationships to structure data. Because of this difference, the formal ontologies are <em>much</em> more expressive than pure class (is-a) ontological hierarchies. Likewise, there are many ways to modularize and share features in a computer program that are beyond the capabilities of pure is-a inheritance hierarchies, i.e., pure class-based inheritance.
+                    </p>
+                    <p>
+                        So, say that you have a clear 'is-a' relationship between objects that you want to model in a computer program -- you sell pianos; you have a ton of different pianos sitting in a showroom; all of these pianos share certain types of features like price, wood, key material, action material, age, brand, etc.; you want a webapp where customers can browse and compare all of the different pianos. Would it make sense to build a custom software object from <em>scratch</em> for each piano, or would it make more sense to build a <em><strong>Piano</strong></em> software blueprint that could be reused for all of the different pianos by just filling in the individual characteristics for each piano without having to rebuild the outline from scratch? Probably the latter -- that is, <em>use a class</em>.
+                    </p>
+                    <p>
+                        Each piano in the storeroom (and webapp) <em><strong>is a</strong></em> piano, meaning that all of the individual piano objects can be modeled as instantiations of a <em><strong>Piano</strong></em> class. How, you ask? Gently, as follows.
+                    </p>
+                    <hr />
+                    <h3>How to Use a Class ... in Ruby</h3>
+                    <p>
+                        Creating a class in the Ruby language is fairly simple -- all it requires is a <em>class keyword</em>, a <em>class name</em>, and an <em>end keyword</em> to close the class.
+                    </p>
+                    <script type="text/javascript">SyntaxHighlighter.all()</script>
+                    <pre class="brush: ruby">
+                        class Piano
+                        end
+                    </pre>
+                    <p>
+                        That simple code above would allow me to then create piano objects of the class <em><strong>Piano</strong></em>, like so:
+                    </p>
+                    <pre class="brush: ruby">
+                        piano1 = Piano.new
+                    </pre>
+                    <p>
+                        Which would return a piano object similar to #<'Piano:0x0000010129bda8'>, which I could then use in my webapp to do things like display the piano object id, store the piano object in a database, and more.
+                    </p>
+                    <p>
+                        If I wanted to actually add data and behavior to all of our pianos, I could add code within the <code>class</code> and <code>end</code> keywords. Let's try that now, with a basic <em><strong>Piano</strong></em> class example.
+                    </p>
+
+                    <hr />
+                    <h3>Piano Class Example</h3>
+                    <pre class="brush: ruby">
+                        class Piano
+                            def initialize(brand, age, price, keys, size, soundboard_wood)
+                                @brand = brand
+                                @age = age
+                                @price = price
+                                @keys = keys
+                                @size = size
+                                @wood = soundboard_wood
+                            end
+
+                            def piano_desc
+                                puts "The #{@age} year old #{@size} #{@brand} piano currently costs #{@price} U.S. dollars. The piano's soundboard is made of #{@wood} and has #{@keys} keys."
+                            end
+                        end
+                    </pre>
+                    <p>
+                        Now, create some pianos!
+                    </p>
+                    <pre class="brush: ruby">
+                        my_piano = Piano.new("Chickering", 110,
+                                            "N/A", "ivory-ebony",
+                                            "full-grand", "spruce")
+                        elt_john_piano = Piano.new("Yamaha", 4,
+                                                  "1,000,000", "ivory-ebony",
+                                                  "full-grand", "spruce")
+                    </pre>
+                    <p>
+                        Now we can call the <code>piano_desc</code> method on each of the pianos to see a description of the pianos.
+                    </p>
+                    <pre class="brush: ruby">
+                        my_piano.piano_desc
+                        elt_john_piano.piano_desc
+                    </pre>
+                    <p>
+                        Those two method calls would print out the following:
+                    </p>
+                    <p>
+                        <strong>The 110 year old full-grand Chickering piano currently costs N/A U.S. dollars. The piano's soundboard is made of spruce and has ivory-ebony keys.</strong>
+                    </p>
+                    <p>
+                        <strong>The 4 year old full-grand Yamaha piano currently costs 1,000,000 U.S. dollars. The piano's soundboard is made of spruce and has ivory-ebony keys.</strong>
+                    </p>
+                    <p>
+                        Obviously these examples were highly simplified and contrived; however, I hope that the high-level concepts surrounding classes and objects were made more clear than prior to reading this post.
+                    </p>
+                    <p>
+                        Though fairly simple to use, classes are very powerful. Use with care, and only use when you are trying to model an <em><strong>is-a</strong></em>relationship between a bunch of objects and a shared type. When those prerequisites are met, classes will unlock powerful gains from inheritance, encapsulation, and reusability.
+                    </p>
+                </div>
+            </div>
+            <div id="bodysidebar">
+                <div id="authorimg">
+                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash3/t1.0-1/s320x320/548436_10101038017860745_492696320_n.jpg" alt="Clark Feusier's LinkedIn Profile" width="100%">
+                </div>
+                <h2 id="authortextheading">Makin' Stacks, Yo... Full-Stacks</h2>
+                <p>
+                    I am a student at Dev Bootcamp in San Francisco, California. Born and raised in the San Francisco Bay Area.
+                    Educated at California Polytechnic State University, San Luis Obispo (physics and philosophy). Graduate education at the University of Chicago (metalogic and philosophy of science).
+                </p>
+                <hr />
+                <div id="bottomhalfsidebar">
+                    <h3 id="bottomhalfheader">Play Time</h3>
+                    <li>Playing music, mainly piano</li>
+                    <li>Beer, wine, tea, coffee</li>
+                    <li>Hiking with Fiddle</li>
+                    <li>Philosophizing</li>
+                </div>
+            </div>
+            <div id="bodysidebar" style="margin-bottom: 20px;">
+                <h2 style="text-align: center;">Of the Week</h2>
+                <p>
+                    Development Topic: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">HTML and CSS</span><br />
+                    Motivation: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Lazy artist = no masterpiece</span><br />
+                    Music: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">The White Buffalo</span><br />
+                </p>
+            </div>
+        </div>
+        <div id="bottomwrap">
+            <div id="about_section">
+                <p style="text-align:center;">
+                    My partner in crime is named Fiddle --
+                    She likes chasing lizards --
+                    Her best friend (other than me) is named Banjo --
+                    <a href="../fiddle.html">Say Hi!</a>
+                </p>
+            </div>
+            <footer>
+                <div id="footerleft">
+                    <a id="footerhome" href="../index.html">CF HOME</a>
+                </div>
+                <div id="footerright">
+                    <a href="http://github.com/Cfeusier">GitHub</a> |
+                    <a href="mailto:cfeusier@gmail.com">Email</a> |
+                    <a href="http://linkedin.com/in/clarkfeusier">LinkedIn</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
