@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="initial-scale=1" />
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+    <title>Clark Feusier | SQL Cheat Sheet</title>
+    <link rel="stylesheet" type="text/css" href="../vendor/stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/blog_template.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/unit3_cheatsheet.css">
+    <script type="text/javascript" src="../vendor/javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="../vendor/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
+    <link href="../vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="../vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../vendor/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
+</head>
+<body>
+    <div id="containermax">
+        <header>
+            <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
+                <a href="../index.html" style="margin: 0px; text-decoration: underline;"><img id="homeicon" style="border-bottom: 2px solid #402C21;" src="http://www.clipartbest.com/download?clipart=di7e57rxT" width="27px" height="27px"></a><a href="../index.html" id="brand">Clark Feusier</a>
+            </div>
+        </header>
+        <div class="bodycontentwrap">
+            <div class="bodycontent">
+                <script type="text/javascript">SyntaxHighlighter.all()</script>
+                <div id="sheetmainid">
+                    <h1 id="sqltitle">SQL Cheat Sheet</h1>
+                    <hr />
+                    <p id="noteid">
+                        Note: this cheat sheet lists common SQL commands (MySQL syntax) and concepts &mdash; this will be updated with time to become more complete. Thanks to Tali Herzka and Michael Yeung for collaboration!
+                    </p>
+                    <hr />
+                    <h2><em>SELECT</em> Statements</h2>
+                    <hr />
+                    <p>
+                        To select ALL of the fields for entries in a table, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT * FROM table_name
+                    </pre>
+                    <hr />
+                    <p>
+                        To select a given field for entries in a table, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT field_name FROM table_name
+                    </pre>
+                    <hr />
+                    <p>
+                        To select multiple fields for entries in a table, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT f_name1, f_name2, f_name3 FROM table_name
+                    </pre>
+                    <hr />
+                    <p>
+                        To select data for entries in a table based on specific conditions, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT f_name FROM t_name
+                          WHERE conditions
+                    </pre>
+                    <hr />
+                    <p>
+                        To order the result of a query based on ascending order, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT f_name FROM t_name
+                          WHERE conditions
+                          ORDER BY f_name ASC
+                    </pre>
+                    <hr />
+                    <p>
+                        To order the result of a query based on descending order, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT f_name FROM t_name
+                          WHERE conditions
+                          ORDER BY f_name DESC
+                    </pre>
+                    <hr />
+                    <p>
+                        To order the result of a query based on multiple fields, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT f_name FROM t_name
+                          WHERE conditions
+                          ORDER BY f_name1 DESC, f_name2 ASC
+                    </pre>
+                    <hr />
+                    <p>
+                        To select only unique values from a given column, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT DISTINCT f_name FROM t_name
+                    </pre>
+                    <hr />
+                    <p>
+                        To select only values from a given column that match a certain pattern (with a wildcard character '%'), use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT f_name FROM t_name
+                          WHERE f_name LIKE pattern
+                    </pre>
+                    <hr />
+                    <p>
+                        To select entries from a given column only if the entries are present in a list that you provide, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT f_name FROM t_name
+                          WHERE f_name IN ('listmember1', 'listmember2', etc.)
+                    </pre>
+                    <hr />
+                    <p>
+                        To select only the values from a given column that fall within a provided range, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT f_name FROM t_name
+                          WHERE f_name BETWEEN value_1 AND value2
+                    </pre>
+                    <hr />
+                    <h2><em>JOINs</em></h2>
+                    <hr />
+                    <p>
+                        To 'inner join' tables based on JOIN conditions, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT * FROM t_name1
+                          INNER JOIN t_name2 ON conditions
+                    </pre>
+                    <hr />
+                    <p>
+                        To join the right table to the left table, returning null for non-matching values, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT * FROM t_name1
+                          LEFT JOIN t_name2 ON conditions
+                    </pre>
+                    <hr />
+                    <p>
+                        To join the left table to the right table, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT * FROM t_name1
+                          RIGHT JOIN t_name2 ON conditions
+                    </pre>
+                    <hr />
+                    <p>
+                        To return all the entries from both tables, use:
+                    </p>
+                    <pre class="brush: sql">
+                        SELECT * FROM t_name1
+                          FULL OUTER JOIN t_name2 ON conditions
+                    </pre>
+                    <hr />
+                    <h2><em>Relationships</em></h2>
+                    <hr />
+                    <h5 class="relationship">One to One Relationships</h5>
+                    <p>
+                        <strong>One record can belong to only one other record</strong> &mdash; vice versa. For example, imagine that my webapp had a <em>users</em> table. Also, each user could choose to connect his or her Facebook account to their profile on my webapp for extra perks. I might choose to have a <em>facebook_accounts</em> table &mdash; this would allow me to create a one to one relationship between <em>users</em> and <em>facebook_accounts</em> because each user can only have one Facebook account and each Facebook account can only belong to one user.
+                    </p>
+                    <p>
+                        This relationship is created by adding a <em><strong>foreign key</strong></em> that maps the <em>facebook_accounts</em> table to the <em>users</em> table, usually through a <code>facebook_account_id</code> field in the <em>users</em> table that maps to the <code>id</code> field of the <em>facebook_accounts</em> table.
+                    </p>
+                    <hr />
+                    <h5 class="relationship">One to Many Relationships / Many to One Relationships</h5>
+                    <p>
+                        <strong>One record can have many other records associated with it, but those records can only belong to the one associated record.</strong> Imagine that your webapp has a <em>users</em> table. Each user can create lots of jokes to share on your webapp. So, you have a <em>jokes</em> table. Each user can have as many jokes as he or she wants. But, each joke belongs to a single user. This is a one to many relationship.
+                    </p>
+                    <p>
+                        This relationships is created by adding a <em><strong>foreign key</strong></em> as a field on the 'many' table (in our example, the <em>jokes</em> table). The foreign key maps onto the primary key of the 'one' table (in our example, the <em>users</em> table). Usually, this is achieved by adding a <code>user_id</code> field to the <em>jokes</em> table that maps to the <code>id</code> field in the <em>users</em> table.
+                    </p>
+                    <hr />
+                    <h5 class="relationship">Many to Many Relationships</h5>
+                    <p>
+                        <strong>One record can have many other records associated with it, and those records can also belong to many other records.</strong> Imagine that you have an ecommerce webapp. You have a <em>products</em> table as well as an <em>orders</em> table. Each order can have many different products. Also, each product can be in many different orders. This is a many to many relationship.
+                    </p>
+                    <p>
+                        This relationship is established by creating a hybrid table that can be used as a 'lookup' table. This table will contain two foreign keys &mdash; the id for the item and the id for the order &mdash; so that the hybrid table can join the items with the orders.
+                    </p>
+                    <p>
+                        For example, you could create an <em>items_orders</em> table that has <code>item_id</code> and <code>order_id</code> columns. Then, anytime you needed to find the items in an order (or the orders associated with an item), your queries can access the 'lookup' table to join all the entries needed.
+                    </p>
+
+                </div>
+            </div>
+            <div id="bodysidebar">
+                <div id="authorimg">
+                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash3/t1.0-1/s320x320/548436_10101038017860745_492696320_n.jpg" alt="Clark Feusier's LinkedIn Profile" width="100%">
+                </div>
+                <h2 id="authortextheading">Makin' Stacks, Yo... Full-Stacks</h2>
+                <p>
+                    I am a student at Dev Bootcamp in San Francisco, California. Born and raised in the San Francisco Bay Area.
+                    Educated at California Polytechnic State University, San Luis Obispo (physics and philosophy). Graduate education at the University of Chicago (metalogic and philosophy of science).
+                </p>
+                <hr />
+                <div id="bottomhalfsidebar">
+                    <h3 id="bottomhalfheader">Play Time</h3>
+                    <li>Playing music, mainly piano</li>
+                    <li>Beer, wine, tea, coffee</li>
+                    <li>Hiking with Fiddle</li>
+                    <li>Philosophizing</li>
+                </div>
+            </div>
+            <div id="bodysidebar" style="margin-bottom: 20px;">
+                <h2 style="text-align: center;">Of the Week</h2>
+                <p>
+                    Development Topic: <span style="color: #402C21; font-size: 9pt; margin-left: 3px;">HTML, CSS, JavaScript, Ruby, SQL</span><br />
+                    Motivation: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">I'm on the move</span><br />
+                    Music: <span style="color: #402C21; font-size: 7.5pt; margin-left: 3px;">The Black Keys - Meet Me in the City</span><br />
+                </p>
+            </div>
+        </div>
+        <div id="bottomwrap">
+            <div id="about_section">
+                <p style="text-align:center;">
+                    My partner in crime is named Fiddle --
+                    She likes chasing lizards --
+                    Her best friend (other than me) is named Banjo --
+                    <a href="../fiddle.html">Say Hi!</a>
+                </p>
+            </div>
+            <footer>
+                <div id="footerleft">
+                    <a id="footerhome" href="../index.html">CF HOME</a>
+                </div>
+                <div id="footerright">
+                    <a href="http://github.com/Cfeusier">GitHub</a> |
+                    <a href="mailto:cfeusier@gmail.com">Email</a> |
+                    <a href="http://linkedin.com/in/clarkfeusier">LinkedIn</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
