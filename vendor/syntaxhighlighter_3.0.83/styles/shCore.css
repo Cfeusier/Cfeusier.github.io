@@ -7,15 +7,15 @@
  *
  * @version
  * 3.0.83 (July 02 2010)
- * 
+ *
  * @copyright
  * Copyright (C) 2004-2010 Alex Gorbatchev.
  *
  * @license
  * Dual licensed under the MIT and GPL licenses.
  */
-.syntaxhighlighter a,
-.syntaxhighlighter div,
+/*.syntaxhighlighter a,*/
+/*.syntaxhighlighter div,*/
 .syntaxhighlighter code,
 .syntaxhighlighter table,
 .syntaxhighlighter table td,
@@ -223,4 +223,10 @@
 }
 .syntaxhighlighter.printing .break, .syntaxhighlighter.printing .break a {
   color: black !important;
+}
+a.toolbar_item.command_help.help {
+  display: none !important;
+}
+div.toolbar {
+  display: none !important;
 }
