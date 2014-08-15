@@ -17,6 +17,15 @@
     <link href="../vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P9FNCG');</script>
+    <!-- End Google Tag Manager -->
     <div id="containermax">
         <header>
             <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
@@ -33,105 +42,105 @@
                         In this guided pairing session, Jay and I got our first taste of working with JS to solve a challenge. We learned quite a bit about the different scenarios that would call for the use of different data structures, particularly arrays and JS objects. We also broke our baby-teeth on JS inheritance via writing methods on a constructor's <em><strong>prototype object</strong></em>. Even though Jay was sicker than a dog and high on cold-medicine, we still managed to finish the challenge. Here was our solution:
                     </p>
                     <pre class="brush: js">
-var mt = {
-  name: "Mike Tyson",
-  age: 47,
-  quote: "Everyone has a plan 'till they get punched in the mouth."
-};
+                        var mt = {
+                          name: "Mike Tyson",
+                          age: 47,
+                          quote: "Everyone has a plan 'till they get punched in the mouth."
+                      };
 
-var ec = {
-  name: "Emilia Clarke",
-  age: 27,
-  quote: "No one will take my dragons!"
-};
+                      var ec = {
+                          name: "Emilia Clarke",
+                          age: 27,
+                          quote: "No one will take my dragons!"
+                      };
 
-var clients = [
-{ name:"Adam Sandler", age:47, quote:"That's your home! Are you too good for your home?!" },
-{ name:"Kristen Bell", age: 33, quote:"Do you wanna build a snowman?" },
-{ name:"Jim Carrey", age:52, quote:"...So you're telling me there's a chance? YEAH!" }
-];
+                      var clients = [
+                      { name:"Adam Sandler", age:47, quote:"That's your home! Are you too good for your home?!" },
+                      { name:"Kristen Bell", age: 33, quote:"Do you wanna build a snowman?" },
+                      { name:"Jim Carrey", age:52, quote:"...So you're telling me there's a chance? YEAH!" }
+                      ];
 
-var shooterMcGavin = new Client("Shooter McGavin", 48, "Just stay out of my way... or you'll pay. Listen to what I say.");
-shooterMcGavin.constructor === Client;
-shooterMcGavin.age === 48;
-shooterMcGavin.quote === "Just stay out of my way... or you'll pay. Listen to what I say.";
+                      var shooterMcGavin = new Client("Shooter McGavin", 48, "Just stay out of my way... or you'll pay. Listen to what I say.");
+                      shooterMcGavin.constructor === Client;
+                      shooterMcGavin.age === 48;
+                      shooterMcGavin.quote === "Just stay out of my way... or you'll pay. Listen to what I say.";
 
-function Client(name,age,quote) {
-    this.name=name;
-    this.age=age;
-    this.quote=quote;
-}
+                      function Client(name,age,quote) {
+                        this.name=name;
+                        this.age=age;
+                        this.quote=quote;
+                    }
 
-Client.prototype.display = function() {
-  return "name: " + this.name + "\n" + "age: " + this.age + "\n" + "quote: " + this.quote;
-};
+                    Client.prototype.display = function() {
+                      return "name: " + this.name + "\n" + "age: " + this.age + "\n" + "quote: " + this.quote;
+                  };
 
-Client.prototype.showQuote = function() {
-  return this.quote;
-};
+                  Client.prototype.showQuote = function() {
+                      return this.quote;
+                  };
 
-var clark = new Client("Clark Feusier", 26, "I don't think you're ready for this jelly.");
+                  var clark = new Client("Clark Feusier", 26, "I don't think you're ready for this jelly.");
 
-console.log(clark.display());
-                    </pre>
-                    <script type="text/javascript">
-                     SyntaxHighlighter.all()
-                 </script>
-                 <p>
-                 Our great instructor, Lorena, helped us learn more about JS objects, constructor functions, and prototypal inheritance by pointing us to the following resources:<br>
-                 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor">Object Constructor (MDN)</a><br>
-                <a href="http://stackoverflow.com/questions/1114024/constructors-in-javascript-objects">JS Constructors (StackOverflow)</a><br>
-                <a href="http://www.javascriptkit.com/javatutors/proto3.shtml">Prototype Objects (JS Kit)</a>
-                 </p>
-             </div>
-         </div>
-         <div id="bodysidebar">
-            <div id="authorimg">
-                <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash3/t1.0-1/s320x320/548436_10101038017860745_492696320_n.jpg" alt="Clark Feusier's LinkedIn Profile" width="100%">
-            </div>
-            <h2 id="authortextheading">Makin' Stacks, Yo... Full-Stacks</h2>
-            <p>
-                I am a student at Dev Bootcamp in San Francisco, California. Born and raised in the San Francisco Bay Area.
-                Educated at California Polytechnic State University, San Luis Obispo (physics and philosophy). Graduate education at the University of Chicago (metalogic and philosophy of science).
-            </p>
-            <hr />
-            <div id="bottomhalfsidebar">
-                <h3 id="bottomhalfheader">Play Time</h3>
-                <li>Playing music, mainly piano</li>
-                <li>Beer, wine, tea, coffee</li>
-                <li>Hiking with Fiddle</li>
-                <li>Philosophizing</li>
-            </div>
-        </div>
-        <div id="bodysidebar" style="margin-bottom: 20px;">
-            <h2 style="text-align: center;">Of the Week</h2>
-                <p>
-                    Development Topic: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Ruby and Algorithms</span><br />
-                    Motivation: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Better to be kind than right</span><br />
-                    Music: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Let it Be by Dyme Def</span><br />
-                </p>
-        </div>
+                  console.log(clark.display());
+              </pre>
+              <script type="text/javascript">
+               SyntaxHighlighter.all()
+           </script>
+           <p>
+               Our great instructor, Lorena, helped us learn more about JS objects, constructor functions, and prototypal inheritance by pointing us to the following resources:<br>
+               <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor">Object Constructor (MDN)</a><br>
+               <a href="http://stackoverflow.com/questions/1114024/constructors-in-javascript-objects">JS Constructors (StackOverflow)</a><br>
+               <a href="http://www.javascriptkit.com/javatutors/proto3.shtml">Prototype Objects (JS Kit)</a>
+           </p>
+       </div>
+   </div>
+   <div id="bodysidebar">
+    <div id="authorimg">
+        <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash3/t1.0-1/s320x320/548436_10101038017860745_492696320_n.jpg" alt="Clark Feusier's LinkedIn Profile" width="100%">
     </div>
-    <div id="bottomwrap">
-        <div id="about_section">
-            <p style="text-align:center;">
-                My partner in crime is named Fiddle --
-                She likes chasing lizards --
-                Her best friend (other than me) is named Banjo --
-                <a href="../fiddle.html">Say Hi!</a>
-            </p>
-        </div>
-        <footer>
-            <div id="footerleft">
-                <a id="footerhome" href="../index.html">CF HOME</a>
-            </div>
-            <div id="footerright">
-                <a href="http://github.com/Cfeusier">GitHub</a> |
-                <a href="mailto:cfeusier@gmail.com">Email</a> |
-                <a href="http://linkedin.com/in/clarkfeusier">LinkedIn</a>
-            </div>
-        </footer>
+    <h2 id="authortextheading">Makin' Stacks, Yo... Full-Stacks</h2>
+    <p>
+        I am a student at Dev Bootcamp in San Francisco, California. Born and raised in the San Francisco Bay Area.
+        Educated at California Polytechnic State University, San Luis Obispo (physics and philosophy). Graduate education at the University of Chicago (metalogic and philosophy of science).
+    </p>
+    <hr />
+    <div id="bottomhalfsidebar">
+        <h3 id="bottomhalfheader">Play Time</h3>
+        <li>Playing music, mainly piano</li>
+        <li>Beer, wine, tea, coffee</li>
+        <li>Hiking with Fiddle</li>
+        <li>Philosophizing</li>
     </div>
+</div>
+<div id="bodysidebar" style="margin-bottom: 20px;">
+    <h2 style="text-align: center;">Of the Week</h2>
+    <p>
+        Development Topic: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Ruby and Algorithms</span><br />
+        Motivation: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Better to be kind than right</span><br />
+        Music: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Let it Be by Dyme Def</span><br />
+    </p>
+</div>
+</div>
+<div id="bottomwrap">
+    <div id="about_section">
+        <p style="text-align:center;">
+            My partner in crime is named Fiddle --
+            She likes chasing lizards --
+            Her best friend (other than me) is named Banjo --
+            <a href="../fiddle.html">Say Hi!</a>
+        </p>
+    </div>
+    <footer>
+        <div id="footerleft">
+            <a id="footerhome" href="../index.html">CF HOME</a>
+        </div>
+        <div id="footerright">
+            <a href="http://github.com/Cfeusier">GitHub</a> |
+            <a href="mailto:cfeusier@gmail.com">Email</a> |
+            <a href="http://linkedin.com/in/clarkfeusier">LinkedIn</a>
+        </div>
+    </footer>
+</div>
 </div>
 </body>
 </html>

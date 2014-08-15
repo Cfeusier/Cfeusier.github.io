@@ -19,6 +19,15 @@
     <script type="text/javascript" src="../vendor/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
 </head>
 <body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P9FNCG');</script>
+    <!-- End Google Tag Manager -->
     <div id="containermax">
         <header>
             <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
@@ -63,7 +72,7 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT f_name FROM t_name
-                          WHERE conditions
+                        WHERE conditions
                     </pre>
                     <hr />
                     <p>
@@ -71,8 +80,8 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT f_name FROM t_name
-                          WHERE conditions
-                          ORDER BY f_name ASC
+                        WHERE conditions
+                        ORDER BY f_name ASC
                     </pre>
                     <hr />
                     <p>
@@ -80,8 +89,8 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT f_name FROM t_name
-                          WHERE conditions
-                          ORDER BY f_name DESC
+                        WHERE conditions
+                        ORDER BY f_name DESC
                     </pre>
                     <hr />
                     <p>
@@ -89,8 +98,8 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT f_name FROM t_name
-                          WHERE conditions
-                          ORDER BY f_name1 DESC, f_name2 ASC
+                        WHERE conditions
+                        ORDER BY f_name1 DESC, f_name2 ASC
                     </pre>
                     <hr />
                     <p>
@@ -105,7 +114,7 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT f_name FROM t_name
-                          WHERE f_name LIKE pattern
+                        WHERE f_name LIKE pattern
                     </pre>
                     <hr />
                     <p>
@@ -113,7 +122,7 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT f_name FROM t_name
-                          WHERE f_name IN ('listmember1', 'listmember2', etc.)
+                        WHERE f_name IN ('listmember1', 'listmember2', etc.)
                     </pre>
                     <hr />
                     <p>
@@ -121,7 +130,7 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT f_name FROM t_name
-                          WHERE f_name BETWEEN value_1 AND value2
+                        WHERE f_name BETWEEN value_1 AND value2
                     </pre>
                     <hr />
                     <h2><em>JOINs</em></h2>
@@ -131,7 +140,7 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT * FROM t_name1
-                          INNER JOIN t_name2 ON conditions
+                        INNER JOIN t_name2 ON conditions
                     </pre>
                     <hr />
                     <p>
@@ -139,7 +148,7 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT * FROM t_name1
-                          LEFT JOIN t_name2 ON conditions
+                        LEFT JOIN t_name2 ON conditions
                     </pre>
                     <hr />
                     <p>
@@ -147,7 +156,7 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT * FROM t_name1
-                          RIGHT JOIN t_name2 ON conditions
+                        RIGHT JOIN t_name2 ON conditions
                     </pre>
                     <hr />
                     <p>
@@ -155,7 +164,7 @@
                     </p>
                     <pre class="brush: sql">
                         SELECT * FROM t_name1
-                          FULL OUTER JOIN t_name2 ON conditions
+                        FULL OUTER JOIN t_name2 ON conditions
                     </pre>
                     <hr />
                     <h2><em>Relationships</em></h2>

@@ -19,6 +19,15 @@
     <link href="../vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P9FNCG');</script>
+    <!-- End Google Tag Manager -->
     <div id="containermax">
         <header>
             <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
@@ -53,7 +62,7 @@
                     </p>
                     <pre class="brush: ruby">
                         Product.where("purchase_date = ? AND user_name = ?",
-                                       params[:purchase_date],params[:user_name])
+                        params[:purchase_date],params[:user_name])
                     </pre>
                     <p>
                         That would be very cool! No need for the developer to write raw SQL; instead, the developer can write all the database access/manipulation code in the language in which she wrote the rest of the application (Ruby in the example). Also, the database code would become database agnostic. You could write it once and not worry about writing different versions for your SQLite development database and your PostgreSQL production database. In comes the 'Active Record Pattern' ...
@@ -152,12 +161,12 @@
                     </p>
                     <pre class="brush: ruby">
                         class CreateUsers < ActiveRecord::Migration
-                          def change
-                            create_table :users do |t|
-                              t.string :name
-                              t.string :email
-                            end
-                          end
+                        def change
+                        create_table :users do |t|
+                        t.string :name
+                        t.string :email
+                        end
+                        end
                         end
                     </pre>
                     <p>
@@ -171,14 +180,14 @@
                     </p>
                     <pre class="brush: ruby">
                         class CreateCars < ActiveRecord::Migration
-                          def change
-                            create_table :cars do |t|
-                              t.string :make_model
-                              t.integer :year
-                              t.integer :price
-                              t.text :description
-                            end
-                          end
+                        def change
+                        create_table :cars do |t|
+                        t.string :make_model
+                        t.integer :year
+                        t.integer :price
+                        t.text :description
+                        end
+                        end
                         end
                     </pre>
                     <p>

@@ -17,6 +17,15 @@
     <link href="../vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P9FNCG');</script>
+    <!-- End Google Tag Manager -->
     <div id="containermax">
         <header>
             <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
@@ -101,18 +110,18 @@
                     <h3>Piano Class Example</h3>
                     <pre class="brush: ruby">
                         class Piano
-                            def initialize(brand, age, price, keys, size, soundboard_wood)
-                                @brand = brand
-                                @age = age
-                                @price = price
-                                @keys = keys
-                                @size = size
-                                @wood = soundboard_wood
-                            end
+                        def initialize(brand, age, price, keys, size, soundboard_wood)
+                        @brand = brand
+                        @age = age
+                        @price = price
+                        @keys = keys
+                        @size = size
+                        @wood = soundboard_wood
+                        end
 
-                            def piano_desc
-                                puts "The #{@age} year old #{@size} #{@brand} piano currently costs #{@price} U.S. dollars. The piano's soundboard is made of #{@wood} and has #{@keys} keys."
-                            end
+                        def piano_desc
+                        puts "The #{@age} year old #{@size} #{@brand} piano currently costs #{@price} U.S. dollars. The piano's soundboard is made of #{@wood} and has #{@keys} keys."
+                        end
                         end
                     </pre>
                     <p>
@@ -120,11 +129,11 @@
                     </p>
                     <pre class="brush: ruby">
                         my_piano = Piano.new("Chickering", 110,
-                                            "N/A", "ivory-ebony",
-                                            "full-grand", "spruce")
+                        "N/A", "ivory-ebony",
+                        "full-grand", "spruce")
                         elt_john_piano = Piano.new("Yamaha", 4,
-                                                  "1,000,000", "ivory-ebony",
-                                                  "full-grand", "spruce")
+                        "1,000,000", "ivory-ebony",
+                        "full-grand", "spruce")
                     </pre>
                     <p>
                         Now we can call the <code>piano_desc</code> method on each of the pianos to see a description of the pianos.

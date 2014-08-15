@@ -17,6 +17,15 @@
     <link href="../vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P9FNCG');</script>
+    <!-- End Google Tag Manager -->
     <div id="containermax">
         <header>
             <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
@@ -44,9 +53,9 @@
                     </p>
                     <pre class="brush: ruby">
                         class Parent
-                          def family_history
-                            puts "PARENT family history"
-                          end
+                        def family_history
+                        puts "PARENT family history"
+                        end
                         end
 
                         class Child < Parent
@@ -72,15 +81,15 @@
                     </p>
                     <pre class="brush: ruby">
                         class Parent
-                          attr_accessor :last_name
+                        attr_accessor :last_name
 
-                          def initialize(last_name)
-                            @last_name = last_name
-                          end
+                        def initialize(last_name)
+                        @last_name = last_name
+                        end
 
-                          def family_history
-                            puts "PARENT family history"
-                          end
+                        def family_history
+                        puts "PARENT family history"
+                        end
                         end
 
                         class Child < Parent
@@ -114,17 +123,17 @@
                     <pre class="brush: ruby">
                         module FourWheels
 
-                          def self.four_wheels
-                            puts "4 WHEELS WOOHOO!"
-                          end
+                        def self.four_wheels
+                        puts "4 WHEELS WOOHOO!"
+                        end
 
                         end
 
                         class Car
 
-                          def four_wheels
-                            FourWheels.four_wheels
-                          end
+                        def four_wheels
+                        FourWheels.four_wheels
+                        end
 
                         end
 
@@ -138,33 +147,33 @@
                     <pre class="brush: ruby">
                         module Wheels
 
-                          def self.wheels(num_wheels)
-                            puts "#{num_wheels} WHEELS WOOHOO!"
-                          end
+                        def self.wheels(num_wheels)
+                        puts "#{num_wheels} WHEELS WOOHOO!"
+                        end
 
                         end
 
                         class Car
 
-                          def initialize(wheels)
-                            @wheels = wheels
-                          end
+                        def initialize(wheels)
+                        @wheels = wheels
+                        end
 
-                          def wheels
-                            Wheels.wheels(@wheels)
-                          end
+                        def wheels
+                        Wheels.wheels(@wheels)
+                        end
 
                         end
 
                         class Tricycle
 
-                          def initialize(wheels)
-                            @wheels = wheels
-                          end
+                        def initialize(wheels)
+                        @wheels = wheels
+                        end
 
-                          def wheels
-                            Wheels.wheels(@wheels)
-                          end
+                        def wheels
+                        Wheels.wheels(@wheels)
+                        end
 
                         end
 
