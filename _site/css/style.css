@@ -275,10 +275,10 @@ header{
 
 #main-contents{
 	background-color: #eaebec;
-	padding-top:50px;
+	padding-top:30px;
 }
 .page-contents{
-	padding: 100px;
+	padding: 30px;
 	background: #f5f5f5;
 	margin-bottom: 50px;
 }
@@ -286,7 +286,7 @@ header{
 	margin-top: 0;
 }
 .page-title{
-	margin: 50px 0 40px 0;
+	margin: 10px 0 20px 0;
 	font-weight: 700;
 	font-size: 28px;
 }
@@ -737,4 +737,35 @@ blockquote{
 
 .foot {
 	width: auto;
+}
+
+.about-list {
+	margin:0;
+	padding: 0;
+	list-style: none;
+	margin-bottom: 15px;
+}
+
+.about-list i {
+	margin-right: 10px;
+}
+
+.disabledAnchor {
+	pointer-events: none !important;
+	cursor: default;
+	color: #00688B;
+	display: inline-block;
+}
+.disabledAnchor p, .disabledAnchor i {
+	display: inline-block;
+	color: #303030;
+}
+
+.disabledAnchor i.big-icon {
+	font-size: 40px;
+	margin-bottom: 10px;
+}
+
+hr {
+	border-bottom: 1px solid gray;
 }
