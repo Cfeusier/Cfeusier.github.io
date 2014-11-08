@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                {{content}}
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">{{ page.date | date_to_long_string }}</span>
+                </div>
+                <h2 class="title">{{page.title}}</h2>
+                <div class="content">
+                    {{ page.content | markdownify }}
+                </div> 
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                {% for tag in page.tags %}
+                <a class="tag_list_link" href="{{site.url}}/tag/{{ tag }}">{{ tag }}</a>
+                <span class="seperator">,</span>
+                {% endfor %}
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{site.url}}{{page.url}}&t={{page.title}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer={{site.url}}{{page.url}}&text={{page.title}}&url={{site.url}}{{page.url}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url={{site.url}}{{page.url}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>                    
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	{% if page.previous.url %} 
+            <li class="prev"><a href="{{site.url}}{{page.previous.url}}"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            {% endif %}
+            {% if page.previous.url or page.next.url%} 
+            <li class="separator"></li>
+            {% endif %}
+            {% if page.next.url %} 
+            <li class="next"><a href="{{site.url}}{{page.next.url}}"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

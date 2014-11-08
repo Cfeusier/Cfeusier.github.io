@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ page.title }}</title>
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="{{site.url}}/css/base.css">
+
+    </head>
+    <body>
+       <header>
+            <div id="logo">
+                <img src="{{site.url}}img/headshot.png" alt="">
+            </div>
+            <div id="site-heading">
+                <h2 class="title">Clark Feusier</h2>
+                <h3 class="subtitle">Software Engineer and Metalogician</h3>
+            </div>
+            <ul id="nav">
+                 <li class="{% if page.url == '/pages/about/' %}active{% endif %}"><a href="{{site.url}}/pages/about">About</a></li>
+                 <li class="{% if page.url == '/' %}active{% endif %}"><a href="{{site.url}}/index.html">Blog</a></li>
+                 <li><a href="#" id="contact-section">Contact</a></li>
+            </ul>
+            <div id="contact-wrapper">
+                <div id="contact-content">
+                    <i class="fa fa-envelope-o contact-icon"></i>
+                    <ul id="contact-list">
+                        <li><a href="mailto:cfeusier@gmail.com">cfeusier@gmail.com</a></li>
+                        <li class="separator">/</li>
+                        <li><a href="#">#Johndow</a></li>
+                    </ul>
+                </div>
+                <a href="#" id="contact-close"><i class="fa fa-times"></i></a>
+            </div>
+       </header>
+       <div id="main-contents">

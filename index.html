@@ -1,341 +1,67 @@
-<!DOCTYPE html>
-<html>
-<html lang="en">
+---
+layout: default
+title: Clark Feusier | Software and Logic
+---
 
-<head>
-    <link href='http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="viewport" content="initial-scale=1" />
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
-    <title>Clark Feusier | Success as Will</title>
-    <link rel="stylesheet" type="text/css" href="vendor/stylesheets/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/blog_template.css" />
-    <script type="text/javascript" src="vendor/javascripts/modernizr.js"></script>
-    <!--[if lte IE 8]><script>(function(){var e="abbr,article,aside,audio,canvas,datalist,details,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i]);}}());</script><![endif]-->
-</head>
 
-<body>
-    <!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P9FNCG');</script>
-    <!-- End Google Tag Manager -->
-    <div id="containermax">
-        <header>
-            <div style="display: inline-block; margin-top: 13px; margin-left: 20px;">
-                <a href="./index.html" style="margin: 0px; text-decoration: underline;">
-                    <img id="homeicon" style="border-bottom: 2px solid #402C21;" src="http://www.clipartbest.com/download?clipart=di7e57rxT" width="27px" height="27px"></a><a href="./index.html" id="brand">Clark Feusier</a>
+<div class="blog-posts">
+
+    <div class="container">
+        {% for post in paginator.posts %}
+        <div class="post-item">
+            <div class="post-header">
+               {% case post.layout %}
+
+                    {% when 'post_simple' %}
+                      {% include simple_post_header.html %}
+
+                    {% when 'post_image' %}
+                      {% include image_post_header.html %}
+
+                    {% when 'post_video' %}
+                      {% include video_post_header.html %}
+
+                    {% when 'post_audio' %}
+                      {% include audio_post_header.html %}
+
+                    {% else %}
+                      {% include simple_post_header.html %}
+
+               {% endcase %}
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">{{ post.date | date_to_long_string }}</span>
                 </div>
-            </header>
-            <div class="bodycontentwrap">
-                <div class="bodycontent">
-                    <h1 id="latestheader">Latest Writings</h1>
-                    <a class="postlinklist" href="blog-posts/week10_11_perspective.html">
-                        <h3>Perspective : Week 10 and 11</h3>
-                    </a>
-                    <p>
-                        My perspective on the first two weeks &mdash; documented for posterity and dissemination.
-                    </p>
-                    <p>
-                        "Stress and anxiety are recursive &mdash; stress calls itself recursively, passing in it's current level of stress as an argument ... never reaching a base-case, thus spiraling away into infinite stress and anxiety, until your brain shuts down from over-consumed memory ... Stack level too deep, yo ... can - not - com - pute ..."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week10_11_perspective.html">Read Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week9_cultural.html">
-                        <h3>Excuse me, How Do I Ask a Good Question?</h3>
-                    </a>
-                    <p>
-                        "'What is the <em><strong>right</strong></em> way to write a custom Angular directive?' Well, you have probably loaded your own values into 'right,' so it is best to clarify those values explicitly. 'Right' based on what criteria? What is the context of the directive and the objectives of the implementation? Answers to those questions would 'unload' the term 'right' so that the question could be answered clearly.
-                    </p>
-                    <p>
-                        'What is the <em><strong>best</strong></em> programming language to learn?' 'Best' programming language in what ways and for whom? 'Nuff said. Try to be explicit up front about your values, criteria, and context when using 'thick' and 'loaded' normative terms within your questions ..."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week9_cultural.html">Read Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week8_cultural.html">
-                        <h3>Conflict, Shame, and Humble Pie</h3>
-                    </a>
-                    <p>
-                        "To handle the original conflict &mdash; I was now ready to go back to my colleagues with my tail between my legs, my mouth full of humble pie, and my head covered in shit because it had been so far up my ass &mdash; I needed to apologize.
-                    </p>
-                    <p>
-                        Next, I needed to listen to my colleagues. The <em>real</em> kind of listening &mdash; you know, the kind of listening where you aren't just thinking of things to say or waiting for your turn to interject ..."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week8_cultural.html">Read Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week8_technical.html">
-                        <h3>The Active Record Pattern + ORM + Rails' ActiveRecord</h3>
-                    </a>
-                    <p>
-                        "We now have all the parts in place to finally explain Object-Relational Mapping. <strong>Objects are a mixture of abilities and data in the form of properties</strong>, e.g., a <code>Car</code> object could have the ability to <code>accelerate</code> and a <code>horsepower</code> property. <strong>Relations are just tables of data and how the data are related</strong>, e.g., a <code>Cars</code> table could have a field for horsepower, and the different car records could have a different value for their horsepower. Object-Relational Mapping just <em><strong>maps classes to tables, objects to records, and the properties of objects onto the fields of tables</strong></em>..."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week8_technical.html">Read Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit3_projects/unit3_cheatsheet.html">
-                        <h3>SQL Cheat Sheet</h3>
-                    </a>
-                    <p>
-                        Here is a SQL (MySQL) cheat sheet for some of the commands and concepts most common for beginners &mdash; SELECT statements, JOINs, and relationships.
-                        <br />
-                        <a class="postlinklist" href="unit3_projects/unit3_cheatsheet.html">View Cheat Sheet</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week7_cultural.html">
-                        <h3>When am I Happyproudisfied?</h3>
-                    </a>
-                    <p>
-                        "Ignoring the fact that happiness, pride, and satisfaction are <em><strong>themselves</strong></em> second-order <em>values</em> that could be questioned in their own right, they are useful as measuring sticks against which to evaluate my life. If I can find out the values involved in making me happy, proud, and satisfied, then I have a winning formula &mdash; I just need to embody those values, and I will be happy, proud, and satisfied ..."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week7_cultural.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week7_technical.html">
-                        <h3>You NoSQL?</h3>
-                    </a>
-                    <p>
-                        "In the world of databases and database management systems, the big dog is SQL and all of the systems built on top of SQL. However, in the past few years, a newcomer has started rapidly grabbing market share in the database game (the game be real, yo). This upstart is called NoSQL. The reason you should care about this is that SQL and NoSQL aren't just different 'products' — they are different in kind ..."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week7_technical.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week6_cultural.html">
-                        <h3>Threatening the Stereotype Threat</h3>
-                    </a>
-                    <p>
-                        "Let's kick the stereotype threat's ass together ..."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week6_cultural.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week6_technical.html">
-                        <h3>Another Explanation of Composition and Inheritance ... ugh</h3>
-                    </a>
-                    <p>
-                        "I am a human. I have a brain. My dog is a dog. My dog has a brain. Should my dog and I stand in an inheritance relation to some <strong>direct</strong> parent just because we both share the functionality of having a brain? Probably not. It makes more sense to model this case as a scenario where my dog and I are both <em><strong>composed</strong></em> of brains (as well as main other things), i.e., we both <em><strong>have</strong></em> brains. BOOM -- composition motivated"
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week6_technical.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week5_cultural.html">
-                        <h3>It Takes a Village to Raise a Programmer</h3>
-                    </a>
-                    <p>
-                        "If you have ever seen Varsity Blues and the TV show the O.C., then you pretty much know what high school was like for me. Take a town's obsession with football, particularly producing college and pro quarterbacks, and mix with a wealthy-white California-bubble -- you have my high school town ... "
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week5_cultural.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week5_technical.html">
-                        <h3>Shakin' Class -- Pianos in Different Area Codes</h3>
-                    </a>
-                    <p>
-                        "Though fairly simple to use, classes are very powerful. Use with care, and only use when you are trying to model an <em><strong>is-a</strong></em> relationship between a bunch of objects and a shared type. When those prerequisites are met, classes will unlock powerful gains from inheritance, encapsulation, and reusability."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week5_technical.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week4_cultural.html">
-                        <h3>Emerging Technology (Non-Existent) Ethics</h3>
-                    </a>
-                    <p>
-                        "The world of technology is a <em><strong>shit show</strong></em> -- like college-Spring-Break-Cancun-style. Unclear standards. Unclear how regulation works. Minimal enforcement of unclear standards. If <em>bad things caused by lack of a global technology roadmap</em> is analagous to <em>underage drinking</em>, than the future looks to be the youngest, sloppiest, drunkest, wildest, and stupidest of Spring Breaks ..."
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week4_cultural.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week4_technical.html">
-                        <h3>(Re)cycle and Reuse</h3>
-                    </a>
-                    <p>
-                        "If aesthetic sexiness doesn't sway you, you are a robot. So, hopefully you will find this convincing -- there are slight performance gains when using #cycle versus #each (combined with #times)." Read all about <strong>Enumerable#cycle</strong> in this week's 'technical' post.
-                        <br />
-                        <a class="postlinklist" href="blog-posts/week4_technical.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit1_projects/dbc-v-happiness/be_happy.html">
-                        <h3>DBC v. Your Happiness ...</h3>
-                    </a>
-                    <p>
-                        Who will win? Test your skills against the feared Dev Bootcamp -- can you survive DBC with your happiness intact? If you have the nerve, take a run through my Unit 1 Week 3 Challenge 5 game.
-                        <br />
-                        <a class="postlinklist" href="unit1_projects/dbc-v-happiness/be_happy.html">Start Playing!</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week3_cultural.html">
-                        <h3>Clark Brain Think Like So</h3>
-                    </a>
-                    <p>
-                        Let me explain how I would most naturally expound the meaning of an <em>abstract sequential</em> thinking style. I would provide a <em><strong>theory</strong></em> of the meaning of an <em>abstract sequential</em> thinking style. That I would approach describing <em>abstract sequentialism</em> by providing a theory of the meaning of <em>abstract sequentialism</em> belies the fact that I, myself, am an <em>abstract sequentialist thinker</em>. If that confused you, read the full post!
-                        <br />
-                        <a href="blog-posts/week3_cultural.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week3_technical.html">
-                        <h3>The Pencil is to the Left ...</h3>
-                    </a>
-                    <p>
-                        Like any tool, the success of the tool is dependent upon the proper use of said tool. JavaScript is a powerful tool when used properly, with more similarities than differences to other multi-purpose scripting languages. Read my thoughts on JavaScript's popularity in web development, JavaScript's strengths, and JavaScript's weaknesses.
-                        <br />
-                        <a href="blog-posts/week3_technical.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit1_projects/gps1.2.html">
-                        <h3>GPS 1.2 with Jay Dave -- Intro to JS</h3>
-                    </a>
-                    <p>
-                        Jay and I worked on creating a simple Client management program in order to get exposure to working with JavaScript objects. We also got a peek at using JS prototypal inheritance and learned about different scenarios that call for specific data structures.
-                        <br />
-                        <a href="unit1_projects/gps1.2.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit1_projects/my_wireframe.html">
-                        <h3>Wireframing and Designing This Website</h3>
-                    </a>
-                    <p>
-                        Check out the wireframing, planning, and execution process for designing this site! As always, please give me feedback.
-                        <br />
-                        <a href="unit1_projects/my_wireframe.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit1_projects/class4/practice/index.html">
-                        <h3>Women in Computing -- Responsive Version</h3>
-                    </a>
-                    <p>
-                        For this assignment, we were supposed to take a
-                        <em>rigid</em>page that had content about women in Computing and make that page "responsive" -- that is, optimized to display different content based on the device, screen size, and resolution. Finally, I optimized for huge monitors, desktops, tablets, and mobile phones by using different media queries.
-                        <br />
-                        <a href="unit1_projects/class4/practice/index.html">View Women in Computing made Responsive</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week2_technical.html">
-                        <h3>Designers' Favorite Positions: Relative, Absolute, Fixed, and Static</h3>
-                    </a>
-                    <p>
-                        If you are confused about the different types of positioning that can be used to position HTML elements, have no fear. In this post, I explain and provide examples to clarify the differences between relative, absolute, fixed, and static positioning. If you don't want to read the whole post, here is the summary: static positioning is the default, and doesn't actually do any positioning (unless overriding previously positioned elements). Relative positioning is positioning of an element relative to itself. Absolute positioning is positioning of an element relative to another element with absolute or relative positioning. Finally, fixed positioning is positioning of an element relative to the viewport or browser window.
-                        <br />
-                        <a href="blog-posts/week2_technical.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit1_projects/class1/practice/index.html">
-                        <h3>Women in Computing -- Semantic Version</h3>
-                    </a>
-                    <p>
-                        For this assignment, I used a page that had content about women in Computing and made that page "more semantic" -- that is, I updated the markup in certain places to use more meaningful structure using HTML5 syntax. Secondary (Right) click on the page and select "view page source," which will allow you to view the HTML5 markup like the "article and section" tags.
-                        <br />
-                        <a href="unit1_projects/class1/practice/index.html">View Women in Computing made Semantic</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit1_projects/gps1.1.html">
-                        <h3>GPS1.1 with James Robinson on Pair Programming</h3>
-                    </a>
-                    <p>
-                        For our first Guided Pairing Session (GPS), we were required to build a simple webpage with HTML and CSS to reflect on the topic of Pair Programming. We spent much of it playing with the driver/navigator roles and started on the page content near the end.
-                        <br />
-                        <a href="unit1_projects/gps1.1.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week1_technical.html">
-                        <h3>Website Analysis | GitHub, Google Analytics, and Vimeo</h3>
-                    </a>
-                    <p>
-                        Each of these websites, maybe more appropriately called "web apps," are best-in-class products along multiple axes of evaluation -- from usability and design, all the way to performance and utility-value. We have a lot to learn, so let's get started!
-                        <br />
-                        <a href="blog-posts/week1_technical.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="blog-posts/week1_cultural.html">
-                        <h3>Dev Bootcamp is a Bootcamp</h3>
-                    </a>
-                    <p>
-                        Don't forget that you signed up for it. Bootcamps accelerate life, and I am excited to be doing it with such an interesting group of people. I am more excited than I have been to do anything in my life, while also more nervous...
-                        <br />
-                        <a href="blog-posts/week1_cultural.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit1_projects/wireframe_sites.html">
-                        <h3>Wireframing as Part of the Web Design Process</h3>
-                    </a>
-                    <p>
-                        In this post, I will wireframe and analyze a page from each of three of my favorite websites -- GitHub, Google Analytics, and Vimeo. It is important to learn wireframing because it allows you to greatly clarify and optimize the design process. Wireframing also reenforces the need to decouple the design from the content.
-                        <br />
-                        <a href="unit1_projects/wireframe_sites.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="unit1_projects/dbc2.html">
-                        <h3>How I Plan to Stay Motivated during DBC</h3>
-                    </a>
-                    <p>
-                        I have found some pretty easy and ridiculous ways that I motivate myself ... Sharing in case anyone else needs the occasional reminder of why they are here.
-                        <br />
-                        <a href="unit1_projects/dbc2.html">Read the Full Post</a>
-                    </p>
-                    <hr />
-                    <a class="postlinklist" href="http://devdevclark.com/2014/customizations-to-bash_profile-and-terminal-prompt/">
-                        <h3>Command Line Customization</h3>
-                    </a>
-                    <p>
-                        I customized my Terminal app and iTerm2, by modifying my ~/.bash_profile and ~/.zshrc configuration files. Check out the results for a quick but big improvement!
-                        <br />
-                        <a class="fullpostlink" href="http://devdevclark.com/2014/customizations-to-bash_profile-and-terminal-prompt/">Read the Full Post</a>
-                    </p>
+                <a href="{{site.url}}{{ post.url }}">
+                    <h2 class="title">{{ post.title }}</h2>
+                </a>
+                <div class="content">
+                    {{ post.excerpt }}
                 </div>
             </div>
-            <div id="bodysidebar">
-                <div id="authorimg">
-                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash3/t1.0-1/s320x320/548436_10101038017860745_492696320_n.jpg" alt="Clark Feusier's LinkedIn Profile" width="100%">
-                </div>
-                <h2 id="authortextheading">Makin' Stacks, Yo... Full-Stacks</h2>
-                <p>
-                    I am a Software Developer located in California. Born and raised in the San Francisco Bay Area.
-                    Educated at California Polytechnic State University, San Luis Obispo (physics and philosophy). Graduate education at the University of Chicago (metalogic and philosophy of science).
-                </p>
-                <hr />
-                <div id="bottomhalfsidebar">
-                    <h3 id="bottomhalfheader">Play Time</h3>
-                    <li>Playing music, mainly piano</li>
-                    <li>Reading and learning</li>
-                    <li>Beer, wine, tea, coffee</li>
-                    <li>Hiking with Fiddle</li>
-                    <li>Philosophizing</li>
-                </div>
-            </div>
-            <div id="bodysidebar">
-                <h2 style="text-align: center;">Of the Week</h2>
-                <p>
-                    Development Topic: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">React and Angular</span><br />
-                    Motivation: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">Love the chase</span><br />
-                    Music: <span style="color: #402C21; font-size: 13pt; margin-left: 3px;">So Far to Go &mdash; J Dilla</span><br />
-                </p>
-            </div>
+            <a href="{{site.url}}{{ post.url }}" class="post-more">Read more</a>
+
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{site.url}}{{post.url}}&t={{post.title}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer={{site.url}}{{page.url}}&text={{post.title}}&url={{site.url}}{{post.url}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url={{site.url}}{{post.url}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
         </div>
-        <div id="bottomwrap">
-            <div id="about_section">
-                <p style="text-align:center;">
-                    My partner in crime is named Fiddle -- She likes chasing lizards -- Her best friend (other than me) is named Banjo --
-                    <a href="fiddle.html">Say Hi!</a>
-                </p>
-            </div>
-            <footer>
-                <div id="footerleft">
-                    <a id="footerhome" href="./index.html">CF HOME</a>
-                </div>
-                <div id="footerright">
-                    <a href="http://github.com/Cfeusier">GitHub</a> |
-                    <a href="mailto:cfeusier@gmail.com">Email</a> |
-                    <a href="http://linkedin.com/in/clarkfeusier">LinkedIn</a>
-                </div>
-            </footer>
-        </div>
+        {% endfor %}
     </div>
-</body>
 
-</html>
+    <div id="blog-pagination">
+        <ul>
+            {% if paginator.previous_page %}
+            <li class="prev"><a href="{{site.url}}{{paginator.previous_page_path}}"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            {% endif %}
+            {% if paginator.previous_page or paginator.next_page%}
+            <li class="separator"></li>
+            {% endif %}
+             {% if paginator.next_page %}
+            <li class="next"><a href="{{site.url}}{{paginator.next_page_path}}"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
