@@ -1,4 +1,4 @@
-	/* azee - Minimal Blog theme for Jekyll v1.0
+/* azee - Minimal Blog theme for Jekyll v1.0
 @2014 owwwlab
 http://themeforest.net/user/owwwlab/portfolio
 **************************************************/
@@ -47,7 +47,7 @@ h4{
 header{
 	border-top:8px solid #00688B;
 	background: #222222;
-	padding:70px 0 20px 0;
+	padding:50px 0 20px 0;
 	text-align: center;
 	position: relative;
 	overflow: hidden;
@@ -164,6 +164,7 @@ header{
 #contact-wrapper .contact-icon{
 	font-size: 42px;
 	margin-bottom: 30px;
+	margin-right: 10px;
 }
 
 
@@ -205,12 +206,76 @@ header{
 #contact-wrapper a:hover{
 	color:#ccc;
 }
+
+/*---Social Links---*/
+#social-links-wrapper{
+	position: absolute;
+	background: #222222;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+}
+
+
+#social-links-content{
+	text-align: center;
+	color:#00688B;
+	padding: 122px 40px;
+}
+
+#social-links-wrapper .social-links-icon{
+	font-size: 42px;
+	margin-bottom: 30px;
+}
+
+
+#social-links-list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+#social-links-list li{
+	display: inline-block;
+	margin-right: 20px;
+}
+#social-links-wrapper .separator{
+	font-size: 28px;
+}
+
+#social-links-list li a{
+	font-family: 'Open Sans Condensed';
+	font-size: 30px;
+}
+#social-links-close{
+	display: block;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	margin-left: -15px;
+	padding: 5px;
+	color: #474747;
+	font-size: 25px;
+}
+
+#social-links-wrapper a{
+	-webkit-transition: all .25s ease;
+	-moz-transition: all .25s ease;
+	-ms-transition: all .25s ease;
+	-o-transition: all .25s ease;
+	transition: all .25s ease;
+}
+#social-links-wrapper a:hover{
+	color:#ccc;
+}
+
 /*Main content
 **************************************************/
 
 #main-contents{
 	background-color: #eaebec;
-	padding-top:100px;
+	padding-top:50px;
 }
 .page-contents{
 	padding: 100px;
@@ -324,6 +389,9 @@ header{
 	font-size: 23px;
 	margin-top: 10px;
 	margin-bottom: 20px;
+}
+.post-item .post-body .title:hover {
+	color:#00688B;
 }
 .post-item .post-body .content{
 	color: #303030;
@@ -524,12 +592,12 @@ header{
 	color: black;
 	margin-top: 35px;
 	margin-bottom: 20px;
-	text-shadow: 2px 2px #dadada;
+	text-shadow: 1px 1px #dadada;
 }
 
 /*---Bottom section---*/
 #bottom{
-	padding:100px 10% 80px 10%;
+	padding:80px 10% 60px 10%;
 	text-align: center;
 	background: #222222;
 	position: relative;

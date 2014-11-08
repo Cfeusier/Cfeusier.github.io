@@ -8,14 +8,14 @@
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-
+        <link rel="shortcut icon" type="image/x-icon" href="{{site.url}}/img/favicon.ico" />
         <link rel="stylesheet" href="{{site.url}}/css/base.css">
 
     </head>
     <body>
        <header>
             <div id="logo">
-                <img src="{{site.url}}img/headshot.png" alt="">
+                <img src="{{site.url}}/img/headshot.png" alt="">
             </div>
             <div id="site-heading">
                 <h2 class="title">Clark Feusier</h2>
@@ -23,16 +23,20 @@
             </div>
             <ul id="nav">
                  <li class="{% if page.url == '/pages/about/' %}active{% endif %}"><a href="{{site.url}}/pages/about">About</a></li>
-                 <li class="{% if page.url == '/' %}active{% endif %}"><a href="{{site.url}}/index.html">Blog</a></li>
+                 <li class="{% if page.url == '/' %}active{% endif %}"><a href="{{site.url}}/index.html">Writing</a></li>
+                 <li class="{% if page.url == '/pages/portfolio/' %}active{% endif %}"><a href="{{site.url}}/pages/portfolio">Portfolio</a></li>
                  <li><a href="#" id="contact-section">Contact</a></li>
             </ul>
             <div id="contact-wrapper">
                 <div id="contact-content">
-                    <i class="fa fa-envelope-o contact-icon"></i>
                     <ul id="contact-list">
-                        <li><a href="mailto:cfeusier@gmail.com">cfeusier@gmail.com</a></li>
+                        <i class="fa fa-envelope-o contact-icon"></i>
+                        <li><a href="mailto:cfeusier@gmail.com">  cfeusier@gmail.com</a></li>
                         <li class="separator">/</li>
-                        <li><a href="#">#Johndow</a></li>
+                        <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                        <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
                 </div>
                 <a href="#" id="contact-close"><i class="fa fa-times"></i></a>
