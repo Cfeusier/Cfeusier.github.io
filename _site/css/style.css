@@ -690,6 +690,24 @@ header {
 	position: relative;
 	z-index: 1;
 }
+.endOfPostWrapper {
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+.endOfPostWrapper p {
+	color: #4d4d4d;
+	padding-top: 40px;
+	padding-bottom: 20px;
+}
+.endOfPostCta {
+	background-color: #303030;
+	width: auto;
+	color: #00688B;
+	border-radius: 4px;
+	border: 2px solid #00688B;
+	padding: 20px;
+}
 /* Shortcodes
 **************************************************/
 blockquote {
