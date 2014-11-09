@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Writing a Rake Task to Generate New Posts for my Jekyll-Powered Blog</title>
+        <title>Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog</title>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -57,9 +57,55 @@
                 <div class="meta">
                     <span class="date">08 November 2014</span>
                 </div>
-                <h2 class="title">Writing a Rake Task to Generate New Posts for my Jekyll-Powered Blog</h2>
+                <h2 class="title">Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog</h2>
                 <div class="content">
-                    
+                    <pre><code>rake gen:post TITLE="&lt;INSERT TITLE&gt;" [D] [FN] [TAGS]
+</code></pre>
+
+<p>I couldn’t find a good plugin online for using a command to generate Jekyll post-files automatically date-stamped and stubbed with content/YAML front matter. So, I got some practice writing a simple Rake task. Here is an easy way to create a custom post file generator in just a few steps.</p>
+
+<h3 id="target">Target</h3>
+
+<p>I want to be able to type <code>rake gen:post TITLE="Badass Title Here"</code> and get an auto-generated file that looks like this:</p>
+
+<pre><code>---
+layout: post_simple
+title:  "Badass Title Here"
+date:   2014-11-08
+author: "Clark Feusier"
+excerpt: ""
+tags:
+- default tag1
+- default tag2
+---
+
+Stubbed content that you can have here with whatever dynamic variables you collect or calculate in your rake task!
+</code></pre>
+
+<p>Optionally, I would like to have the ability to add options like this:</p>
+
+<pre><code>rake gen:post TITLE="Title Here" D=YYYY-MM-DD FN="opt_filename.md" TAGS="tag1,tag2,..."
+</code></pre>
+
+<p>The <code>D</code> option would take a date that would override the default (current date). This should be input in the YYYY-MM-DD date format. The <code>FN</code> option would take a filename as a string. Finally, the <code>TAGS</code> option would take a comma-separated list of tags in the form of a string.</p>
+
+<hr />
+
+<h3 id="outline-of-steps">Outline of Steps</h3>
+
+<ul>
+  <li>create <code>_posts</code> directory</li>
+  <li>Gemfile — add Rake and ActiveSupport/CoreExt</li>
+  <li>bundle install</li>
+  <li>Rakefile:
+    <ul>
+      <li>require rake and as/ce</li>
+      <li>namespace task to :gen</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="code-explanation">Code Explanation</h3>
 
                 </div>
             </div>
@@ -86,8 +132,8 @@
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/2014/11/08/rake-task-generate-new-post-file-jekyll/&t=Writing a Rake Task to Generate New Posts for my Jekyll-Powered Blog" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://localhost:4000/2014/11/08/rake-task-generate-new-post-file-jekyll/&text=Writing a Rake Task to Generate New Posts for my Jekyll-Powered Blog&url=http://localhost:4000/2014/11/08/rake-task-generate-new-post-file-jekyll/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/2014/11/08/rake-task-generate-new-post-file-jekyll/&t=Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://localhost:4000/2014/11/08/rake-task-generate-new-post-file-jekyll/&text=Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog&url=http://localhost:4000/2014/11/08/rake-task-generate-new-post-file-jekyll/" target="_blank"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="https://plus.google.com/share?url=http://localhost:4000/2014/11/08/rake-task-generate-new-post-file-jekyll/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>

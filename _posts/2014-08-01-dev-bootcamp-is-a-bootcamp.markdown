@@ -2,6 +2,7 @@
 layout: post_simple
 title:  "Dev Bootcamp is a Bootcamp"
 date:   2014-08-01
+author: "Clark Feusier"
 excerpt: "I haven't been this motivated, engaged, excited, passionate, and stubborn to succeed in my life. I also have never felt so absolutely vulnerable to the world ..."
 tags:
 - DBC

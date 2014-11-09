@@ -2,6 +2,7 @@
 layout: post_simple
 title:  "Website Analysis | GitHub, Google Analytics, and Vimeo"
 date:   2014-08-03
+author: "Clark Feusier"
 excerpt: "Each of these websites, maybe more appropriately called 'web apps', are best-in-class products along multiple axes of evaluation -- from usability and design, all the way to performance and utility-value. In this post, I discuss the good and bad ..."
 tags:
 - UI/UX
