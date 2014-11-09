@@ -786,3 +786,15 @@ blockquote {
 hr {
 	border-bottom: 1px solid gray;
 }
+
+.starList {
+	float: left;
+	margin: 5px 20px;
+	padding: 0 10px;
+}
+
+.starList li {
+	list-style-type: none;
+	text-align: left;
+	font-size: 12pt;
+}

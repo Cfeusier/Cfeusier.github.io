@@ -4,9 +4,7 @@ title: My Blog
 ---
 <div class="container">
     <div class="page-contents">
-        <h2 class="page-title first-elem"> Blog archive</h2>
-        <h3 class="page-subtitle">Posts with {{ page.tag }} tag</h3> 
-
+        <h2 class="page-title first-elem"> Posts with the '{{ page.tag }}' Tag</h2>
         <ul id="ptitle-list">
 
         {% for post in site.posts %}
@@ -15,10 +13,10 @@ title: My Blog
 
                 <li class="clearfix">
                 	<span class="date">{{ post.date | date_to_long_string }}</span>
-                	<span class="seperator">--</span>
+                	<span class="seperator">&mdash;</span>
                     <a href="{{site.url}}{{ post.url }}"><h3 class="title">{{ post.title }}</h3></a>
                 </li>
-            
+
                 {% endif %}
             {% endfor %}
         {% endfor %}
