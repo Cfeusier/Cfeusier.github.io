@@ -5,11 +5,11 @@ date:   2014-08-19
 author: "Clark Feusier"
 excerpt: "Conditional loops and iterator methods like Enumerable#each aid greatly in keeping your code DRY by allowing for code reuse and repetitive-task automation. I want to introduce and dissect another one of these methods -- 'Enumerable#cycle' ..."
 tags:
-- cultural
-- emerging technology
-- ethics
-- opinion
-- robots and shit
+- software engineering
+- ruby
+- enumerables
+- cycle
+- each
 ---
 
 Conditional loops and iterator methods like Enumerable#each aid greatly in keeping your code DRY by allowing for code reuse and repetitive-task automation. I want to introduce and dissect another one of these methods -- ***Enumerable#cycle***.

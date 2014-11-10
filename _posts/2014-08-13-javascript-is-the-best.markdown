@@ -5,10 +5,9 @@ date:   2014-08-13
 author: "Clark Feusier"
 excerpt: "Why is JavaScript popular in web development? What are the great things about JavaScript? What are it's limitations?"
 tags:
-- personal development
-- thinking styles
-- engineering empathy
-- DBC
+- software engineering
+- javascript
+- software trends
 ---
 
 # The Pencil is to the Left ...
