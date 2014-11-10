@@ -3,7 +3,7 @@ layout: post_simple
 title:  "Designers' Favorite Positions: Relative, Absolute, Fixed, and Static"
 date:   2014-08-07
 author: "Clark Feusier"
-excerpt: ""
+excerpt: "CSS provides powerful mechanisms for positioning elements on the screen -- one of the main mechanisms for positioning is the 'position' property. Designers can choose between four different values: static (the default), relative, absolute, and fixed. These values all do different things and allow designers fine-grained control over the positioning of their elements. Let's go through the differences and some examples of the situations that call for each value ..."
 tags:
 - software engineering
 - css
