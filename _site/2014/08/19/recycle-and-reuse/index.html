@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>(Re)cycle and Reuse</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://localhost:4000/css/base.css">
+    <link rel="shortcut icon" type="image/x-icon" href="http://localhost:4000/img/favicon.ico" />
+    <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushYaml.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"></script>
+    <link href="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FNCG');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Setup SyntaxHighlighter -->
+    <script type="text/javascript">SyntaxHighlighter.all()</script>
+    <!-- End SyntaxHighlighter Setup -->
+    <header>
+        <div id="logo">
+            <img src="http://localhost:4000/img/headshot.png" alt="">
+        </div>
+        <div id="site-heading">
+            <h2 class="title">Clark Feusier</h2>
+            <h3 class="subtitle">Software Engineer and Metalogician</h3>
+        </div>
+        <ul id="nav">
+         <li class=""><a href="http://localhost:4000/pages/about">About</a></li>
+         <li class=""><a href="http://localhost:4000/index.html">Writing</a></li>
+         <li class=""><a href="http://localhost:4000/pages/portfolio">Portfolio</a></li>
+         <li><a href="#" id="contact-section">Contact</a></li>
+     </ul>
+     <div id="contact-wrapper">
+        <div id="contact-content">
+            <ul id="contact-list">
+                <i class="fa fa-envelope-o contact-icon"></i>
+                <li><a href="mailto:cfeusier@gmail.com">  cfeusier@gmail.com</a></li>
+                <li class="separator">/</li>
+                <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+        <a href="#" id="contact-close"><i class="fa fa-times"></i></a>
+    </div>
+</header>
+<div id="main-contents">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">19 August 2014</span>
+                </div>
+                <h2 class="title">(Re)cycle and Reuse</h2>
+                <div class="content">
+                    <p>Conditional loops and iterator methods like Enumerable#each aid greatly in keeping your code DRY by allowing for code reuse and repetitive-task automation. I want to introduce and dissect another one of these methods – <strong><em>Enumerable#cycle</em></strong>.</p>
+
+<hr />
+
+<h2 id="enumerablecyclen--nil--obj-block----nil">Enumerable#cycle(n = nil) { |obj| block } -&gt; nil</h2>
+
+<h5 style="opacity: 0.5;">Ruby Documentation of Enumerable#cycle</h5>
+
+<blockquote>
+    Calls <strong>block</strong> for each element of <em>enum</em> repeatedly n times or forever if none or nil is given. If a non-positive number is given or the collection is empty, #cycle does nothing. #cycle returns nil if the loop has finished without getting interrupted.
+    <br /><br />
+    #cycle saves elements in an internal array so changes to <em>enum</em> after the first pass have no effect.
+    <br /><br />
+    If no block is given, an enumerator is returned instead.
+    <br />
+    <strong>Enumerable#cycle(n = nil) -&gt; an_enumerator</strong>
+</blockquote>
+
+<p><a href="http://ruby-doc.org/core-2.1.2/Enumerable.html#method-i-cycle" target="_blank">(Source)</a></p>
+
+<hr />
+
+<p>Here is my explanation of the above definition of #cycle from the <a href="http://ruby-doc.org/core-2.1.2/Enumerable.html#method-i-cycle" target="_blank">Ruby documentation:</a></p>
+
+<p>First, the ‘#cycle’ definition is <em>called on</em> an <strong>enumerable</strong> object (an instantiation of the <strong><em>Enumerable</em></strong> class). This is just a fancy way of saying that the ‘callee’ or ‘receiver’ of the #cycle method call is an <em>enumerable</em> object, most likely an array or hash – or, the object on which the method will work is an enumerable object (an object that can be ‘enumerated’).</p>
+
+<p>‘#cycle’ calls <strong>block</strong> for each element of <em>enum</em> can be translated as meaning that each element of the enumerable receiver will have <strong>block</strong> called with the element being passed to the block. So, calling:</p>
+
+<pre class="brush: ruby">
+    [1, 2, 3].cycle(2) { |num| puts num }
+</pre>
+
+<p>… will call <code>puts num</code> for each element of the array <code>[1, 2, 3]</code>, resulting in:</p>
+
+<pre class="brush: ruby">
+    1
+    2
+    3
+    1
+    2
+    3
+</pre>
+
+<p>The numbers ‘1, 2, 3’ are repeated because ‘2’ is passed in as an argument to #cycle, indicating that #cycle should happen <em>twice</em>. As you can see, each element of the array gets passed in to the <strong>block</strong> as the <code>|num|</code> local block variable, resulting in <code>puts</code> being called for each element.</p>
+
+<p>‘#cycle’ ‘calls <strong>block</strong> for each element of <em>enum</em> repeatedly n times or forever if none or nil is given’ isn’t the most well-wrought of sentences, but it means something similar to the following:</p>
+
+<p>Each element gets passed into the block ‘repeatedly n times or forever’ – the number of times to repeat the cycle is given as an argument to the #cycle method call. If you just call #cycle without passing in an argument, it will repeat ‘forever,’ because the default parameter is set to <code>nil</code>.</p>
+
+<p>If #cycle is passed a number, and #cycle finishes its loop without getting interrupted, the return value of the method will be <code>nil</code>. Finally, #cycle uses an ‘internal array’ to store changes to <strong>enum</strong> so that #cycle acts non-destructively on the callee.</p>
+
+<p>So, now that we have a decent understanding of what #cycle does, let’s cover some different examples of uses of #cycle.</p>
+
+<hr />
+
+<p><strong><em>Calling #cycle on an enumerable without passing in a block results in a new enumerator object being returned.</em></strong></p>
+
+<p>That is, <code>[1, 2, 3].cycle(5)</code> will return an enumerator object that looks like this (without the single quotes inside the tag):</p>
+
+<pre class="brush: ruby">
+    #&lt;'Enumerator: [1, 2, 3]:cycle(5)'&gt;
+</pre>
+
+<p>To be totally honest, I am not exactly sure what people do with Enumerator objects like this in this type of context. I will be asking around… <strong><em>UPDATE:</em></strong> turns out that using an enumerable method to return an Enumerator object is usually so that you can chain method calls onto that Enumerator object.</p>
+
+<p><strong><em>Using #cycle with an array, would look something like this:</em></strong></p>
+
+<pre class="brush: ruby">
+    arr = ["Clark", "is", "the", "best", "!"]
+    arr.cycle(3) { |str| puts str }
+    puts "Keep telling yourself that, Clark..."
+</pre>
+
+<p>As you can see, each element of the array gets passed into the ‘str’ parameter of the block. This is complicated slightly when using #cycle with a hash instead of an array, which we will cover now.</p>
+
+<p><strong><em>When calling #cycle on a hash, there are two options</em></strong> – pass in each whole element of the hash as a single parameter or pass in the key and the value of each element of the hash as two parameters (with the key always taking the first position and the value occupies the second). What you decide to do will depend on what you are trying to accomplish with using #cycle on a hash. Let’s start with the single parameter option.</p>
+
+<pre class="brush: ruby">
+hashish = { "Clark" =&gt; :best, "?" =&gt; false }
+hashish.cycle(10) { |element| puts element }
+puts "Bummer, dude..."
+</pre>
+
+<p>The #cycle call would print (ten times in a row):</p>
+
+<pre class="brush: ruby">
+    Clark
+    best
+    ?
+    false
+</pre>
+
+<p>As you can see, the first key is getting printed (with a newline), then the first value is printed. Then, the second key gets printed, then the second value … <em>ad terminus ad   quem</em>. Each key-value pair is being passed in as the ‘element’ variable in the #cycle block. Let’s compare that to the case of using #cycle with 2 parameters instead of 1.</p>
+
+<p><strong><em>If you want to access each key and value individually, without having to pull them out of the key-value pair object, you can pass in two arguments to the #cycle block</em></strong> — <code>|k_pos, v_pos|</code>.</p>
+
+<p>It doesn’t matter what you name the two arguments; the first argument will be the key and the second argument will be bound to the value.</p>
+
+<pre class="brush: ruby">
+hashish = { "Clark" =&gt; :best, "?" =&gt; false }
+hashish.cycle(10) { |key, value| puts "#{key} : #{value}" }
+puts "Bummer, dude..."
+</pre>
+
+<p>The above use of #cycle will produce the following output (ten times in a row):</p>
+
+<pre class="brush:ruby">
+    Clark : best
+    ? : false
+</pre>
+
+<p>Ok, so now that we have covered <em>how</em> to use #cycle with its few variations, you might be wondering why you <em>would</em> ever use #cycle … For example, why would you use #cycle instead of using any of the <code>for</code> loop variations, or why would you use #cycle instead of #each within a #times block? I will make an attempt to provide an answer to those questions below.</p>
+
+<hr />
+
+<p>The first answer is easy to give, but feels somewhat ‘snooty’ – <em>you should use <strong>anything</strong> over a <code>for</code> loop because a <code>for</code> loop is so <strong>un-Ruby</strong></em> … ugh, pretentiousness-induced vomit.</p>
+
+<p>The second answer is a little bit more difficult for me to provide (given my current state of programming ignorance), however, I think that I can provide an empirical-evidence-based explanation for why one might choose to use #cycle in certain scenarios instead of using #times/#upto in combination with #each.</p>
+
+<p>Here are the competing versions:</p>
+
+<pre class="brush: ruby">
+    [1, 2, 3].cycle(5) { |obj| puts obj }
+</pre>
+
+<h3 style="text-align: left;">vs.</h3>
+
+<pre class="brush: ruby">
+    5.times { [1, 2, 3].each { |obj| puts obj } }
+</pre>
+
+<p>A bastardized Ockham’s Razor provides the first support for using #cycle over #times + #each. I mean, why not use the built-in Enumerable class Ruby-magic and save yourself from needing to nest a block within a block?</p>
+
+<p>If aesthetic sexiness doesn’t sway you, you are a robot. So, hopefully you will find this convincing – there are slight performance gains when using #cycle versus #times + #each. Here is the test that I ran to profile #cycle and #times + #each:</p>
+
+<pre class="brush: ruby">
+    def cycle_test(arr, num)
+    start = Time.now
+    puts start
+    arr.cycle(num) { |obj| puts obj }
+    stop = Time.now
+    puts stop
+    puts stop - start
+    end
+
+    cycle_test([1, 2, 3], 1000)
+</pre>
+
+<pre class="brush: ruby">
+    def each_test(arr, num)
+    start = Time.now
+    puts start
+    num.times { arr.each { |obj| puts obj } }
+    stop = Time.now
+    puts stop
+    puts stop - start
+    end
+
+    each_test([1, 2, 3], 1000)
+</pre>
+
+<ul>
+  <li><code>cycle_test</code> took 0.041044 seconds to run (100 test average)</li>
+  <li><code>each_test</code> took 0.042207 seconds to run (100 test average)</li>
+  <li>So, <code>cycle_test</code>, implementing #cycle, was 2.76% faster for 1000 repetitions than <code>each_test</code>, implementing #times + #each</li>
+</ul>
+
+<p>I know, I know, not a huge difference, nor a very well-designed test, but it gives <em>directional</em> confirmation that using #cycle is faster than using #times + #each. So, if you are concerned with that type of ‘optimibation’ ®, then use #cycle instead of #times + #each.</p>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://localhost:4000/tag/cultural">cultural</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://localhost:4000/tag/emerging technology">emerging technology</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://localhost:4000/tag/ethics">ethics</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://localhost:4000/tag/opinion">opinion</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://localhost:4000/tag/robots and shit">robots and shit</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/2014/08/19/recycle-and-reuse/&t=(Re)cycle and Reuse" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://localhost:4000/2014/08/19/recycle-and-reuse/&text=(Re)cycle and Reuse&url=http://localhost:4000/2014/08/19/recycle-and-reuse/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://localhost:4000/2014/08/19/recycle-and-reuse/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://localhost:4000/2014/08/15/emerging-technology-ethics/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+            <li class="next"><a href="http://localhost:4000/2014/11/08/rake-task-generate-new-post-file-jekyll/"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+            
+        </ul>
+    </div>
+</div>
+ </div>
+       <footer>
+            <div id="footer-quote">
+                <div class="container">
+                    <div class="contents">
+                        <div class="quote-icon">
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+                        <span class="quote-name">Percy Bysshe Shelley</span>
+                        <div class="quote-text">
+                            The soul's joy lies in <span class="colored-text">doing</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <div class="container foot">
+                    <ul id="social-icons">
+                        <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                        <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                    <div id="copyright">© COPYRIGHT 2014 Clark Feusier</div>
+                    <a id="home-circle" href="http://localhost:4000"><i class="fa fa-home"></i></a>
+                </div>
+            </div>
+       </footer>
+       <script type="text/javascript" src="http://localhost:4000/js/jquery-1.11.0.min.js"></script>
+       <script type="text/javascript" src="http://localhost:4000/js/header_glitter.js"></script>
+    </body>
+</html>
