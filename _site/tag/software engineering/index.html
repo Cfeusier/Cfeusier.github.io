@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Design is not just what it looks like</title>
+    <title>Posts Tagged &ldquo;software engineering&rdquo;</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -15,6 +15,7 @@
     <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
     <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushBash.js"></script>
     <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushYaml.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"></script>
     <link href="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
     <link href="http://localhost:4000/vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 </head>
@@ -57,100 +58,64 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="single-post">
-    <div class="container">
-        <div class="post-item">
-            <div class="post-header">
-                <img src="http://localhost:4000/img/blog/01.jpg" alt="">
-            </div>
-            <div class="post-body">
-                <div class="meta">
-                    <span class="date">22 April 2014</span>
-                </div>
-                <h2 class="title">Design is not just what it looks like</h2>
-                <div class="content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+<div class="container">
+    <div class="page-contents">
+        <h2 class="page-title first-elem"> Posts with the 'software engineering' Tag</h2>
+        <ul id="ptitle-list">
 
-<pre><code>        /*Basic Setups
-        ------------------------------------------------*/
-        this.sections = this.wrapper.children('section');
-        this.currentPage = this.sections.filter('.active');
-        this.config.navHeight = this.navContainer.height();
-        this.currentPage.css('z-index', 101).show();
-
-        this.prepare();
-        this.bindUiAction();
-
-        this.demandPage = this.currentPage;
-        this.demandPage.find('.contain').css('padding-top',this.config.navHeight);
-        this.toTop = true;
-        showScroll(this);
-        this.toTop = false;
-        initHome(this);
-
-        /*Navigation Events Handlers
-        ----------------------------------------------*/
-        var self = this,navT,nav,anim,obj;
-        this.navLi.on('mouseover', function() {
-            obj=(self.toTop)?{top:'-16px'}:{top:'0px'};
-            var topText=$(this).find('span.top'),
-                bottomText=$(this).find('span.bottom');
-            anim = new TimelineLite({});
-            anim
-            .to(topText,0.4,obj)
-            .to(bottomText,0.4,obj,'-=0.4');
-        });
-        this.navLi.on('mouseleave', function() {
-            obj=(self.toTop)?{top:'0px'}:{top:'-16px'};
-            var topText=$(this).find('span.top'),
-                bottomText=$(this).find('span.bottom');
-           anim = new TimelineLite({});
-            anim
-            .to(topText,0.4,obj)
-            .to(bottomText,0.4,obj,'-=0.4');
-        });
-        this.navLi.on('click', function() {
-            pages.navigate($(this).attr('data-page'));
-        });
-    }
-}
-</code></pre>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                </div>
-            </div>
-            <div class="post-tags">
-                <i class="fa fa-tags"></i>
+        
+            
                 
-                <a class="tag_list_link" href="http://localhost:4000/tag/jekyll">jekyll</a>
-                <span class="seperator">,</span>
+            
                 
-                <a class="tag_list_link" href="http://localhost:4000/tag/fashion">fashion</a>
-                <span class="seperator">,</span>
+            
                 
-            </div>
-            <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/2014/04/22/design-is-not/&t=Design is not just what it looks like" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://localhost:4000/2014/04/22/design-is-not/&text=Design is not just what it looks like&url=http://localhost:4000/2014/04/22/design-is-not/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://localhost:4000/2014/04/22/design-is-not/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-            </ul>
-        </div>
-    </div>
-    <div id="blog-pagination">
-        <ul>
-        	
-            <li class="prev"><a href="http://localhost:4000/2013/08/11/sample-audio-iframe/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
             
+                
             
-            <li class="separator"></li>
+                
             
+                
             
-            <li class="next"><a href="http://localhost:4000/2014/08/01/dev-bootcamp-is-a-bootcamp/"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+        
             
+                
+
+                <li class="clearfix">
+                	<span class="date">07 August 2014</span>
+                	<span class="seperator">&mdash;</span>
+                    <a href="http://localhost:4000/2014/08/07/positioning-relative-absolute-fixed-static/"><h3 class="title">Designers' Favorite Positions: Relative, Absolute, Fixed, and Static</h3></a>
+                </li>
+
+                
+            
+                
+            
+                
+            
+                
+            
+        
+            
+                
+            
+                
+            
+        
+            
+                
+            
+                
+            
+        
+
         </ul>
+
+
+
     </div>
 </div>
+
  </div>
        <footer>
             <div id="footer-quote">

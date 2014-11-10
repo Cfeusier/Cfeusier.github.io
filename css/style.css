@@ -793,6 +793,19 @@ hr {
 	padding: 0 10px;
 }
 
+.exampleimg {
+	margin: 0 13px;
+	width: 45%;
+}
+
+@media (max-width: 1000px) {
+	.exampleimg {
+		width: 100%;
+		margin: 10px 5px;
+	}
+}
+
+
 .starList li {
 	list-style-type: none;
 	text-align: left;

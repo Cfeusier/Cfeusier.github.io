@@ -10,7 +10,7 @@ namespace :gen do
     post_title = ENV['TITLE'].camelize
     date = ENV['D'] || Date.today.to_s
     base_filename = ENV['FN'] || ENV['TITLE'].downcase.gsub(/\s+/, "-")
-    post_filename = date + "_" + base_filename + ".markdown"
+    post_filename = date + "-" + base_filename + ".md"
     post_path = APP_ROOT.join('../_posts', post_filename)
     file_exists_mes = "ERROR: post file '#{post_path}' already exists"
     tags = ENV['TAGS'] || "software engineering"
