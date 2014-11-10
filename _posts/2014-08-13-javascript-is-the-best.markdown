@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "JavaScript is the Best ..."
-date:   2014-08-09
+date:   2014-08-13
 author: "Clark Feusier"
 excerpt: "Why is JavaScript popular in web development? What are the great things about JavaScript? What are it's limitations?"
 tags:
