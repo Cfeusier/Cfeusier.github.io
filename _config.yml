@@ -4,7 +4,7 @@ description: ""
 url: "http://localhost:4000"
 encoding:     "utf-8"
 
-paginate: 6
+paginate: 10
 paginate_path: "page:num"
 permalink: pretty
 highlighter: pygments

@@ -3,7 +3,6 @@ layout: post_simple
 title:  "Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog"
 date:   2014-11-08
 author: "Clark Feusier"
-excerpt: "I want to be able to type 'rake gen:post TITLE=\'Badass Title Here\' and get an auto-generated file. But, I couldn't find a good plugin online for using a command to generate Jekyll post-files automatically date-stamped and stubbed with content/YAML front matter. So, I wrote a simple Rake task ..."
 tags:
 - rake
 - ruby
