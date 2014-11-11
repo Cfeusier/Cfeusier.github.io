@@ -5,8 +5,10 @@ date:   2014-09-10
 author: "Clark Feusier"
 tags:
 - software engineering
-- composition
-- object-oriented programming
+- nosql
+- sql
+- databases
+- trends
 ---
 
 In the world of databases and database management systems, the big dog is SQL and all of the systems built on top of SQL. However, in the past few years, a newcomer has started rapidly grabbing market share in the database game (the game be real, yo). This upstart is called NoSQL. The reason you should care about this is that SQL and NoSQL aren't just different 'products' &mdash; they are different *in kind.*
