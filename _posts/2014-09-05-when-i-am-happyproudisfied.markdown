@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "When am I Happyproudisfied?"
-date:   2014-09-01
+date:   2014-09-05
 author: "Clark Feusier"
 tags:
 - cultural
