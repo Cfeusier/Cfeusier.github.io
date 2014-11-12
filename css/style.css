@@ -811,3 +811,20 @@ hr {
 	text-align: left;
 	font-size: 12pt;
 }
+
+.fiddleImg {
+	display: none;
+}
+
+.visible {
+	display: block;
+	margin: 10px auto;
+	text-align: center;
+}
+
+.bordered {
+	border: 2px solid black;
+	border-radius: 5px;
+	width: 250px;
+	height: 350px;
+}
