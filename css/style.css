@@ -544,9 +544,8 @@ header {
 
 #footer-quote {
 	padding:80px 0;
-	background: url('../img/sky_background.jpg') no-repeat;
+	background: url('../img/sky_background.jpg');
 	background-attachment: fixed;
-	background-position: 50% 50%;
 	text-align: center;
 	position: relative;
 	-khtml-opacity:.80;
