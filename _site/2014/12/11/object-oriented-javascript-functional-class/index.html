@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts Tagged &ldquo;workflow&rdquo;</title>
+    <title>Object-Oriented JavaScript - Functional Class Pattern</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,228 +59,75 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-    <div class="page-contents">
-        <h2 class="page-title first-elem"> Posts with the 'workflow' Tag</h2>
-        <ul id="ptitle-list">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">11 December 2014</span>
+                </div>
+                <h2 class="title">Object-Oriented JavaScript - Functional Class Pattern</h2>
+                <div class="content">
+                    <script src="https://gist.github.com/Cfeusier/ff700bfdaf6f4651b05d.js"></script>
 
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
+<ol>
+  <li>downside: memory overhead (duplicate methods for every instance)</li>
+  <li>benefit: clarity</li>
+  <li>downside: mutating closure variables + side effects</li>
+</ol>
 
-                <li class="clearfix">
-                	<span class="date">08 November 2014</span>
-                	<span class="seperator">&mdash;</span>
-                    <a href="http://cfeusier.github.io/2014/11/08/rake-task-generate-new-post-file-jekyll/"><h3 class="title">Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog</h3></a>
-                </li>
+<ul>
+  <li>lines 1 - 14: the constructor function
+    <ul>
+      <li>line 2: create an empty object</li>
+      <li>line 3: add an example ‘differentiator’ variable stored in closure</li>
+      <li>lines 5 - 11: add methods directly to empty object</li>
+      <li>line 13: return the new object</li>
+    </ul>
+  </li>
+</ul>
 
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
+<p>We can now create as many <code>Example</code> instances as we want, all with its own copy of each method. It is as simple as <code>var example = Example();</code>.</p>
 
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://cfeusier.github.io/tag/object-oriented programming">object-oriented programming</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://cfeusier.github.io/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://cfeusier.github.io/tag/functional class pattern">functional class pattern</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://cfeusier.github.io/2014/12/11/object-oriented-javascript-functional-class/&t=Object-Oriented JavaScript - Functional Class Pattern" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://cfeusier.github.io/2014/12/11/object-oriented-javascript-functional-class/&text=Object-Oriented JavaScript - Functional Class Pattern&url=http://cfeusier.github.io/2014/12/11/object-oriented-javascript-functional-class/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://cfeusier.github.io/2014/12/11/object-oriented-javascript-functional-class/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://cfeusier.github.io/2014/11/08/rake-task-generate-new-post-file-jekyll/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+            <li class="next"><a href="http://cfeusier.github.io/2014/12/12/object-oriented-javascript-functional-shared-class/"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+            
         </ul>
-
-
-
     </div>
 </div>
-
  </div>
        <footer>
             <div id="footer-quote">

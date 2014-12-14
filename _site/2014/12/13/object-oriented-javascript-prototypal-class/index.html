@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts Tagged &ldquo;workflow&rdquo;</title>
+    <title>Object-Oriented JavaScript - Prototypal Class Pattern</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,228 +59,83 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-    <div class="page-contents">
-        <h2 class="page-title first-elem"> Posts with the 'workflow' Tag</h2>
-        <ul id="ptitle-list">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">13 December 2014</span>
+                </div>
+                <h2 class="title">Object-Oriented JavaScript - Prototypal Class Pattern</h2>
+                <div class="content">
+                    <script src="https://gist.github.com/Cfeusier/22a5d22ff986d7d9aad2.js"></script>
 
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
+<p>The <em>Prototypal Class</em> pattern is fundamental to JavaScript, especially object-oriented JavaScript. The important characteristics of the <em>Prototypal Class</em> pattern are the following:</p>
 
-                <li class="clearfix">
-                	<span class="date">08 November 2014</span>
-                	<span class="seperator">&mdash;</span>
-                    <a href="http://cfeusier.github.io/2014/11/08/rake-task-generate-new-post-file-jekyll/"><h3 class="title">Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog</h3></a>
-                </li>
+<ol>
+  <li>shared functionality is stored in a container object outside the constructor function object (shared methods are <em>not</em> stored as properties on the instance created within the constructor)</li>
+  <li>instance-by-instance differentiation is done in the constructor</li>
+  <li><strong>failed property lookup is delegated</strong> to the container object holding the desired shared methods</li>
+</ol>
 
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
+<p>This pattern only creates a single instance of each shared method, regardless of how many instances of the ‘class’ are created, thus saving overhead.</p>
 
+<p>This is the pattern on top of which the pseudo-classical pattern is built — adding some syntactic sugar. So, because of the frequency of use of the pseudo-classical pattern, it is important to understand this prototypal class pattern first.</p>
+
+<p>Let’s close by dissecting the important parts of the example above:</p>
+
+<ul>
+  <li>lines 1 - 5: the constructor function
+    <ul>
+      <li>line 2: create an empty object and delegate its failed property lookups to the <strong>exampleMethods</strong> object</li>
+      <li>line 3: add an example ‘differentiator’ property to the empty object</li>
+      <li>line 4: return the new object</li>
+    </ul>
+  </li>
+  <li>lines 7 - 14: method container object with example methods</li>
+</ul>
+
+<p>We can now create as many <code>Example</code> instances as we want, all with access to the methods contained within <code>exampleMethods</code>. It is as simple as <code>var example = Example();</code>.</p>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://cfeusier.github.io/tag/object-oriented programming">object-oriented programming</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://cfeusier.github.io/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://cfeusier.github.io/tag/protoypal class pattern">protoypal class pattern</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://cfeusier.github.io/2014/12/13/object-oriented-javascript-prototypal-class/&t=Object-Oriented JavaScript - Prototypal Class Pattern" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://cfeusier.github.io/2014/12/13/object-oriented-javascript-prototypal-class/&text=Object-Oriented JavaScript - Prototypal Class Pattern&url=http://cfeusier.github.io/2014/12/13/object-oriented-javascript-prototypal-class/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://cfeusier.github.io/2014/12/13/object-oriented-javascript-prototypal-class/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://cfeusier.github.io/2014/12/12/object-oriented-javascript-functional-shared-class/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+            <li class="next"><a href="http://cfeusier.github.io/2014/12/14/object-oriented-javascript-pseudo-classical-class/"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+            
         </ul>
-
-
-
     </div>
 </div>
-
  </div>
        <footer>
             <div id="footer-quote">

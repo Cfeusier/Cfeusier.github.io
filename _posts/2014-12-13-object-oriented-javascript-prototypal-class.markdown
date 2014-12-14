@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "Object-Oriented JavaScript - Prototypal Class Pattern"
-date: 2014-12-12
+date: 2014-12-13
 author: "Clark Feusier"
 tags:
 - object-oriented programming
