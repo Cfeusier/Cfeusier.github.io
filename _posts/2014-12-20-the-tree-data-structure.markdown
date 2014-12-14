@@ -8,3 +8,5 @@ tags:
 - data structures
 - implementation examples
 ---
+
+<script src="https://gist.github.com/Cfeusier/e31b3050db3d4642a700.js"></script>
