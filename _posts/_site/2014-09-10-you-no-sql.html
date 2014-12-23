@@ -1,0 +1,79 @@
+<p>In the world of databases and database management systems, the big dog is SQL and all of the systems built on top of SQL. However, in the past few years, a newcomer has started rapidly grabbing market share in the database game (the game be real, yo). This upstart is called NoSQL. The reason you should care about this is that SQL and NoSQL aren’t just different ‘products’ — they are different <em>in kind.</em></p>
+
+<p>What does <strong>that</strong> mean? Here is an analogy:</p>
+
+<p>Think about the last real dominant cell phone on the market before the ‘smartphone’ boom — let’s say it was the Droid Razr (that little beauty of a flip-phone). Before that phone, there were a bunch of different cell phones that were fairly similar in terms of capabilities. If I had come to you right when the iPhone came out before it penetrated culture, and I had said “you have to buy this phone! It will change your life – it is so amazing!”, you probably would have been somewhat skeptical that I was going to show you another phone similar to all the other phones with some minor new feature (like the side-kick’s keyboard). But no, I was going to show you a phone that was <em>different in kind</em> than all the cell phones up to that point.</p>
+
+<p>SQL is playing the role of the dumbphone, with NoSQL starring as the smartphone. The analogy is skewed because there isn’t a wide gap in quality between SQL and NoSQL as there was between dumbphones and smartphones. The gap is in terms of approach and problems that each solve best, not ‘overall’ quality. That being said, NoSQL is fundamentally different from SQL.</p>
+
+<p>To see how they are different, let’s first cover both SQL and NoSQL’s highlights and similarities. Then, we will move to compare differences, pros and cons, and when to use each. Finally, I will share my thoughts about using both in the future.</p>
+
+<hr />
+
+<h2 id="sql">SQL</h2>
+
+<p>SQL, the <strong><em>Structured Query Language</em></strong>, enables the databases of most data applications in the world. SQL is just a programming language that can interact with the data of a <strong><em>relational</em></strong> database. There are lots of RDBMS (Relational Database Management Systems) that are built purely for use with SQL.</p>
+
+<p>A <em>relational</em> database is usually just a database with data in tables. Tables have columns and rows — intuitive. Tables are sometimes called <strong><em>relations</em></strong>, which are different from <em>relationships</em>, which hold between different tables. The different tables can stand in different relationships to each other, for example, a Users table could have a <em>one-to-many</em> relationship with the Emails table, that is, each user can have many emails but each email can only be owned by one user.</p>
+
+<p>SQL can be used to read from and write to the tables within a relational database. For example, I could write a SQL query to display a user named ‘Austin Powers’ and all of his email subject lines. It might look something like this:</p>
+
+<pre class="brush: sql">
+    SELECT full_name, subject_line
+    FROM users JOIN emails ON users.id = emails.user_id
+    WHERE full_name = 'Austin Powers'
+</pre>
+
+<p>That code is <em>selecting</em> the name and all of the subject lines from a joined table — the users table joined with the emails table. These two tables are joined by the emails table foreign key <strong><em>user_id</em></strong> that matches the <strong><em>id</em></strong> from the users table. It is only selecting users with a value matching ‘Austin Powers’ in the <em>name</em> field of the users table.</p>
+
+<p>As you can see, SQL is a powerful language that is relatively simple to learn and use. Let’s look at NoSQL briefly, so that we can start to look at the real questions like why you would choose a relational database system vs. a non-relational system, etc.</p>
+
+<h2 id="nosql">NoSQL</h2>
+
+<p>First, NoSQL stands for <strong><em>Not Only SQL</em></strong> — to indicate that NoSQL is compatible with SQL in certain ways. NoSQL is slightly harder to pigeon-hole into a uniform description and specification because there are so many different NoSQL implementations; NoSQL is basically a catch-all term used to group <em>non-relational</em> databases. Non-relational databases include document-oriented databases, column databases, key-value databases, graph databases, and more.</p>
+
+<p>The commonality between all of these NoSQL approaches is a use of data without a need for tabular data representation and fixed relationships between tables. The most popular NoSQL approaches represent data as documents, keys and values, or graphs. These non-tabular data can interact in ways that determine different relationships depending on their interactions — this is the ‘dynamic’ schema ability that everyone talks about with NoSQL compared to SQL’s more rigid schemas. Each document in a NoSQL data store could contain different fields, whereas each table in a SQL data store must contain uniform fields and field-sequence within said table. That is, in SQL, you must model a structure that your data will ‘fit into,’ <em>ahead of time.</em> NoSQL allows for a ‘on-the-go’ approach to schemas.</p>
+
+<p>The most popular NoSQL products currently include MongoDB (document), CouchDB (document), Redis (key-value), and Neo4j (graph). Some large companies have adopted NoSQL — names including the New York Times, MTV Networks, etc.</p>
+
+<p>So, now is when you might be asking “well, when would I choose SQL and what situations would be ideal for NoSQL”? In order to understand the ideal use-cases for SQL and NoSQL, let’s make the similarities and differences between SQL and NoSQL more explicit.</p>
+
+<hr />
+
+<h2 id="similarities-between-sql-and-nosql">Similarities between SQL and NoSQL</h2>
+
+<p>Both enable persistent storage and retrieval of data. Both allow for schematization of data — that is, the ability to provide some type of normative model structure for the data; though, only SQL does this explicitly. Both can produce similar end-results in terms of caching, using their respective capacities. That is about it.</p>
+
+<h2 id="differences-between-sql-and-nosql">Differences between SQL and NoSQL</h2>
+
+<p>SQL is based on the <em>Relational Model</em>, making it a <strong>relational</strong> database. Whereas, NoSQL is primarily a <strong>non-relational</strong> database.</p>
+
+<p>A SQL data store usually contains collections of tables that have fixed fields and fixed relationships between the tables. These tables are ‘relations’ in that the data entries in the tables can be represented as fixed relations between attributes, e.g., a data record for a Person could just be represented as relations between the attributes like <em>first_name, last_name, age, birthday, gender, occupation, etc.</em></p>
+
+<p>On the other hand, a NoSQL data store (e.g., a document-oriented store) will contain collections of documents. The data in these documents could vary greatly from one to another within a collection of documents. If we imagine this was a relational data store, we could consider the collections of documents to be acting as tables and the documents to be acting as individual records. Now we can see the difference — the ‘fields’ of documents in a single collection of documents may vary from one document to another, while relational data stores must have the same sequence of fields for all records within a table (i.e., a collection of records).</p>
+
+<p>To extend the Person example further, in a NoSQL database, we could have a collection of People (i.e., documents that each represent a person) where each document (person) is represented by different attributes — the Clark document/person might be represented by a name, interests, social relationships, and health, whereas the John document/person might be represented by a name, net worth, fame, sexual conquests, and power. This wouldn’t be allowed in a SQL People table — each record/person would have to be represented by the same fixed set of attributes.</p>
+
+<p>The non-relational nature of the modeling lends itself to a ‘dynamic schema’ where the documents can stand in different relations to each other depending on different contexts. Compare this to SQL and the relational model that requires the relations in which the records can stand within a collection to be specified explicitly beforehand.</p>
+
+<p>Next, SQL databases use SQL as the ‘access language,’ whereas all of the NoSQL database management systems vary in their choice of access language.</p>
+
+<p>So, what does all this imply for which to choose?</p>
+
+<p>SQL is great for data that is uniformily structured for the most part and complex in terms of model (particularly the relationships between relations). Think about it, structured data fits in tables well if it has a pattern that matches column-row format. Also, it is easier to model complex relationships between relations (tables) than it is to model complex relationships between non-relational data!</p>
+
+<p>For less uniformily structured data, less complicated model design required, but larger data sets NoSQL supposedly provides a much better option because NoSQL can easily scale ‘horizontally,’ that is, NoSQL is for ‘distributed data,’ meaning that you can add servers ‘horizontally’ to bear load for a particular part of a database. If each part of the database only needs to be responsible for ‘unrelated’ data collections, then it doesn’t matter if those particular parts of the database are distributed. If each part of the database is ‘related’ to the other parts of the database, then it is difficult to distribute that data across multiple servers.</p>
+
+<p>Complicated relationships are better suited for SQL for this very reason — it is difficult to partition well and difficult to horizontally scale if each part of the database is tightly coupled to other parts of the database. You can’t split up the complicated relationships to distribute for horizontal scaling, so you can only scale by adding more ‘power’ to your single server.</p>
+
+<p>There are techniques used by SQL masters that quasi-distribute databases horizontally, such as ‘sharding.’ These techniques tend to be complicated and compromising of data consistency, thus looked-down upon. The popularity of NoSQL for large ‘unrelated’ datasets is partly accounted for by the performance of distributed databases over ‘sharded’ SQL databases.</p>
+
+<p>That being said, companies like Clustrix claim that they can provide ‘scaled-out’ SQL databases without sharding. They ‘simply add nodes to linearly scale your database’ <a href="http://www.clustrix.com" target="_blank">(source)</a>. They basically just set up clusters of database nodes where each node has its own database engine, query compiler, and data map. They claim to have a unique and patented ‘table slicing’ formula that allows them to maintain consistency while keeping performance. The problem with this approach is that it is expensive! They are just distributing load by <em>duplicating</em> and <em>slicing</em> parts of the data — that is, they are just throwing brute force at the problem of scaling SQL. The original problem was that you couldn’t scale SQL horizontally; you could only throw more brute force at the single server. Clustrix just does some hand-waving that looks like linear-scaling, but is really just vertical scaling duplicated ‘linearly’ across multiple nodes, and thus less efficient than NoSQL’s actual linear scaling capacity.</p>
+
+<p>In the end, your needs should determine your use of SQL and NoSQL. If you have a large but relatively unstructured dataset and an application requirement of cheap scaling, then you might want NoSQL. If you have data that fits in tables and complicated data requirements for the application, but don’t have a large data set or don’t mind paying more for peformance, then SQL is probably a better bet. At least, hopefully you have a better understanding of the differences between SQL and NoSQL after the above discussion.</p>
+
+<hr />
+
+<h2 id="using-sql-and-nosql-in-the-future">Using SQL and NoSQL in the Future</h2>
+
+<p>I don’t have any particularly strong feelings about using either SQL or NoSQL. Though, I will admit that I am currently more comfortable with SQL than NoSQL because of pure exposure. The key-value pair NoSQL and document-oriented NoSQL implementations seem to be relatively familiar because of my exposure to languages like JSON and document-based RESTful operations. In the end, I love learning and am looking forward to getting to use both SQL and NoSQL on different projects. If anything new comes out, I will try that too!</p>
