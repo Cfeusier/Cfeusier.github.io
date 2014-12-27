@@ -805,6 +805,11 @@ hr {
 	float: left;
 }
 
+#main-contents > div > div.container > div > div.post-body > div.content > p:nth-child(22) > img {
+  width: 50%;
+  height: 300px;
+}
+
 @media (max-width: 1000px) {
 	.exampleimg {
 		width: 100%;
@@ -816,8 +821,13 @@ hr {
 		margin: 10px 5px;
 		height: auto;
 	}
-}
 
+        .treeImg {
+          width: 100%;
+          margin: 10px 5px;
+          height: auto;
+        }
+}
 
 .starList li {
 	list-style-type: none;
