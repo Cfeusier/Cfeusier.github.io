@@ -23,6 +23,8 @@ Don't get offended when I say this:
 
 Before I can make you feel bad about taking trees for granted, I need you to be very familiar with trees and their uses. Once you understand the tree, you will feel bad for not appreciating it enough. Then, you will start appreciating trees, as well as using them in the situations for which they are perfectly suited. Good.
 
+
+
 ---
 
 ### The Tree as an Abstract Data Type
@@ -30,6 +32,8 @@ Before I can make you feel bad about taking trees for granted, I need you to be 
 A tree is, first and foremost, a data structure adhering to the interface of the abstract data type **Tree**. A Tree is just an abstract *ideal* that we all kind of agree upon &mdash; hey buddy, let's call any data structure that has property X, Y, and Z an ***array***, while any data structure with properties A, B, and L should be called a ***tree.***
 
 Why is this important? Because it helps us avoid a common mental mistake, early &mdash; that of confusing the abstract data type **Tree** with a particular concrete implementation of that abstraction. Can you implement the basic properties of 'Treehood' in more than one way? If you answered yes, you are ready to continue. If not, please read about the differences between a concrete entity and an abstraction.
+
+
 
 ### The Tree as a Concrete Data Structure
 
@@ -40,6 +44,7 @@ A tree, like all data structures, holds data and has certain data-access rules. 
 <blockquote>3. what tradeoffs are associated with a standard tree implementation?</blockquote>
 
 Let's try to answer those three questions.
+
 
 
 ## Data Arrangement
@@ -58,7 +63,8 @@ Summary:
 
 With that summary in mind, here is a simple tree visualization:
 
-<img class='treeImg' src='/img/simple_tree.png' />
+<div style="text-align: center;"><img class='treeImg' src='/img/simple_tree.png' style='width: 70%; height: 300px; margin: 10px auto;' /></div>
+
 
 
 ## Data Access - the Basic Read Interface of a Tree
