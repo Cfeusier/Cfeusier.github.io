@@ -81,6 +81,7 @@ We can now create tree instances right and left (though they will currently lack
 
 Now that we can make trees, let's give them a useful interface.
 
+
 ## Data Access and Manipulation - the Basic Interface of a Tree
 
 Most agree that a useful tree implementation will at least offer an interface for the following:
@@ -237,13 +238,101 @@ Compared to the simple tree **contains** method, the time complexity of the bina
 
 Now that we have built the foundations of the tree and binary search tree, let's finish this post by examining a very popular use of a special type of tree &mdash; **the decision tree**.
 
+
 ---
+
 
 ## The Decision Tree
 
-- games - rock, paper, scissors
-- system-state analysis - n-queens algorithm
+A decision tree is a tree where each node value is dependent on a decision made at a parent node. Sounds abstract, but it is actually pretty intuitive. The tree branches are 'decision sequences,' i.e., paths which the decision could take. The key to understanding the decision tree is grasping the idea that each node represents a possible system state. And, each possible system state is determined by its parent's state.
 
+For example, I am confronted with some choices &mdash; dinner or dessert?
 
+If I choose dinner, I am confronted with a new decision point &mdash; chicken or steak?
 
+If I choose chicken, I am confronted with a new decision point &mdash; fried chicken or chicken marsala?
+
+This could continue as long as we want. Each of the decisions was dependent on the first choice between dinner or dessert. If I had chosen 'dessert,' the resulting choices to choose between would have been different than what was offered based on my original decision of 'dinner.'
+
+We can visualize this example with a decision tree:
+
+<img src="/img/blog/trees.png" />
+
+The decision tree will usually contain **n * r + 1 nodes**, where n is the number or possible choices at each decision point and r is the number of decision points. So, if you have to choose between dinner and dessert, and you only have to make that decision once, then your decision tree would have 3 nodes &mdash; one node for each choice (2 nodes total) multiplied by one (number of times you need to make the decision), plus 1.
+
+Humans use this type of 'branched' reasoning all the time &mdash; don't let all of the new terminology convince you that a decision tree is anything other than a representation of our standard 'decision-making' process.
+
+Look at the tree while imagining that you are sitting in a restaurant with a menu in front of you. The first decision point that you reach is a choice between ordering *dinner* or *dessert* (not both, we are strict).
+
+Let's assume that you want to eat dinner. You will move down a level in the tree to the 'dinner' node. Your mind will now prompt you to make another decision &mdash; should you order *chicken* or *steak* for dinner?
+
+For some reason, you don't eat red meat, so you decide that you want to have chicken for dinner. Move your focus down to the 'chicken' node, and now choose between *fried* chicken, chicken *marsala*, or a *curry* chicken. You love curries, so you move down another node to choose between *red* and *yellow* curry.
+
+Once you have made all of the decisions necessary to answer the original question &mdash; what you are going to order &mdash; you can package up that information into an answer and give it to the server.
+
+But, what is 'that information' that you need to package up, and where do you get it?
+
+This is why decision trees are beautiful &mdash; your **order** decision is actually contained within the tree, defined by the *sequence* of decisions made while traversing the tree. The path that you took is actually your order! You can think of your order as **dinner -> chicken -> curry -> yellow**, i.e., the values at each of the nodes that were chosen.
+
+Pretty cool, eh?
+
+In reality, our decision-making might require us to go up and down the tree, as well as across the tree, before we can decide on the best final path that we want to take. When we need to do this in our programs, we can harness the properties of the decision tree and use recursion to crawl all over the tree.
+
+You can solve many (software) problems by using a combination of recursion and a decision tree &mdash; so, let's see an example!
+
+At first, I was going to show you my solution to the **n-queens** problem in order to demonstrate the use of a decision tree, but then I realized how stupid that would be from a pedagogical perspective, due to the complexity of n-queens. I will save n-queens for a separate post. Instead, we are going to use a common toy interview problem based on the **rock-paper-scissors** (row-sham-bo) game, which isn't novel but manifests some lessons about using decision trees for system-state analysis.
+
+---
+
+### Rock - Paper - Scissors
+
+<blockquote>Prompt: generate an array of all possible throws a single player could throw for n rounds</blockquote>
+
+Constraints of the problem:
+
+- single player
+- **n** rounds
+- 3 possible throws &mdash; *rock*, *paper*, or *scissors*
+- return an array of arrays
+  - each internal array is a 'solution' &mdash; a list of **n** throws
+  - outer array must contain *all* possible solutions
+
+We can think about this problem as another interaction with a decision tree. We start with an empty state (`[]`), and then we fill that state with all possible permutations of **n** throws. We can get an exhaustive list of possible permutations by doing a depth-first-search of a decision tree. Each node represents either a 'rock', 'paper', or 'scissor' throw. We crawl the tree up and down, and each time we get to the end of a branch, we know that we have found a valid solution.
+
+Here is the code, which I will explain below.
+
+<script src="https://gist.github.com/Cfeusier/a0c246225f87dcbf722e.js"></script>
+
+We are using a common pattern when working with trees, where we use a recursive subroutine within our solver function.
+
+We start by taking a number of *rounds* as input &mdash; rounds is the number of times the single player makes a throw in a valid solution.
+
+<img src="/img/blog/rockpaperscissors.png" />
+
+If you look at the tree visualization above, you will see that we start by pushing a 'rock' throw into the *thrown* array. Before we go any further across the tree, we go **down** the tree with recursion. This happens on line 16, where we recurse with 1 less round of throws.
+
+The recursive call will now push another rock into the array, so we have `[ rock, rock ]` in our **thrown** array. Another recursive call will push 'rock' into our **thrown** array one more time, so that we have `[ rock, rock, rock ]` in our array.
+
+Assuming that we only want our player to throw 3 times (rounds), we will then recurse a final time, passing `0` into our subroutine.
+
+This time, when we enter the recursive call, our base case triggers &mdash; we have 0 rounds left to throw, so we know that we have found a valid solution. We have a solution with `[ rock, rock, rock ]` &mdash; we want to push a **copy** of that solution into our `outcomes` array in the closure scope. We need to push a copy of the **thrown** array, because we are going to go back *up* the tree one level and then find another solution based on that current decision constraint (i.e, `[ rock, rock, paper/scissors ]`).
+
+This pattern of going down, then up and across, then down, then up and across, etc., will continue **n** times down, **n times** up, and `plays.length` times across. This pattern of movement through the tree is caused by looping *across* the possible `plays`, and recursing `down` **n** times for each `play`. Finally, once all of the possible states have been examined through a mixture of iteration and recursion, we know that we have all of our possible outcomes or solutions, so we just return that array of solution arrays.
+
+Hopefully this relatively contrived example shows the value of a decision tree for system-state analysis and sequence analysis.
+
+## Summary
+
+1. trees are cool
+2. trees are node-based data structures
+  - each node stores a value and a reference to zero or more children nodes
+  - a tree has a root node of which all the other nodes in the tree are ancestors
+  - every node is itself a tree, composed of subtrees
+3. you can constrain trees to do what you want
+  - number of children constraints: binary trees are the most common (each node can only have two children)
+  - insertion of data constraints: search trees are the most common (insert data based on a pattern to optimize search and retrieval)
+  - type or value of children constraints: decision trees are the most common (the type of node or value at a node is constrained by the values of ancestor nodes)
+4. use recursion and smart base cases when working with trees
+
+### Save your software, plant a tree.
 
