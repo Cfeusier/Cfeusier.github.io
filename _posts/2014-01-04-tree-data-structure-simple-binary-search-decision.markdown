@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "Rollin' Trees, yo"
-date: 2014-12-26
+date: 2014-01-04
 author: "Clark Feusier"
 tags:
 - javascript
