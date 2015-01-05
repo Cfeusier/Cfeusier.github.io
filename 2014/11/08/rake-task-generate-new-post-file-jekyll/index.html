@@ -1,0 +1,393 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://clarkfeusier.com/css/base.css">
+    <link rel="shortcut icon" type="image/x-icon" href="http://clarkfeusier.com/img/favicon.ico" />
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushYaml.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FNCG');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Setup SyntaxHighlighter -->
+    <script type="text/javascript">SyntaxHighlighter.all()</script>
+    <!-- End SyntaxHighlighter Setup -->
+    <header>
+        <div id="logo">
+            <img src="http://clarkfeusier.com/img/headshot.png" alt="">
+        </div>
+        <div id="site-heading">
+            <h2 class="title">Clark Feusier</h2>
+            <h3 class="subtitle">Software Engineer and Metalogician</h3>
+        </div>
+        <ul id="nav">
+         <li class=""><a href="http://clarkfeusier.com/pages/about">About</a></li>
+         <li class=""><a href="http://clarkfeusier.com/index.html">Writing</a></li>
+         <li class=""><a href="http://clarkfeusier.com/pages/portfolio">Portfolio</a></li>
+         <li><a href="#" id="contact-section">Contact</a></li>
+     </ul>
+     <div id="contact-wrapper">
+        <div id="contact-content">
+            <ul id="contact-list">
+                <i class="fa fa-envelope-o contact-icon"></i>
+                <li><a href="mailto:cfeusier@gmail.com">  cfeusier@gmail.com</a></li>
+                <li class="separator">/</li>
+                <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+        <a href="#" id="contact-close"><i class="fa fa-times"></i></a>
+    </div>
+</header>
+<div id="main-contents">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">08 November 2014</span>
+                </div>
+                <h2 class="title">Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog</h2>
+                <div class="content">
+                    <pre class="brush: bash">
+    rake gen:post TITLE="[INSERT TITLE]" [D] [FN] [TAGS]
+</pre>
+
+<p>I couldn’t find a good plugin online for using a command to generate Jekyll post-files automatically date-stamped and stubbed with content/YAML front matter. So, I got some practice writing a simple Rake task. Here is an easy way to create a custom post file generator in just a few steps.</p>
+
+<h2 id="target">Target</h2>
+
+<p>I want to be able to type <code>rake gen:post TITLE="Badass Title Here"</code> and get an auto-generated file that looks like this:</p>
+
+<pre class="brush: yaml">
+    ---
+    layout: post_simple
+    title:  "Badass Title Here"
+    date:   2014-11-08
+    author: "Clark Feusier"
+    excerpt: ""
+    tags:
+    - default tag1
+    - default tag2
+    ---
+</pre>
+
+<p>Stubbed content that you can have here with whatever dynamic variables you collect or calculate in your rake task!</p>
+
+<p>Optionally, I would like to have the ability to add options like this:</p>
+
+<pre class="brush: bash">
+    rake gen:post TITLE="Title Here" D=YYYY-MM-DD FN="opt_filename.md" TAGS="tag1,tag2,..."
+</pre>
+
+<p>The <code>D</code> option would take a date that would override the default (current date). This should be input in the YYYY-MM-DD date format. The <code>FN</code> option would take a filename as a string. Finally, the <code>TAGS</code> option would take a comma-separated list of tags in the form of a string.</p>
+
+<hr />
+
+<h2 id="outline-of-steps">Outline of Steps</h2>
+
+<h3 id="if-you-havent-already-create-a-posts-directory-to-hold-your-jekyll-blog-posts">If you haven’t already, create a <code>_posts</code> directory to hold your Jekyll blog posts</h3>
+
+<ul>
+  <li>
+    <p>This step is simple: just create an empty directory (folder) at the <strong><em>root</em></strong> of your Jekyll blog</p>
+  </li>
+  <li>
+    <p>the root of your blog will be the top-level directory of your blog — <strong>for example:</strong></p>
+  </li>
+</ul>
+
+<pre class="brush: ruby">
+    blog_root/
+        _posts/
+</pre>
+
+<h3 id="create-a-gemfile-at-the-top-level-of-your-application">Create a Gemfile at the top-level of your application</h3>
+
+<ul>
+  <li>This step is simple: just create an empty file titled <code>Gemfile</code> at the <strong><em>root</em></strong> of your blog — <strong>for example:</strong></li>
+</ul>
+
+<pre class="brush: ruby">
+    blog_root/
+        _posts/
+        Gemfile
+</pre>
+
+<h3 id="add-rake-and-activesupport-to-your-gemfile">Add <code>Rake</code> and <code>ActiveSupport</code> to your Gemfile</h3>
+
+<ul>
+  <li>Your <code>Gemfile</code> should look like this:</li>
+</ul>
+
+<pre class="brush: ruby">
+    source 'https://rubygems.org'
+    ruby '[INSERT RUBY VERSION NUMBER HERE]'
+
+    gem 'activesupport', '~&gt;4.1'
+    gem 'rake'
+</pre>
+
+<h3 id="run-bundle-install">Run <code>bundle install</code></h3>
+
+<ul>
+  <li>Seriously, just go to your root directory and run <code>bundle install</code> — let Bundler take care of installing all the dependencies for you</li>
+</ul>
+
+<h3 id="create-an-empty-directory-config-at-the-top-level-of-your-application">Create an empty directory <code>config/</code> at the top-level of your application</h3>
+
+<ul>
+  <li>This step is simple: create an empty directory titled <code>config</code> at the <strong><em>root</em></strong> of your blog — <strong>for example:</strong></li>
+</ul>
+
+<pre class="brush: ruby">
+    blog_root/
+        _posts/
+        config/
+        Gemfile
+</pre>
+
+<h3 id="create-an-empty-file-titled-environmentrb-within-the-config-directory">Create an empty file titled <code>environment.rb</code> <strong>within</strong> the <code>config/</code> directory</h3>
+
+<ul>
+  <li>This step is simple: create an empty file titled <code>environment.rb</code> in the <code>config/</code> directory of your blog — <strong>for example:</strong></li>
+</ul>
+
+<pre class="brush: ruby">
+    blog_root/
+        _posts/
+        config/
+            environment.rb
+        Gemfile
+</pre>
+
+<h3 id="fill-the-configenvironmentrb-file-with-centralized-helpers">Fill the <code>config/environment.rb</code> file with centralized helpers</h3>
+
+<ul>
+  <li>Add some path-centric logic constants and <code>require</code> statements to make it easier to work on your Rake task later — <strong>for example:</strong></li>
+</ul>
+
+<pre class="brush: ruby">
+    ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __FILE__)
+    require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
+    require 'rubygems'
+    require 'uri'
+    require 'pathname'
+
+    APP_ROOT = Pathname.new(File.expand_path('../', __FILE__))
+    APP_NAME = APP_ROOT.basename.to_s
+</pre>
+
+<ul>
+  <li>The above code is doing the following:
+    <ol>
+      <li>defining an environment variable (if it doesn’t already exist) that points to the file location of the Gemfile so that Bundler can find the Gemfile</li>
+      <li>requiring <code>bundler/setup</code> if the Gemfile exists</li>
+      <li>requiring the <code>rubygems</code> that we care about having in our app</li>
+      <li>requiring <code>uri</code> and <code>pathname</code> so that we can define our path-centric constants</li>
+      <li>creating an <code>APP_ROOT</code> constant pointing to the path location of your app <strong><em>root</em></strong></li>
+      <li>creating an <code>APP_NAME</code> constant with the value of the <code>APP_ROOT</code> basename as a string</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="create-an-empty-rakefile-at-th-top-level-of-your-application">Create an empty <code>Rakefile</code> at th top-level of your application</h3>
+
+<ul>
+  <li>This step is simple: just create an empty file titled <code>Rakefile</code> at the <strong><em>root</em></strong> of your blog — <strong>for example:</strong></li>
+</ul>
+
+<pre class="brush: ruby">
+    blog_root/
+        _posts/
+        config/
+            environment.rb
+        Gemfile
+        Rakefile
+</pre>
+
+<h3 id="add-the-following-code-to-your-rakefile">Add the following code to your <code>Rakefile</code>:</h3>
+
+<pre class="brush: ruby">
+    require ::File.expand_path('../config/environment', __FILE__)
+    require 'rake'
+    require 'active_support/core_ext'
+
+    namespace :gen do
+      desc "Create an empty post in /_posts, e.g., rake gen:post TITLE='This is a Sample Title'"
+      task :post do
+        err_mes = "Must specificy post TITLE, e.g., rake gen:post TITLE='This is a Sample Title'"
+        raise err_mes unless ENV.has_key?('TITLE')
+        post_title = ENV['TITLE'].camelize
+        date = ENV['D'] || Date.today.to_s
+        base_filename = ENV['FN'] || ENV['TITLE'].downcase.gsub(/\s+/, "-")
+        post_filename = date + "_" + base_filename + ".markdown"
+        post_path = APP_ROOT.join('../_posts', post_filename)
+        file_exists_mes = "ERROR: post file '#{post_path}' already exists"
+        tags = ENV['TAGS'] || "software engineering"
+        tag_str = ""
+        tags = tags.split(",").each { |tag| tag_str &lt;&lt; '- ' + tag + "\n" }
+        tag_str.chomp!
+
+        raise file_exists_mes if File.exist?(post_path)
+
+        puts "Created #{post_path}"
+        File.open(post_path, 'w+') do |f|
+          f.write(&lt;&lt;-EOF.strip_heredoc)
+    ---
+    layout: post_simple
+    title:  #{post_title}
+    date:   #{date}
+    author: "Clark Feusier"
+    excerpt: ""
+    tags:
+    #{tag_str}
+    ---
+
+    Sample content goes here. This is the first paragraph that you should replace with your content for #{post_title}.
+
+    Now, go write something awesome...
+    EOF
+        end
+      end
+    end
+</pre>
+
+<ul>
+  <li>The only things that you should need to change are the following:
+    <ul>
+      <li>line 16: change ‘software engineering’ to whatever you want your default tag to be for posts</li>
+      <li>line 27: the name of the layout that you will be using for this post type</li>
+      <li>line 30: the name of the author</li>
+      <li>lines 36-38: change the stubbed text to whatever default text you want for this post type</li>
+    </ul>
+  </li>
+  <li>If you know what you are doing, you should be able to change the HEREDOC string to whatever you want your post template to look like!</li>
+  <li>You can now generate post-files from the command line, like this:</li>
+</ul>
+
+<pre class="brush: bash">
+    rake gen:post TITLE="I Am So Awesome at Writing Titles" D=2014-11-09 TAGS="awesomeness,clark,tag3"
+</pre>
+
+<p>The above command will create a file <code>2014-11-09-i-am-so-awesome-at-writing-titles.markdown</code> in your <code>_posts/</code> directory with the following stubbed content:</p>
+
+<pre class="brush: yaml">
+    ---
+    layout: post_simple
+    title:  "I Am So Awesome at Writing Titles"
+    date:   2014-11-09
+    author: "Clark Feusier"
+    excerpt: ""
+    tags:
+    - awesomeness
+    - clark
+    - tag3
+    ---
+
+    Sample content goes here. This is the first paragraph that you should replace with your content for I Am So Awesome at Writing Titles.
+
+    Now, go write something awesome...
+</pre>
+
+<h3 id="now-go-write">Now, GO WRITE!</h3>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/rake">rake</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/ruby">ruby</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/jekyll">jekyll</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/devops">devops</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/automation">automation</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/workflow">workflow</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2014/11/08/rake-task-generate-new-post-file-jekyll/&t=Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2014/11/08/rake-task-generate-new-post-file-jekyll/&text=Writing a Rake Task to Generate New Posts for My Jekyll-Powered Blog&url=http://clarkfeusier.com/2014/11/08/rake-task-generate-new-post-file-jekyll/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2014/11/08/rake-task-generate-new-post-file-jekyll/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2014/10/01/perspective-on-dbc-and-life/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+            <li class="next"><a href="http://clarkfeusier.com/2014/12/11/object-oriented-javascript-functional-class/"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+            
+        </ul>
+    </div>
+</div>
+ </div>
+       <footer>
+            <div id="footer-quote">
+                <div class="container">
+                    <div class="contents">
+                        <div class="quote-icon">
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+                        <span class="quote-name">Percy Bysshe Shelley</span>
+                        <div class="quote-text">
+                            The soul's joy lies in <span class="colored-text">doing</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <div class="container foot">
+                    <ul id="social-icons">
+                        <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                        <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                    <div id="copyright">© COPYRIGHT 2014 Clark Feusier</div>
+                    <a id="home-circle" href="http://clarkfeusier.com"><i class="fa fa-home"></i></a>
+                </div>
+            </div>
+       </footer>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/jquery-1.11.0.min.js"></script>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/header_glitter.js"></script>
+    </body>
+</html>
