@@ -1,0 +1,3 @@
+- CoffeeScript vs JavaScript
+- Incentivize Language Learning, inherently good
+- Blackjack Example
