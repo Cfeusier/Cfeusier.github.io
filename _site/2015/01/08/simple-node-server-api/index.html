@@ -1,0 +1,498 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Node Basics: How to Create a Simple Server and Router + Node Fundamentals</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://clarkfeusier.com/css/base.css">
+    <link rel="shortcut icon" type="image/x-icon" href="http://clarkfeusier.com/img/favicon.ico" />
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushYaml.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FNCG');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Setup SyntaxHighlighter -->
+    <script type="text/javascript">SyntaxHighlighter.all()</script>
+    <!-- End SyntaxHighlighter Setup -->
+    <header>
+        <div id="logo">
+            <img src="http://clarkfeusier.com/img/headshot.png" alt="">
+        </div>
+        <div id="site-heading">
+            <h2 class="title">Clark Feusier</h2>
+            <h3 class="subtitle">Software Engineer and Metalogician</h3>
+        </div>
+        <ul id="nav">
+         <li class=""><a href="http://clarkfeusier.com/pages/about">About</a></li>
+         <li class=""><a href="http://clarkfeusier.com/index.html">Writing</a></li>
+         <li class=""><a href="http://clarkfeusier.com/pages/portfolio">Portfolio</a></li>
+         <li><a href="#" id="contact-section">Contact</a></li>
+     </ul>
+     <div id="contact-wrapper">
+        <div id="contact-content">
+            <ul id="contact-list">
+                <i class="fa fa-envelope-o contact-icon"></i>
+                <li><a href="mailto:cfeusier@gmail.com">  cfeusier@gmail.com</a></li>
+                <li class="separator">/</li>
+                <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+        <a href="#" id="contact-close"><i class="fa fa-times"></i></a>
+    </div>
+</header>
+<div id="main-contents">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">08 January 2015</span>
+                </div>
+                <h2 class="title">Node Basics: How to Create a Simple Server and Router + Node Fundamentals</h2>
+                <div class="content">
+                    <p><strong>Who</strong>: this post is for anyone looking to learn some of the foundations required for working with Node</p>
+
+<p><strong>What</strong>: this post will show you how to create a simple resource server using vanilla Node and the Node <em>http</em> module</p>
+
+<p><strong>How</strong>: the magic of a simple request handler, also known as a router</p>
+
+<p><strong>When</strong>: anytime you want</p>
+
+<p><strong>Why</strong>: to serve a client request with any resource (file, database entry, etc.)</p>
+
+<hr />
+
+<h3 id="node">Node</h3>
+
+<p>Node is the tool that we will be using to build our server, so what is Node?</p>
+
+<p>In essence, Node is just a JavaScript interpreter, packaged with a bunch of helper libraries and a command line interface tool.</p>
+
+<p>Summary of Node:</p>
+
+<ol>
+  <li>Node is a JavaScript interpreter built on the V8 engine that powered the Google Chrome browser</li>
+  <li>Node is packaged with a bunch of utility libraries for performing common development tasks, like interacting with a file system or sending an HTTP request</li>
+  <li>Node is packaged with a command line interface that allows you to enter <code>node</code> and then either enter the Node REPL or provide a file for Node to execute</li>
+  <li>Node isn’t much more than that</li>
+  <li>Node doesn’t have to be used ‘on the server,’ as is oft-misstated — you could build a command line app with Node just like you could with Ruby, without using Node ‘on the server’.</li>
+</ol>
+
+<p>Now that we have an idea of what Node is, let’s talk about the theory behind what we are building. We are building a <strong>server</strong> that responds to request from a <strong>client</strong>. So, what is a client, request, response, and server?</p>
+
+<h3 id="client--server-model">Client / Server Model</h3>
+
+<p>This model just describes a relationship between entities, the <strong>clients</strong> and the <strong>servers</strong>. In this model, there is a relationship between clients and a server, where that relationship involves the server providing a service to clients. Here is a fun analogy:</p>
+
+<p>Imagine that there are no ovens or microwaves in the city in which I live, other than the single microwave that I own. I have decided to provide a service to my fellow city inhabitants.</p>
+
+<p>One by one, my neighbors, my dear <strong>clients</strong>, walk up to my front lawn — I have positioned my microwave on top of a card table, and connected the microwave via an extension cord plugged in to the garage outlet.</p>
+
+<p>Each client, who wants to use my service, places her food on my table, hands me $0.25, and tells me a number (the number of seconds to heat the food in the microwave).</p>
+
+<p>The relationship that I have to the neighbor I serve, is one of a server to a client — this the ‘client / server model’ that people talk about. This is one of many distributed communication models, but discussing those models would take us too far afield.</p>
+
+<p>So, you might be thinking, how will our server get requests, and how will it serve the responses back to the clients? Good question. On the web, this client / server model is enabled by HTTP network communication. So, let’s talk about HTTP, real quickly.</p>
+
+<h3 id="http">HTTP</h3>
+
+<p>HTTP is a protocol that, when followed correctly, allows computers in different locations to communicate ‘across the wire’ of the Internet. If you use a web browser, every page that you see is served by HTTP communication (partially).</p>
+
+<p>For our purposes, all you need to know are the following concepts:</p>
+
+<ol>
+  <li>HTTP supports various request types: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>, <code>OPTIONS</code>, etc. — these verbs specify what to do with the resource being requested</li>
+  <li>HTTP communication usually involves a request from a client and a response from a server — the request contains at least headers (metadata about the request), and a body (the data of that the request is meant to send). The response contains at least headers, a body, and a status code to tell the client if the server could handle the request or not.</li>
+</ol>
+
+<p>Enough theory, I think we are ready to jump into the file structure of our application.</p>
+
+<h2 id="app-structure">App Structure</h2>
+
+<script src="https://gist.github.com/Cfeusier/8a6b9a1a3b4c5ea589dc.js"></script>
+
+<ol>
+  <li><code>package.json</code> is an app manifest for use with NPM modules — the specification of dependecies is the important part of this file.</li>
+  <li><code>.gitignore</code> has the usual list of files and directories to ignore — if you don’t have one setup already, google ‘.gitignore for node dev [insert operating system]’</li>
+  <li><code>server/server.js</code> declares the ip of the server and request entry port, then the server is created with the input of a routine that will handle requests — the request handler routine is our magic doorman, the router. Then, the server is told to listen for requests to the given ip and port.</li>
+  <li><code>server/router.js</code> will handle different types of requests by mapping request features onto pieces of code that should be run in response to that given pattern.</li>
+  <li><code>server/http-helpers.js</code> declares helper functions for communicating over HTTP, since our server will be handling HTTP requests only.</li>
+  <li><code>public/</code> contains all static assets</li>
+  <li><code>test/</code> contains tests for your application</li>
+</ol>
+
+<p>If the interactions between the different parts of this app structure are hazy in your mind, don’t worry — we are turning to that now.</p>
+
+<h2 id="high-level-app-overview">High-Level App Overview</h2>
+
+<p>Here is a diagram of the app flow, which I will explain below. The black dot at the top of the diagram represents the entry point to our server program — in our case, <code>server/server.js</code>, as declared in our package.json file.</p>
+
+<p><img src="/img/blog/node_server_router_json.png" width="90%" style="margin: 0 auto;" /></p>
+
+<ol>
+  <li>The server program entry point, <code>server/server.js</code>, will create a server and register a router
+    <ul>
+      <li>the registration of the router will trigger the router to set itself up</li>
+      <li>when the router setup is complete, the server will start listening for requests, i.e., you have a live server</li>
+    </ul>
+  </li>
+  <li>Now that the server is listening for requests to a given address and on a given port, the client can service incoming requests from clients — let’s assume our service can either serve up a resource or create a new resource (HTTP GET and POST requests)
+    <ul>
+      <li>e.g., the client issues a request to the server</li>
+      <li>the server creates a skeleton response object and sends it along with the request object to the router (the magic doorman)</li>
+      <li>the router will run some type of process to filter the requests based on their different properties
+        <ul>
+          <li>in our case, the router will check the HTTP request method, and route to the correct routines — our skeleton will start by only routing <code>GET</code> and <code>POST</code> requests</li>
+          <li>the router will send the request and response objects to the correct routine (either the ‘GET’ subroutine or the ‘POST’ subroutine in our example)</li>
+        </ul>
+      </li>
+      <li>the subroutine will do some work on the request and response objects</li>
+      <li>finally, the subroutine will send the response, optional data, and a status code directly back to the server</li>
+    </ul>
+  </li>
+  <li>The server receives the response, optional data, and status code from the subroutine
+    <ul>
+      <li>the server sends the response, data, and status code back to the client who initiatied the request</li>
+    </ul>
+  </li>
+  <li>The client receives the response, data, and status code from the server — and is sometimes happy</li>
+</ol>
+
+<p>Now that we have a good mental-model of the top-level flow of our application, let’s look at the code that implements this outline.</p>
+
+<h2 id="code">Code</h2>
+
+<h3 id="packagejson">package.json</h3>
+
+<p>Remember, this file just declares your app’s dependecies for NPM use.</p>
+
+<script src="https://gist.github.com/Cfeusier/e4e233feb24a6038a283.js"></script>
+
+<p>This file is pretty self-explanatory, but I will describe it for completeness:</p>
+
+<ol>
+  <li>names your app if you register it in the NPM registry</li>
+  <li>declares a version number</li>
+  <li>declares the main entry point for the program</li>
+  <li>declares the author of the application</li>
+  <li>states the app license</li>
+  <li>declares all dependencies and development dependencies</li>
+  <li>defines the custom scripts that npm can run for your app</li>
+</ol>
+
+<h3 id="gitignore">.gitignore</h3>
+
+<p>Whatever standard .gitignore you usually use for your setup with Node apps.</p>
+
+<h3 id="public">public/</h3>
+
+<p>Whatever public assets that you want to serve — index page for your root route, stylesheets, etc.</p>
+
+<h3 id="test">test/</h3>
+
+<p>Whatever testing framework you want to use — I tend to like mocha (or jasmine), plus the chai expectation library. Also, sinon is a big help for certain types of testing.</p>
+
+<h3 id="serverserverjs">server/server.js</h3>
+
+<p>Here is the entry point for your Node application, which I will explain below:</p>
+
+<script src="https://gist.github.com/Cfeusier/85d5f98b36c512a6533e.js"></script>
+
+<ol>
+  <li>require the Node <code>http</code> module</li>
+  <li>require your <code>router</code> module</li>
+  <li>define your the port on which your server will be listening</li>
+  <li>define your server ip address</li>
+  <li>create your HTTP server</li>
+  <li>pass your server the router’s request handler function, for handling requests</li>
+  <li>log out some server info</li>
+  <li>tell the server to start listening on your port and ip address</li>
+</ol>
+
+<p>When our server is created, it registers a request handler to which the server will delegate the request handling. If you are curious about how that delegation is happening, check out the Node docs for <a href="http://nodejs.org/api/http.html#http_http_createserver_requestlistener" target="_blank">http.createServer</a>. Let’s go look at that request handler now!</p>
+
+<h3 id="serverrouterjs">server/router.js</h3>
+
+<p>The majority of our service’s work will be done in this file. Our <code>handleRequest</code> method has been delegated the responsibility of handling the requests that the server passes to this router. Let’s see how the <code>handleRequest</code> method routes requests to the code that should be run to serve the given requests.</p>
+
+<p>Here is the skeleton code, and then I will go through line-by-line.</p>
+
+<script src="https://gist.github.com/Cfeusier/b4e1627e8a4066c74769.js"></script>
+
+<p>We start by requiring the Node path and url modules, though this is optional — I usually need both modules within my router.</p>
+
+<p>Next, we require the <code>server/http-helpers</code> module, which we will discuss below. We are saving this module as <code>utils</code> because the module contains a bunch of utilities that we wrote for interacting with HTTP requests and responses.</p>
+
+<p>Starting on line 5, we will define our route handlers based on the type of incoming request method; the route handlers will be stored as properties on our <code>actions</code> object.</p>
+
+<p>All of our route handler methods must adhere to a certain interface — request handler method signatures must at least include a request and response so that the handlers can easily access the delegated requests and responses passed from the server.</p>
+
+<p>We are going to skip down to the actual router, <code>handleRequest</code>, before we examine the contents of the <code>'GET'</code> and <code>'POST'</code> request handler subroutines. Remember that our server is delegating the handling of all incoming requests to the <code>handleRequest</code> method — i.e., <code>handleRequest</code> is the router that will map the requests onto the correct subroutines to run in response to given requests.</p>
+
+<p><strong><code>handleRequest</code></strong></p>
+
+<ul>
+  <li><strong>line 31</strong>: takes a request and a response as an input from the server</li>
+  <li><strong>line 32</strong>: looks into the actions object for a subroutine that can handle the given request
+    <ul>
+      <li>in our case, the subroutines are indexed based on the request method name (e.g., <code>'GET'</code>, <code>'POST'</code>, etc.)</li>
+    </ul>
+  </li>
+  <li><strong>line 33</strong>: if there is no subroutine defined to handle the given request method, we use a utility to send a 404 response back to the server; if there is a subroutine defined to handle the given request method, invoke that subroutine with the request and response objects</li>
+</ul>
+
+<p><strong><code>'GET'</code></strong> - example <code>GET</code> request handler</p>
+
+<p>This is just a skeleton request handler subroutine — to fill out this skeleton, one needs to know the purpose of the API to which the request is being issued. So, let’s talk at a level of abstraction a little higher than the implementation level.</p>
+
+<p>Usually, a <code>GET</code> request to an API is interpreted as the following: the requesting client wants the API to send back the data pertaining to the resource at the given request endpoint (i.e., the part of the request that tells the server which resource is desired). In HTTP-land, the endpoint for a request usually corresponds to part of a URL — usually some part of the path — e.g., <code>/users/3iEadf8fj625/tweets/</code>, <code>/index.html</code>, etc.</p>
+
+<p>The server needs to take that endpoint and read it for patterns — if the router recognizes a pattern that has a registered subroutine, then the router will delegate the request handling to said subroutine. In our diagram above, the endpoint-filtering, pattern recognition, and subroutine mapping is taken care of within the ‘magic doorman’ box.</p>
+
+<p>In our code above, on lines 7 through 10, there are comments with an example of how one might filter endpoints in HTTP-land. The example comments just use the Node url module’s <code>parse</code> method to parse the <code>url</code> property of the request object. Then, the endpoint will be available as the <code>pathname</code> property on the parsed url.</p>
+
+<p>Usually, once the handler has a usable endpoint, the handler is expected to <em>get</em> the resource represented by the endpoint from wherever it is stored — hence the name of the HTTP request method, <code>GET</code>. Depending on the setup and purpose, the resource might be stored a number of differnt types of persistent stores (file system, database, etc.).</p>
+
+<p>Let’s assume that your resource is stored in a database. At this point in your request handler, you might query the database for the resource. The query will return one of two things: an error or the data of the requested resource. If the database query returns an error, handle it according to your desired app logic. If your database returns the resource data, put the data into the correct format, and use the HTTP utility that we are going to write to respond to the server with the correct response, properly formatted resource data, and a status code of the operation. BOOM.</p>
+
+<p><strong><code>'POST'</code></strong> - example <code>POST</code> request handler</p>
+
+<p>This is also a skeleton request handler subroutine — this subroutine will handle incoming <code>POST</code> requests to the API. Usually, this is interpreted as the following: requesting client wants the API to create a resource with the information that the client is sending — kind of like the client is saying, ‘hey bro, make this and save it for me. I might want to get it back from you later. Thanks’.</p>
+
+<p>The client is sending along some data with the <code>POST</code> request — data that will be used to create a resource in the database. So, the first thing that our subroutine has to do to handle the <code>POST</code> request is collect and prepare the data from the request object into the correct format for storage in the database. We are going to use one of our utility HTTP helper methods called <code>prepareResponse</code> to collect and prepare the data. This utility will also take a callback, which it will trigger once it has completed preparing the data. That callback will have access to the prepared data.</p>
+
+<p>At that point, within the callback, the handler can do whatever it wants with the data — pass it through some middleware, validate it, save it to the database, transform it, etc. — and then send back a response to the server that indicates the success of the whole operation. Usually, the post request will be redirected on success or sent an error on failure. In our code, we are using a utility method called <code>redirector</code>, which we will implement below. The <code>redirector</code> will send a redirect response back to the server. BOOM.</p>
+
+<p>Now that our <code>GET</code> and <code>POST</code> request handler subroutines are finished, we could add different types of request handlers to our router’s <code>actions</code> object, so that we could handle more than the current <code>GET</code> and <code>POST</code> requests.</p>
+
+<p>We have finished our router, but the router implementation relied heavily on the utility helpers that we haven’t discussed yet. Let’s turn to the HTTP utilities now.</p>
+
+<h3 id="serverhttp-helpersjs">server/http-helpers.js</h3>
+
+<p>At a high-level, this module just provides a bunch of utilities for working with HTTP requests and responses in Node. I will explain the code below.</p>
+
+<script src="https://gist.github.com/Cfeusier/d2ded0ee86f9536ed96b.js"></script>
+
+<ul>
+  <li><strong>lines 1 - 7</strong>: sets up a reusable object with default response headers
+    <ul>
+      <li>these are particularly helpful for doing CORS work</li>
+      <li>line 6 allows you to set the content type of the request, which is set to JSON in our example</li>
+    </ul>
+  </li>
+  <li><strong>lines 9 - 13</strong>: utility for preparing responses to <code>POST</code> requests
+    <ul>
+      <li>the function takes a request object and a callback as parameters</li>
+      <li>line 10: create empty string and store in <code>data</code> variable</li>
+      <li>line 11: listen on the request’s <code>'data'</code> event (when the request object, which is a Node <code>readable stream</code>, finishes streaming a single chunk of data, the <code>'data'</code> event fires, meaning that the event will fire repeatedly until all the request data is read)
+        <ul>
+          <li>each chunk of data is concatenated to our <code>data</code> string that we declared and initialized in closure</li>
+        </ul>
+      </li>
+      <li>line 12: listen on the request’s <code>'end'</code> event (when all of the stream data has been read, the request fires an <code>'end'</code> event, signifying that all the request data has been transfered)
+        <ul>
+          <li>when the <code>'end'</code> event is emitted, we invoke the callback with the fully-read data so that the callback function has access to the data</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>ASIDE</strong></p>
+
+<p>When we used the <code>prepareResponse</code> utility in our request handler subroutine, we gave the utility a callback that would take the data and do something with it (e.g., save it to the database). That is what we are doing by invoking the callback with the data in <code>prepareResponse</code> — we are passing control back to the callback in the request handler subroutine, and we are giving that callback access to the data that was read. <em>This is the heart of Node.</em></p>
+
+<blockquote>Always perform <em><strong>blocking I/O</strong></em> asynchronously</blockquote>
+
+<p>What does that mean?</p>
+
+<ol>
+  <li>Node is a JavaScript interpreter, first and foremost</li>
+  <li>Node is ‘single-threaded’, meaning that it can only process one line of code at a time (no concurrent processing)</li>
+  <li>Because of 1 and 2 above, it is possible to ‘block’ your Node app’s processing</li>
+  <li>Most input and output operations (I/O) are time complex and costly, so they can be considered ‘blocking’ — e.g., writing to a database, reading from a file on your harddrive, etc. — because they don’t get to exploit the speed of <strong>in-memory</strong> operations</li>
+  <li>A blocked thread is annoying if your Node app is serving users who have to wait until the blocking operation finishes before they can even request new operations</li>
+  <li>You can avoid blocking your Node thread by performing those costly operations <strong>asynchronously</strong></li>
+</ol>
+
+<p><em>This is the heart of Node (2).</em></p>
+
+<blockquote>When a request for a costly operation comes in, package up that request with a callback that specifies what to do when the costly operation finishes processing and fire off that request. <em>But, do not wait for the result of the costly operation to come back before processing the next piece of code</em>. Instead, continue processing the next piece of code, and when the costly operation finishes, that operation is responsible for triggering the callback and passing it the correct data. The callback will then inject itself back into the main thread and perform the desired operation with the data it needed from the costly operation.</blockquote>
+
+<p>All of the above can be summed up as follows: when working with Node, <strong>if in doubt, pass it a callback™</strong></p>
+
+<p><strong>END ASIDE</strong></p>
+
+<p>Now that we have a firmer appreciation for why Node apps can be fast (if implemented well), we can move on to analyzing the other utilities.</p>
+
+<ul>
+  <li><strong>lines 15 - 19</strong>: utility for sending a response back to the server
+    <ul>
+      <li>this function is responsible for sending a response back to the server, by writing the headers of the response and ending the response (passing in the data for the response)</li>
+      <li>this function can be invoked with a response (to send), some data (to send), and a status code (to send)</li>
+      <li>line 16: set a default status code if one isn’t provided</li>
+      <li>line 17: write the response headers with the headers that we defined at the top of our file</li>
+      <li>line 18: end the response, which is a Node <code>writable stream</code>, with the data you want to write to the response — this is equivalent to writing a bunch of data to the response, then closing the write stream</li>
+    </ul>
+  </li>
+  <li><strong>lines 21 - 23</strong>: utility for sending an error response back to the server
+    <ul>
+      <li>this function is invoked with a response object, which will send a 404 response code and error message back to the server by tacking it onto the response object that was passed in</li>
+      <li>line 22: use the helper we wrote above to <code>respond</code> to the server — however, tell <code>respond</code> to send the response object back with a ‘Not Found’ message and a 404 status code</li>
+    </ul>
+  </li>
+  <li><strong>lines 25 - 29</strong>: utility for sending a redirect response back to the server
+    <ul>
+      <li>this function is used to redirect the request and response to a new location, i.e., to a new endpoint (a web address in HTTP-land)</li>
+      <li>this function takes the response object to pass along with the redirect, as well as an optional status code and location (address) to use as the redirect final destination</li>
+      <li>line 26: set a default status code if one isn’t provided (302 is temporary redirect)</li>
+      <li>line 27: write the headers on the response object with the status code and an object that contains a <code>Location</code> property, set to your final destination
+        <ul>
+          <li><code>Location</code> hooks into the browser APIs and directs the browser to request the resource at the given location</li>
+        </ul>
+      </li>
+      <li>line 28: end the response without passing data, since the redirect status code and final destination are all that is needed to satisfy the client’s request</li>
+    </ul>
+  </li>
+</ul>
+
+<p>That is it for our HTTP utility functions, and our application skeleton! Let’s summarize.</p>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<ol>
+  <li>Node Fundamentals:
+    <ul>
+      <li>don’t block the JavaScript interpreter’s loop</li>
+      <li>I/O is costly, do it asynchronously</li>
+      <li>provide a callback to handle results of asynchronous I/O operations</li>
+    </ul>
+  </li>
+  <li>Client &lt; - &gt; Server Model:
+    <ul>
+      <li>client requests a service</li>
+      <li>server serves the client’s requests</li>
+    </ul>
+  </li>
+  <li>Node HTTP Server:
+    <ul>
+      <li>create server and delegate all request handling to a router</li>
+      <li>then, tell teh server to listen for incoming requests at a given address and on a given port</li>
+    </ul>
+  </li>
+  <li>Router:
+    <ul>
+      <li>filter incoming requests based on patterns</li>
+      <li>map the requests to their registered subroutines</li>
+    </ul>
+  </li>
+  <li>Request Handler Subroutines:
+    <ul>
+      <li>receive a request and response from the router</li>
+      <li>do stuff with the request and write stuff to the response</li>
+      <li>send the response back with a status code to the server, which will send it along to the appropriate client</li>
+    </ul>
+  </li>
+</ol>
+
+<p>BOOM.</p>
+
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/best practices">best practices</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/implementation examples">implementation examples</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/node">node</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/server">server</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/api">api</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/08/simple-node-server-api/&t=Node Basics: How to Create a Simple Server and Router + Node Fundamentals" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/08/simple-node-server-api/&text=Node Basics: How to Create a Simple Server and Router + Node Fundamentals&url=http://clarkfeusier.com/2015/01/08/simple-node-server-api/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/08/simple-node-server-api/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/01/07/file-and-directory-organization-node-express-app/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+        </ul>
+    </div>
+</div>
+ </div>
+       <footer>
+            <div id="footer-quote">
+                <div class="container">
+                    <div class="contents">
+                        <div class="quote-icon">
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+                        <span class="quote-name">Percy Bysshe Shelley</span>
+                        <div class="quote-text">
+                            The soul's joy lies in <span class="colored-text">doing</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <div class="container foot">
+                    <ul id="social-icons">
+                        <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                        <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                    <div id="copyright">© COPYRIGHT 2014 Clark Feusier</div>
+                    <a id="home-circle" href="http://clarkfeusier.com"><i class="fa fa-home"></i></a>
+                </div>
+            </div>
+       </footer>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/jquery-1.11.0.min.js"></script>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/header_glitter.js"></script>
+    </body>
+</html>

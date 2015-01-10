@@ -26,6 +26,7 @@ tags:
     - full view of app by hiding complexity
     - abstraction for extensibility and maintenance
 
+
 ## Directory Structure
 
 <script src="https://gist.github.com/Cfeusier/e580815b1270fb98f273.js"></script>
@@ -113,6 +114,7 @@ This is an example utility module that helps handle requests for *one* collectio
 
 
 ## Summary
+
 
 
 
