@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts Tagged &ldquo;data structures&rdquo;</title>
+    <title>Popular Interview Question: Higher-Order Functions and Function Binding</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,268 +59,110 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-    <div class="page-contents">
-        <h2 class="page-title first-elem"> Posts with the 'data structures' Tag</h2>
-        <ul id="ptitle-list">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">10 January 2015</span>
+                </div>
+                <h2 class="title">Popular Interview Question: Higher-Order Functions and Function Binding</h2>
+                <div class="content">
+                    <p>In technical interviews, it is common that the interviewer will throw in a question about functional programming. If you are applying for a job as a JavaScript engineer, then you should expect an interview question in some similar form to the following:</p>
 
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
+<blockquote>
+Write a 'bind' method on the Function prototype that binds a context to a function and returns the bound version, so that when invoked, the returned function will be executed in the context passed into the bind method
+</blockquote>
 
-                <li class="clearfix">
-                	<span class="date">04 January 2015</span>
-                	<span class="seperator">&mdash;</span>
-                    <a href="http://clarkfeusier.com/2015/01/04/tree-data-structure-simple-binary-search-decision/"><h3 class="title">Rollin' Trees, yo</h3></a>
-                </li>
+<p>Here is an example of the target objective:</p>
 
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
+<script src="https://gist.github.com/Cfeusier/c23cc54f1048b02fc4f4.js"></script>
 
+<p>This interview question is testing your knowledge of a few things:</p>
+
+<ol>
+  <li>the <code>.prototype</code> property of function objects</li>
+  <li>the concept of an object decorator (specifically, function object decorator)</li>
+  <li>how to use JavaScript’s <code>call</code>, <code>apply</code>, and <code>bind</code></li>
+  <li>how to use first-class functions</li>
+  <li>how to use higher-order functions</li>
+  <li>what the <code>arguments</code> object is in JavaScript, and how to manipulate it into an Array</li>
+</ol>
+
+<p>It is not enough to be able to solve this problem — you must be able to talk intelligibly about the previous 6 topics with your interviewer(s). So, let’s talk through a general approach to the problem and the constraints of the problem, then, we can walk through the code for one possible solution and the theory involved.</p>
+
+<h2 id="problem-constraints-and-the-process-of-finding-a-solution">Problem Constraints and the Process of Finding a Solution</h2>
+
+<p>First, what is this problem even asking us to do?</p>
+
+<p>When I approach a problem of any decent complexity, I like to break it down into <strong>stupid</strong>-obvious little parts.</p>
+
+<ol>
+  <li>write a method called <code>bind</code></li>
+  <li>add the <code>bind</code> method as a property on the <code>Function.prototype</code></li>
+  <li>inputs: a context object to which the returned function should be bound</li>
+  <li>outputs: a bound function</li>
+</ol>
+
+<p>So, I need to figure out out to add a method to the <code>Function.prototype</code>. Next, I need to understand what it means to ‘bind’ a function to a context. Finally, I need to be aware of any edge-cases and ‘gotchas’ — e.g., what happens if no context is provided to our <code>bind</code> function?</p>
+
+<p>Those problems are small and manageable — I know how to add a method to the <code>.prototype</code> property of an object. I think I know what it means to ‘bind’ a function to a context. Finally, I will remind myself to reconsider edge-cases as we progress. Let’s implement, then discuss.</p>
+
+<h2 id="solution">Solution</h2>
+
+<script src="https://gist.github.com/Cfeusier/6388b0760af775fcb068.js"></script>
+
+<ul>
+  <li>functions that can either take other functions as arguments or return them as results</li>
+</ul>
+
+<h2 id="theory">Theory</h2>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/functional programming">functional programming</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/implementation examples">implementation examples</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/interview questions">interview questions</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/10/interview-question-function-bind/&t=Popular Interview Question: Higher-Order Functions and Function Binding" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/10/interview-question-function-bind/&text=Popular Interview Question: Higher-Order Functions and Function Binding&url=http://clarkfeusier.com/2015/01/10/interview-question-function-bind/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/10/interview-question-function-bind/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/01/08/simple-node-server-api/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
         </ul>
-
-
-
     </div>
 </div>
-
  </div>
        <footer>
             <div id="footer-quote">
