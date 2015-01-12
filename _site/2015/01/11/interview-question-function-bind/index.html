@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Popular Interview Question: Higher-Order Functions and Function Binding</title>
+    <title>Popular Interview Question Series: Higher-Order Functions and Function Binding</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -67,14 +67,14 @@
             </div>
             <div class="post-body">
                 <div class="meta">
-                    <span class="date">10 January 2015</span>
+                    <span class="date">11 January 2015</span>
                 </div>
-                <h2 class="title">Popular Interview Question: Higher-Order Functions and Function Binding</h2>
+                <h2 class="title">Popular Interview Question Series: Higher-Order Functions and Function Binding</h2>
                 <div class="content">
-                    <p>In technical interviews, it is common that the interviewer will throw in a question about functional programming. If you are applying for a job as a JavaScript engineer, then you should expect an interview question in some similar form to the following:</p>
+                    <p>In technical interviews, it is common that the interviewer will throw in a question that tests your knowledge of higher-order functions and function-binding. If you are applying for a job as a JavaScript engineer, then you should expect an interview question in some similar form to the following:</p>
 
 <blockquote>
-Write a 'bind' method on the Function prototype that binds a context to a function and returns the bound version, so that when invoked, the returned function will be executed in the context passed into the bind method
+  Write a 'bind' method on the Function prototype that binds a context to a function and returns the bound version, so that when invoked, the returned function will be executed in the context passed into the bind method
 </blockquote>
 
 <p>Here is an example of the target objective:</p>
@@ -111,15 +111,98 @@ Write a 'bind' method on the Function prototype that binds a context to a functi
 
 <p>Those problems are small and manageable — I know how to add a method to the <code>.prototype</code> property of an object. I think I know what it means to ‘bind’ a function to a context. Finally, I will remind myself to reconsider edge-cases as we progress. Let’s implement, then discuss.</p>
 
-<h2 id="solution">Solution</h2>
+<h2 id="implementation">Implementation</h2>
 
 <script src="https://gist.github.com/Cfeusier/6388b0760af775fcb068.js"></script>
+
+<ul>
+  <li><strong>line 2</strong>: anything passed into our <code>bind</code> function, other than the first <code>ctx</code> parameter, needs to get passed along as an argument when the bound function is invoked
+    <ul>
+      <li>use the <code>Array.prototype.slice</code> method on the <code>arguments</code> object
+        <ul>
+          <li><code>slice</code> from index <code>1</code> to the length of <code>arguments</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>line 3</strong>: we will be returning a new function as our bound function, so we want to store a reference to our old function first
+    <ul>
+      <li>capture the object that is currently bound to <code>this</code> — the function to bind</li>
+    </ul>
+  </li>
+  <li><strong>lines 5 - 9</strong>: the ‘decorated’ function object that can now be invoked in the context to which it was bound
+    <ul>
+      <li><strong>line 6</strong>: the bound function needs access to any arguments with which it is invoked
+        <ul>
+          <li>use the same technique as above, and slice the <code>arguments</code> object
+            <ul>
+              <li>this time, <code>slice</code> the whole <code>arguments</code> object length because there are no named parameters in the bound function’s signature</li>
+              <li>store the array of arguments to the bound function in <code>allArgs</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>line 7</strong>: concatenate the outer function’s arguments with the bound function’s arguments, and store them in the <code>allArgs</code> variable</li>
+      <li><strong>line 8</strong>: return the original function, invoked in the context stored in closure, and pass along all of the arguments from the outer and inner function</li>
+    </ul>
+  </li>
+</ul>
+
+<p>That’s it! If that felt too fast, good — the next section is perfect for you.</p>
+
+<h2 id="theory">Theory</h2>
+
+<h3 id="the-arguments-object">The <code>arguments</code> Object</h3>
+
+<p>Every function object in JavaScript has an <code>arguments</code> object that the JavaScript interpreter manages. Every time that a function is invoked, all of the arguments with which the function are invoked are stored on the <code>arguments</code> object associated with the given function object. Maybe an example will elucidate:</p>
+
+<script src="https://gist.github.com/Cfeusier/6e32decb794c98041ed8.js"></script>
+
+<p>Ignoring the <code>.prototype</code> and <code>.call</code> part, which we will explain below, the example above declares a function called <code>func</code>, which doesn’t have any ‘named’ parameters in its function signature, i.e., nothing is in-between the parentheses on line 1 where <code>func</code> is defined. This function, <code>func</code>, will access anything that you pass into it on invocation, <strong>from its <code>arguments</code> object</strong>. <code>func</code> will then loop through an array representation of the <code>arguments</code> object, and log each of the individual arguments with which the function was invoked at runtime.</p>
+
+<p>If you are confused by the above paragraph, ignore the complexity — each argument that I pass in to <code>func</code> when invoking it on line 9 is going to get logged out, as seen on lines 11 through 18. I am able to log out each of the arguments without knowing ahead of time about how many will be passed in, because I am accessing them from <em>inside</em> the function that they were passed to on invocation. That means, you never <strong>actually</strong> have to name your function parameters — we do it because we are lazy.</p>
+
+<p>Takeaways — any inputs you give to a function on invocation are made available within said function via the <code>arguments</code> object. Also, the <code>arguments</code> object is an <strong>object</strong> — if you want to treat it like an array, you need to turn it into an array by using something like <code>.slice</code> on the <code>arguments</code> object.</p>
+
+<h3 id="the-prototype-property">The <code>.prototype</code> Property</h3>
+
+<p>Briefly, the <code>.prototype</code> property is given by default to function objects in JavaScript, and that property stores an empty object. This empty object is used to store behavior (functions) that will be shared between different instances of the function object. If you are fuzzy on this topic, there are some great resources online, but here are two of my articles to start with: <a href="http://clarkfeusier.com/2014/12/14/object-oriented-javascript-pseudo-classical-class/" target="_blank">.prototype in the pseudo-classical style</a> and <a href="http://clarkfeusier.com/2014/12/13/object-oriented-javascript-prototypal-class/" target="_blank">the prototypal style class pattern</a>.</p>
+
+<h3 id="the-this-keyword">The <code>this</code> Keyword</h3>
+
+<p>We want <code>bind</code> to return a new function that invokes the correct ‘bound’ function <strong>every time</strong> in a given context, but we don’t know what that bound function will be ahead of time. So, how can we access the function to bind the context to, if we don’t know its name? That is where the JavaScript keyword <code>this</code> comes in.</p>
+
+<p>Based on a consistent set of rules, <code>this</code> is <strong>auto-bound</strong> at runtime to a context object. The rules for auto-binding <code>this</code> are based on function <strong>invocation</strong> context. That is all fancy for saying that each time you invoke a function, the interpreter ‘looks around’ and, depending on how you invoked the function, selects an object in the environment. Within the function declaration of the function that you are now invoking, the keyword <code>this</code> is <strong>auto-bound</strong> to the context object that the interpreter selected.</p>
+
+<p>If the function was invoked in the global scope, <code>this</code> is bound to the global scope (the <code>window</code> in the browser).</p>
+
+<p>If the function is invoked as a <strong>method</strong> — i.e., the function is a property on an object, and is invoked like <code>object.func()</code> — the <code>this</code> keyword is bound to the <code>object</code> to the left of the <code>.</code> of the function invocation. Anywhere within the scope of the function definition of the function that is currently being invoked, the <code>this</code> keyword refers to the <code>object</code> at invocation time.</p>
+
+<p>If the function is invoked using either <code>.call</code> or <code>.apply</code>, within the function definition of the function that is currently being invoked, the <code>this</code> keyword refers to the <strong>first</strong> argument given to either <code>.call</code> or <code>.apply</code> on invocation. Let’s quickly run through JavaScript’s <code>.call</code> and <code>.apply</code>.</p>
+
+<h3 id="forced-context-function-invokers-call-and-apply">Forced-Context Function Invokers: <code>.call</code> and <code>.apply</code></h3>
+
+<script src="https://gist.github.com/Cfeusier/0b2ac710778758c3c989.js"></script>
+
+<script src="https://gist.github.com/Cfeusier/d2c780feeb8834bd8692.js"></script>
+
+<h3 id="line-2-and-line-6">Line 2 and Line 6</h3>
+
+<h3 id="first-class-functions">First-Class Functions</h3>
+
+<h3 id="higher-order-functions">Higher-Order Functions</h3>
 
 <ul>
   <li>functions that can either take other functions as arguments or return them as results</li>
 </ul>
 
-<h2 id="theory">Theory</h2>
+<h3 id="decorators">Decorators</h3>
+
+<h4 id="function-decorators">Function Decorators</h4>
+
+<h3 id="lines-5-through-9">Lines 5 through 9</h3>
+
+<h3 id="bonus-closures">Bonus: Closures</h3>
 
 <hr />
 
@@ -145,9 +228,9 @@ Write a 'bind' method on the Function prototype that binds a context to a functi
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/10/interview-question-function-bind/&t=Popular Interview Question: Higher-Order Functions and Function Binding" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/10/interview-question-function-bind/&text=Popular Interview Question: Higher-Order Functions and Function Binding&url=http://clarkfeusier.com/2015/01/10/interview-question-function-bind/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/10/interview-question-function-bind/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/11/interview-question-function-bind/&t=Popular Interview Question Series: Higher-Order Functions and Function Binding" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/11/interview-question-function-bind/&text=Popular Interview Question Series: Higher-Order Functions and Function Binding&url=http://clarkfeusier.com/2015/01/11/interview-question-function-bind/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/11/interview-question-function-bind/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>
     </div>
