@@ -182,19 +182,50 @@
 
 <h3 id="forced-context-function-invokers-call-and-apply">Forced-Context Function Invokers: <code>.call</code> and <code>.apply</code></h3>
 
+<p>When the JavaScript interpreter invokes a function, the interpreter will automatically bind the keyword <code>this</code> within the function body to a likely focal object. If you, as a developer, want fine-grained control over the binding of the keyword <code>this</code> (the function invocation’s context object), you can force the interpreter to invoke the function in the context of an object of your choosing by using either <code>.call</code> or <code>.apply</code> to invoke the function. In this sense, you are <strong>forcing</strong> the interpreter to invoke your function with the keyword <code>this</code> bound to your specified context object. I like to call <code>.call</code> and <code>.apply</code> ‘forced-context function invokers’ because they <strong>force</strong> the context of function invocation.</p>
+
+<p><code>exampleMethod.call({});</code> will invoke the <code>exampleMethod</code> with the keyword <code>this</code> assigned the empty object passed into <code>.call</code>. You can use <code>.apply</code> in the same manner as <code>.call</code>, to force the context of the function invocation to the first argument given to either <code>.call</code> or <code>.apply</code>.</p>
+
+<p>The <strong>only</strong> difference between <code>.call</code> and <code>.apply</code> is the type of parameters that they take (after the context object). <code>.call</code> takes a list of comma-separated arguments, while <code>.apply</code> takes an array of arguments. That is the <strong>only</strong> difference. Here are two examples to solidify this discussion — the first example highlights the difference between using standard function invocation and <code>.call</code>, while the second example demonstrates the difference between standard function invocation and <code>.apply</code>.</p>
+
 <script src="https://gist.github.com/Cfeusier/0b2ac710778758c3c989.js"></script>
 
 <script src="https://gist.github.com/Cfeusier/d2c780feeb8834bd8692.js"></script>
 
+<p>We are actually now in a place to fully understand line 2 and line 6, so let’s turn there next.</p>
+
 <h3 id="line-2-and-line-6">Line 2 and Line 6</h3>
+
+<p>Based on the principles that we just covered, we can infer the meaning of lines 2 and 6.</p>
+
+<ol>
+  <li>each function gets its own <code>arguments</code> object with arguments from invocation stored on the object</li>
+  <li>the <code>arguments</code> object is <em>not</em> an array</li>
+  <li>the <code>.prototype</code> property of a function object stores all of the <strong>shared</strong> functionality that each instance of that function object will inherit</li>
+  <li>you can turn the <code>arguments</code> object into an array by using the <code>slice</code> method on the <code>arguments</code> object</li>
+  <li>all array objects have inherit the <code>slice</code> method from the <code>Array.prototype</code>, so we can get access to the <code>slice</code> method by referencing <code>Array.prototype.slice</code></li>
+  <li>however, we want the <code>slice</code> to work on the <code>arguments</code> object, not the <code>Array.prototype</code> on which the method is being called</li>
+  <li>we can <strong>force</strong> the context of the <code>slice</code> invocation by using either <code>.call</code> or <code>.apply</code></li>
+  <li>on line 2, we want to ignore the first argument (the context object), so we only want to slice from index 1 to the end, so we need to pass <code>1</code> into <code>slice</code> as an argument</li>
+  <li>because our argument isn’t an array, we should use <code>.call</code> instead of <code>.apply</code></li>
+  <li>therefore, we are using the <code>Array.prototype</code>’s <code>slice</code> method on the <code>arguments</code> object, and we are invoking that <code>slice</code> method with a forced context by using <code>.call</code> and supplying the <code>arguments</code> object as the context object to <code>.call</code></li>
+</ol>
+
+<p>Now, we can sum up line 2 and line 6 — line 2 is storing all of the arguments passed into the outer <code>bind</code> function other than the first argument <code>ctx</code>, in a variable called <code>ctxArgs</code>. Line 6 is storing all of the arguments passed into the inner (bound) function in a variable called <code>allArgs</code>.</p>
+
+<p>Great, the pieces are coming together! Let’s tackle the last few pieces of theory, and then we will see the full picture. We will start with the concept of a <em>first-class</em> function.</p>
 
 <h3 id="first-class-functions">First-Class Functions</h3>
 
+<p>Some programming languages are ‘functionists’ — they discriminate against functions. Other languages, like JavaScript, treat functions as ‘first-class’ citizens. All that this means, is that JavaScript allows you to treat a function as you would any other object in JavaScript — if you can store a string in a variable, then you can store a function in a variable. If you can pass a number into a function invocation as an argument, then you can pass a function to another function invocation as an argument. If you can add properties to objects, you can add properties to function objects, <em>ad nauseam</em>…</p>
+
+<p>There are a lot of subtlties that I am glossing over, but for now, just know that this treatment of functions allows JavaScript to do some cool ‘functional’ programming techniques for which some other languages aren’t equipped.</p>
+
+<p>If you look at our solution above, you will notice that the return value of the <code>bind</code> function is <strong>another function</strong>. No surprise that JavaScript allows us to do this — if you can return any other value in JavaScript, why not a function object? JavaScript allows this, once again, because functions are ‘first-class’ in JavaScript. Now that we understand the <em>first-class</em> treatment of functions, we can talk about this special type of first-class function treatment — the <strong>higher-order function</strong>, i.e., using one function to return another function. Let’s talk about higher-order functions now.</p>
+
 <h3 id="higher-order-functions">Higher-Order Functions</h3>
 
-<ul>
-  <li>functions that can either take other functions as arguments or return them as results</li>
-</ul>
+<p>The ‘order’ of a function is based on what ‘level’ the function sits at in relation to other functions in the system’s processing thread. So, if each function in our system is processed one after the other, we could consider all of our functions to be of order 0. Now, imagine that one of our functions nests another function within it. We could visualize the nested function as being at order 1, relative to it’s wrapper function, which is at order 0. The wrapper function is returning a function that will get executed at a ‘meta-level’ relative to itself. A</p>
 
 <h3 id="decorators">Decorators</h3>
 

@@ -99,18 +99,48 @@ If the function is invoked using either `.call` or `.apply`, within the function
 
 ### Forced-Context Function Invokers: `.call` and `.apply`
 
+When the JavaScript interpreter invokes a function, the interpreter will automatically bind the keyword `this` within the function body to a likely focal object. If you, as a developer, want fine-grained control over the binding of the keyword `this` (the function invocation's context object), you can force the interpreter to invoke the function in the context of an object of your choosing by using either `.call` or `.apply` to invoke the function. In this sense, you are **forcing** the interpreter to invoke your function with the keyword `this` bound to your specified context object. I like to call `.call` and `.apply` 'forced-context function invokers' because they **force** the context of function invocation.
+
+`exampleMethod.call({});` will invoke the `exampleMethod` with the keyword `this` assigned the empty object passed into `.call`. You can use `.apply` in the same manner as `.call`, to force the context of the function invocation to the first argument given to either `.call` or `.apply`.
+
+The **only** difference between `.call` and `.apply` is the type of parameters that they take (after the context object). `.call` takes a list of comma-separated arguments, while `.apply` takes an array of arguments. That is the **only** difference. Here are two examples to solidify this discussion &mdash; the first example highlights the difference between using standard function invocation and `.call`, while the second example demonstrates the difference between standard function invocation and `.apply`.
+
 <script src="https://gist.github.com/Cfeusier/0b2ac710778758c3c989.js"></script>
 
 <script src="https://gist.github.com/Cfeusier/d2c780feeb8834bd8692.js"></script>
 
+We are actually now in a place to fully understand line 2 and line 6, so let's turn there next.
 
 ### Line 2 and Line 6
 
+Based on the principles that we just covered, we can infer the meaning of lines 2 and 6.
+
+1. each function gets its own `arguments` object with arguments from invocation stored on the object
+2. the `arguments` object is *not* an array
+3. the `.prototype` property of a function object stores all of the **shared** functionality that each instance of that function object will inherit
+4. you can turn the `arguments` object into an array by using the `slice` method on the `arguments` object
+5. all array objects have inherit the `slice` method from the `Array.prototype`, so we can get access to the `slice` method by referencing `Array.prototype.slice`
+6. however, we want the `slice` to work on the `arguments` object, not the `Array.prototype` on which the method is being called
+7. we can **force** the context of the `slice` invocation by using either `.call` or `.apply`
+8. on line 2, we want to ignore the first argument (the context object), so we only want to slice from index 1 to the end, so we need to pass `1` into `slice` as an argument
+9. because our argument isn't an array, we should use `.call` instead of `.apply`
+10. therefore, we are using the `Array.prototype`'s `slice` method on the `arguments` object, and we are invoking that `slice` method with a forced context by using `.call` and supplying the `arguments` object as the context object to `.call`
+
+Now, we can sum up line 2 and line 6 &mdash; line 2 is storing all of the arguments passed into the outer `bind` function other than the first argument `ctx`, in a variable called `ctxArgs`. Line 6 is storing all of the arguments passed into the inner (bound) function in a variable called `allArgs`.
+
+Great, the pieces are coming together! Let's tackle the last few pieces of theory, and then we will see the full picture. We will start with the concept of a *first-class* function.
+
 ### First-Class Functions
+
+Some programming languages are 'functionists' &mdash; they discriminate against functions. Other languages, like JavaScript, treat functions as 'first-class' citizens. All that this means, is that JavaScript allows you to treat a function as you would any other object in JavaScript &mdash; if you can store a string in a variable, then you can store a function in a variable. If you can pass a number into a function invocation as an argument, then you can pass a function to another function invocation as an argument. If you can add properties to objects, you can add properties to function objects, *ad nauseam*...
+
+There are a lot of subtlties that I am glossing over, but for now, just know that this treatment of functions allows JavaScript to do some cool 'functional' programming techniques for which some other languages aren't equipped.
+
+If you look at our solution above, you will notice that the return value of the `bind` function is **another function**. No surprise that JavaScript allows us to do this &mdash; if you can return any other value in JavaScript, why not a function object? JavaScript allows this, once again, because functions are 'first-class' in JavaScript. Now that we understand the *first-class* treatment of functions, we can talk about this special type of first-class function treatment &mdash; the **higher-order function**, i.e., using one function to return another function. Let's talk about higher-order functions now.
 
 ### Higher-Order Functions
 
-- functions that can either take other functions as arguments or return them as results
+The 'order' of a function is based on what 'level' the function sits at in relation to other functions in the system's processing thread. So, if each function in our system is processed one after the other, we could consider all of our functions to be of order 0. Now, imagine that one of our functions nests another function within it. We could visualize the nested function as being at order 1, relative to it's wrapper function, which is at order 0. The wrapper function is returning a function that will get executed at a 'meta-level' relative to itself. A
 
 ### Decorators
 
