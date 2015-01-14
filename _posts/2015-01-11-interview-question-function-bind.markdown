@@ -76,7 +76,7 @@ Every function object in JavaScript has an `arguments` object that the JavaScrip
 
 Ignoring the `.prototype` and `.call` part, which we will explain below, the example above declares a function called `func`, which doesn't have any 'named' parameters in its function signature, i.e., nothing is in-between the parentheses on line 1 where `func` is defined. This function, `func`, will access anything that you pass into it on invocation, **from its `arguments` object**. `func` will then loop through an array representation of the `arguments` object, and log each of the individual arguments with which the function was invoked at runtime.
 
-If you are confused by the above paragraph, ignore the complexity &mdash; each argument that I pass in to `func` when invoking it on line 9 is going to get logged out, as seen on lines 11 through 18. I am able to log out each of the arguments without knowing ahead of time about how many will be passed in, because I am accessing them from *inside* the function that they were passed to on invocation. That means, you never **actually** have to name your function parameters &mdash; we do it because we are lazy.
+If you are confused by the above paragraph, ignore the complexity &mdash; each argument that I pass in to `func` when invoking it on line 9 is going to get logged out, as seen on lines 11 through 18. I am able to log out each of the arguments without knowing ahead of time how many will be passed in, because I am accessing them from *inside* the function that they were passed to on invocation. That means, you never **actually** have to name your function parameters &mdash; we do it because we are lazy and it is a pain to always reference `arguments`.
 
 Takeaways &mdash; any inputs you give to a function on invocation are made available within said function via the `arguments` object. Also, the `arguments` object is an **object** &mdash; if you want to treat it like an array, you need to turn it into an array by using something like `.slice` on the `arguments` object.
 
@@ -93,9 +93,9 @@ Based on a consistent set of rules, `this` is **auto-bound** at runtime to a con
 
 If the function was invoked in the global scope, `this` is bound to the global scope (the `window` in the browser).
 
-If the function is invoked as a **method** &mdash; i.e., the function is a property on an object, and is invoked like `object.func()` &mdash; the `this` keyword is bound to the `object` to the left of the `.` of the function invocation. Anywhere within the scope of the function definition of the function that is currently being invoked, the `this` keyword refers to the `object` at invocation time.
+If the function is invoked as a **method** &mdash; i.e., the function is a property on an object, and is invoked like `object.func()` &mdash; the `this` keyword is bound to the `object` to the left of the `.` of the function invocation. Anywhere within the body of the function that is currently being invoked, the `this` keyword refers to the `object` at invocation time.
 
-If the function is invoked using either `.call` or `.apply`, within the function definition of the function that is currently being invoked, the `this` keyword refers to the **first** argument given to either `.call` or `.apply` on invocation. Let's quickly run through JavaScript's `.call` and `.apply`.
+If the function is invoked using either `.call` or `.apply`, within the body of the function that is currently being invoked, the `this` keyword refers to the **first** argument given to either `.call` or `.apply` on invocation. Let's quickly run through JavaScript's `.call` and `.apply`.
 
 ### Forced-Context Function Invokers: `.call` and `.apply`
 
@@ -117,9 +117,9 @@ Based on the principles that we just covered, we can infer the meaning of lines 
 
 1. each function gets its own `arguments` object with arguments from invocation stored on the object
 2. the `arguments` object is *not* an array
-3. the `.prototype` property of a function object stores all of the **shared** functionality that each instance of that function object will inherit
+3. the `.prototype` property of the function object stores all of the **shared** functionality that each instance will inherit
 4. you can turn the `arguments` object into an array by using the `slice` method on the `arguments` object
-5. all array objects have inherit the `slice` method from the `Array.prototype`, so we can get access to the `slice` method by referencing `Array.prototype.slice`
+5. we can get access to the `slice` method by referencing `Array.prototype.slice`
 6. however, we want the `slice` to work on the `arguments` object, not the `Array.prototype` on which the method is being called
 7. we can **force** the context of the `slice` invocation by using either `.call` or `.apply`
 8. on line 2, we want to ignore the first argument (the context object), so we only want to slice from index 1 to the end, so we need to pass `1` into `slice` as an argument
@@ -136,22 +136,77 @@ Some programming languages are 'functionists' &mdash; they discriminate against 
 
 There are a lot of subtlties that I am glossing over, but for now, just know that this treatment of functions allows JavaScript to do some cool 'functional' programming techniques for which some other languages aren't equipped.
 
-If you look at our solution above, you will notice that the return value of the `bind` function is **another function**. No surprise that JavaScript allows us to do this &mdash; if you can return any other value in JavaScript, why not a function object? JavaScript allows this, once again, because functions are 'first-class' in JavaScript. Now that we understand the *first-class* treatment of functions, we can talk about this special type of first-class function treatment &mdash; the **higher-order function**, i.e., using one function to return another function. Let's talk about higher-order functions now.
+If you look at our solution above, you will notice that the return value of the `bind` function is **another function**. No surprise that JavaScript allows us to do this &mdash; if you can return any other value in JavaScript, why not a function object? JavaScript allows this, once again, because functions are 'first-class' in JavaScript. Now that we understand the *first-class* treatment of functions, we can talk about this special type of first-class function treatment &mdash; the **higher-order function**. Let's talk about higher-order functions now.
 
 ### Higher-Order Functions
 
-The 'order' of a function is based on what 'level' the function sits at in relation to other functions in the system's processing thread. So, if each function in our system is processed one after the other, we could consider all of our functions to be of order 0. Now, imagine that one of our functions nests another function within it. We could visualize the nested function as being at order 1, relative to it's wrapper function, which is at order 0. The wrapper function is returning a function that will get executed at a 'meta-level' relative to itself. A
+The term 'higher-order function' comes from mathematics, but has been adopted by computer science. Most functions are **first-order** functions. Some functions are termed **higher-order** for one or more of the following reasons:
+
+1. the function receives another function as an input
+2. the function returns a function as the output
+
+In our solution above, the `bind` function is definitely a **higher-order** function. First, `bind` has *an implicit function object input* &mdash; `bind` is accessing the function to bind using the `this` keyword. This implicit access via `this` is equivalent to `bind` taking the function as an explicit input, so we can consider our `bind` function **higher-order**.
+
+Further, the `bind` function also **returns a function** as its output, making `bind` higher-order in both of the ways specified above.
+
+Not only is `bind` taking a function input and returning a function output, `bind` is returning a **slight variation** of the input function. There is a name for this pattern...
 
 ### Decorators
 
+A *decorator* function is a function that takes an object as an input, changes the input object, and then returns the changed object. The function is taking an object, 'decorating it' with state or behavior, and then returning the decorated object. This function pattern is very common. There is a special type of decorator function, the **function decorator**, that I want to disucss now.
+
 #### Function Decorators
 
-### Lines 5 through 9
+A function decorator is a *sub-type* of the generic decorator function. The distinguishing feature of the function decorator is the **type of object on which the decorator works**. A generic decorator takes any object as an input and returns a decorated version of that object. A function decorator takes a **function object** as an input and returns a decorated version of the **function object**.
 
-### Bonus: Closures
+Because the input and output of a function decorator is, by definition, a function, we can infer *a priori* that a function decorator is a **higher-order** function.
 
+We are now in position to understand the rest of the solution.
+
+### Full Solution Explanation
+
+For reference, here is the complete solution again:
+
+<script src="https://gist.github.com/Cfeusier/6388b0760af775fcb068.js"></script>
+
+1. The `bind` function is defined **on** the `Function.prototype`, so all function intstances will be able to use `bind`
+2. We can access the function that is invoking `bind` from within the body of `bind` by using the keyword `this`
+3. This ability to access the function that is invoking `bind` is equivalent to our `bind` function taking the function instance as an input; thus, `bind` is a **higher-order** function
+4. Also, `bind` returns a function on line 5 that returns our input function bound to a new context object on line 8
+5. a higher-order function that takes a function object input and returns a slightly 'decorated' version of that function object is classed a **function decorator**
+
+One more pass!
+
+1. When `bind` is invoked on a function, we capture all of the 'extra' arguments by using `Array.prototype.slice.call(arguments, 1)` and store the extra arguments in a variable `ctxArgs`, on line 2
+2. In the outer scope of the `bind` function, we capture the current context object and store it in a variable `func`. We have to do this because we are going to enter a new function scope on line 5, and `this` will be bound to a new context, so before that happens, we store a reference to the original context object
+3. The return value of `bind` will be a function, returned on line 5
+4. The function that is returned on line 5 is defined in a **closure scope**, giving the function access to the `ctxArgs` and `func` which are declared in the outer scope of `bind`
+5. We want our returned function, when invoked, to call the **original** function in the context of **ctx**, which was passed into `bind` and is technically stored in the closure scope of our returned function
+6. In order to make our `bind` function accomodate **new** arguments that are passed into the bound function when **it** is invoked, we need to capture the arguments of the returned function and pass them along when we invoke the original function in the correct context
+7. We want to pass along **all** of the arguments &mdash; the arguments passed into the outer function and the new bound function &mdash; so we need to combine the `ctxArgs` and the inner arguments called `allArgs`. We store the combination of those two argument sets into `allArgs`
+8. Our returned function returns the **invocation** of our original function `func` *in the context of* `ctx`, with all of the arguments passed in &mdash; the invocation context is **forced** on line 8 by the use of `func.apply(ctx, ...)`
+9. Finally, notice that we pass all of the inner and outer arguments `allArgs` along to the invocation of the original function with `func.apply(..., allArgs)`
 
 ---
 
 ## Summary
+
+Wow, we covered a lot of conceptual and technical material in this post! Let's summarize everything that you know now.
+
+- Function objects are automatically assigned a `.prototype` property, to which all of their instances will get access
+- Function objects are automatically assigned an `arguments` object that is filled with the arguments passed to the function on invocation
+- Turning the `arguments` object into an array is as simple as storing the result of `Array.prototype.slice.call(arguments)`
+- All function objects are executed in the context of an object which is auto-bound to the keyword `this`
+- All function objects can be **forced** to assign `this` to a given object if the function is invoked using either `.call(objToBindToThis)` or `.apply(objToBindToThis)`
+- The only difference between `.call` and `.apply` is how they treat the arguments **after** the first argument
+- JavaScript treats functions as **first-class** objects, i.e., functions can be used as arguments, variable values, return values, etc.
+- A **higher-order function** is a function that either takes a function input or returns a function as output
+- A **function decorator**, a type of *higher-order function*, is a function that takes a function as input, and then returns a 'decorated' version of that function as the output
+- All of the principles necessary to compose your own solution to this question in any interview situation!
+
+### Decorated, Bound, Returned&#8482;
+
+With love,
+
+Clark
 
