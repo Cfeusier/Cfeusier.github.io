@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts Tagged &ldquo;html5&rdquo;</title>
+    <title>Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,244 +59,114 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-    <div class="page-contents">
-        <h2 class="page-title first-elem"> Posts with the 'html5' Tag</h2>
-        <ul id="ptitle-list">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">14 January 2015</span>
+                </div>
+                <h2 class="title">Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt</h2>
+                <div class="content">
+                    <h2 id="concatenation-of-files">Concatenation of Files</h2>
 
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
+<p>For each script that you force your client to request, the client has to wait for a full request/response cycle before being able to load the code from that script. If you have 10 scripts and 3 stylesheets being loaded in your <code>index.html</code>, that is at least 13 full roundtrips to the server and back before the client is ready to engage with the user — not a good user experience.</p>
 
-                <li class="clearfix">
-                	<span class="date">07 August 2014</span>
-                	<span class="seperator">&mdash;</span>
-                    <a href="http://clarkfeusier.com/2014/08/07/positioning-relative-absolute-fixed-static/"><h3 class="title">Designers' Favorite Positions: Relative, Absolute, Fixed, and Static</h3></a>
-                </li>
+<p>For production purposes — deploying your code — you should <strong>concatenate</strong> all of your scripts into a single script, and load that script in your <code>index.html</code>, thereby only needing to make 1 trip to the server and back.</p>
 
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
+<p><strong>tl;dr</strong> — the purpose of concatenation is to reduce the requests needed to get your app running on the client, by only loading a single file that contains all of the files <em>smushed</em> together, separated by some meaningful delimiter (like <code>;</code> in JavaScript).</p>
 
+<h2 id="minification-of-files">Minification of Files</h2>
+
+<h2 id="automation">Automation</h2>
+
+<h2 id="build-tools-and-task-runners">Build Tools and Task Runners</h2>
+
+<h2 id="grunt">Grunt</h2>
+
+<ol>
+  <li>install grunt cli globally</li>
+  <li>add <code>Gruntfile.js</code> to local dir at root level</li>
+  <li>add <code>package.json</code> to local dir at root level</li>
+  <li>complete <code>package.json</code> and run <code>npm install</code>
+    <ul>
+      <li>will install grunt locally</li>
+    </ul>
+  </li>
+  <li><code>Gruntfile.js</code> contents
+    <ul>
+      <li>install grunt plugins as needed with <code>--save-dev</code></li>
+    </ul>
+  </li>
+</ol>
+
+<p>// Gruntfile.js</p>
+
+<ul>
+  <li>
+    <p>export function (grunt)</p>
+
+    <ul>
+      <li>initConfig with options object
+        <ul>
+          <li>pkg: get package.json</li>
+          <li>plugin config objects</li>
         </ul>
+      </li>
+      <li>load plugins with loadNpmTasks</li>
+      <li>register tasks</li>
+    </ul>
+  </li>
+</ul>
 
+<p>// package.json</p>
 
-
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/dev ops">dev ops</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/implementation examples">implementation examples</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/build tools">build tools</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/task runners">task runners</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/grunt">grunt</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt/&t=Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt/&text=Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt&url=http://clarkfeusier.com/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/01/11/interview-question-function-bind/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+        </ul>
     </div>
 </div>
-
  </div>
        <footer>
             <div id="footer-quote">
