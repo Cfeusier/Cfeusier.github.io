@@ -71,58 +71,227 @@
                 </div>
                 <h2 class="title">Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt</h2>
                 <div class="content">
-                    <h2 id="concatenation-of-files">Concatenation of Files</h2>
+                    <p>In this post, you will learn why you should concatenate and minify your scripts and stylesheets into one small file using the task runner called <strong>Grunt.js</strong>. You will also learn <strong>how</strong> to concatenate and minify your scripts and stylesheets with <strong>Grunt</strong>.</p>
+
+<h2 id="concatenation-of-files">Concatenation of Files</h2>
 
 <p>For each script that you force your client to request, the client has to wait for a full request/response cycle before being able to load the code from that script. If you have 10 scripts and 3 stylesheets being loaded in your <code>index.html</code>, that is at least 13 full roundtrips to the server and back before the client is ready to engage with the user — not a good user experience.</p>
 
 <p>For production purposes — deploying your code — you should <strong>concatenate</strong> all of your scripts into a single script, and load that script in your <code>index.html</code>, thereby only needing to make 1 trip to the server and back.</p>
 
-<p><strong>tl;dr</strong> — the purpose of concatenation is to reduce the requests needed to get your app running on the client, by only loading a single file that contains all of the files <em>smushed</em> together, separated by some meaningful delimiter (like <code>;</code> in JavaScript).</p>
+<p>I tend to write 3 tasks to concatenate my files: a task for concatenating all of my client-side javascripts, a task for concatenating all of my vendor and third-party client-side javascripts, and a task for concatenating all of my stylesheets. This allows me to place three tags on my <code>index.html</code> — a javascripts tag, a vendor javascripts tag, and a stylesheets link. <strong>Three</strong> requests from the client and three round-trips to the server and back — regardless of how many source files were concatenated.</p>
+
+<p><strong>tl;dr</strong> — the purpose of concatenation is to reduce the requests needed to get your app running on the client, by <strong>smushing together</strong> all of the files of a single type into <em>one</em> file, separated by some meaningful delimiter (like <code>;</code> in JavaScript). The client can then load all of the files with a single request.</p>
+
+<p>For example, do you think that the user has a better experience waiting for the client to request and receive each of the following files?</p>
+
+<script src="https://gist.github.com/Cfeusier/561bfc50f1aab4a2989b.js"></script>
+
+<p>Or, these files?</p>
+
+<script src="https://gist.github.com/Cfeusier/f77e1b47174d46de3d55.js"></script>
+
+<p>Enough said. Let’s move on to another type of production optimization — file <em>minification</em>.</p>
 
 <h2 id="minification-of-files">Minification of Files</h2>
 
-<h2 id="automation">Automation</h2>
+<p>If concatenation is the process of <em>stringing together multiple files</em> into one file, minification is the process of <em>compressing the code from one file</em> into one really small version of that code. The compression takes place by removing whitespace and new line characters, and sometimes changing variable names to single letters.</p>
+
+<p>The purpose of concatenation is to reduce the number of roundtrips that need to be made to get all of the code onto the client. The purpose of minifcation is to reduce the <em>amount of data that needs to be sent on a single response</em>, by removing extraneous and non-semantic characters in the file that the response will send.</p>
+
+<p>For example, do you think it would take longer for a server to send the first code example below to a client or the second code example? And, which do you think would take longer for the client to download? By the way, the first example is only showing 60 of 1200+ lines of code, and the second example, takes up 30 lines.</p>
+
+<script src="https://gist.github.com/Cfeusier/9b3a4bd4b58038f87c6a.js"></script>
+
+<script src="https://gist.github.com/Cfeusier/fce136d6e687e1dd87b3.js"></script>
+
+<p><strong>tl;dr</strong> — obviously, the minified version is much smaller than the unminified version. Smaller usually means faster to upload and download.</p>
+
+<p>So, now that we understand both concatenation and minification in terms of result and purpose, we can understand how to combine them. The process goes like this:</p>
+
+<ol>
+  <li>combine lots of different files into a single file (concatentation)</li>
+  <li>strip that single combined file — the output of the concatenation operation — of all extraneous space and characters (minification)</li>
+</ol>
+
+<p>The result of those two operations is a single and <em>small</em> file (relative to the unminified version) that can be sent to the client in a single and speedy trip.</p>
+
+<p>How would you go about implementing the two step process that I just outlined?</p>
+
+<p>Hopefully, your mind went rather quickly from a manual solution to an automated solution. You don’t want to have to copy and paste everytime any source file changes — error prone and ridiculous. Time matters to me; I don’t want to waste time doing things like copying and pasting. Let’s figure out how to automate this concatenation/minification task. I suggest a build tool or task runner, like Grunt. Here we go…</p>
 
 <h2 id="build-tools-and-task-runners">Build Tools and Task Runners</h2>
 
+<p>Build tools are just software utilities used to build new instances of applications. Task runners are just software utilities used to automate the running of tasks. Building a new version of an application is a <em>task</em>, so you can automate your <em>build</em> process with a <strong>task runner</strong>, like <a href="http://gruntjs.com/">Grunt.js</a>.</p>
+
 <h2 id="grunt">Grunt</h2>
 
+<p><strong>Grunt</strong> will help you automate pretty much any task that you can think of, but we will only be using it for concatenation and minification. Also, please note that there are a lot of competitors to <strong>Grunt</strong> that will do the same thing. <strong>Grunt</strong> and <strong>Gulp</strong> tend to be the most popular task runners out there right now for JavaScript.</p>
+
+<p><strong>Grunt</strong> puts an abstraction layer between the intent of your task and how to execute that task in a given environment, meaning that you can write your task once and it will run on pretty much any environment without having to rewrite it — very cool.</p>
+
+<p>Now that we have enough background on <strong>Grunt</strong>, let’s dive into concatenation and minification with <strong>Grunt</strong>.</p>
+
+<h3 id="grunt-setup">Grunt Setup</h3>
+
 <ol>
-  <li>install grunt cli globally</li>
-  <li>add <code>Gruntfile.js</code> to local dir at root level</li>
-  <li>add <code>package.json</code> to local dir at root level</li>
-  <li>complete <code>package.json</code> and run <code>npm install</code>
+  <li>globally install the <strong>Grunt Command-Line Interface</strong> tool
     <ul>
-      <li>will install grunt locally</li>
+      <li><code>npm install -g grunt-cli</code> (must be run as a user with administrator access)</li>
     </ul>
   </li>
-  <li><code>Gruntfile.js</code> contents
+  <li>change directories into the root of your project</li>
+  <li>add a <code>Gruntfile.js</code> at the root level of your project
     <ul>
-      <li>install grunt plugins as needed with <code>--save-dev</code></li>
+      <li>leave this empty for now</li>
+    </ul>
+  </li>
+  <li>add a <code>package.json</code> at the root level of your project
+    <ul>
+      <li><strong>Grunt</strong> and its plugins are managed via <a href="http://npmjs.com">npm</a>, so you need a <code>package.json</code> file in your project to interact with <strong>Grunt</strong></li>
+      <li>here are the contents of our <code>package.json</code> file:</li>
     </ul>
   </li>
 </ol>
 
-<p>// Gruntfile.js</p>
+<script src="https://gist.github.com/Cfeusier/a95becf952aae5b87701.js"></script>
 
 <ul>
-  <li>
-    <p>export function (grunt)</p>
-
+  <li>this <code>package.json</code> acts as a manifest to declare the name, version number, description, main entry point, license, publication visibility, and development dependencies of the application</li>
+  <li><strong>npm</strong> will manage these dependencies for you if you run <code>npm install</code>
     <ul>
-      <li>initConfig with options object
+      <li>this command will install your <code>devDependencies</code> in your local project folder — i.e., <strong>npm</strong> installs the packages we will be using: <code>grunt</code>, <code>grunt-contrib-concat</code>, <code>grunt-contrib-cssmin</code>, and <code>grunt-contrib-uglify</code></li>
+    </ul>
+  </li>
+  <li><em>Note</em>: any <strong>Grunt</strong> plugin that contains the word <code>contrib</code> in the title is officially maintained by the <strong>Grunt</strong> development team; So, you should probably lean towards <code>contrib</code> packages, all else being equal</li>
+  <li>if you need more plugins later, you can install as needed with <code>npm install plugin_name --save-dev</code>, which will automatically write the plugin to your <code>package.json</code> as a dependency, as well as install the plugin to your local project</li>
+</ul>
+
+<p>We are finished with the <strong>Grunt</strong> setup, so if you haven’t already, before moving on, please run <code>npm install</code> from the root-level of your local project directory. To the code!</p>
+
+<h2 id="gruntfilejs-for-concatenation-and-minification">Gruntfile.js for Concatenation and Minification</h2>
+
+<p>The <code>Gruntfile.js</code> always follows the same pattern — initialize and configure <strong>Grunt</strong> and plugins, load the plugins, and register tasks. The configuration of the plugins can happen before or after the loading step — doesn’t usually matter.</p>
+
+<p>It will be easier to explain the <code>Gruntfile.js</code> if we have it in front of our mind’s eye, so here it is:</p>
+
+<script src="https://gist.github.com/Cfeusier/161c258c1863235567f7.js"></script>
+
+<p>We start by exporting a function, on <strong>line 1</strong>, that <strong>Grunt</strong> can invoke with a <code>grunt</code> object as an argument. The majority of the work in this function will be done by interacting with the <code>grunt</code> object. The rest of the <code>Gruntfile.js</code> is made up of the three parts that we discussed earlier — configuration of <code>grunt</code> and plugins, loading of all necessary plugins, and registering tasks on the <code>grunt</code> object.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<p><strong>Lines 7 - 45</strong> invoke the <code>initConfig</code> method on the <code>grunt</code> object, providing the configuration settings for your tasks as an object. <strong>Line 9</strong> provides <strong>Grunt</strong> with the package settings by reading the JSON of the <code>package.json</code> file with <code>grunt.file.readJSON('package.json')</code>. All of the task and plugin configuration happens between lines 11 and 44.</p>
+
+<h3 id="concat"><code>concat</code></h3>
+
+<ul>
+  <li><strong>lines 11 - 23</strong>: define the configuration for our <em>concatenation</em> task, <code>concat</code>
+    <ul>
+      <li><strong>line 12</strong>: sets one option for the <code>concat</code> task — the separator between each file in the concatenation (<code>;</code> works in JavaScript because the interpreter treats <code>;</code> as the end of a meaningful piece of code)</li>
+      <li><strong>lines 14 - 17</strong>: define our <code>js</code> sub-task configuration, which will be used to concatenate all of our non-vendor JavaScript for delivery to the client
         <ul>
-          <li>pkg: get package.json</li>
-          <li>plugin config objects</li>
+          <li><strong>line 15</strong>: sets the location of the <code>src</code> files — the files to concatenate together</li>
+          <li>in our case, we are telling <strong>Grunt</strong> to look in the <code>src</code> directory for any <code>.js</code> files nested any level of sub-directories deep</li>
+          <li><strong>line 16</strong>: sets the location of the <code>dest</code> file — the single file that will hold all of the concatenated JavaScript code from the <code>src</code> files</li>
+          <li>in our case, we are telling <strong>Grunt</strong> to dump all the concatenated code in a new file in the <code>dist</code> directory titled with the package name from the <code>pkg</code> property we set above</li>
         </ul>
       </li>
-      <li>load plugins with loadNpmTasks</li>
-      <li>register tasks</li>
+      <li><strong>lines 19 - 22</strong>: define our <code>vendor</code> sub-task configuration, which will be used to concatenate all of our vendor JavaScripts for delivery to the client
+        <ul>
+          <li><strong>line 20</strong>: sets the location of the <code>src</code> files — the files to concatenate together</li>
+          <li>in our case, we are telling <strong>Grunt</strong> to look through an <strong>array</strong> of files in a specific order because of order-dependencies between the vendor libraries</li>
+          <li>we are specifying the <code>jquery.js</code> file in our <code>vendor</code> directory to be concatenated first, then the <code>underscore.js</code> file, followed by any other <code>.js</code> file any level deep within the <code>vendor</code> directory</li>
+          <li><strong>line 21</strong>: sets the location of the <code>dest</code> file — the single file that will hold all of the concatenated JavaScript code from the <code>src</code> vendor files</li>
+          <li>in our case, we are telling <strong>Grunt</strong> to dump all the concatenated code in a new file in the <code>dist</code> directory titled <code>vendors.js</code></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
 
-<p>// package.json</p>
+<p>That is the whole process for getting all of your files concatenated — just run <code>grunt concat</code> from the command-line and watch the magic happen (assuming that you have loaded the plugins as seen below). Now, you can replace all of the script tags in your HTML with just <em>two</em> tags — one to the <code>dist/[NAME OF PACKAGE].js</code> and one point to the <code>dist/vendors.js</code> file.</p>
+
+<h3 id="uglify"><code>uglify</code></h3>
+
+<ul>
+  <li><strong>lines 25 - 38</strong>: define the configuration for our <em>minification</em> task, <code>uglify</code>
+    <ul>
+      <li>**lines 26 - 29 **: sets the options for the <code>uglify</code> task
+        <ul>
+          <li><strong>line 27</strong>: sets the <code>banner</code> option so that each minified file gets a banner comment at the top with some information for to make your life easier</li>
+          <li><strong>line 28</strong>: sets the <code>mangle</code> option to <code>false</code>, which instructs the <code>uglify</code> plugin to avoid changing variable names and function names (even if that might shorten the code)</li>
+        </ul>
+      </li>
+      <li><strong>lines 30 - 34</strong>: define a sub-task configuration called <code>js</code>
+        <ul>
+          <li><strong>lines 31 - 32</strong>: declare the files to minify, and store them in an array as the value of a property that has a key set to the destination file in which to put the minified code</li>
+        </ul>
+      </li>
+      <li><strong>lines 35 - 38</strong>: define a sub-task configuration called <code>vendor</code> and repeat the same pattern as the <code>js</code> sub-task, except for your vendor scripts</li>
+    </ul>
+  </li>
+</ul>
+
+<p>That is the whole process for getting all of your files minified — just run <code>grunt concat</code> then <code>grunt uglify</code> from the command-line and watch the magic happen (assuming that you have loaded the plugins as seen below). Now, you can replace all of the script tags in your HTML that point to unminified JavaScript with just <em>two</em> tags — one to the <code>dist/[NAME OF PACKAGE].min.js</code> and one point to the <code>dist/vendors.min.js</code> file.</p>
+
+<h3 id="cssmin"><code>cssmin</code></h3>
+
+<ul>
+  <li><strong>lines 40 - 44</strong>: define the configuration for our <strong>CSS minification</strong> task, <code>cssmin</code>
+    <ul>
+      <li><strong>lines 41 - 43</strong>: set the <code>target</code> property to the files that you want to minify and the file that you would like to use as the destination for the minified code
+        <ul>
+          <li>in our case, we are minifying <code>style.css</code> from the <code>styles</code> directory, and we are outputting the code into <code>style.min.css</code> in the <code>dist</code> directory</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>That is the whole process for getting all of your CSS files minified — just run <code>grunt cssmin</code> from the command-line and watch the magic happen (assuming that you have loaded the plugins as seen below). Now, you can replace the stylesheet link references to unminified CSS in your HTML with just one tag pointing to a minified <code>styles/style.min.css</code>.</p>
+
+<p>Now that all of the plugin task configurations have been completed, we are going to load all of the plugin packages using <code>grunt.loadNpmTasks</code>.</p>
+
+<h3 id="load-plugins">Load Plugins</h3>
+
+<ul>
+  <li><strong>lines 51 - 53</strong>: load the plugins you are utilizing in the tasks so that you have access to them
+    <ul>
+      <li>in our case, we are using a plugin for <code>concat</code>, <code>uglify</code>, and <code>cssmin</code>, so we load all three of them with <code>grunt.loadNpmTasks('PLUGIN NAME');</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>After all of the require plugins are loaded, we can register any ‘composite’ tasks, and end the <code>Gruntfile.js</code>.</p>
+
+<h3 id="register-tasks">Register Tasks</h3>
+
+<p>This is where you <strong>register</strong> any tasks that are made up of other tasks or sub-tasks. This is very powerful — allowing you to build highly flexible and composable units of functionality that can be rearranged depending on need. We are going to demonstrate an example of that power by registering a composite task called <code>build</code>. This <code>build</code> task is just going to <strong>synchronously</strong> execute the <code>concat</code> task, then the <code>uglify</code> task, and finally the <code>cssmin</code> task.</p>
+
+<ul>
+  <li><strong>lines 59 - 63</strong>: register a task on the <code>grunt</code> object that is called <code>build</code>
+    <ul>
+      <li><code>build</code> is composed of the plugin sub-tasks that we configured above: <code>concat</code>, <code>uglify</code>, and <code>cssmin</code> in that order</li>
+    </ul>
+  </li>
+</ul>
+
+<p>We can now issue the <code>grunt build</code> command at the command-line and the end result will be concatenated and minified JavaScript and CSS files! BOOM.</p>
+
+<h2 id="summary">Summary</h2>
+
+<ol>
+  <li>reducing the number of script tags in your HTML reduces the number of requests the client has to make to the server for the given files — this is achieved by <strong>concatenating</strong> all the files into a single file, and only loading that file</li>
+  <li>reducing the size of a single file reduces the time that a single response takes to get passed between the server and the client (and the amount of time for the client to digest the response) — this is accomplished by <strong>minifying</strong> your files, i.e., reducing extraneous characters and space</li>
+  <li><strong>Grunt.js</strong> is a task runner that helps you compose and run tasks like file concatenation and minification</li>
+</ol>
+
+<p>Automate the silly stuff and then use that earned time to do fun stuff in the future.</p>
+
+<p>Thanks,</p>
+
+<p>Clark</p>
 
                 </div>
             </div>
