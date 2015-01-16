@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Popular Interview Question Series: Balanced Parentheses and a Stack</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://clarkfeusier.com/css/base.css">
+    <link rel="shortcut icon" type="image/x-icon" href="http://clarkfeusier.com/img/favicon.ico" />
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushYaml.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FNCG');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Setup SyntaxHighlighter -->
+    <script type="text/javascript">SyntaxHighlighter.all()</script>
+    <!-- End SyntaxHighlighter Setup -->
+    <header>
+        <div id="logo">
+            <img src="http://clarkfeusier.com/img/headshot.png" alt="">
+        </div>
+        <div id="site-heading">
+            <h2 class="title">Clark Feusier</h2>
+            <h3 class="subtitle">Software Engineer and Metalogician</h3>
+        </div>
+        <ul id="nav">
+         <li class=""><a href="http://clarkfeusier.com/pages/about">About</a></li>
+         <li class=""><a href="http://clarkfeusier.com/index.html">Writing</a></li>
+         <li class=""><a href="http://clarkfeusier.com/pages/portfolio">Portfolio</a></li>
+         <li><a href="#" id="contact-section">Contact</a></li>
+     </ul>
+     <div id="contact-wrapper">
+        <div id="contact-content">
+            <ul id="contact-list">
+                <i class="fa fa-envelope-o contact-icon"></i>
+                <li><a href="mailto:cfeusier@gmail.com">  cfeusier@gmail.com</a></li>
+                <li class="separator">/</li>
+                <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+        <a href="#" id="contact-close"><i class="fa fa-times"></i></a>
+    </div>
+</header>
+<div id="main-contents">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">16 January 2015</span>
+                </div>
+                <h2 class="title">Popular Interview Question Series: Balanced Parentheses and a Stack</h2>
+                <div class="content">
+                    <p>In early-screening technical interviews, the <strong>Balanced Parentheses</strong> question is quite popular. It goes something like this:</p>
+
+<blockquote>Write a 'balancedParens' function that takes a string as input and returns a boolean &mdash; if the parentheses in the input string are 'balanced', then return true, else return false</blockquote>
+
+<p>You are given the following skeleton and behavior expectations in the next two examples:</p>
+
+<h3 id="skeleton">Skeleton</h3>
+<script src="https://gist.github.com/Cfeusier/f0ac47298ed24bdb67d3.js"></script>
+
+<h3 id="examples-of-expected-behavior">Examples of Expected Behavior</h3>
+<script src="https://gist.github.com/Cfeusier/044499c1de173f77a702.js"></script>
+
+<p>The interview question is testing you on the following:</p>
+
+<ol>
+  <li>ability to interpret the prompt and expectations to figure out the properties of a <strong>balanced</strong> string of parentheses</li>
+  <li>familiarity with common data structures — it is likely that a <strong>Stack</strong> data structure is expected in the solution, though that is definitely not necessary</li>
+  <li>ability to discuss the time complexity of possible solutions</li>
+</ol>
+
+<p>Let’s get started!</p>
+
+<hr />
+
+<h3 id="clarifying-the-prompt">Clarifying the Prompt</h3>
+
+<p>My first questions when prompted with the <strong>Balanced Parentheses</strong> always surround the following:</p>
+
+<ol>
+  <li>what is the definition of <em>balanced</em> parentheses?</li>
+  <li>what should be the return value if the input string is empty?</li>
+  <li>what should be the return value if input isn’t a string?</li>
+  <li>what constitutes the extension of <em>parentheses</em>?</li>
+</ol>
+
+<p>Once I have answered those questions to a satisfactory degree, I feel as though I can approach the problem clearly. So, what is a string with <em>balanced</em> parentheses?</p>
+
+<p>Usually, this is meant as it is meant in mathematics, logic, and programming — open parentheses must be closed by the same type of parentheses, and open parentheses must be closed in the <em>correct</em> order, i.e., never close an open pair before its <strong>inner</strong> pair is closed (if it has an inner pair). Thus, <code>'{[]}'</code> is balanced, while <code>'{[}]'</code> is not balanced.</p>
+
+<p>Next, what should the return value be if the input string is empty? We are considering an empty string a <em>balanced</em> string, so we should return <code>true</code>.</p>
+
+<p>Next, what should be the return value if input isn’t a string? In our case, we are going to assume that our function is <strong>always</strong> recieving a string input, so we don’t need to worry about this edge case.</p>
+
+<p>Finally, what constitutes the extension of <em>parentheses</em>? We are considering the extension of <em>parentheses</em> to be <code>'{, }, (, ), [, ]'</code>, but feel free to add any other parenthesis symbol.</p>
+
+<p>I consider our four questions to have been satisfactorily answered, so let’s move on to our algorithm and then implementation.</p>
+
+<hr />
+
+<h3 id="algorithm-outline">Algorithm Outline</h3>
+
+<ol>
+  <li>create a stack and store it in a variable
+    <ul>
+      <li>the stack will be used to hold all the opened parentheses in the input string</li>
+    </ul>
+  </li>
+  <li>create two object maps — one for all the open parenthesis characters and one for all the closed parenthesis characters
+    <ul>
+      <li>for the open parentheses map, set the keys to the open parenthesis symbols and the values to the matching closing parenthesis symbol</li>
+      <li>for the closed parentheses map, set the the keys to the closed parenthesis symbols and the values to true</li>
+    </ul>
+  </li>
+  <li>iterate through the characters of the string
+    <ul>
+      <li>for each character
+        <ul>
+          <li>if the character is an open parenthesis character, push the character onto the stack</li>
+          <li>else if the character is a closed parenthesis character, then pop off the last opening parenthesis from the stack and compare it’s closing pair to the current character
+            <ul>
+              <li>if the character is not equal to the required closing parenthesis symbol, then you have an imbalanced string and should return false</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>return an equality comparison between the stack length and 0 — if the stack is empty and we have looped through the whole input string, we can assume that we have a balanced string.</li>
+</ol>
+
+<p>Let’s look at the implementation, and then talk through it line by line.</p>
+
+<hr />
+
+<h3 id="solution">Solution</h3>
+<script src="https://gist.github.com/Cfeusier/4d883707c111476ff4e9.js"></script>
+
+<ul>
+  <li><strong>line 2</strong>: declare our stack and initialize it to an empty array</li>
+  <li><strong>line 3</strong>: declare our open parentheses map and intialize it to an object with open parentheses as keys and closed parentheses as values</li>
+  <li><strong>line 4</strong>: declare our closed parentheses map and intialize it to an object with closed parentheses as keys and <code>true</code> as the values</li>
+  <li><strong>lines 6 - 13</strong>: loop through the input string
+    <ul>
+      <li><strong>line 7</strong>: declare a temporary <code>chr</code> variable and initialize it to the character in the input string at the index of the iteration counter</li>
+      <li><strong>line 8</strong>: check if the <code>chr</code> is an open parenthesis symbol
+        <ul>
+          <li><strong>line 9</strong>: if an open <code>chr</code>, push the <code>chr</code> onto the stack and keep looping through the string</li>
+        </ul>
+      </li>
+      <li><strong>line 10</strong>: check if the <code>chr</code> is a closed parenthesis symbol
+        <ul>
+          <li><strong>line 11</strong>: if a closed <code>chr</code>, check if the matching closed parenthesis of the last element that is popped off the stack (the last open parenthesis symbol found in the string) is not equal to the current <code>chr</code>
+            <ul>
+              <li>if the <code>chr</code> isn’t the matching closed parenthesis for the <em>last</em> open parenthesis from the stack, then we return false because we have an imbalanced input</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>line 15</strong>: return a coerced boolean value — the result of evaluating the expression <code>stack.length === 0</code> — which will return true if the stack has been emptied with no imbalanced parentheses, and false otherwise</li>
+</ul>
+
+<p>That is the full solution! Let’s talk time complexity!</p>
+
+<h3 id="time-complexity-of-our-solution">Time Complexity of our Solution</h3>
+
+<p><strong>Worst case</strong>: <em>linear</em></p>
+
+<p>Our solution iterates the length of the input string, meaning that our time cost will grow in linear proportion to the growth of the string length. Or, for each character that is added to the input string, the algorithm will take 1 time unit longer to complete (worst case). All other operations in our algorithm are <em>constant time</em> because we are using object-property lookup to find our comparison values and the <code>pop</code> method of a <em>Stack</em> data structure to keep track of all the parenthesis pairs that get opened.</p>
+
+<hr />
+
+<h3 id="summary">Summary</h3>
+
+<ul>
+  <li>clarify the prompt by defining terms and point out all edge cases your solution will need to handle</li>
+  <li>if you are keeping track of the ‘last’ member of a sequence and need to access that last element in constant time, use a <strong>Stack</strong> data structure</li>
+  <li>keep your algorithm simple</li>
+</ul>
+
+<p>Cheers,</p>
+
+<p>Clark</p>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/implementation examples">implementation examples</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/interview questions">interview questions</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/stack">stack</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/16/interview-question-balanced-parentheses-stack/&t=Popular Interview Question Series: Balanced Parentheses and a Stack" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/16/interview-question-balanced-parentheses-stack/&text=Popular Interview Question Series: Balanced Parentheses and a Stack&url=http://clarkfeusier.com/2015/01/16/interview-question-balanced-parentheses-stack/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/16/interview-question-balanced-parentheses-stack/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+        </ul>
+    </div>
+</div>
+ </div>
+       <footer>
+            <div id="footer-quote">
+                <div class="container">
+                    <div class="contents">
+                        <div class="quote-icon">
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+                        <span class="quote-name">Percy Bysshe Shelley</span>
+                        <div class="quote-text">
+                            The soul's joy lies in <span class="colored-text">doing</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <div class="container foot">
+                    <ul id="social-icons">
+                        <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                        <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                    <div id="copyright">© COPYRIGHT 2014 Clark Feusier</div>
+                    <a id="home-circle" href="http://clarkfeusier.com"><i class="fa fa-home"></i></a>
+                </div>
+            </div>
+       </footer>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/jquery-1.11.0.min.js"></script>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/header_glitter.js"></script>
+    </body>
+</html>
