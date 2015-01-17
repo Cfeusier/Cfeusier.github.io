@@ -81,29 +81,78 @@
 
 <p>If your head isn’t spinning by now, you shouldn’t be reading this. <strong><em>Go build a compiler or something.</em></strong></p>
 
-<p>For those of us still here, let’s break down the prompt so that we have an idea of how to even think about the problem.</p>
+<p>For those of us still here, let’s look at an example of the expected behavior and then dissect the prompt.</p>
 
-<p>You are given the following skeleton and behavior expectations in the next two examples:</p>
+<h2 id="example-of-expected-behavior">Example of Expected Behavior</h2>
 
-<h3 id="skeleton">Skeleton</h3>
+<p>Each of the asynchronous functions (<code>job1</code>, <code>job2</code>, and <code>job3</code>) use a <code>setTimeout</code> function to simulate a long-running task.</p>
 
-<h3 id="examples-of-expected-behavior">Examples of Expected Behavior</h3>
+<script src="https://gist.github.com/Cfeusier/766a1031e12c860dc0c2.js"></script>
+
+<p>Based on the example, <code>job2</code> will return first, <code>job3</code> will return second, and <code>job1</code> will return last, but the expectation is that <code>asyncMap</code> will <strong>make it appear</strong> as though the results being passed into the final callback were returned in the order of <code>job1</code> - <code>job2</code> - <code>job3</code>. The results will be passed into the callback, which logs the results in <strong>synchronous-appearing</strong> order, as seen on lines 17 - 19.</p>
+
+<p>We have a clear expectation of the behavior of a <strong>single-case</strong>, so let’s dissect the prompt to see if we can pick out a more general expectation that handles all cases.</p>
+
+<h2 id="dissecting-the-prompt">Dissecting the Prompt</h2>
 
 <ul>
-  <li>implement a parallel processor that handles the results synchronously</li>
-  <li>kick off async tasks</li>
-  <li>once all return, invoke cb on the results in the correct order</li>
+  <li>we are in JavaScript-land — the world of the browser, Node, the Event Loop, a single-thread, and web applications</li>
 </ul>
 
-<p>The interview question is testing you on the following:</p>
+<p>Obviously, you can implement asynchronous code behavior in a language that can handle multi-threading, but the prompt will be framed very differently. If you are being asked this question in an interview, it is because you are going to be working with the JavaScript in some capacity if they offer you the job.</p>
 
-<h2 id="solution-imperative-style">Solution: Imperative Style</h2>
+<ul>
+  <li><code>asyncMap</code> will take two inputs — an array and a callback function</li>
+</ul>
+
+<p>The <strong>array</strong> argument will be full of <em>asynchronous</em> functions, and the <strong>callback function</strong> argument will be an action to perform when all of the functions in the array have finished executing.</p>
+
+<p>Each member of the array can be thought of as a <strong><em>job</em></strong> that needs to be performed. The job will take time to complete, and because JavaScript runs on a single-thread, the job will block the event loop of the JavaScript interpreter if it is executed <em>synchronously</em>.</p>
+
+<p>Instead, each job should be <strong>started</strong> and given instructions on what to do when the job is completed, and then the JavaScript interpreter can continue processing without needing to wait for each job to complete before even <strong>starting</strong> the next job. When each job finishes, it can use the instructions it was given to <strong>callback</strong> the main thread with the result of the job’s work. This is <em>one</em> way to implement <strong>asynchronicity</strong> — another popular style is to use <a href="https://promisesaplus.com/">Promises</a> instead of callbacks.</p>
+
+<p>Don’t get confused by all the callbacks floating around. Our <code>asyncMap</code> function will take a <strong>single</strong> callback, while each of the functions within the input array will take <strong>its own</strong> callback, which will be different from the callback passed into <code>asyncMap</code> as the second argument.</p>
+
+<p>Once all of the <strong>jobs</strong> have completed and triggered their individual callbacks, <code>asyncMap</code> should collect up all of the results from the jobs — the results should be ordered based on when the job was <strong>started</strong>, not when the job returned it’s value. Finally, the callback that was passed into <code>asyncMap</code> should be invoked with the results as an argument.</p>
+
+<p><code>asyncMap</code> should effectively simulate a <em>synchronous</em> mapping function, i.e., even though the collection being enumerated over contains functions that will be executed asynchronously, the result of our <code>asyncMap</code> function will appear as though all of the jobs were executed synchronously.</p>
+
+<p>Now that we have a target for which we can aim, let’s cover the concepts and techniques that will be involved in our algorithm, and then we will cover two possible solutions to the problem.</p>
+
+<h2 id="concepts-and-techniques-involved">Concepts and Techniques Involved</h2>
+
+<p>The interview question is testing you on your ability to comprehend and use the following:</p>
+
+<ol>
+  <li>asynchronous programming techniques</li>
+  <li>higher-order functions</li>
+  <li>callbacks</li>
+</ol>
+
+<p>Before discussing two possible solutions, I want to give a <strong>too long - didn’t read (tl;dr)</strong> overview of those three topics to make sure that everyone is on the same page.</p>
+
+<h3 id="asynchronous-programming-techniques">Asynchronous Programming Techniques</h3>
+
+<h3 id="higher-order-functions">Higher-Order Functions</h3>
+
+<h3 id="callbacks">Callbacks</h3>
+
+<h2 id="solutions">Solutions</h2>
+
+<ol>
+  <li>imperative style solution</li>
+  <li>functional style solution</li>
+</ol>
+
+<p>What does that mean?</p>
+
+<h2 id="solution-imperative">Solution: <em>imperative</em></h2>
 
 <p>blahty blah</p>
 
 <script src="https://gist.github.com/Cfeusier/4a6321bd3acd325b85d8.js"></script>
 
-<h2 id="solution-functional-style">Solution: Functional Style</h2>
+<h2 id="solution-functional">Solution: <em>functional</em></h2>
 
 <p>blahty blah</p>
 
