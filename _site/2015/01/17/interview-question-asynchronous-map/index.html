@@ -67,13 +67,21 @@
             </div>
             <div class="post-body">
                 <div class="meta">
-                    <span class="date">18 January 2015</span>
+                    <span class="date">17 January 2015</span>
                 </div>
                 <h2 class="title">Popular Interview Question Series: Asynchronous Map with Variations</h2>
                 <div class="content">
-                    <p>In early-screening technical interviews, the <strong>Parallel</strong> or <strong>AsynchronousMap</strong> question is quite popular. It goes something like this:</p>
+                    <p>One of my favorite ‘toy problems,’ often asked in technical interviews during a ‘screening’ phase, is to implement an <strong>asynchronous mapping</strong> function. This problem can be tricky because it tests your knowledge of <em>asynchronicity</em> and your ability to use <em>higher-order functions</em>. This knowledge is considered necessary for a web-application engineer — asynchronous programming techniques, event systems, and use of higher-order functions are standard for building web apps. So, many interviewers use this question to <em>cut to the chase</em>.</p>
 
-<blockquote>Write an 'asyncMap' function that ... </blockquote>
+<p>The prompt will usually go like this:</p>
+
+<blockquote>
+  Write an <strong>asyncMap</strong> function with two parameters &mdash; an array of asynchronous functions and a callback function. Each of the asynchronous functions takes a <em><strong>its own callback</strong></em> and invokes that callback when finished executing. The callback passed to <strong>asyncMap</strong> should be invoked on the results of the callbacks of the asynchronous functions. The order of the results should be the same as the order in which the asynchronous functions were invoked. Note, the order in which the asynchronous functions are passed to <strong>asyncMap</strong> determines the order of the results, not the order in which the asynchronous functions finish executing. After <em>all</em> the callbacks of the asynchronous functions have returned, <strong>asyncMap</strong> should invoke the callback on the collection of results.
+</blockquote>
+
+<p>If your head isn’t spinning by now, you shouldn’t be reading this. <strong><em>Go build a compiler or something.</em></strong></p>
+
+<p>For those of us still here, let’s break down the prompt so that we have an idea of how to even think about the problem.</p>
 
 <p>You are given the following skeleton and behavior expectations in the next two examples:</p>
 
@@ -81,7 +89,34 @@
 
 <h3 id="examples-of-expected-behavior">Examples of Expected Behavior</h3>
 
+<ul>
+  <li>implement a parallel processor that handles the results synchronously</li>
+  <li>kick off async tasks</li>
+  <li>once all return, invoke cb on the results in the correct order</li>
+</ul>
+
 <p>The interview question is testing you on the following:</p>
+
+<h2 id="solution-imperative-style">Solution: Imperative Style</h2>
+
+<p>blahty blah</p>
+
+<script src="https://gist.github.com/Cfeusier/4a6321bd3acd325b85d8.js"></script>
+
+<h2 id="solution-functional-style">Solution: Functional Style</h2>
+
+<p>blahty blah</p>
+
+<script src="https://gist.github.com/Cfeusier/02ed48507b02b2b5c3f0.js"></script>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+  <li>asynchronicity</li>
+  <li>higher-order functions</li>
+  <li>callbacks</li>
+</ul>
+
 
                 </div>
             </div>
@@ -105,9 +140,9 @@
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/18/interview-question-asynchronous-map/&t=Popular Interview Question Series: Asynchronous Map with Variations" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/18/interview-question-asynchronous-map/&text=Popular Interview Question Series: Asynchronous Map with Variations&url=http://clarkfeusier.com/2015/01/18/interview-question-asynchronous-map/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/18/interview-question-asynchronous-map/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/17/interview-question-asynchronous-map/&t=Popular Interview Question Series: Asynchronous Map with Variations" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/17/interview-question-asynchronous-map/&text=Popular Interview Question Series: Asynchronous Map with Variations&url=http://clarkfeusier.com/2015/01/17/interview-question-asynchronous-map/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/17/interview-question-asynchronous-map/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>
     </div>
