@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title: "Popular Interview Question Series: Variations on Asynchronous Map"
-date: 2015-01-17
+date: 2015-01-18
 author: "Clark Feusier"
 tags:
 - javascript
@@ -141,16 +141,16 @@ There are a lot of subtleties being trampled, but that should be enough to be ge
   - this variable will keep track of how many of the `jobs` have finished &mdash; `finished` gets incremented every time one of the `jobs` calls back with the result of its work
 - **lines 5 - 14**: iterate the length of the `jobs` array
   - this iteration will allow us to trigger all of the `jobs` one by one
-- **lines 6 - 13**: create an **immediately-invoked function expression** (IFFE)
+- **lines 6 - 13**: create an **immediately-invoked function expression** (IIFE)
   - this is where it gets cool, but it also requires an aside ...
 
 **ASIDE**
 
-An ***immediately-invoked function expression***, or **IFFE** (pronounced 'If - E'), is exactly what it sounds like &mdash; a function expression that is invoked **immediately** after it is defined. Read this code and try to understand what is happening before I explain it.
+An ***immediately-invoked function expression***, or **IIFE** (pronounced 'If - E'), is exactly what it sounds like &mdash; a function expression that is invoked **immediately** after it is defined. Read this code and try to understand what is happening before I explain it.
 
 <script src="https://gist.github.com/Cfeusier/8a8d9c73dadd716aca64.js"></script>
 
-Seriously, an **IFFE** is just a function that has `()` **immediately** following the end of the function definition, which invokes the function that was just defined. The **IFFE** is a very common and useful pattern because it allows you to open a new scope and then immediately destroy the scope by invoking the function, with the possibility of storing the return value of the function without storing anything else in the scope. This is used often for simulating 'private variables' in JavaScript &mdash; the IFFE allows you to maintain a variable's state by protecting it with a new scope, while still having access to the variables from the outer scope. We used an IFFE in our solution for that very reason.
+Seriously, an **IIFE** is just a function that has `()` **immediately** following the end of the function definition, which invokes the function that was just defined. The **IIFE** is a very common and useful pattern because it allows you to open a new scope and then immediately destroy the scope by invoking the function, with the possibility of storing the return value of the function without storing anything else in the scope. This is used often for simulating 'private variables' in JavaScript &mdash; the IIFE allows you to maintain a variable's state by protecting it with a new scope, while still having access to the variables from the outer scope. We used an IIFE in our solution for that very reason.
 
 **END ASIDE**
 
@@ -158,24 +158,60 @@ Ok, here is the imperative solution again, just to refresh the mind before we pi
 
 <script src="https://gist.github.com/Cfeusier/4a6321bd3acd325b85d8.js"></script>
 
-- **line 7**: within our IFFE wrapper, we are grabbing the current `job` with `jobs[i]`
-  - `i` is referring to the parameter in the function signature on line 6, which is actually being passed into the invocation of the IFFE from the `for` loop on line 13
+- **line 7**: within our IIFE wrapper, we are grabbing the current `job` with `jobs[i]`
+  - `i` is referring to the parameter in the function signature on line 6, which is actually being passed into the invocation of the IIFE from the `for` loop on line 13
   - we must do this to **capture** the current value of `i` because the iteration of the `for` loop will happen faster than each of the `jobs`, so by the time the first `job` is trying to store its result value at index `i` on line 9, the value of `i` will be the length of the array because the iteration will have completed all of its loops
 - **lines 8 - 12**: invoke the current `job` and pass in a callback that will handle the result of the `job`
   - the result of the `job` is passed to the callback as `val` on line 8
-  - **line 9**:
-  - **line 10**:
-  - **line 11**:
-- **line 13**:
+    - remember, each `job` must trigger its callback with the return value of its work &mdash; the return value of the `job` will be passed into the callback as `val` on line 8
+  - **line 9**: assign the result `val` of the `job` to the correct position in the `results` collection
+    - the position at which we are storing the `val` is the index number which is based on when the `job` was **started**
+  - **line 10**: increment the `finished` count, indicating that another `job` has finished its work
+  - **line 11**: if the number of `jobs` that have `finished` is equal to the length of the `jobs` collection, then invoke the `asyncMap` callback with `results` of all the `jobs`
+    - if the `finished` count is equal to the number of `jobs` in the `jobs` collection, then we can assume that all of the `jobs` have stored their result values in the `results` array &mdash; once all the `jobs` have called back with their values, we know that the `results` array is complete and ready to pass back to the `asyncMap` callback function
+
+That is our complete imperative-style solution to `asyncMap`. The trick to handling the asynchronous ordering is to create a new scope and capture the **original start** index number of the `job` with an IIFE.
+
+I love that solution, especially since it reminds me of beautiful third-party libraries like *jQuery*, but I also hate having to remember to wrap the work inside the `for` loop within an IIFE. To avoid dealing with these 'lower-level' details of managing scope and race conditions, we can **abstract away** those lower-level details and wrap them up in a **function** so that we don't have to remember the details each time. Instead, we can just remember the interface of our new function, and let it do all the work for us.
+
+I am sure that you have inferred where I am going with this...
 
 ## Solution: *functional*
 
 <script src="https://gist.github.com/Cfeusier/02ed48507b02b2b5c3f0.js"></script>
 
+Before I go through this solution line-by-line, I want to warn you that I have tweaked the logic on this implementation sligthly relative to the imperative-style solution. The differences in logic are the direction that `finished` moves and the condition of the base-case. In the imperative version, `finished` starts at `0` and is **incremented** each time a `job` finishes, and the base-case is reached when `finished` is equal to the length of the `jobs` collection. In the functional version, this logic is reversed. `finished` starts at the length of the `jobs` collection, and each time a `job` finishes, we **decrement** the `finished` count. The base-case checks if the `finished` count is `0`, indicating that all the `jobs` have completed.
+
+- **line 2**: declare a `results` variable and initialize it to an empty array
+  - this array will store the return values from all of our `jobs` &mdash; the `results` must be ordered based on the order of the original `jobs` array, not the order that the `jobs` complete processing
+- **line 3**: declare a `finished` variable and initialize it to `jobs.length`
+  - this variable will keep track of how many of the `jobs` have finished &mdash; `finished` gets decremented every time one of the `jobs` calls back with the result of its work
+- **lines 5 - 10**: iterate over the `jobs` array with `jobs.forEach`
+  - `forEach` is the abstraction **function** mentioned above &mdash; it *hides* all of the iteration logic from us, so we only need to know the **public interface** of `forEach`. It is a invoked **on a collection**. `forEach` takes a callback parameter that is invoked once for every item in the collection. `forEach` passes each item into the callback, along with the index number of that item. We can say, 'hey, give me all the jobs one by one along with the index number that corresponds to their index in the `jobs` collection, and do whatever I specify in the callback for each `job` in the collection.' We don't need to worry about scopes and race conditions because our `forEach` abstraction worries about that for us!
+- **line 6**: invoke the current `job` and provide a callback instruction to the `job` that specifies how to handle the result of the `job`
+- **line 7**: store the result of the `job`'s work at `results[i]`
+  -within our `job` callback, the `job` has **finished** its work and provided the result of the work to the callback in the form of `result`, so we can store it in the `results` collection
+- **line 8**: if the `finished` count decremented by `1` is equal to `0`, callback to `asyncMap` with the final `results` of all the `jobs` in the correct order
+  - the decrementing happens **first**, before the equality check, so we can decrement and check all in one step
+
+That is the complete solution to our functional-style solution to `asyncMap` &mdash; terse and simple. All of the hard work of this prompt is **handled for you** if you use the native `forEach` that is standard in ECMAScript 5+. If it feels like cheating to you, remind yourself how silly that attitude is &mdash; if utilizing a helpful abstracting is cheating (and you think cheating is bad), then you shouldn't be using a computer or the English language ;)
+
+Wow, that was a lot of material &mdash; let's summarize.
+
 ## Summary
 
-- asynchronous processing model
-- callbacks
-- imperative programming and functional programming
+**Callbacks**
 
+A **callback** is just a group of *instructions* bundled into a **function**, which is passed into another function. The **callback** can get executed at a precise time of the developer's choosing, usually after the function that is accepting the callback finishes its operations.
 
+**The Asynchronous Processing Model**
+
+This model processes instructions of a certain type (usually costly operations like I/O) asynchronously. The processor **starts** to process those instructions' operations, and then hands those operations an instruction of how to return the result when complete; then, *the processor continues to the next instruction without waiting for the prior instructions' operations to complete*. As soon as any operations complete, they can use the instructions they were provided at start to **callback** to the processor with the result. This model allows the processor to avoid getting **blocked** by costly operations.
+
+**Imperative Programming and Functional Programming**
+
+These are both **styles** or **paradigms** of programming, with different commitments to **how computation should be represented in code**. The *imperative*-style of programming is committed to representing computation in the form of short, *language-level*, **imperative statements**. The *functional*-style of programming is committed to representing computation in the form of **function abstractions** over language-level features.
+
+Now go use callbacks to implement your functional-style asynchronous apps! If you finish anything cool, [call me back](mailto:cfeusier@gmail.com). I have other things to process,
+
+Clark
