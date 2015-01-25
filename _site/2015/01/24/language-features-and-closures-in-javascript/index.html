@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts Tagged &ldquo;grunt&rdquo;</title>
+    <title>The Language Features of JavaScript that Create Closure</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,314 +59,106 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-    <div class="page-contents">
-        <h2 class="page-title first-elem"> Posts with the 'grunt' Tag</h2>
-        <ul id="ptitle-list">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">24 January 2015</span>
+                </div>
+                <h2 class="title">The Language Features of JavaScript that Create Closure</h2>
+                <div class="content">
+                    <ol>
+  <li>a closure function closes over (encloses) the closure-scoped variables</li>
+  <li>the declaration is returned within another function</li>
+  <li>references a variable from its context (the containing function)</li>
+  <li>when the closure function is executed, it can access the variables referenced in even though the containing function has already finished execution</li>
+</ol>
 
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
+<h3 id="function-properties-language-features-that-allow-for-closures-in-js">function properties (language features) that allow for closures in JS:</h3>
 
-                <li class="clearfix">
-                	<span class="date">14 January 2015</span>
-                	<span class="seperator">&mdash;</span>
-                    <a href="http://clarkfeusier.com/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt/"><h3 class="title">Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt</h3></a>
-                </li>
+<ol>
+  <li>fn1 can/must explicitly return value (or value gets GCed)</li>
+  <li>fn1 can return fn2 as explicit return value</li>
+  <li>fn2 can retain access to the context in which it was created</li>
+  <li>fn1 returns fn2 as explict value</li>
+  <li>fn2 references variable A in fn1</li>
+  <li>fn1 gets executed and stored in variable as fn2</li>
+  <li>variable A disappears when execution is done</li>
+  <li>fn2 gets executed</li>
+  <li>fn2 can access variable A, even though the fn1’s execution context (intuitively) should have disappeared at this point</li>
+</ol>
 
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
+<h2 id="scopes">Scopes</h2>
 
+<ol>
+  <li>scope = part of program where a binding between a variable and value is valid</li>
+  <li>lexical scope = regions of source code where variable name reference has meaning (no access errors)</li>
+  <li>default scope in JavaScript is global</li>
+  <li>‘{‘ of a function declaration delimits the entry to a new lexical scope</li>
+  <li>lexical scope enforces access rules</li>
+  <li>scopes can be nested</li>
+  <li>variables are either global or local to a single function (lexically scoped)</li>
+  <li>in-memory (dynamic) scope = in-memory storage sytem (data structure) for holding variables and their values</li>
+  <li>in-memory scope structures are called execution contexts</li>
+  <li>in-memory scopes == dynamic scopes == execution contexts</li>
+  <li>lexical scopes have one-to-many relationships with in-memory scopes (1 lexical scope for the code—n dynamic scopes, with one for each invocation of the function associated with that scope
+program run</li>
+  <li>in-memory datastores will be built to keep track of all variables available to function objects</li>
+  <li>an in-memory datastore is created anew for every invocation of a function to isolate the running of each function</li>
+  <li>thus, for each lexical scope there could be 0-many in-memory scopes/execution contexts (depending on how many times the function has been executed)</li>
+  <li>the current in-memory scope/execution context is where the interpreter first does lookup</li>
+  <li>the execution context has a key-value mapping inside it</li>
+</ol>
+
+<h2 id="closures">Closures</h2>
+
+<ol>
+  <li>closure = a function object that retains ongoing access to the variables of the context in which it was created</li>
+  <li>a function object (the function itself, uninvoked) that was created within another function</li>
+  <li>this inner function object is just a reference to the function object that you invoke later!</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/closures">closures</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/computer science">computer science</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/language">language</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/24/language-features-and-closures-in-javascript/&t=The Language Features of JavaScript that Create Closure" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/24/language-features-and-closures-in-javascript/&text=The Language Features of JavaScript that Create Closure&url=http://clarkfeusier.com/2015/01/24/language-features-and-closures-in-javascript/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/24/language-features-and-closures-in-javascript/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/01/18/interview-question-asynchronous-map/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
         </ul>
-
-
-
     </div>
 </div>
-
  </div>
        <footer>
             <div id="footer-quote">
