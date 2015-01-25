@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts Tagged &ldquo;grunt&rdquo;</title>
+    <title>What the eff is 'this'?</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,324 +59,100 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-    <div class="page-contents">
-        <h2 class="page-title first-elem"> Posts with the 'grunt' Tag</h2>
-        <ul id="ptitle-list">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">25 January 2015</span>
+                </div>
+                <h2 class="title">What the eff is 'this'?</h2>
+                <div class="content">
+                    <ol>
+  <li>this = an auto-bound identifier that refers to some likely-focal object during method or constructor invocation</li>
+  <li>‘this’ is used for OO language features</li>
+  <li>‘this’ has reference only when code runs</li>
+  <li>5 ways this can appear in running code (at call time)</li>
+</ol>
 
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
+<h2 id="how-to-determine-what-this-refers-to">How to determine what ‘this’ refers to</h2>
 
-                <li class="clearfix">
-                	<span class="date">14 January 2015</span>
-                	<span class="seperator">&mdash;</span>
-                    <a href="http://clarkfeusier.com/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt/"><h3 class="title">Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt</h3></a>
-                </li>
+<ol>
+  <li>pause debugger on a line that refers to this</li>
+  <li>scan outward — find the closest enclosing function body</li>
+  <li>look one level down in the call stack — find where the function was called</li>
+  <li>see how the function was called to determine this reference</li>
+</ol>
 
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
+<h2 id="run-patterns">Run Patterns</h2>
 
+<script src="https://gist.github.com/Cfeusier/a8bba391fcfe744bc6db.js"></script>
+
+<p>global reference (binding target: global object)
+free function invocation (binding target: global object)
+#call or #apply (binding target: the first argument to #call or #apply)
+method invocation (binding target: call time receiver — object on left of dot at call time)
+construction mode (binding target: a new object created for that invocation)</p>
+
+<p>this is an auto-bound identifier that refers to some likely-focal object during function invocation
+where-ever this is, find enclosing function declaration braces
+find the place where the enclosing function is called
+global this
+window or globalObject
+free fn invocation - functionName()
+window or globalObject
+.call or .apply invocation - fn.call(target) or obj.mtdName.call(target)
+the first argument to .call or .apply
+method invocation - target.methodName()
+the object left of the dot at call time
+contstructor invocation - new functionName()
+a new object created for that invocation</p>
+
+<ul>
+  <li>90% of the time: this  = the object to the left of the dot where that function was called</li>
+  <li>setTimeout does weird shit (runs everything in the global context)</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/object-oriented programming">object-oriented programming</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/this keyword">this keyword</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/heuristics">heuristics</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/01/25/what-the-eff-is-this/&t=What the eff is 'this'?" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/01/25/what-the-eff-is-this/&text=What the eff is 'this'?&url=http://clarkfeusier.com/2015/01/25/what-the-eff-is-this/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/01/25/what-the-eff-is-this/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/01/24/language-features-and-closures-in-javascript/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
         </ul>
-
-
-
     </div>
 </div>
-
  </div>
        <footer>
             <div id="footer-quote">
