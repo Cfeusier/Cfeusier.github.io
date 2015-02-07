@@ -1,13 +1,14 @@
 ---
 layout: post_simple
 title:  "What the eff is 'this'?"
-date: 2015-01-25
+date: 2015-02-08
 author: "Clark Feusier"
 tags:
 - object-oriented programming
 - javascript
 - this keyword
 - heuristics
+
 ---
 
 **Why you should read this post** &mdash; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis doloremque dolores, fuga! Accusantium sed unde itaque, quasi fuga sit, cupiditate facere quam delectus eius, maiores maxime. Quod labore facilis beatae. Sunt debitis ad similique veniam cum iste ipsa, ullam veritatis, illo quibusdam fugiat id quaerat hic odit temporibus rem praesentium?
