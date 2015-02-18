@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts Tagged &ldquo;career&rdquo;</title>
+    <title>Building Cross-Platform Desktop Applications with Atom Shell</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,324 +59,109 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-    <div class="page-contents">
-        <h2 class="page-title first-elem"> Posts with the 'career' Tag</h2>
-        <ul id="ptitle-list">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">18 February 2015</span>
+                </div>
+                <h2 class="title">Building Cross-Platform Desktop Applications with Atom Shell</h2>
+                <div class="content">
+                    <h2 id="basics">Basics</h2>
 
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
+<h2 id="motivations">Motivations</h2>
 
-                <li class="clearfix">
-                	<span class="date">21 August 2014</span>
-                	<span class="seperator">&mdash;</span>
-                    <a href="http://clarkfeusier.com/2014/08/21/it-takes-a-village/"><h3 class="title">It Takes a Village to Raise a Programmer</h3></a>
-                </li>
+<h3 id="atom-shell-framework">Atom Shell Framework</h3>
 
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
+<h3 id="examples">Examples</h3>
 
+<h3 id="resources">Resources</h3>
+
+<ul>
+  <li>show Atom Editor
+    <ul>
+      <li>doc, file system, right-click, etc (Native OS commands)</li>
+      <li>works on all three popular OS’s
+        <ul>
+          <li>not with 3 different code bases</li>
         </ul>
+      </li>
+      <li>1 codebase of html, js (coffee), css</li>
+      <li>how? the Atom Editor is built with Atom Shell</li>
+    </ul>
+  </li>
+  <li>what is Atom Shell?
+    <ul>
+      <li>framework for building cross-platform desktop applications</li>
+      <li>write for MacOSX, Windows of all types, and Linux of all types, in JavaScript, HTML, and CSS</li>
+      <li>built on Node.js and Chromium (70% C++, 10% CoffeeScript, 10% Objective-C++, 5% Python and Shell)</li>
+      <li>creates a chromium container/runtime environment for you application to run in, with hooks into the OS’s API
+  -&gt; allows you to use node + 3rd party node modules like you would in a node web app
+  -&gt; lets you control the native OS without having to know or write 3 diff OS APIs
+      - e.g., clipboard API https://github.com/atom/atom-shell/blob/master/docs/api/clipboard.md</li>
+    </ul>
+  </li>
+</ul>
 
+<p>Caveat: not as mature of ecosystem and tools as i would like</p>
 
+<p>runs your code as a web app inside a browser wrapper, also providing a JS API to tie into the OS
+‘app’ API provides abstraction over hooks into the OS’s app-lifecycle
+show app.getPath()
+this ‘app’ API allows you to manage the two sides of the application and it’s lifecycle
+2 sides - browser and renderer
+browser is what you are used to thinking of as the node side (usually server interaction)
+node Event Emitter object
+https://github.com/atom/atom-shell/blob/master/docs/api/browser-window.md
+renderer is usually a web page side (load scripts in the html that your browser window serves!
+can communicate via an atom-shell api, ipc (or remote)
+ipc is a ‘inter process channel’ that is just an event system object (if you have use any event system, ipc will feel very familiar, especially if you have used socket.io
+listen on and fire events between the browser side and the renderer side
+browser side has access to a fuller range of native os api wrappers</p>
 
+<p>https://github.com/Cfeusier/atom-spike</p>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/hybrid apps">hybrid apps</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/frameworks">frameworks</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/examples">examples</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/02/18/cross-platform-desktop-apps-with-atom-shell/&t=Building Cross-Platform Desktop Applications with Atom Shell" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/02/18/cross-platform-desktop-apps-with-atom-shell/&text=Building Cross-Platform Desktop Applications with Atom Shell&url=http://clarkfeusier.com/2015/02/18/cross-platform-desktop-apps-with-atom-shell/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/02/18/cross-platform-desktop-apps-with-atom-shell/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/02/17/what-the-eff-is-this/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+        </ul>
     </div>
 </div>
-
  </div>
        <footer>
             <div id="footer-quote">

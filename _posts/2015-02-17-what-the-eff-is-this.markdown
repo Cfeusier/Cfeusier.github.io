@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "What the eff is 'this'?"
-date: 2015-02-08
+date: 2015-02-17
 author: "Clark Feusier"
 tags:
 - object-oriented programming
