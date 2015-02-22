@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "Building Cross-Platform Desktop Applications with Atom Shell"
-date: 2015-02-18
+date: 2015-02-22
 author: "Clark Feusier"
 tags:
 - hybrid apps

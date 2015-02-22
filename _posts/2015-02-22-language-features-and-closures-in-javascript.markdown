@@ -1,13 +1,14 @@
 ---
 layout: post_simple
 title:  "The Language Features of JavaScript that Create Closure"
-date: 2015-01-24
+date: 2015-02-22
 author: "Clark Feusier"
 tags:
 - javascript
 - closures
 - computer science
 - language
+
 ---
 
 1. a closure function closes over (encloses) the closure-scoped variables
