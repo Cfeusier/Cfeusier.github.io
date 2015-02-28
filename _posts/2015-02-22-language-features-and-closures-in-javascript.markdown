@@ -11,23 +11,70 @@ tags:
 
 ---
 
-1. a closure function closes over (encloses) the closure-scoped variables
-1. the declaration is returned within another function
-  1. references a variable from its context (the containing function)
-1. when the closure function is executed, it can access the variables referenced in even though the containing function has already finished execution
+This will be a very simple post covering the language features of JavaScript that create **closure**. Basically, I just want to sing you a little ditty about closures &mdash; what they are and how they come about in JavaScript.
 
-### function properties (language features) that allow for closures in JS:
+Our post will follow this outline:
 
-1. fn1 can/must explicitly return value (or value gets GCed)
-1. fn1 can return fn2 as explicit return value
-1. fn2 can retain access to the context in which it was created
-1. fn1 returns fn2 as explict value
-1. fn2 references variable A in fn1
-1. fn1 gets executed and stored in variable as fn2
-1. variable A disappears when execution is done
-1. fn2 gets executed
-1. fn2 can access variable A, even though the fn1’s execution context (intuitively) should have disappeared at this point
+1. the definition of a closure
+2. the requisite parts of a closure
+3. a brief explanation of *scope* in JavaScript &mdash; both lexical and dynamic scope
+4. the necessary features of the JavaScript language that allow for closure
 
+**Note**: from here on, I will assume that I am only talking about closure in *JavaScript*
+
+<blockquote>
+    <strong>Credit</strong> to <a href='https://twitter.com/mracus' target='_blank'>@mracus</a> for the awesome lecture, from which my following notes were derived. Anything good in this post is credit to him, and anything incorrect is probably because of my misunderstanding.
+</blockquote>
+
+Let's break it down, yo.
+
+---
+
+## The Definition of a Closure
+
+A **closure** is a ***function*** object that retains **ongoing access** to the variables of the context *in which it was created*.
+
+For a less formal specification &mdash; a closure is pretty much just a function object that was ***defined within*** and ***returned by*** another function. That is, a closure is a reference to a function object that was defined and returned by an 'outer' function.
+
+If the concept of a closure isn't clear from the above definitions, the following examination of the different components of a closure help clarify.
+
+## The Requisite Parts of a Closure
+
+1. an **outer** function with variables
+
+<script src="https://gist.github.com/Cfeusier/654300c9bdecd7597441.js"></script>
+
+2. an **inner** function that references variables in the outer function
+
+<script src="https://gist.github.com/Cfeusier/e48f5cafed64132c08d2.js"></script>
+
+3. the inner function is **returned** by the outer function
+
+<script src="https://gist.github.com/Cfeusier/d100585e61ab18e07606.js"></script>
+
+As you can see, our final code snippet illustrates a closure, summarized as follows:
+
+1. a closure function **closes over** (encloses) the closure-scoped variables
+1. the declaration of the closure function is returned by the outer function
+  1. the closure function references a variable from its context (the outer function)
+1. when the closure function is executed, it can access the variables referenced in even though the outer function has already finished execution
+
+## An Aside about Scope in JavaScript
+
+
+## The Features of JavasScript that Allow for Closure
+
+---
+
+## Summary
+
+
+
+
+
+---
+
+# WORKING NOTES
 
 ## Scopes
 
@@ -49,9 +96,14 @@ program run
 1. the current in-memory scope/execution context is where the interpreter first does lookup
 1. the execution context has a key-value mapping inside it
 
+### function properties (language features) that allow for closures in JS:
 
-## Closures
-
-1. closure = a function object that retains ongoing access to the variables of the context in which it was created
-1. a function object (the function itself, uninvoked) that was created within another function
-1. this inner function object is just a reference to the function object that you invoke later!
+1. fn1 can/must explicitly return value (or value gets GCed)
+1. fn1 can return fn2 as explicit return value
+1. fn2 can retain access to the context in which it was created
+1. fn1 returns fn2 as explict value
+1. fn2 references variable A in fn1
+1. fn1 gets executed and stored in variable as fn2
+1. variable A disappears when execution is done
+1. fn2 gets executed
+1. fn2 can access variable A, even though the fn1’s execution context (intuitively) should have disappeared at this point

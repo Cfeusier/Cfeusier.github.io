@@ -71,26 +71,75 @@
                 </div>
                 <h2 class="title">The Language Features of JavaScript that Create Closure</h2>
                 <div class="content">
-                    <ol>
-  <li>a closure function closes over (encloses) the closure-scoped variables</li>
-  <li>the declaration is returned within another function</li>
-  <li>references a variable from its context (the containing function)</li>
-  <li>when the closure function is executed, it can access the variables referenced in even though the containing function has already finished execution</li>
-</ol>
+                    <p>This will be a very simple post covering the language features of JavaScript that create <strong>closure</strong>. Basically, I just want to sing you a little ditty about closures — what they are and how they come about in JavaScript.</p>
 
-<h3 id="function-properties-language-features-that-allow-for-closures-in-js">function properties (language features) that allow for closures in JS:</h3>
+<p>Our post will follow this outline:</p>
 
 <ol>
-  <li>fn1 can/must explicitly return value (or value gets GCed)</li>
-  <li>fn1 can return fn2 as explicit return value</li>
-  <li>fn2 can retain access to the context in which it was created</li>
-  <li>fn1 returns fn2 as explict value</li>
-  <li>fn2 references variable A in fn1</li>
-  <li>fn1 gets executed and stored in variable as fn2</li>
-  <li>variable A disappears when execution is done</li>
-  <li>fn2 gets executed</li>
-  <li>fn2 can access variable A, even though the fn1’s execution context (intuitively) should have disappeared at this point</li>
+  <li>the definition of a closure</li>
+  <li>the requisite parts of a closure</li>
+  <li>a brief explanation of <em>scope</em> in JavaScript — both lexical and dynamic scope</li>
+  <li>the necessary features of the JavaScript language that allow for closure</li>
 </ol>
+
+<p><strong>Note</strong>: from here on, I will assume that I am only talking about closure in <em>JavaScript</em></p>
+
+<blockquote>
+    <strong>Credit</strong> to <a href="https://twitter.com/mracus" target="_blank">@mracus</a> for the awesome lecture, from which my following notes were derived. Anything good in this post is credit to him, and anything incorrect is probably because of my misunderstanding.
+</blockquote>
+
+<p>Let’s break it down, yo.</p>
+
+<hr />
+
+<h2 id="the-definition-of-a-closure">The Definition of a Closure</h2>
+
+<p>A <strong>closure</strong> is a <strong><em>function</em></strong> object that retains <strong>ongoing access</strong> to the variables of the context <em>in which it was created</em>.</p>
+
+<p>For a less formal specification — a closure is pretty much just a function object that was <strong><em>defined within</em></strong> and <strong><em>returned by</em></strong> another function. That is, a closure is a reference to a function object that was defined and returned by an ‘outer’ function.</p>
+
+<p>If the concept of a closure isn’t clear from the above definitions, the following examination of the different components of a closure help clarify.</p>
+
+<h2 id="the-requisite-parts-of-a-closure">The Requisite Parts of a Closure</h2>
+
+<ol>
+  <li>an <strong>outer</strong> function with variables</li>
+</ol>
+
+<script src="https://gist.github.com/Cfeusier/654300c9bdecd7597441.js"></script>
+
+<ol>
+  <li>an <strong>inner</strong> function that references variables in the outer function</li>
+</ol>
+
+<script src="https://gist.github.com/Cfeusier/e48f5cafed64132c08d2.js"></script>
+
+<ol>
+  <li>the inner function is <strong>returned</strong> by the outer function</li>
+</ol>
+
+<script src="https://gist.github.com/Cfeusier/d100585e61ab18e07606.js"></script>
+
+<p>As you can see, our final code snippet illustrates a closure, summarized as follows:</p>
+
+<ol>
+  <li>a closure function <strong>closes over</strong> (encloses) the closure-scoped variables</li>
+  <li>the declaration of the closure function is returned by the outer function</li>
+  <li>the closure function references a variable from its context (the outer function)</li>
+  <li>when the closure function is executed, it can access the variables referenced in even though the outer function has already finished execution</li>
+</ol>
+
+<h2 id="an-aside-about-scope-in-javascript">An Aside about Scope in JavaScript</h2>
+
+<h2 id="the-features-of-javasscript-that-allow-for-closure">The Features of JavasScript that Allow for Closure</h2>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<hr />
+
+<h1 id="working-notes">WORKING NOTES</h1>
 
 <h2 id="scopes">Scopes</h2>
 
@@ -114,12 +163,18 @@ program run</li>
   <li>the execution context has a key-value mapping inside it</li>
 </ol>
 
-<h2 id="closures">Closures</h2>
+<h3 id="function-properties-language-features-that-allow-for-closures-in-js">function properties (language features) that allow for closures in JS:</h3>
 
 <ol>
-  <li>closure = a function object that retains ongoing access to the variables of the context in which it was created</li>
-  <li>a function object (the function itself, uninvoked) that was created within another function</li>
-  <li>this inner function object is just a reference to the function object that you invoke later!</li>
+  <li>fn1 can/must explicitly return value (or value gets GCed)</li>
+  <li>fn1 can return fn2 as explicit return value</li>
+  <li>fn2 can retain access to the context in which it was created</li>
+  <li>fn1 returns fn2 as explict value</li>
+  <li>fn2 references variable A in fn1</li>
+  <li>fn1 gets executed and stored in variable as fn2</li>
+  <li>variable A disappears when execution is done</li>
+  <li>fn2 gets executed</li>
+  <li>fn2 can access variable A, even though the fn1’s execution context (intuitively) should have disappeared at this point</li>
 </ol>
 
                 </div>
