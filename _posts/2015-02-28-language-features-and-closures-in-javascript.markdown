@@ -89,11 +89,9 @@ We can contrast this type of scoping, based on static parts of a program, with a
 
 **Note**: though *dynamic scope* is also called *in-memory scope* and *execution context*, I will use the terms interchangeably.
 
-As discussed above, JavaScript scopes variables to functions, meaning that the **dynamic scope** of a variable is the in-memory mapping of variable names and values available **during a particular execution** of the function to which the variable is scoped.
+As discussed above, JavaScript scopes variables to functions, meaning that the **dynamic scope** of a variable is the in-memory mapping of variable names and values available **during a particular execution** of the function to which the variable is scoped. During the execution of the function, the variable name 'exists' and is bound to a value, but as soon as the function returns, the variable name no longer 'exists' and thus can't be bound to any value.
 
- if a variable name's scope is a certain function, then its scope is the time-period during which the function is executing: while the function is running, the variable name exists, and is bound to its variable, but after the function returns, the variable name does not exist
-- a new dynamic scope is created anew for every invocation of a function to isolate the running of each function
-- the current execution context is where the interpreter first does lookup for a given variable
+This means that a new dynamic scope is created for *every invocation of a function*, in order to isolate the running of each function in its own environment. The current dynamic scope of a function is where the interpreter first does lookup for a given variable.
 
 ## The Features of JavasScript that Allow for Closure
 
