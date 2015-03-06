@@ -59,8 +59,41 @@ As you can see, our final code snippet illustrates a closure, summarized as foll
   1. the closure function references a variable from its context (the outer function)
 1. when the closure function is executed, it can access the variables referenced in even though the outer function has already finished execution
 
+We now have the concept of a closure in front of us, but we need to understand how **scoping** works in JavaScript before we can truly understanding closures and their power. Remember, a **closure** is a function that retains ongoing access to the variables from the **scope** in which the closure function was created. So, to understand closures, we need to understand how scoping works in JavaScript.
+
 ## An Aside about Scope in JavaScript
 
+First, let's clear the air &mdash; **scope** is an ambiguous term when used by JavaScripters. Most of the misunderstanding and confusion surrounding scoping comes from engineers' continual equivocation between **two** *different* concepts of scope &mdash; **lexical** and **dynamic**. This section will pull apart those two concepts, so that we can understand them properly.
+
+### Lexical Scope
+
+<blockquote>the region of source code where a <em>variable name</em> reference has <strong>meaning</strong></blockquote>
+
+JavaScript lexically scopes variable name reference to the **function** (ignoring ES6 `let` and the like), which means that ***every function body has a corresponding lexical scope***. Take a look at the following code snippet, and then we will discuss.
+
+<script src="https://gist.github.com/Cfeusier/de557a076731ad8b321e.js"></script>
+
+JavaScript has **global** and **local** variables &mdash; any variable declared outside of a function is **global**, while any variable declared within a function is **locally** scoped to that function. So, on line 2, we declare and initialize a global variable named `globalVariable`, and we store the value `"got lipstick stamps on my passport"` in the `globalVariable` name-bucket. We can access this variable anywhere in our program, hence `global` &mdash; line 19 would log out the value stored in `globalVariable`.
+
+The function `newScopeAboutToOpenHere` (lines 4 - 8) opens a local scope, in which we declare and initialize the name `localVariable` to the value `"never left the shire"`. This variable is ***local*** to the function in which it was declared in the sense that the variable name `localVariable` doesn't successfully refer to anything **outside** of the function `newScopeAboutToOpenHere`. The `console.log` statement of `localVariable` on line 20, outside of the `newScopeAboutToOpenHere` function, would throw a **reference** error because the variable doesn't refer to anything valid in the global scope because the variable is local. We can only access the value stored at that name reference if the value is **returned** from the function to which the variable is locally scoped. We access `"never left the shire"` from outside of the shire by invoking `newScopeAboutToOpenHere` on line 21, which explicitly returns `localVariable`.
+
+Finally, local scopes can be nested, as seen on lines 10 to 17.
+
+We were able to determine the **lexical scope** of the variables by merely **reading** the source code, that is, without running the code. In this sense, lexical scope is **static** &mdash; not dynamic. A variable is *lexically* scoped to a function as long as the variable name occurs **within the function's body** and represents a valid variable name within the function's lexicon (also called the "variable's local lexical environment"). Another way of saying it is: a variable's *lexical* scope is the **part of a program** where a binding between the variable and a value is valid.
+
+We can contrast this type of scoping, based on static parts of a program, with a type of scoping for a variable that is determined based on the **time** that a function executes while a program is running. Let's discuss this type of **dynamic** scope now, which will also clarify any lingering confusion around lexical scope.
+
+### Dynamic Scope
+
+<blockquote>the in-memory storage system for holding a mapping of the available variables and values available to a function during execution</blockquote>
+
+**Note**: though *dynamic scope* is also called *in-memory scope* and *execution context*, I will use the terms interchangeably.
+
+As discussed above, JavaScript scopes variables to functions, meaning that the **dynamic scope** of a variable is the in-memory mapping of variable names and values available **during a particular execution** of the function to which the variable is scoped.
+
+ if a variable name's scope is a certain function, then its scope is the time-period during which the function is executing: while the function is running, the variable name exists, and is bound to its variable, but after the function returns, the variable name does not exist
+- a new dynamic scope is created anew for every invocation of a function to isolate the running of each function
+- the current execution context is where the interpreter first does lookup for a given variable
 
 ## The Features of JavasScript that Allow for Closure
 
@@ -78,23 +111,14 @@ As you can see, our final code snippet illustrates a closure, summarized as foll
 
 ## Scopes
 
-1. scope = part of program where a binding between a variable and value is valid
-1. lexical scope = regions of source code where variable name reference has meaning (no access errors)
 1. default scope in JavaScript is global
 1. ‘{‘ of a function declaration delimits the entry to a new lexical scope
 1. lexical scope enforces access rules
 1. scopes can be nested
 1. variables are either global or local to a single function (lexically scoped)
-1. in-memory (dynamic) scope = in-memory storage sytem (data structure) for holding variables and their values
-1. in-memory scope structures are called execution contexts
-1. in-memory scopes == dynamic scopes == execution contexts
 1. lexical scopes have one-to-many relationships with in-memory scopes (1 lexical scope for the code—n dynamic scopes, with one for each invocation of the function associated with that scope
 program run
-1. in-memory datastores will be built to keep track of all variables available to function objects
-1. an in-memory datastore is created anew for every invocation of a function to isolate the running of each function
 1. thus, for each lexical scope there could be 0-many in-memory scopes/execution contexts (depending on how many times the function has been executed)
-1. the current in-memory scope/execution context is where the interpreter first does lookup
-1. the execution context has a key-value mapping inside it
 
 ### function properties (language features) that allow for closures in JS:
 
