@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "The Language Features of JavaScript that Create Closure"
-date: 2015-02-28
+date: 2015-03-15
 author: "Clark Feusier"
 tags:
 - javascript

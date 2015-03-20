@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "Building Cross-Platform Desktop Applications with Atom Shell"
-date: 2015-02-22
+date: 2015-03-16
 author: "Clark Feusier"
 tags:
 - hybrid apps
@@ -11,11 +11,27 @@ tags:
 
 ---
 
+I just completed a project that was a desktop application built using <a href="https://github.com/atom/atom-shell" target="_blank">***Atom Shell***</a>, among other technologies. This post is meant to save others from the pain that I encountered due to the current dearth of documentation available on ***Atom Shell***.
+
+I will cover my takeaways from working with Atom Shell the past 4 weeks in the following form:
+
+1. an introduction to ***Atom Shell*** basics and the motivations for using ***Atom Shell***
+1. how to use ***Atom Shell***
+1. common pitfalls and their solutions
+1. examples of how to use common ***Atom Shell*** APIs
+1. further resources for working with ***Atom Shell***
+
+Let's get started!
+
 ## Basics
 
 ## Motivations
 
 ### Atom Shell Framework
+
+### Common Pitfalls and Solutions
+
+remember `process.type` if you want to check browser vs renderer
 
 ### Examples
 

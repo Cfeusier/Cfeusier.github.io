@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>When am I Happyproudisfied?</title>
+    <title>Guest Post: String Primitives and String Objects in JavaScript</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -67,97 +67,83 @@
             </div>
             <div class="post-body">
                 <div class="meta">
-                    <span class="date">05 September 2014</span>
+                    <span class="date">19 March 2015</span>
                 </div>
-                <h2 class="title">When am I Happyproudisfied?</h2>
+                <h2 class="title">Guest Post: String Primitives and String Objects in JavaScript</h2>
                 <div class="content">
-                    <p>I have felt the happiest, proudest, and most satisfied in life when I experience situations involving the pursuit of knowledge, pleasure, status, and close relationships.</p>
-
-<p>Ignoring the fact that happiness, pride, and satisfaction are <strong><em>themselves</em></strong> second-order <em>values</em> that could be questioned in their own right, they are useful as measuring sticks against which to evaluate my life. If I can find out the values involved in making me happy, proud, and satisfied, then I have a winning formula — I just need to embody those values, and I will be happy, proud, and satisfied, <em>ceteris paribus.</em></p>
-
-<p>I have been <em>happyproudisfied</em> when I am pursuing knowledge, seeking pleasure, basking in status, and building close relationships. <em>A fortiori,</em> if I want to be <em>happiproudisfied,</em> then I should pursue knowledge, seek pleasure within moderation, earn status, and build close relationships.</p>
-
-<p>I am going to focus the rest of this post on the pursuit of knowledge and close relationships. I think that pleasure and status-seeking are more characteristic human values/attributes — that is, they are ‘further down’ the evolutionary timeline — so it makes sense to focus on my freakish obsession with gaining new knowledge and my weird social relationships. At least it will be more entertaining.</p>
+                    <p>My friend and talented young Software Engineer, <a href="http://www.pdiniz.com/">Paulo Diniz</a>, wrote this guest post to explain the difference between <em>String Primitives</em> and <em>String Objects</em> in JavaScript, and what that might mean to a JavaScript programmer. The following is from Paulo…</p>
 
 <hr />
 
-<p>The pursuit of knowledge is important to me because I value the internal and external power that knowledge brings, <em>in and of itself.</em> Close relationships with other people — family, friends, and a significant partner — are too complex to say exactly why they are important to me, but it probably has something to do with evolution, physiology, and social learning. At another level, it is probably because close relationships make me feel engaged, loved, pleasured, supported, part of a group, wanted, intellectually stimulated, etc. — all things that make me <em>happyproudisfied.</em></p>
+<h2 id="javascript-string-primitives-and-string-objects">JavaScript String Primitives and String Objects</h2>
 
-<hr />
+<p><strong>By <a href="http://www.pdiniz.com/">Paulo Diniz</a></strong></p>
 
-<p>In general, I try to live up to these values (disagree = 1 : agree = 5):</p>
+<p>Throughout this post I will be referring to JavaScript’s string primitive data type as a <strong>string</strong> and to the String Object as a <strong>String</strong>. Now let’s take a look at what the JavaScript string data type and the String Object actually are. In order to do this let’s use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">MDN’s descriptions</a> and some examples of why the distinction matters:</p>
 
-<ul>
-  <li>pursuit of knowledge : 4</li>
-  <li>building close relationships : 2.5</li>
-</ul>
+<h3 id="the-distinction-between-string-primitives-and-string-objects">The Distinction Between String Primitives and String Objects</h3>
 
-<hr />
+<p><strong>Note</strong>: JavaScript distinguishes between String objects and primitive string values (the same is true of Boolean and Numbers).</p>
 
-<p>What was the last topic that someone asked for my advice on?</p>
+<p>String literals (denoted by double or single quotes) and strings returned from String calls in a non-constructor context (i.e., without using the new keyword) are primitive strings. JavaScript automatically converts primitives to String objects, so that it’s possible to use String object methods for primitive strings. In contexts where a method is to be invoked on a primitive string or a property lookup occurs, JavaScript will automatically wrap the string primitive and call the method or perform the property lookup.</p>
 
-<ul>
-  <li>Musical: stringing and tuning a ukulele</li>
-  <li>Technical: iterating over collections with Ruby Enumerable methods</li>
-  <li>Emotional: dealing with fears and debilitating anxiety</li>
-</ul>
+<script src="https://gist.github.com/Cfeusier/0102abdfae6893db8cdf.js"></script>
 
-<hr />
+<p>String primitives and String objects also give different results when using eval(). Primitives passed to eval are treated as source code; String objects are treated as all other objects are, by returning the object. For example:</p>
 
-<p>Do I think my values can help me mediate stereotype threat if I recognize I feel it?</p>
+<script src="https://gist.github.com/Cfeusier/a9c9e9f425d14140d317.js"></script>
 
-<p><strong><em>Yes.</em></strong> Values provide ‘higher-order’ goals to hang onto when we feel discouraged, unmotivated, or afraid. If I am freezing in the face of my recognition of stereotype threat, I can choose to focus my energy on my values instead — ideally, those values will act as a guiding light and goal towards which to aim, while also distracting me from my paralysis in the face of stereotype threat.</p>
+<p>For these reasons, code may break when it encounters String objects when it expects a primitive string instead. Generally authors need not worry about the distinction.</p>
 
-<hr />
+<p>A String object can always be converted to its primitive counterpart with the valueOf() method.</p>
 
-<p>Can I think of any other exercises I can use to help me when I am feeling down (for whatever reason) at DBC?</p>
+<p><code>js
+console.log(eval(s2.valueOf())); // returns the number 4
+</code></p>
 
-<ul>
-  <li>place a pencil between my teeth for 5 minutes</li>
-  <li>watch inspirational and funny videos</li>
-  <li>re-perspectivize</li>
-  <li>exercise</li>
-  <li>meditate</li>
-  <li>take a shower</li>
-  <li>ask for help</li>
-  <li>dance and sing</li>
-  <li>play with my dog, Fiddle</li>
-  <li>listen to happy music</li>
-  <li>etc.</li>
-</ul>
+<p>Now that we know what the distinction between the two are let’s take a deeper look into the string datatype. String datatypes in JavaScript are immutable, and what that means is that whenever you run any function such as <code>String.substr()</code>, <code>String.concat()</code>, or <code>String + “a”</code>, what you are actually doing is creating a new string with the new data set provided. What’s actually going on is that despite the string data type being a JavaScript primitive datatype it’s not actually saved as a string but as an array of 16-bit unsigned integer values. In the language C they are referred to as <strong>char</strong>.</p>
+
+<p>As I’ve explained in <a href="http://www.pdiniz.com/demystifying_javascript_array/">my post on arrays</a>, the primitive C array data type consist of a contiguous memory location on disk and cannot be modified once allocated. ​The reason all this becomes important is the following:</p>
+
+<blockquote>
+All operations on Strings (except as otherwise stated) treat them as sequences of undifferentiated 16-bit unsigned integers; they do not ensure the resulting String is in normalised form, nor do they ensure language-sensitive results (<a href="http://www.ecma-international.org/ecma-262/5.1/#sec-8">source</a>).
+</blockquote>
+
+<p>​Thus, <strong><em>only String function that should be used to normalize a string value</em></strong> is <code>String.prototype.normalize</code>. Finally, when using other String functions be aware that this is not being done for you and might result in unexpected errors when dealing with different data types.</p>
 
                 </div>
             </div>
             <div class="post-tags">
                 <i class="fa fa-tags"></i>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/cultural">cultural</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/dbc">dbc</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/fundamentals">fundamentals</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/engineering empathy">engineering empathy</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/data types">data types</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/guest post">guest post</a>
                 <span class="seperator">,</span>
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2014/09/05/when-i-am-happyproudisfied/&t=When am I Happyproudisfied?" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2014/09/05/when-i-am-happyproudisfied/&text=When am I Happyproudisfied?&url=http://clarkfeusier.com/2014/09/05/when-i-am-happyproudisfied/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2014/09/05/when-i-am-happyproudisfied/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/&t=Guest Post: String Primitives and String Objects in JavaScript" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/&text=Guest Post: String Primitives and String Objects in JavaScript&url=http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>
     </div>
     <div id="blog-pagination">
         <ul>
         	
-            <li class="prev"><a href="http://clarkfeusier.com/2014/09/01/another-explanation-composition-inheritance/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            <li class="prev"><a href="http://clarkfeusier.com/2015/02/19/variable-hoisting-function-hoisting-javascript/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
             
             
             <li class="separator"></li>
             
-            
-            <li class="next"><a href="http://clarkfeusier.com/2014/09/10/you-no-sql/"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
             
         </ul>
     </div>
@@ -185,7 +171,7 @@
                         <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
-                    <div id="copyright">© COPYRIGHT 2014 Clark Feusier</div>
+                    <div id="copyright">© COPYRIGHT 2015 Clark Feusier</div>
                     <a id="home-circle" href="http://clarkfeusier.com"><i class="fa fa-home"></i></a>
                 </div>
             </div>
