@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts Tagged &ldquo;best practices&rdquo;</title>
+    <title>Sudoku Solution Validator - Code Example</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,332 +59,124 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-    <div class="page-contents">
-        <h2 class="page-title first-elem"> Posts with the 'best practices' Tag</h2>
-        <ul id="ptitle-list">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">22 March 2015</span>
+                </div>
+                <h2 class="title">Sudoku Solution Validator - Code Example</h2>
+                <div class="content">
+                    <p><em>Five months ago</em>, I was asked to solve a problem with a pair — the challenge was to write a <strong>Sudoku solution validator</strong>. We were expected to take a two-dimensional array that represented a Sudoku board and determine whether or not the board was ‘solved’ based on <a href="http://en.wikipedia.org/wiki/Sudoku">the rules of Sudoku</a>.</p>
 
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
+<p>Today, I attempted the same Sudoku challenge, but with two minor tweaks: I would be <strong>solo</strong> instead of with a pair, and I would deliver a solution in <strong>under one hour</strong>.</p>
 
-                <li class="clearfix">
-                	<span class="date">08 January 2015</span>
-                	<span class="seperator">&mdash;</span>
-                    <a href="http://clarkfeusier.com/2015/01/08/simple-node-server-api/"><h3 class="title">Node Basics: How to Create a Simple Server and Router + Node Fundamentals</h3></a>
-                </li>
+<p>The account of this personal experiment will take the following form:</p>
 
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
-            
-                
-            
-                
-            
-        
+<ol>
+  <li>statement and discussion of the Sudoku Solution Validator prompt</li>
+  <li>explanation of my general approach</li>
+  <li>overview of my solution logic</li>
+  <li>solution code</li>
+  <li>closing thoughts</li>
+</ol>
 
+<p>Let’s get started!</p>
+
+<h2 id="sudoku-solution-validator-prompt">Sudoku Solution Validator Prompt</h2>
+
+<blockquote>
+Write a function <em><strong>validateSolution</strong></em> that accepts a 2-dimensional array representing a Sudoku board, and returns true if the board represents a valid solution, or false otherwise. The cells of the Sudoku board may contain the integers 1 through 9, also 0's, which will represent empty cells (<a href="http://www.codewars.com/kata/sudoku-solution-validator/javascript" target="_blank">source</a>).
+</blockquote>
+
+<h3 id="example-expectations">Example Expectations</h3>
+
+<script src="https://gist.github.com/Cfeusier/c79c8054be52374475c5.js"></script>
+
+<h2 id="general-approach">General Approach</h2>
+
+<p>When I started the challenge, I set the following guidelines to focus my approach:</p>
+
+<ol>
+  <li>modularize logic into small pieces about which it is easy to reason</li>
+  <li>short-circuit unnecessary evaluation — check the easy fail-conditions first</li>
+  <li>put off costly processing validations until the end</li>
+  <li>use functional programming techniques within reason</li>
+</ol>
+
+<h2 id="overview-of-solution-logic">Overview of Solution Logic</h2>
+
+<p>The logic of my solution is stupid-simple.</p>
+
+<p>Check that each row, column, and region <strong>sums to 45</strong> and <strong>contains one and only one</strong> of each possible integer <strong>between 1 and 9</strong>.</p>
+
+<p>To optimize performance, each step can short-circuit the whole process if any of the checks return false.</p>
+
+<p>In order to ‘check’ each entity (row, column, or region), I followed this process:</p>
+
+<ol>
+  <li>convert row/column/region into array of 9 numbers</li>
+  <li>check that sum of array members is 45</li>
+  <li>check that the numbers 1 through 9 each appear once (and only once) in the array</li>
+</ol>
+
+<p>If all of the checks succeed, the solution is valid and we return true.</p>
+
+<p>Pretty simple, eh? Let’s see the code!</p>
+
+<h2 id="solution">Solution</h2>
+
+<script src="https://gist.github.com/Cfeusier/a11f1d9455add2b517b0.js"></script>
+
+<hr />
+
+<p>I had a lot of fun with this challenge, though I personally hate Sudoku.</p>
+
+<p>Best,</p>
+
+<p>Clark</p>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/implementation examples">implementation examples</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/interview questions">interview questions</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/sudoku">sudoku</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/03/22/sudoku-solution-validator/&t=Sudoku Solution Validator - Code Example" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/03/22/sudoku-solution-validator/&text=Sudoku Solution Validator - Code Example&url=http://clarkfeusier.com/2015/03/22/sudoku-solution-validator/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/03/22/sudoku-solution-validator/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
         </ul>
-
-
-
     </div>
 </div>
-
  </div>
        <footer>
             <div id="footer-quote">
