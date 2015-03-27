@@ -812,47 +812,49 @@ hr {
 }
 
 @media (max-width: 1000px) {
-	.exampleimg {
-		width: 100%;
-		margin: 10px 5px;
-	}
+  .exampleimg {
+    width: 100%;
+    margin: 10px 5px;
+  }
 
-	.inceptionImg {
-		width: 100%;
-		margin: 10px 5px;
-		height: auto;
-	}
+  .inceptionImg {
+    width: 100%;
+    margin: 10px 5px;
+    height: auto;
+  }
 
-img.treeImg {
-          width: 100%;
-          margin: 10px 5px;
-          height: auto;
-          border-radius: 20%;
-}
+  img.treeImg {
+    width: 100%;
+    margin: 10px 5px;
+    height: auto;
+    border-radius: 20%;
+  }
 
-.starList li {
-	list-style-type: none;
-	text-align: left;
-	font-size: 12pt;
-}
+  .starList li {
+    list-style-type: none;
+    text-align: left;
+    font-size: 12pt;
+  }
 
-.fiddleImg {
-	display: none;
-}
+  .fiddleImg {
+    display: none;
+  }
 
-.visible {
-	display: block;
-	margin: 10px auto;
-	text-align: center;
-}
+  .visible {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+  }
 
-.bordered {
-	border: 2px solid black;
-	border-radius: 5px;
-	width: 250px;
-	height: 350px;
-}
+  .bordered {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 250px;
+    height: 350px;
+  }
 
-.writingsIcon {
-  font-size: 12px;
+  .writingsIcon {
+    font-size: 12px;
+  }
+
 }
