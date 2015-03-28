@@ -67,7 +67,7 @@
             </div>
             <div class="post-body">
                 <div class="meta">
-                    <span class="date">26 March 2015</span>
+                    <span class="date">28 March 2015</span>
                 </div>
                 <h2 class="title">Building a Parser with Jison: Parsers and Parser Generators</h2>
                 <div class="content">
@@ -85,11 +85,15 @@
 A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, which takes a <em>sequential stream of symbols</em> as an <strong>input</strong>, and produces a <em>structured representation of the input stream's</em> <strong>parts</strong> as an <strong>output</strong>.
 </blockquote>
 
-<p>–&gt; EXPLANATION GOES HERE</p>
+<p>For example, imagine that we were given the symbol stream of <code>1 + 2</code>. Right now, the structure and meaning of that stream is unclear (to a computer) — to give the symbol stream meaning to the computer, we need to <strong>re-represent</strong> the symbol stream in a format that contains its structure and semantics — we need to <strong>parse</strong> the symbol stream.</p>
 
-<p><img src="/img/blog/parser_function.jpg" style="border:2px solid black; border-radius: 4px; padding: 20px; margin: 0 auto;" width="100%" /></p>
+<p>In the diagram below, we see one way to parse the symbol stream <code>1 + 2</code> into a new representation — from a <em>linear</em> stream into a <em>tree</em> that contains the data and relationships of the symbol stream but with all of the benefits of a tree-like interface.</p>
 
-<p>–&gt; TRANSITION</p>
+<p><img src="/img/blog/parser_function.jpg" style="border:1px solid black; border-radius: 4px; padding: 2px; margin: 0 auto;" width="100%" /></p>
+
+<p>In the parsing example above, the input gets converted into a single root node, an <code>AdditionExpression</code>, which contains children <code>NumericLiterals</code> that stand in an addition-relation of some type via the <code>AdditionOperator</code>.</p>
+
+<p>Great. So, now that we have a firm grasp of the high-level concept of a <strong>parser</strong>, let’s talk about <strong><em>why you should care about all this</em></strong>.</p>
 
 <hr />
 
@@ -170,9 +174,9 @@ The parsing component checks that the tokens form an allowable expression. This 
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/03/26/building-parser-with-jison-introduction-to-parsers/&t=Building a Parser with Jison: Parsers and Parser Generators" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/03/26/building-parser-with-jison-introduction-to-parsers/&text=Building a Parser with Jison: Parsers and Parser Generators&url=http://clarkfeusier.com/2015/03/26/building-parser-with-jison-introduction-to-parsers/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/03/26/building-parser-with-jison-introduction-to-parsers/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/03/28/building-parser-with-jison-introduction-to-parsers/&t=Building a Parser with Jison: Parsers and Parser Generators" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/03/28/building-parser-with-jison-introduction-to-parsers/&text=Building a Parser with Jison: Parsers and Parser Generators&url=http://clarkfeusier.com/2015/03/28/building-parser-with-jison-introduction-to-parsers/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/03/28/building-parser-with-jison-introduction-to-parsers/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>
     </div>
