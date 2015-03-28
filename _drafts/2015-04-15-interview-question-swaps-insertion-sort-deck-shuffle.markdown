@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "Popular Interview Question Series: Insertion Sort and Deck Shuffle"
-date: 2015-02-20
+date: 2015-04-15
 author: "Clark Feusier"
 tags:
 - javascript
