@@ -38,11 +38,24 @@ Great. So, now that we have a firm grasp of the high-level concept of a **parser
 
 ---
 
-## Why Should I Care About This at All?
+## Why Should You Care About This?
+
+<blockquote><em><strong>TL;DR</strong></em> &mdash; parsers help you build cool shit</blockquote>
+
+The power of parsers is that they allow you to **convert input of** ***one form*** **into a** ***representation of another form*** **which with a software component can interact**.
+
+I would contend that technology and cognition supervene heavily upon manipulations of data stream representations &mdash; for example, a sensory stream coming in and being parsed into a **meaningful** representation by the brain and body. I would argue that a large part of our society and civilization is owed to the power of manipulating representations of one format into representations of another format &mdash; reading and writing, transformation equations in mathematics and physics, network communication of data packets across the internet, and more.
+
+So, if you want to build powerful things and think about things that have never been thought, you will want to know how to ***manipulate data from one representation to another***. A **parser** is one way to do that.
+
+### Concrete Examples
+
+1. The DOM
+2. Machine Learning over Knowledgebases
+3. Compilers/Interpreters
 
 ### Case-Study: the DOM
 
---> TRANSITION
 
 ---
 
