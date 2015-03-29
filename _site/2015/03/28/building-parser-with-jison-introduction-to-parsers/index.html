@@ -107,15 +107,39 @@ A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, whi
 
 <p>So, if you want to build powerful things and think about things that have never been thought, you will want to know how to <strong><em>manipulate data from one representation to another</em></strong>. A <strong>parser</strong> is one way to do that.</p>
 
+<p>Enough <em>theory</em>, show us the <strong>practical</strong> applications — <strong><em>challenge accepted</em></strong>.</p>
+
 <h3 id="concrete-examples">Concrete Examples</h3>
 
-<ol>
-  <li>The DOM</li>
-  <li>Machine Learning over Knowledgebases</li>
-  <li>Compilers/Interpreters</li>
-</ol>
+<p>(1) <strong>The Computer</strong> — an input stream of electric patterns get converted into 0s and 1s, and vice versa.</p>
 
-<h3 id="case-study-the-dom">Case-Study: the DOM</h3>
+<p>(2) <strong>Compilers and Interpreters</strong> — an input stream of one type of program code is converted into another type of program code. For example, <strong><em>CoffeeScript</em></strong> is parsed and then compiled into <strong><em>JavaScript</em></strong>, as shown in the following two snippets:</p>
+
+<script src="https://gist.github.com/Cfeusier/62dcfb440e3f73e168c8.js"></script>
+
+<p>Once compiled, the above CoffeeScript will be represented as the following JavaScript:</p>
+
+<script src="https://gist.github.com/Cfeusier/b48720078b16dacb6ad8.js"></script>
+
+<p>In order to generate the JavaScript code, there is a required <strong>intermediate step</strong> of <em>converting the CoffeeScript into a non-CoffeeScript structured representation</em> — i.e., parsing the CoffeeScript into a parse tree.</p>
+
+<p>(3) <strong>The DOM</strong> — I find the DOM to be one of the easiest ways to show the power and approachability of building a parser. So, let’s do a quick case-study of the DOM. The <strong>DOM</strong>, or Document Object Model, is a convention for representing a document as an object in a tree-structure. Web browsers, like Google Chrome or Mozilla Firefox, can take an input file (which is a one big string of HTML) and parse it into a document tree.</p>
+
+<p>For example, if we input the following HTML document into a simplistic HTML-to-DOM parser, we would get a tree representation of the HTML document that looks like the diagram below.</p>
+
+<script src="https://gist.github.com/Cfeusier/a9e7219263d697432646.js"></script>
+
+<p><img src="/img/blog/example_dom_tree.png" style="border:1px solid black; border-radius: 4px; padding: 2px; margin: 0 auto;" width="100%" /></p>
+
+<p><strong>So, why does every web browser do this?</strong> <strong><em>Why does every browser parse HTML documents into DOM trees?</em></strong></p>
+
+<blockquote><h3>Parsing HTML into a DOM tree allows the web browser to <strong>expose an API</strong> for the document.</h3></blockquote>
+
+<p>That is the payoff. Let me state it more generally. Parsing a string into a tree representation allows you to expose an API for accessing and manipulating the input data — an API that was <strong>not</strong> available when working with the raw input stream.</p>
+
+<p>Imagine that our input HTML’s first <code>div</code> element included an <strong>id</strong> <code>first-div</code>. Browsers expose a method on the <code>document</code> object that allows us to select the <code>div</code> element with a given <strong>id</strong>, without having to manually traverse the HTML string. It is a simple as <code>document.getElementById('first-div');</code>. There are hundreds of public methods in each browser’s DOM API. By parsing HTML into a JavaScript object (the DOM tree), the browser is able to offer a JavaScript interface that is <strong>extremely powerful</strong>.</p>
+
+<p>At this point, we have a firm grasp of what a parser is and the motivations for building a parser, but you are probably thinking <strong>just show me how to build a parser already, damn it!</strong> Well, here we go.</p>
 
 <hr />
 
