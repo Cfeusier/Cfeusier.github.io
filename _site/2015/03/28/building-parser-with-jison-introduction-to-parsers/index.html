@@ -82,7 +82,7 @@
 <h2 id="what-is-a-parser">What is a Parser?</h2>
 
 <blockquote>
-A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, which takes a <em>sequential stream of symbols</em> as an <strong>input</strong>, and produces a <em>structured representation of the input stream's</em> <strong>parts</strong> as an <strong>output</strong>.
+<h3>A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, which takes a <em>sequential stream of symbols</em> as an <strong>input</strong>, and produces a <em>structured representation of the input stream's</em> <strong>parts</strong> as an <strong>output</strong></h3>
 </blockquote>
 
 <p>For example, imagine that we were given the symbol stream of <code>1 + 2</code>. Right now, the structure and meaning of that stream is unclear (to a computer) — to give the symbol stream meaning to the computer, we need to <strong>re-represent</strong> the symbol stream in a format that contains its structure and semantics — we need to <strong>parse</strong> the symbol stream.</p>
@@ -99,7 +99,7 @@ A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, whi
 
 <h2 id="why-should-you-care-about-this">Why Should You Care About This?</h2>
 
-<blockquote><em><strong>TL;DR</strong></em> &mdash; parsers help you build cool shit</blockquote>
+<blockquote><h3><em><strong>TL;DR</strong></em> &mdash; parsers help you build cool shit</h3></blockquote>
 
 <p>The power of parsers is that they allow you to <strong>convert input of</strong> <strong><em>one form</em></strong> <strong>into a</strong> <strong><em>representation of another form</em></strong> <strong>which with a software component can interact</strong>.</p>
 
@@ -133,7 +133,7 @@ A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, whi
 
 <p><strong>So, why does every web browser do this?</strong> <strong><em>Why does every browser parse HTML documents into DOM trees?</em></strong></p>
 
-<blockquote><h3>Parsing HTML into a DOM tree allows the web browser to <strong>expose an API</strong> for the document.</h3></blockquote>
+<blockquote><h3>Parsing HTML into a DOM tree allows the web browser to <strong>expose an API</strong> for the document</h3></blockquote>
 
 <p>That is the payoff. Let me state it more generally. Parsing a string into a tree representation allows you to expose an API for accessing and manipulating the input data — an API that was <strong>not</strong> available when working with the raw input stream.</p>
 
@@ -143,20 +143,40 @@ A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, whi
 
 <hr />
 
-<h2 id="what-is-a-parser-composed-of">What is a Parser Composed of?</h2>
+<h1 class="page-title">Parsers</h1>
+
+<p>In order to build a parser, we must be clear on what we are building, that is, we must have a clear idea of the components of a parser.</p>
+
+<h2 id="what-are-the-components-of-a-parser">What are the Components of a Parser?</h2>
 
 <ol>
-  <li>Lexer (Lexical Analysis)</li>
-  <li>Parsing Component (Syntactic Analysis)</li>
+  <li>the <strong>Lexical Analyzer</strong> generates meaningful tokens by splitting the input stream based on regular expressions</li>
+  <li>the <strong>Syntactic Analyzer</strong> generates a tree of expressions by checking if tokens combine into well-formed formulas based on a grammar specification</li>
 </ol>
 
-<p>The lexer turns input symbols into tokens defined by a lexical grammar.
-The parsing component checks that the tokens form an allowable expression. This is usually done with reference to a context-free grammar. Map allowable expressions to actions that you want to take when those expressions are found. This creates your parse tree.</p>
+<p>Let’s clarify the details of both components in turn, starting with the <em>lexical analyzer</em>.</p>
 
-<h3 id="syntactic-grammar">Syntactic Grammar</h3>
+<h3 id="the-lexical-analyzer">The Lexical Analyzer</h3>
+
+<blockquote><h3>The lexer turns input symbols into tokens defined by a lexical grammar</h3></blockquote>
 
 <ul>
-  <li>recursively defines components that can make up an expression and the order in which they must appear</li>
+  <li>input symbol pattern matcher</li>
+  <li>lexical grammar</li>
+  <li>tokens wrapped with location data and other goodies</li>
+</ul>
+
+<h3 id="the-syntactic-analyzer">The Syntactic Analyzer</h3>
+
+<blockquote><h3>The syntactic analyzer uses a syntactic grammar, in combination with the tokens from the lexer, to create a parse tree of allowable expressions</h3></blockquote>
+
+<ul>
+  <li>The syntactic analyzer checks that the tokens form an allowable expression.</li>
+  <li>This is usually done with reference to a context-free grammar.</li>
+  <li>Maps allowable expressions to actions that you want to take when those expressions are found.</li>
+  <li>This creates your parse tree.</li>
+  <li>Grammar + Logic/Actions + composed of tokens from the lexer</li>
+  <li>The Syntactic Grammar recursively defines components that can make up an expression and the order in which they must appear</li>
   <li>mention BNF Grammar</li>
 </ul>
 

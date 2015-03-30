@@ -3,6 +3,7 @@ layout: post_simple
 title:  "Building a Parser with Jison: Parsers and Parser Generators"
 date: 2015-03-28
 author: "Clark Feusier"
+excerpt: "This post is an introduction to parsers, parser generators, and Jison. To start, a <strong>parser</strong> is a glorified <em><strong>function</strong></em>, which takes a <em>sequential stream of symbols</em> as an <strong>input</strong>, and produces a <em>structured representation of the input stream's</em> <strong>parts</strong> as an <strong>output</strong>..."
 tags:
 - javascript
 - jison
@@ -23,7 +24,7 @@ tags:
 ## What is a Parser?
 
 <blockquote>
-A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, which takes a <em>sequential stream of symbols</em> as an <strong>input</strong>, and produces a <em>structured representation of the input stream's</em> <strong>parts</strong> as an <strong>output</strong>.
+<h3>A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, which takes a <em>sequential stream of symbols</em> as an <strong>input</strong>, and produces a <em>structured representation of the input stream's</em> <strong>parts</strong> as an <strong>output</strong></h3>
 </blockquote>
 
 For example, imagine that we were given the symbol stream of `1 + 2`. Right now, the structure and meaning of that stream is unclear (to a computer) &mdash; to give the symbol stream meaning to the computer, we need to **re-represent** the symbol stream in a format that contains its structure and semantics &mdash; we need to **parse** the symbol stream.
@@ -40,7 +41,7 @@ Great. So, now that we have a firm grasp of the high-level concept of a **parser
 
 ## Why Should You Care About This?
 
-<blockquote><em><strong>TL;DR</strong></em> &mdash; parsers help you build cool shit</blockquote>
+<blockquote><h3><em><strong>TL;DR</strong></em> &mdash; parsers help you build cool shit</h3></blockquote>
 
 The power of parsers is that they allow you to **convert input of** ***one form*** **into a** ***representation of another form*** **which with a software component can interact**.
 
@@ -74,7 +75,7 @@ For example, if we input the following HTML document into a simplistic HTML-to-D
 
 **So, why does every web browser do this?** ***Why does every browser parse HTML documents into DOM trees?***
 
-<blockquote><h3>Parsing HTML into a DOM tree allows the web browser to <strong>expose an API</strong> for the document.</h3></blockquote>
+<blockquote><h3>Parsing HTML into a DOM tree allows the web browser to <strong>expose an API</strong> for the document</h3></blockquote>
 
 That is the payoff. Let me state it more generally. Parsing a string into a tree representation allows you to expose an API for accessing and manipulating the input data &mdash; an API that was **not** available when working with the raw input stream.
 
@@ -84,17 +85,35 @@ At this point, we have a firm grasp of what a parser is and the motivations for 
 
 ---
 
-## What is a Parser Composed of?
+<h1 class="page-title">Parsers</h1>
 
-1. Lexer (Lexical Analysis)
-2. Parsing Component (Syntactic Analysis)
+In order to build a parser, we must be clear on what we are building, that is, we must have a clear idea of the components of a parser.
 
-The lexer turns input symbols into tokens defined by a lexical grammar.
-The parsing component checks that the tokens form an allowable expression. This is usually done with reference to a context-free grammar. Map allowable expressions to actions that you want to take when those expressions are found. This creates your parse tree.
+## What are the Components of a Parser?
 
-### Syntactic Grammar
+1. the **Lexical Analyzer** generates meaningful tokens by splitting the input stream based on regular expressions
+2. the **Syntactic Analyzer** generates a tree of expressions by checking if tokens combine into well-formed formulas based on a grammar specification
 
-- recursively defines components that can make up an expression and the order in which they must appear
+Let's clarify the details of both components in turn, starting with the *lexical analyzer*.
+
+### The Lexical Analyzer
+
+<blockquote><h3>The lexer turns input symbols into tokens defined by a lexical grammar</h3></blockquote>
+
+- input symbol pattern matcher
+- lexical grammar
+- tokens wrapped with location data and other goodies
+
+### The Syntactic Analyzer
+
+<blockquote><h3>The syntactic analyzer uses a syntactic grammar, in combination with the tokens from the lexer, to create a parse tree of allowable expressions</h3></blockquote>
+
+- The syntactic analyzer checks that the tokens form an allowable expression.
+- This is usually done with reference to a context-free grammar.
+- Maps allowable expressions to actions that you want to take when those expressions are found.
+- This creates your parse tree.
+- Grammar + Logic/Actions + composed of tokens from the lexer
+- The Syntactic Grammar recursively defines components that can make up an expression and the order in which they must appear
 - mention BNF Grammar
 
 
