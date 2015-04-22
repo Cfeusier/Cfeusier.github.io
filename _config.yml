@@ -6,7 +6,6 @@ encoding:     "utf-8"
 
 paginate: 10
 paginate_path: "page:num"
-permalink: pretty
 highlighter: pygments
 
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
