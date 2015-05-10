@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Unix to Know this Command Series: Reverse-i-Search with CTRL-R</title>
+    <title>Designers' Favorite Positions: Relative, Absolute, Fixed, and Static</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -67,108 +67,101 @@
             </div>
             <div class="post-body">
                 <div class="meta">
-                    <span class="date">14 April 2015</span>
+                    <span class="date">07 August 2014</span>
                 </div>
-                <h2 class="title">Unix to Know this Command Series: Reverse-i-Search with CTRL-R</h2>
+                <h2 class="title">Designers' Favorite Positions: Relative, Absolute, Fixed, and Static</h2>
                 <div class="content">
-                    <p>If you want to look cool, save time, and live a better life, then spend 5 minutes learning the shell command <code>CTRL-R</code> — sometimes called <strong>reverse-i-search</strong>. There is rare shell command that I use more often as a software engineer; I would like to pass my love for this wonderful utility on to the rest of the world. Here we go &lt;3</p>
+                    <p>CSS provides powerful mechanisms for positioning elements on the screen – one of the main mechanisms for positioning is the <strong><em>position</em></strong> property. Designers can choose between four different values: static (the default), relative, absolute, and fixed. These values all do different things and allow designers fine-grained control over the positioning of their elements. Let’s go through the differences and some examples of the situations that call for each value.</p>
 
-<p><strong><em>Note</em></strong>: this command can be used in most Linux, GNU, and Unix scripting shells. Some Windows command-line tools like Cygwin and PowerShell support this command, as well. The title is more catchy my way, though.</p>
+<h2 id="static-positioning">Static Positioning</h2>
 
-<hr />
+<pre class="brush: css">
+  position: static;
+</pre>
 
-<h2 id="definition-of-reverse-i-search">Definition of Reverse-i-Search</h2>
+<p>The default positioning that every HTML element gets is <strong><em>static</em></strong> . The static property doesn’t really do much, other than default to displaying elements in the “normal flow” of the page. If you don’t change the positioning of an element, it will default to “flowing” into the page in the way that it normally would based on other factors like the <strong><em>float</em></strong> and <strong><em>display</em></strong> properties. Another way of saying this is that static positioning doesn’t actually do any positioning of elements!</p>
 
-<blockquote><strong>Reverse-i-search</strong> is a simple, <em><strong>backward-moving</strong></em>, incremental search starting at the current line and moving <em><strong>up</strong></em> through the command history <a href="https://www.gnu.org/software/bash/manual/html_node/Commands-For-History.html" target="_blank">(source)</a></blockquote>
+<h2 id="relative-positioning">Relative Positioning</h2>
 
-<p>Imagine that the command history is a stack — each time that you execute a command, the command is pushed onto the command history stack.</p>
+<pre class="brush: css">
+  position: relative;
+</pre>
 
-<p>Each time that you use <strong><em>reverse-i-search</em></strong>, you are peeking at the top of the stack, and then if satisfied, popping the latest command off of the stack to exectute — except, you can imagine you are peeking at the top of a stack that has been filtered to only contain matches to the search pattern requested.</p>
+<p>In my opinion, this is the coolest of the positioning values because it allows you to position elements
+<strong><em>relative to themselves</em></strong> ! This means that you can specify, using
+<strong><em>position: relative</em></strong> , where you want an element to be positioned
+<em>relative to its normal position</em>. This is extremely powerful when you can’t seem to get things to work how you want in a given browser because you can tweak positions relative to where the element usually is (when things are working). Let’s say that you need a div 20px to the left of where it is usually. Instead of re-positioning/re-styling an element from scratch, you can just use relative positioning and then
+<strong><em>left: 20px;</em></strong>.</p>
 
-<h2 id="how-to-use-reverse-i-search">How to Use Reverse-i-Search</h2>
+<p>The caveat: an element that has been positioned via relative positioning will still take up the space where it normally would be. For example, the div that we moved 20px to the left of where it would normally be will leave a 20px space to the right because it is still actually “there.”</p>
 
-<blockquote>Hit <em><strong>CTRL-R</strong></em> then start typing previously used command</blockquote>
+<p>Here is an example for clarity – the first image is using static positioning while the second element is using relative positioning and “left: 50px” on DIV 2 to shift DIV 2 50px to the right of where it would normally be:</p>
 
-<p>For example, if I had previously typed a command to run a specific test file that started with the word <code>mocha</code>, I could start typing <code>moch...</code> (mocha is the test runner utility) after initiating <strong><em>reverse-i-search</em></strong> with <strong>CTRL-R</strong>.</p>
+<p><img src="/img/blog/relative_positioning.png" class="exampleimg" />
+<img src="/img/blog/relative_positioning_left.png" class="exampleimg" /></p>
 
-<p><img src="/img/blog/reverse_i_search_example.png" width="97%" style="margin: 0 auto; border: 2px solid gray;" /></p>
+<h2 id="absolute-positioning">Absolute Positioning</h2>
 
-<p>As the above screenshot shows, the command-line is populated with the most recent fuzzy match from the command history — the matched pattern is underlined.</p>
+<pre class="brush: css">
+  position: absolute;
+</pre>
 
-<blockquote>Hit <em><strong>Enter/Return</strong></em> to select a command and execute it</blockquote>
+<p>Absolute positioning is exactly what it sounds like – you position elements on the page in
+<strong><em>absolute</em></strong> locations. Ignore the paradox that this “absolute” location is actually relative to the closest parent element with either relative or absolute positioning (or if there are none, the HTML element). So, if you set the positioning of an element to absolute, you can then set the top, bottom, right, and left locations. These will then be computed relative to the closest parent element with absolute or relative positioning (or the HTML element), and then the element will be set in that position regardless of the rest of the page flow.</p>
 
-<p>For example, assume that we have started a back-search with <code>g fet</code>…</p>
+<h2 id="fixed-positioning">Fixed Positioning</h2>
 
-<p><img src="/img/blog/reverse_i_search_git_result.png" width="97%" style="margin: 0 auto; border: 2px solid gray;" /></p>
+<pre class="brush: css">
+  position: fixed;
+</pre>
 
-<p>We want to execute the command that matched — <code>g fetch origin master</code>. We hit <strong>enter</strong>, and watch the command execute.</p>
+<p>Finally, an element with fixed positioning will be positioned relative to either the viewport or browser window. This means, that you can do things like “fix” a sidebar so that it stays where it is regardless of scrolling. However, this type of positioning should be used with caution because it can cause usability problems on different device sizes.</p>
 
-<p><img src="/img/blog/reverse_i_search_git.png" width="97%" style="margin: 0 auto; border: 2px solid gray;" /></p>
+<h1 id="summary">Summary</h1>
 
-<hr />
+<p>Static positioning is the default, and doesn’t actually do any positioning (unless overriding previously positioned elements). Relative positioning is positioning of an element
+<em>relative to itself</em>. Absolute positioning is positioning of an element
+<em>relative to another element with absolute or relative positioning</em>. Finally, fixed positioning is positioning of an element relative to the viewport or browser window.</p>
 
-<h2 id="cycle-through-history">Cycle through History</h2>
+<h3 id="extra-resources">Extra Resources</h3>
 
-<p><strong>What if we want to search through the command history list, one-by-one?</strong></p>
-
-<blockquote>Cycle through command history by hitting <em><strong>CTRL-R</strong></em>, again</blockquote>
-
-<p>Simple. Just repeat the command as many times as needed until you find your command or exhaust the list of history.</p>
-
-<h2 id="edit-command-while-searching">Edit Command while Searching</h2>
-
-<p><strong>What if we want to edit the historical command before executing it?</strong></p>
-
-<blockquote>Use the left or right arrow to place cursor within selection for editing</blockquote>
-
-<p>Also simple. While searching, hit either the left or right arrow to place your cursor in the currently matched command. You can then edit the command as you normally would, then hit <strong>enter</strong> to execute the new command.</p>
-
-<hr />
-
-<p>Good for you for making your life easier by learning these shortcuts and tools — you now have a valuable way to manipulate your shell command history with <code>CTRL-R</code>!</p>
-
-<p>Remember, it isn’t just me that should know these scripting tools — <strong><em>unix to know these commands, too™</em></strong></p>
-
+<p><a href="http://www.barelyfitz.com/screencast/html-training/css/positioning/">Learn CSS Positioning in 10 Steps</a></p>
 
                 </div>
             </div>
             <div class="post-tags">
                 <i class="fa fa-tags"></i>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/unix">unix</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/software engineering">software engineering</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/linux/GNU">linux/GNU</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/css">css</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/shell commands">shell commands</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/positioning">positioning</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/scripting">scripting</a>
-                <span class="seperator">,</span>
-                
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/bash">bash</a>
-                <span class="seperator">,</span>
-                
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/zsh">zsh</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/html5">html5</a>
                 <span class="seperator">,</span>
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/04/14/unix-to-know-this-command-reverse-i-search/&t=Unix to Know this Command Series: Reverse-i-Search with CTRL-R" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/04/14/unix-to-know-this-command-reverse-i-search/&text=Unix to Know this Command Series: Reverse-i-Search with CTRL-R&url=http://clarkfeusier.com/2015/04/14/unix-to-know-this-command-reverse-i-search/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/04/14/unix-to-know-this-command-reverse-i-search/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2014/08/07/positioning-relative-absolute-fixed-static.html&t=Designers' Favorite Positions: Relative, Absolute, Fixed, and Static" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2014/08/07/positioning-relative-absolute-fixed-static.html&text=Designers' Favorite Positions: Relative, Absolute, Fixed, and Static&url=http://clarkfeusier.com/2014/08/07/positioning-relative-absolute-fixed-static.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2014/08/07/positioning-relative-absolute-fixed-static.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>
     </div>
     <div id="blog-pagination">
         <ul>
         	
-            <li class="prev"><a href="http://clarkfeusier.com/2015/04/13/guest-post-digital-ocean-postgresql-ubuntu-tutorial-5-minutes/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            <li class="prev"><a href="http://clarkfeusier.com/2014/08/03/website-analysis-github-google-analytics-vimeo.html"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
             
             
             <li class="separator"></li>
             
+            
+            <li class="next"><a href="http://clarkfeusier.com/2014/08/09/clark-brain-think-like-so.html"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
             
         </ul>
     </div>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Guest Post: String Primitives and String Objects in JavaScript</title>
+    <title>It Takes a Village to Raise a Programmer</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -67,85 +67,75 @@
             </div>
             <div class="post-body">
                 <div class="meta">
-                    <span class="date">19 March 2015</span>
+                    <span class="date">21 August 2014</span>
                 </div>
-                <h2 class="title">Guest Post: String Primitives and String Objects in JavaScript</h2>
+                <h2 class="title">It Takes a Village to Raise a Programmer</h2>
                 <div class="content">
-                    <p>My friend and talented young Software Engineer, <a href="http://www.pdiniz.com/">Paulo Diniz</a>, wrote this guest post to explain the difference between <em>String Primitives</em> and <em>String Objects</em> in JavaScript, and what that might mean to a JavaScript programmer. The following is from Paulo…</p>
+                    <p>If you have ever seen <em>Varsity Blues</em> and the TV show <em>the O.C.</em>, then you pretty much know what high school was like for me. Take a town’s obsession with football, particularly producing college and pro quarterbacks, and mix with a wealthy-white California-bubble – you have my high school town. <strong><em>Forbes</em></strong> was very wrong for ranking my town the 2nd most friendly town in America – we are savages.</p>
+
+<p>Around town, your performance in life (particularly athletically) was <em>everyone’s</em> business, especially if you were the quarterback. Keep in mind, this 16,000 person town has produced 17 olympians, pro quarterbacks, college quarterbacks with a 38-2 starter’s record and a national championship, Cam Newton’s Quarterback Coach for the Carolina Panthers, <em>ad nauseam</em> (not to mention, the countless Fortune 500 Executives, millionaires and billionaires, famous artists, Hollywood bigwigs, etc.). If you were playing well and winning games – you were living like Jordan Belfort in <em>The Wolf of Wall Street</em>. If you were losing or playing poorly – you were the goat wearing a very heavy and thorny crown. Well, I was the quarterback.</p>
+
+<p>Why am I telling you this? Because this all relates closely to how I think of feedback and working with others. I have some good and very bad habits from those experiences, and I have already noticed that I will be thankful for a lot of them, but fighting others throughout my time at DBC. I have learned to take poorly-framed feedback – feedback that isn’t specific, actionable, and kind – with a large grain of salt. But, I have learned to hide behind a defensive feedback shell for most other feedback even if it is specific, actionable, and kind. I only take feedback well from a specific set of people whom I trust deeply. I need to remove this defensive shell in order to learn efficiently at DBC.</p>
 
 <hr />
 
-<h2 id="javascript-string-primitives-and-string-objects">JavaScript String Primitives and String Objects</h2>
+<h2 id="feedback">Feedback</h2>
 
-<p><strong>By <a href="http://www.pdiniz.com/">Paulo Diniz</a></strong></p>
+<p>When reading the feedback that I was given from my other DBC pairs and group members throughout phase 0, I felt some fantastic emotions. The feedback was genuinely encouraging and phenomenally kind. I have certain social issues that I am particularly insecure about going into this whole DBC process, so receiving extremely nice words about the very issues that I am insecure about was just what I needed.</p>
 
-<p>Throughout this post I will be referring to JavaScript’s string primitive data type as a <strong>string</strong> and to the String Object as a <strong>String</strong>. Now let’s take a look at what the JavaScript string data type and the String Object actually are. In order to do this let’s use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">MDN’s descriptions</a> and some examples of why the distinction matters:</p>
+<p>I am still waiting for feedback that is more difficult to process dispassionately – then, I am sure I will feel a much wider range of emotions.</p>
 
-<h3 id="the-distinction-between-string-primitives-and-string-objects">The Distinction Between String Primitives and String Objects</h3>
+<p>Some of the feedback was <em>directly</em> helpful. Some of the feedback was obviously ‘diplomatic,’ but containing a core of constructive criticism under the covers, and thus <em>indirectly</em> helpful. Luckily, only a small portion of the feedback lived in generalities-land and was useless.</p>
 
-<p><strong>Note</strong>: JavaScript distinguishes between String objects and primitive string values (the same is true of Boolean and Numbers).</p>
+<p>Because I am so acclimated to mean and usually useless feedback, I am slowly removing the shell that ignored feedback from anyone other than a small circle. That small circle is now the whole developer community, particularly DBC members.</p>
 
-<p>String literals (denoted by double or single quotes) and strings returned from String calls in a non-constructor context (i.e., without using the new keyword) are primitive strings. JavaScript automatically converts primitives to String objects, so that it’s possible to use String object methods for primitive strings. In contexts where a method is to be invoked on a primitive string or a property lookup occurs, JavaScript will automatically wrap the string primitive and call the method or perform the property lookup.</p>
+<p>I <em>consistently</em> received feedback that I need to be more assertive as navigator, so I will work hard to improve this throughout future pairing sessions (as long as I don’t get too assertive!).</p>
 
-<script src="https://gist.github.com/Cfeusier/0102abdfae6893db8cdf.js"></script>
+<p>Finally, for me, writing feedback was made difficult by my inability to give constructive feedback that is still perceived as kind by other people. I have been spending ridiculous amounts of time on writing feedback, and I have also been trying to improve my meta-feedback scores to make sure that I am on track. I have noticed that this continual attention to giving specific-actionable-kind feedback has bled into other parts of my life, in a positive way. Neuroplasticity and such, right? Overall, the feedback process has been a healthy and stretching experience for me, and I am glad that DBC requires this as part of the curriculum.</p>
 
-<p>String primitives and String objects also give different results when using eval(). Primitives passed to eval are treated as source code; String objects are treated as all other objects are, by returning the object. For example:</p>
+<h2 id="pairing">Pairing</h2>
 
-<script src="https://gist.github.com/Cfeusier/a9c9e9f425d14140d317.js"></script>
+<p>Pairing with another person to solve challenges has been a rewarding though occasionally trying experience. I enjoy working with another person for the most part, but I am just not <em>used to</em> doing it often. The process is so contingent upon the pair being synced, there seems to be a larger chance of failure than individual work. Once I was able to get past this <em>newness</em>, I was able to see that there is a far larger change of success when pairing, if the pairing is done well.</p>
 
-<p>For these reasons, code may break when it encounters String objects when it expects a primitive string instead. Generally authors need not worry about the distinction.</p>
+<hr />
 
-<p>A String object can always be converted to its primitive counterpart with the valueOf() method.</p>
-
-<p><code>js
-console.log(eval(s2.valueOf())); // returns the number 4
-</code></p>
-
-<p>Now that we know what the distinction between the two are let’s take a deeper look into the string datatype. String datatypes in JavaScript are immutable, and what that means is that whenever you run any function such as <code>String.substr()</code>, <code>String.concat()</code>, or <code>String + “a”</code>, what you are actually doing is creating a new string with the new data set provided. What’s actually going on is that despite the string data type being a JavaScript primitive datatype it’s not actually saved as a string but as an array of 16-bit unsigned integer values. In the language C they are referred to as <strong>char</strong>.</p>
-
-<p>As I’ve explained in <a href="http://www.pdiniz.com/demystifying_javascript_array/">my post on arrays</a>, the primitive C array data type consist of a contiguous memory location on disk and cannot be modified once allocated. ​The reason all this becomes important is the following:</p>
-
-<blockquote>
-All operations on Strings (except as otherwise stated) treat them as sequences of undifferentiated 16-bit unsigned integers; they do not ensure the resulting String is in normalised form, nor do they ensure language-sensitive results (<a href="http://www.ecma-international.org/ecma-262/5.1/#sec-8">source</a>).
-</blockquote>
-
-<p>​Thus, <strong><em>only String function that should be used to normalize a string value</em></strong> is <code>String.prototype.normalize</code>. Finally, when using other String functions be aware that this is not being done for you and might result in unexpected errors when dealing with different data types.</p>
+<p>Overall, what are my thoughts on using community feedback and pairing to guide my learning? <strong><em>I think that it takes a village to raise an expert</em></strong>. Becoming an expert requires learning things that you have to get from a community of practitioners. That is the difference that I will grasp onto between a community of by-standers’ feedback and a community of practitioners’ feedback – the latter is something that I need to become a software craftsman of the level that I envision.</p>
 
                 </div>
             </div>
             <div class="post-tags">
                 <i class="fa fa-tags"></i>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/cultural">cultural</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/fundamentals">fundamentals</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/dbc">dbc</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/data types">data types</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/career">career</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/guest post">guest post</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/engineering empathy">engineering empathy</a>
                 <span class="seperator">,</span>
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/&t=Guest Post: String Primitives and String Objects in JavaScript" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/&text=Guest Post: String Primitives and String Objects in JavaScript&url=http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/03/19/guest-post-string-primitive-vs-string-object-javascript/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2014/08/21/it-takes-a-village.html&t=It Takes a Village to Raise a Programmer" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2014/08/21/it-takes-a-village.html&text=It Takes a Village to Raise a Programmer&url=http://clarkfeusier.com/2014/08/21/it-takes-a-village.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2014/08/21/it-takes-a-village.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>
     </div>
     <div id="blog-pagination">
         <ul>
         	
-            <li class="prev"><a href="http://clarkfeusier.com/2015/02/19/variable-hoisting-function-hoisting-javascript/"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            <li class="prev"><a href="http://clarkfeusier.com/2014/08/19/recycle-and-reuse.html"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
             
             
             <li class="separator"></li>
             
             
-            <li class="next"><a href="http://clarkfeusier.com/2015/03/22/sudoku-solution-validator/"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+            <li class="next"><a href="http://clarkfeusier.com/2014/08/21/shaking-class-inheritance-composition.html"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
             
         </ul>
     </div>
