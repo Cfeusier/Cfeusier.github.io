@@ -268,7 +268,7 @@
 
 <p>Most web applications these days are not islands — they consume and serve resources with other applications, which may be on different domains. The SO policy makes asynchronous HTTP communication between applications on different domains quite difficult. For example, large applications tend to be fragmented into modules using subdomains like <code>store.site.com</code> and <code>admin.site.com</code> — the SO policy considers <code>store.site.com</code> and <code>admin.site.com</code> to be of different origin, so resource sharing between the components will require a <strong>circumvention of the SO policy</strong>.</p>
 
-<p>There are <strong>multiple options</strong> for circumventing the SO policy. <strong><em>Note well, none of the options is perfect, nor will any of the options be one hundred percent cross-browser compatible</em></strong>. I will do my best to clearly state the tradeoffs of each option, and I will provide a fun infographic at the end to help you choose the best option for your use-case.</p>
+<p>There are <strong>multiple options</strong> for circumventing the SO policy. <strong><em>Note well, none of the options is perfect, nor will any of the options be one hundred percent cross-browser compatible</em></strong>. I will do my best to clearly state the tradeoffs of each option, and I will provide a fun decision-tree at the end to help you choose the best option for your use-case.</p>
 
 <p>The options for ‘relaxing’ the SO policy, which I will briefly discuss in turn, are <strong><em>cross-origin resource sharing (CORS), JSON with padding (JSONP), <code>document.domain</code> manipulation, and the <code>window.postMessage</code> message system</em></strong>.</p>
 
@@ -299,9 +299,55 @@
 
 <h3 id="json-with-padding-jsonp">JSON with Padding (JSONP)</h3>
 
+<ul>
+  <li>GET requests only</li>
+  <li>older than AJAX</li>
+  <li>SOP isn’t enforced on script tags</li>
+  <li>script tag makes a request with a file and a callback function that receives the response and can sanitize the response</li>
+</ul>
+
 <h3 id="setting-documentdomain">Setting <code>document.domain</code></h3>
 
+<ul>
+  <li>Set <code>document.domain</code> to the same domain on two different documents — will relax the SOP for those two documents (only those two domains though)</li>
+</ul>
+
 <h3 id="windowpostmessage"><code>window.postMessage</code></h3>
+
+<ul>
+  <li>new API for messaging between windows added to browser soon</li>
+  <li>event system, kind of</li>
+</ul>
+
+<h2 id="choosing-between-techniques-to-safely-relax-the-same-origin-policy">Choosing Between Techniques to Safely Relax the Same-Origin Policy</h2>
+
+<ul>
+  <li>CORS</li>
+  <li>JSONP</li>
+  <li><code>document.domain</code></li>
+  <li><code>window.postMessage</code></li>
+</ul>
+
+<h3 id="cross-domain-decision-tree-credit-mracushttpstwittercommracus">Cross-Domain Decision Tree (credit <a href="https://twitter.com/mracus">@mracus</a>)</h3>
+
+<blockquote>
+  <p><strong><em>Do you need to make a cross-domain request using older browsers?</em></strong></p>
+</blockquote>
+
+<ul>
+  <li><strong>No</strong> — use CORS</li>
+  <li><strong>Yes</strong> — <strong><em>Is there a lot of data in the request?</em></strong>
+    <ul>
+      <li><strong>No</strong> — use JSONP</li>
+      <li><strong>Yes</strong> — <strong><em>Is there a lot of data coming back in the response?</em></strong>
+        <ul>
+          <li><strong>No</strong> — use iFrames</li>
+          <li><strong>Yes</strong> — use a mixture of CORS, JSONP, <code>window.postMessage</code>, and <code>document.domain</code> (try not to hate life)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
 <hr />
 
@@ -331,6 +377,7 @@
   <li>care about security</li>
   <li>know the common exploits</li>
   <li>prevent low-hanging fruit exploits</li>
+  <li>learn how to relax the SOP without exposing your web app</li>
 </ul>
 
 

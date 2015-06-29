@@ -193,7 +193,7 @@ What does it mean to say that the SO policy can be ***too restrictive***?
 
 Most web applications these days are not islands &mdash; they consume and serve resources with other applications, which may be on different domains. The SO policy makes asynchronous HTTP communication between applications on different domains quite difficult. For example, large applications tend to be fragmented into modules using subdomains like `store.site.com` and `admin.site.com` &mdash; the SO policy considers `store.site.com` and `admin.site.com` to be of different origin, so resource sharing between the components will require a **circumvention of the SO policy**.
 
-There are **multiple options** for circumventing the SO policy. ***Note well, none of the options is perfect, nor will any of the options be one hundred percent cross-browser compatible***. I will do my best to clearly state the tradeoffs of each option, and I will provide a fun infographic at the end to help you choose the best option for your use-case.
+There are **multiple options** for circumventing the SO policy. ***Note well, none of the options is perfect, nor will any of the options be one hundred percent cross-browser compatible***. I will do my best to clearly state the tradeoffs of each option, and I will provide a fun decision-tree at the end to help you choose the best option for your use-case.
 
 The options for 'relaxing' the SO policy, which I will briefly discuss in turn, are ***cross-origin resource sharing (CORS), JSON with padding (JSONP), `document.domain` manipulation, and the `window.postMessage` message system***.
 
@@ -218,11 +218,37 @@ The options for 'relaxing' the SO policy, which I will briefly discuss in turn, 
 
 ### JSON with Padding (JSONP)
 
-
+- GET requests only
+- older than AJAX
+- SOP isn't enforced on script tags
+- script tag makes a request with a file and a callback function that receives the response and can sanitize the response
 
 ### Setting `document.domain`
 
+- Set `document.domain` to the same domain on two different documents &mdash; will relax the SOP for those two documents (only those two domains though)
+
 ### `window.postMessage`
+
+- new API for messaging between windows added to browser soon
+- event system, kind of
+
+## Choosing Between Techniques to Safely Relax the Same-Origin Policy
+
+- CORS
+- JSONP
+- `document.domain`
+- `window.postMessage`
+
+### Cross-Domain Decision Tree (credit [@mracus](https://twitter.com/mracus))
+
+> ***Do you need to make a cross-domain request using older browsers?***
+
+- **No** &mdash; use CORS
+- **Yes** &mdash; ***Is there a lot of data in the request?***
+    - **No** &mdash; use JSONP
+    - **Yes** &mdash; ***Is there a lot of data coming back in the response?***
+        - **No** &mdash; use iFrames
+        - **Yes** &mdash; use a mixture of CORS, JSONP, `window.postMessage`, and `document.domain` (try not to hate life)
 
 ---
 
@@ -247,4 +273,6 @@ The options for 'relaxing' the SO policy, which I will briefly discuss in turn, 
 - care about security
 - know the common exploits
 - prevent low-hanging fruit exploits
+- learn how to relax the SOP without exposing your web app
+
 
