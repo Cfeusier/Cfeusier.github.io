@@ -254,6 +254,9 @@ The options for 'relaxing' the SO policy, which I will briefly discuss in turn, 
 
 # Simple Protection Mechanisms
 
+- motivate low-hanging fruit protection mechanisms
+- differentiate between injection and CSRF protection mechanisms
+
 ## Protecting against Injection
 
 - Parameterized Statements
@@ -274,5 +277,4 @@ The options for 'relaxing' the SO policy, which I will briefly discuss in turn, 
 - know the common exploits
 - prevent low-hanging fruit exploits
 - learn how to relax the SOP without exposing your web app
-
 
