@@ -1,7 +1,7 @@
 ---
 layout: post_simple
 title:  "An Introduction to Injection, XSS, CSRF, and Practicing Safe Security"
-date: 2015-05-28
+date: 2015-09-07
 author: "Clark Feusier"
 excerpt: "In this post, we will discuss practical web security. We will start by covering the <strong>who</strong> &mdash; who you need to protect against. Next, we will cover the <strong>what</strong> &mdash; what common exploits you need to know about and protect against. Finally, the <strong>how</strong> &mdash; how to protect against the common exploits, including code examples. If you are interested, let us begin..."
 tags:
