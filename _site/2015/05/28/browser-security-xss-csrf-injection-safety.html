@@ -278,112 +278,130 @@
   <p>CORS defines a way in which a browser and server can interact to safely determine whether or not to allow the cross-origin request. It allows for more freedom and functionality than purely same-origin requests, but is more secure than simply allowing all cross-origin requests. It is a recommended standard of the W3C (<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">source</a>).</p>
 </blockquote>
 
+<p>CORS allows a server to <strong><em>opt into</em></strong> serving requests that come from disparate origins — <em>cross-origins</em>. That is, CORS allows a server to selectively circumvent the browser’s Same-Origin policy by whitelisting requestor domains. The whitelisted origins can then make requests to the server without running afoul of the SO policy. Because the ‘allowed’ cross-origins are specified in a <em>whitelist</em>, all other cross-origin requests are still filtered by the SO policy — keeping your app secure.</p>
+
+<p>Ok, so how do we use CORS?</p>
+
+<p>CORS works by extending HTTP with a new request header option (<code>Origin</code>) and a corresponding response header option (<code>Access-Control-Allow-Origin</code>). So, in order to use CORS, the server needs to specify the correct options in HTTP response headers. Here is an example of CORS options that could be written to an HTTP response header:</p>
+
 <script src="https://gist.github.com/Cfeusier/e9868ed6e7c5a24e8983.js"></script>
 
-<ul>
-  <li>allows server to opt into serving requests that come from a different origin</li>
-  <li>extends HTTP by adding a new request header option named <code>Origin</code> and a corresponding response header option named <code>Access-Control-Allow-Origin</code>.</li>
-  <li>server can whitelist requestor domains (exact or pattern-match)</li>
-  <li>not supported fully — IE 10+, Firefox 3.5+, Safari 4+, and Chrome 10+ supported</li>
-  <li><code>"access-control-allow-&lt;option&gt;"</code> — <code>origin</code>, <code>methods</code>, <code>headers</code>, <code>max-age</code></li>
-  <li><code>"access-control-allow-methods": "OPTIONS"</code> needs to be set</li>
-</ul>
+<p>The first option, <code>"access-control-allow-origin"</code>, is the <em>whitelist</em> of <strong>requestor origins</strong> — the whitelisted origins can be specified using exact strings or wildcard patterns. The example above allows <strong>all</strong> cross-origin requests to the server (<code>*</code> is a wildcard pattern).</p>
 
-<p>(<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">source</a>)</p>
+<p>The next option, <code>"access-control-allow-methods"</code>, is the <em>whitelist</em> of <strong>methods</strong> — the whitelist of HTTP verbs that the server will respond to when requested cross-origin. <strong>Note very well</strong>, the <code>"OPTIONS"</code> action needs to be specified in order to use CORS (in almost all cases) because it allows the browser to send a ‘pre-flight’ request to the cross-origin server to determine more information about the safety of the request. To learn more about pre-flighted requests, check out the Mozilla developer docs guide on <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests">pre-flighted requests</a>.</p>
 
-<p><strong>Websockets + Whitelisting</strong></p>
+<p>The <code>"access-control-allow-headers"</code> option is used to respond to <em>pre-flight</em> requests with the <em>whitelist</em> of <strong>HTTP headers</strong> allowed in the actual CORS request.</p>
 
-<ul>
-  <li>same concept as XHR CORS, except with websockets instead of XHR requests</li>
-</ul>
+<p>The final option, <code>"access-control-max-age"</code>, is the number of seconds that a browser can cache the results of a <em>preflight</em> request before the results expire.</p>
+
+<p>In summary, if a server specifies CORS options, it can serve requests for resources <em>cross-origin</em>. Currently, CORS is the best option for maintaining web app safety while relaxing the SO policy; however, CORS is currently only supported in IE 10+, Firefox 3.5+, Safari 4+, and Chrome 10+ (<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">for more information on CORS</a>). If you need to support cross-origin resource sharing on older browsers, you need to consider JSONP.</p>
+
+<blockquote><strong><em>Side Note: Websockets and Whitelisting</em></strong><br />This is the same concept as XHR CORS, except with websockets instead of XHR requests.</blockquote>
 
 <h3 id="json-with-padding-jsonp">JSON with Padding (JSONP)</h3>
 
-<ul>
-  <li>GET requests only</li>
-  <li>older than AJAX</li>
-  <li>SOP isn’t enforced on script tags</li>
-  <li>script tag makes a request with a file and a callback function that receives the response and can sanitize the response</li>
-</ul>
+<p>JSONP, or JSON with padding, is often used to safely circumvent the SO policy when ‘old’ browser support is required. So, <strong><em>what is JSONP</em></strong>, <strong><em>how does JSONP safely circumvent the SO policy</em></strong>, and <strong><em>when should it be used</em></strong>?</p>
+
+<p>JSONP uses a script tag to make a GET request for JSON. JSONP wraps the JSON response in a JavaScript callback function which is loaded into the browser as a script (which isn’t subject to the SO policy). The callback function, or <strong>padding</strong>, is where the <em>safety</em> checks can happen to make sure the response doesn’t contain anything malicious.</p>
+
+<p>JSONP safely circumvents the SO policy because the SO policy isn’t enforced on script tags in the same way as other XHR requests and because JSONP only works with GET requests.</p>
+
+<p>Because JSONP only works with GET requests, it can’t be used for all of your cross-origin resource sharing needs. However, JSONP is especially useful for ‘one-off’ GET requests cross-origin that require older browser support.</p>
+
+<p>The final two options for safely circumventing the SO policy can be used to supplement cross-origin requests by CORS and JSONP.</p>
 
 <h3 id="setting-documentdomain">Setting <code>document.domain</code></h3>
 
-<ul>
-  <li>Set <code>document.domain</code> to the same domain on two different documents — will relax the SOP for those two documents (only those two domains though)</li>
-</ul>
+<p>The browser will relax the SO policy between two documents (cross-origin) if both documents set the <code>document.domain</code> property to the same domain value. The browser will then allow those two cross-domain documents to communicate and share resources as though they were on the same origin.</p>
+
+<p>From the <code>Document.domain</code> documentation:</p>
+
+<blockquote>One document is allowed to access another if they have both set document.domain to the same value, indicating their intent to cooperate, or neither has set document.domain and the domains in the URLs are the same (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/domain" target="_blank">source</a>).</blockquote>
+
+<p>This sounds awesome — why not use it for all your cross-origin needs? Setting <code>document.domain</code> <strong><em>only works for frames/iframes</em></strong>, not <em>XHR</em>… Well, that sucks. Any other options?</p>
 
 <h3 id="windowpostmessage"><code>window.postMessage</code></h3>
 
-<ul>
-  <li>new API for messaging between windows added to browser soon</li>
-  <li>event system, kind of</li>
-</ul>
+<p>The <code>window.postMessage</code> method is part of a new API for messaging between browser windows (cross-origin allowed) using a simple event system to post and receive messages.</p>
+
+<p>I am most excited about this option for cross-origin communication, however, it is not fully supported yet (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">source</a>).</p>
+
+<p>The general approach to using <code>window.postMessage</code> goes like this:</p>
+
+<ol>
+  <li>get reference to a <code>window</code>, i.e., <code>someWindow = window.open('somewindowdetails')</code></li>
+  <li>call <code>someWindow.postMessage(&lt;MESSSAGE&gt;, &lt;ORIGIN&gt;)</code></li>
+  <li>setup an event listener on <code>someWindow</code>, e.g., <code>window.addEventListener("message", handleMessage, false)</code></li>
+  <li>declare a <code>handleMessage</code> function to take the message event and check the <code>event.origin</code></li>
+  <li>the <code>handleMessage</code> callback receives an <code>event</code> object with the following useful properties:
+    <ul>
+      <li><code>origin</code> : the origin of the window where the message originated — represented as a string</li>
+      <li><code>source</code> : the window object of the origin window</li>
+      <li><code>data</code> : the message sent to the receiving window</li>
+    </ul>
+  </li>
+</ol>
+
+<p>In order to <em>safely</em> use this API for cross-origin communication, you must check the <code>event.origin</code> in your event handler function. For example, <code>if (event.origin !== 'someorigin') return;</code>, will only receive the message if the message <code>event.origin</code> is <code>'someorigin'</code>.</p>
+
+<p>Like I mentioned at the start of this section, the <code>window.postMessage</code> API is exciting but not supported enough (at the time of this post) to make it a complete solution for cross-origin communication.</p>
+
+<p>So, we don’t seem to have single, clean solution for dealing with cross-origin resource sharing. Let’s discuss heuristics for choosing between the options.</p>
 
 <h2 id="choosing-between-techniques-to-safely-relax-the-same-origin-policy">Choosing Between Techniques to Safely Relax the Same-Origin Policy</h2>
 
-<ul>
-  <li>CORS</li>
-  <li>JSONP</li>
-  <li><code>document.domain</code></li>
-  <li><code>window.postMessage</code></li>
-</ul>
+<p>How do I choose between the different techniques to safely relax the SO policy? I use the following cross-domain decision tree:</p>
 
 <h3 id="cross-domain-decision-tree-credit-mracushttpstwittercommracus">Cross-Domain Decision Tree (credit <a href="https://twitter.com/mracus">@mracus</a>)</h3>
 
-<blockquote>
-  <p><strong><em>Do you need to make a cross-domain request using older browsers?</em></strong></p>
-</blockquote>
-
 <ul>
-  <li><strong>No</strong> — use CORS</li>
-  <li><strong>Yes</strong> — <strong><em>Is there a lot of data in the request?</em></strong>
+  <li><strong><em>Do you need to make a cross-domain request using older browsers?</em></strong>
     <ul>
-      <li><strong>No</strong> — use JSONP</li>
-      <li><strong>Yes</strong> — <strong><em>Is there a lot of data coming back in the response?</em></strong>
+      <li><strong>No</strong> — use CORS</li>
+      <li><strong>Yes</strong> — <strong><em>Is there a lot of data in the request?</em></strong>
         <ul>
-          <li><strong>No</strong> — use iFrames</li>
-          <li><strong>Yes</strong> — use a mixture of CORS, JSONP, <code>window.postMessage</code>, and <code>document.domain</code> (try not to hate life)</li>
+          <li><strong>No</strong> — use JSONP</li>
+          <li><strong>Yes</strong> — <strong><em>Is there a lot of data coming back in the response?</em></strong>
+            <ul>
+              <li><strong>No</strong> — use iFrames</li>
+              <li><strong>Yes</strong> — use a mixture of CORS, JSONP, <code>window.postMessage</code>, and <code>document.domain</code> (try not to hate life)</li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
   </li>
 </ul>
 
-<hr />
-
-<h1 id="simple-protection-mechanisms">Simple Protection Mechanisms</h1>
-
-<ul>
-  <li>motivate low-hanging fruit protection mechanisms</li>
-  <li>differentiate between injection and CSRF protection mechanisms</li>
-</ul>
-
-<h2 id="protecting-against-injection">Protecting against Injection</h2>
-
-<ul>
-  <li>Parameterized Statements</li>
-  <li>Input Validation</li>
-  <li>Escaping and Sanitization</li>
-  <li>Smart-use of Session Cookies</li>
-</ul>
-
-<h2 id="protecting-against-csrf">Protecting against CSRF</h2>
-
-<ul>
-  <li>Same-Origin Policy (for free)</li>
-  <li>Cookie-to-Header Tokens</li>
-</ul>
+<p>Once you have chosen your cross-origin communication strategy, you still need to use the simple protection mechanisms mentioned in the different sections above. Let’s conclude with a summary of the protection mechanisms.</p>
 
 <hr />
 
-<h1 id="practice-safe-security">Practice Safe Security</h1>
+<h1 id="protecting-against-injection">Protecting against Injection</h1>
 
-<ul>
-  <li>care about security</li>
-  <li>know the common exploits</li>
-  <li>prevent low-hanging fruit exploits</li>
-  <li>learn how to relax the SOP without exposing your web app</li>
-</ul>
+<p>It is actually fairly simple to protect you web application and users from the most common injection exploits. The simple heuristics go as follows:</p>
+
+<blockquote>if data is being sent to a server, validate and sanitize the data before sending it to the server</blockquote>
+
+<p>This means that you need to write custom validations for your data (client-side), and take advantage of many popular sanitization libraries available based on tried-and-true regexp patterns. Don’t send data to your server unless you know that it has been checked and cleaned.</p>
+
+<blockquote>if data is being received from a server, escape the data before rendering it to the user</blockquote>
+
+<p>This means that you don’t assume that your server is sending you clean data! Assume that your server is compromised (you <em>effed</em> up the validation/sanitization stage) — so, escape your data before rendering it (in case the data contains malicious scripts or html). There are also many popular ‘escaping’ libraries available.</p>
+
+<p>If you follow those two general principles, you will protect your app and users from the majority of injection attacks.</p>
+
+<h1 id="protecting-against-csrf">Protecting against CSRF</h1>
+
+<p>Similarly, it is fairly simple to protect against cross-site request forgery. First, the Same-Origin policy is <em>free</em>. Second, use cookie-to-header tokens to validate the identity of all requests.</p>
+
+<p>By protecting against injection and cross-site request forgery, you have protected against the majority of attacks that any web application will encounter.</p>
+
+<hr />
+
+<h1 id="summary-practice-safe-security">Summary: Practice Safe Security</h1>
+
+<p>In order to practice safe security, <strong>care</strong> about the security of your applications, <strong>know</strong> the common exploits, <strong>prevent</strong> the low-hanging exploits, and <strong>learn</strong> how to safely relax the Same-Origin policy without exposing your web application to threats.</p>
 
 
                 </div>
