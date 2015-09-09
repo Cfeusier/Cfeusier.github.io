@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Unix to Know this Command Series: Printing from Streams with <em><strong>sed -n '/pattern/'p</strong></em></title>
+    <title>CoffeeScript Polyfill for Function.prototype.bind</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -69,70 +69,36 @@
                 <div class="meta">
                     <span class="date">08 September 2015</span>
                 </div>
-                <h2 class="title">Unix to Know this Command Series: Printing from Streams with <em><strong>sed -n '/pattern/'p</strong></em></h2>
+                <h2 class="title">CoffeeScript Polyfill for Function.prototype.bind</h2>
                 <div class="content">
-                    <p>I like to think of the Unix command-line utilities as though they were interesting characters — it helps me remember the flags based on each command’s <em>personality</em>.</p>
+                    <p>Recently, I needed to polyfill <code>Function.prototype.bind</code> to use with <em>PhantomJS</em>. The project I was working on was written in <em>CoffeeScript</em>, so I rewrote the MDN <code>Function.prototype.bind</code> JavaScript polyfill in <em>CoffeeScript</em>…</p>
 
-<p><code>sed</code> is my simple and obedient search hound. He has a single input — his hound-dog nose. He can match patterns coming through the input stream to patterns given to him by his handler. And finally, he can output his findings in an output stream — <strong>WOOF</strong>!</p>
+<script src="https://gist.github.com/Cfeusier/18803aea2b91572da2e6.js"></script>
 
-<p><code>sed</code> is tremendously effective for searching, editing, and printing text without leaving the command-line. I’d like to share with you the <code>sed -n '/pattern/'p</code>, today. This simple command has saved me enough time that I want to share it. Let’s get started!</p>
-
-<p><strong><em>Note</em></strong>: this command can be used in most Linux, GNU, and Unix scripting shells. Some Windows command-line tools like Cygwin and PowerShell support this command, as well. The title is more catchy my way, though.</p>
-
-<hr />
-
-<h2 id="what-is-sed">What is <code>sed</code>?</h2>
-
-<p>A Unix command for stream-oriented editing without opening an editor.</p>
-
-<blockquote><em><strong>sed</strong></em> fills a buffer with input from stdin or a file, modifies the buffer based on desired patterns and arguments, and then outputs the contents to stdout.</blockquote>
-
-<p>Pretty simple, eh? Simple, but powerful. Ok, then how do we use <code>sed</code>?</p>
-
-<h2 id="how-to-use-sed--n-patternp">How to use <code>sed -n '/pattern/'p</code>?</h2>
-
-<p><code>sed -n</code> will silence the printing of pattern space matches that we don’t care about. The <code>p</code> part of <code>sed -n '/pattern/'p</code> is a command that prints from the modified buffer. The <code>'/pattern/'</code> part specifies the pattern by which to filter and modify the buffer — any legitimate Unix regular expression will do. Finally, you pass an input file or text to the command. The complete command will output the lines that contain the given pattern. Let’s look at some examples.</p>
-
-<h2 id="examples-of-printing-with-sed--n-patternp">Examples of printing with <code>sed -n '/pattern/'p</code></h2>
-
-<p><code>sed -n '/console.log/'p example.js</code></p>
-
-<hr />
-
-<p>SUMMARY / CLOSING</p>
-
-<ul>
-  <li>more about sed http://man.cx/sed</li>
-  <li>links to other <em>unix to know this command</em> posts</li>
-</ul>
-
-<p>Remember, it isn’t just me that should know these scripting tools — <strong><em>unix to know these commands, too™</em></strong></p>
+<p>To use the polyfill, just add the above snippet wherever needed.</p>
 
                 </div>
             </div>
             <div class="post-tags">
                 <i class="fa fa-tags"></i>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/unix">unix</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/polyfill">polyfill</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/linux/GNU">linux/GNU</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/bind">bind</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/shell commands">shell commands</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/prototype">prototype</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/sed">sed</a>
-                <span class="seperator">,</span>
-                
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/usage examples">usage examples</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/coffeescript">coffeescript</a>
                 <span class="seperator">,</span>
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/09/08/unix-to-know-this-command-sed-printing-streams-sed-n-p.html&t=Unix to Know this Command Series: Printing from Streams with <em><strong>sed -n '/pattern/'p</strong></em>" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/09/08/unix-to-know-this-command-sed-printing-streams-sed-n-p.html&text=Unix to Know this Command Series: Printing from Streams with <em><strong>sed -n '/pattern/'p</strong></em>&url=http://clarkfeusier.com/2015/09/08/unix-to-know-this-command-sed-printing-streams-sed-n-p.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/09/08/unix-to-know-this-command-sed-printing-streams-sed-n-p.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/09/08/function-prototype-bind-polyfill-coffeescript.html&t=CoffeeScript Polyfill for Function.prototype.bind" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/09/08/function-prototype-bind-polyfill-coffeescript.html&text=CoffeeScript Polyfill for Function.prototype.bind&url=http://clarkfeusier.com/2015/09/08/function-prototype-bind-polyfill-coffeescript.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/09/08/function-prototype-bind-polyfill-coffeescript.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>
     </div>
