@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building a Parser with Jison: Parsers and Parser Generators</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://clarkfeusier.com/css/base.css">
+    <link rel="shortcut icon" type="image/x-icon" href="http://clarkfeusier.com/img/favicon.ico" />
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushRuby.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushYaml.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="http://clarkfeusier.com/vendor/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FNCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FNCG');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Setup SyntaxHighlighter -->
+    <script type="text/javascript">SyntaxHighlighter.all()</script>
+    <!-- End SyntaxHighlighter Setup -->
+    <header>
+        <div id="logo">
+            <img src="http://clarkfeusier.com/img/headshot.png" alt="">
+        </div>
+        <div id="site-heading">
+            <h2 class="title">Clark Feusier</h2>
+            <h3 class="subtitle">Software Engineer and Metalogician</h3>
+        </div>
+        <ul id="nav">
+         <li class=""><a href="http://clarkfeusier.com/pages/about">About</a></li>
+         <li class=""><a href="http://clarkfeusier.com/index.html">Writing</a></li>
+         <li class=""><a href="http://clarkfeusier.com/pages/portfolio">Portfolio</a></li>
+         <li><a href="#" id="contact-section">Contact</a></li>
+     </ul>
+     <div id="contact-wrapper">
+        <div id="contact-content">
+            <ul id="contact-list">
+                <i class="fa fa-envelope-o contact-icon"></i>
+                <li><a href="mailto:cfeusier@gmail.com">  cfeusier@gmail.com</a></li>
+                <li class="separator">/</li>
+                <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+        <a href="#" id="contact-close"><i class="fa fa-times"></i></a>
+    </div>
+</header>
+<div id="main-contents">
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">28 March 2015</span>
+                </div>
+                <h2 class="title">Building a Parser with Jison: Parsers and Parser Generators</h2>
+                <div class="content">
+                    <p><strong>Who</strong>: this post is for anyone looking to learn some of the foundations required for working with <strong><em>parsers</em></strong>, <strong><em>parser generators</em></strong>, and <a href="http://zaach.github.io/jison/docs/"><strong><em>Jison</em></strong></a></p>
+
+<p><strong>What</strong>: this post will show you <strong><em>what a parser is</em></strong>, <strong><em>how to generate a parser</em></strong>, and <strong><em>how to use a parser</em></strong></p>
+
+<p><strong>Why</strong>: I will wax philosophical about why you should care about learning how to build a parser</p>
+
+<hr />
+
+<h2 id="what-is-a-parser">What is a Parser?</h2>
+
+<blockquote>
+<h3>A <strong>parser</strong> is a glorified <em><strong>function</strong></em>, which takes a <em>sequential stream of symbols</em> as an <strong>input</strong>, and produces a <em>structured representation of the input stream</em> <strong>parts</strong> as an <strong>output</strong></h3>
+</blockquote>
+
+<p>For example, imagine that we were given the symbol stream of <code>1 + 2</code>. Right now, the structure and meaning of that stream is unclear (to a computer) — to give the symbol stream meaning to the computer, we need to <strong>re-represent</strong> the symbol stream in a format that contains its structure and semantics — we need to <strong>parse</strong> the symbol stream.</p>
+
+<p>In the diagram below, we see one way to parse the symbol stream <code>1 + 2</code> into a new representation — from a <em>linear</em> stream into a <em>tree</em> that contains the data and relationships of the symbol stream but with all of the benefits of a tree-like interface.</p>
+
+<p><img src="/img/blog/parser_function.jpg" style="border:1px solid black; border-radius: 4px; padding: 2px; margin: 0 auto;" width="100%" /></p>
+
+<p>In the parsing example above, the input gets converted into a single root node, an <code>AdditionExpression</code>, which contains children <code>NumericLiterals</code> that stand in an addition-relation of some type via the <code>AdditionOperator</code>.</p>
+
+<p>Great. So, now that we have a firm grasp of the high-level concept of a <strong>parser</strong>, let’s talk about <strong><em>why you should care about all this</em></strong>.</p>
+
+<hr />
+
+<h2 id="why-should-you-care-about-this">Why Should You Care About This?</h2>
+
+<blockquote><h3><em><strong>TL;DR</strong></em> &mdash; parsers help you build cool shit</h3></blockquote>
+
+<p>The power of parsers is that they allow you to <strong>convert input of</strong> <strong><em>one form</em></strong> <strong>into a</strong> <strong><em>representation of another form</em></strong> <strong>which with a software component can interact</strong>.</p>
+
+<p>I would contend that technology and cognition supervene heavily upon manipulations of data stream representations — for example, a sensory stream coming in and being parsed into a <strong>meaningful</strong> representation by the brain and body. I would argue that a large part of our society and civilization is owed to the power of manipulating representations of one format into representations of another format — reading and writing, transformation equations in mathematics and physics, network communication of data packets across the internet, and more.</p>
+
+<p>So, if you want to build powerful things and think about things that have never been thought, you will want to know how to <strong><em>manipulate data from one representation to another</em></strong>. A <strong>parser</strong> is one way to do that.</p>
+
+<p>Enough <em>theory</em>, show us the <strong>practical</strong> applications — <strong><em>challenge accepted</em></strong>.</p>
+
+<h3 id="concrete-examples">Concrete Examples</h3>
+
+<p>(1) <strong>The Computer</strong> — an input stream of electric patterns get converted into 0s and 1s, and vice versa.</p>
+
+<p>(2) <strong>Compilers and Interpreters</strong> — an input stream of one type of program code is converted into another type of program code. For example, <strong><em>CoffeeScript</em></strong> is parsed and then compiled into <strong><em>JavaScript</em></strong>, as shown in the following two snippets:</p>
+
+<script src="https://gist.github.com/Cfeusier/62dcfb440e3f73e168c8.js"></script>
+
+<p>Once compiled, the above CoffeeScript will be represented as the following JavaScript:</p>
+
+<script src="https://gist.github.com/Cfeusier/b48720078b16dacb6ad8.js"></script>
+
+<p>In order to generate the JavaScript code, there is a required <strong>intermediate step</strong> of <em>converting the CoffeeScript into a non-CoffeeScript structured representation</em> — i.e., parsing the CoffeeScript into a parse tree.</p>
+
+<p>(3) <strong>The DOM</strong> — I find the DOM to be one of the easiest ways to show the power and approachability of building a parser. So, let’s do a quick case-study of the DOM. The <strong>DOM</strong>, or Document Object Model, is a convention for representing a document as an object in a tree-structure. Web browsers, like Google Chrome or Mozilla Firefox, can take an input file (which is a one big string of HTML) and parse it into a document tree.</p>
+
+<p>For example, if we input the following HTML document into a simplistic HTML-to-DOM parser, we would get a tree representation of the HTML document that looks like the diagram below.</p>
+
+<script src="https://gist.github.com/Cfeusier/a9e7219263d697432646.js"></script>
+
+<p><img src="/img/blog/example_dom_tree.png" style="border:1px solid black; border-radius: 4px; padding: 2px; margin: 0 auto;" width="100%" /></p>
+
+<p><strong>So, why does every web browser do this?</strong> <strong><em>Why does every browser parse HTML documents into DOM trees?</em></strong></p>
+
+<blockquote><h3>Parsing HTML into a DOM tree allows the web browser to <strong>expose an API</strong> for the document</h3></blockquote>
+
+<p>That is the payoff. Let me state it more generally. Parsing a string into a tree representation allows you to expose an API for accessing and manipulating the input data — an API that was <strong>not</strong> available when working with the raw input stream.</p>
+
+<p>Imagine that our input HTML’s first <code>div</code> element included an <strong>id</strong> <code>first-div</code>. Browsers expose a method on the <code>document</code> object that allows us to select the <code>div</code> element with a given <strong>id</strong>, without having to manually traverse the HTML string. It is a simple as <code>document.getElementById('first-div');</code>. There are hundreds of public methods in each browser’s DOM API. By parsing HTML into a JavaScript object (the DOM tree), the browser is able to offer a JavaScript interface that is <strong>extremely powerful</strong>.</p>
+
+<p>At this point, we have a firm grasp of what a parser is and the motivations for building a parser, but you are probably thinking <strong>just show me how to build a parser already, damn it!</strong> Well, here we go.</p>
+
+<hr />
+
+<h1 class="page-title">Parsers</h1>
+
+<p>In order to build a parser, we must be clear on what we are building, that is, we must have a clear idea of the components of a parser.</p>
+
+<h2 id="what-are-the-components-of-a-parser">What are the Components of a Parser?</h2>
+
+<ol>
+  <li>the <strong>Lexical Analyzer</strong> generates meaningful tokens by splitting the input stream based on regular expressions patterns</li>
+  <li>the <strong>Syntactic Analyzer</strong> generates a tree of expressions by checking if tokens combine into well-formed formulas based on a grammar specification</li>
+</ol>
+
+<p>Let’s clarify the details of both components in turn, starting with the <em>lexical analyzer</em>.</p>
+
+<h3 id="the-lexical-analyzer">The Lexical Analyzer</h3>
+
+<blockquote><h3>The lexer turns input symbols into tokens defined by a lexical grammar</h3></blockquote>
+
+<p>The main job of the lexical analyzer is to convert the symbols of the input stream into <strong>tokens</strong>, which are then passed to the syntactic analyzer. Creating <strong>tokens</strong> out of the input is the first step in generating <strong>meaning</strong> from the input symbols.</p>
+
+<p>So, what is a <strong>token</strong>? Simplistically, a <strong>token</strong> is a mapping between a symbol or sequence of symbols and the type of lexeme the symbol or sequence of symbols represents. For example, we could choose to represent the symbol <code>(</code> with the token <code>{ value: (, tag: 'LPAREN' }</code>, or <code>var</code> as the token <code>{ value: var, tag 'VAR_KEYWORD' }</code>.</p>
+
+<p>In order to create the tokens, the lexical analyzer is must first <strong><em>read in a stream of characters</em></strong>. The lexical analyzer might read in a stream of symbols from user input, from the input to a function within a program, from a file, <em>ad nauseam</em>.</p>
+
+<p>The logic for creating tokens out of an input stream can be summarized in pseudocode as follows:</p>
+
+<script src="https://gist.github.com/Cfeusier/a6ab7753a330b7cacef7.js"></script>
+
+<p>Here is a real-life example from the <strong>CoffeeScript</strong> lexer’s <a href="http://coffeescript.org/documentation/docs/lexer.html"><strong><code>tokenize</code></strong></a> method. You will notice that the logic matches that of the pseudocode above it. Any standard lexical analyzer will contain logic that looks very similar.</p>
+
+<script src="https://gist.github.com/Cfeusier/fe7dc4c2b93613911105.js"></script>
+
+<p>Now that we have a high-level idea of how a lexical analyzer <strong><em>reads a symbol stream</em></strong>, let’s look at how it does the <strong>tokenization</strong> — i.e., how does it get from <em>symbols</em> to <strong>tokens</strong>.</p>
+
+<p>Imagine that our input was a single character <code>$</code> — our lexical analyzer could contain a rule which returns <code>'BLINGBLINGMONEYAINTATHING'</code> every time the <code>$</code> symbol is encountered. <code>'BLINGBLINGMONEYAINTATHING'</code> is the token which is passed into the syntactic analyzer for further analysis.</p>
+
+<p>Obviously, that is a highly simplified example of lexical analysis; however, it shows us the main component of the lexical analyzer, that is, the <strong>lexical grammar</strong>. The lexical grammar is just a set of rules for mapping patterns onto tokens, usually done with Regular Expressions. Here is an example of a simple (pointless) lexical grammar specification that a tool like <a href="http://en.wikipedia.org/wiki/Lex_(software)" target="_blank">(f)lex</a> could use to generate a lexical analyzer, as we will be doing later with Jison.</p>
+
+<script src="https://gist.github.com/Cfeusier/2dc52725ffb4b375578e.js"></script>
+
+<ul>
+  <li><strong>Lines 1 - 3</strong>:
+    <ul>
+      <li>lexical macros or name definitions. Matched regexp expands into name, which can be used in the grammar to generate a token. EXAMPLES</li>
+    </ul>
+  </li>
+  <li><strong>Lines 5 - 14</strong>:
+    <ul>
+      <li>the lexical grammar rules. When a raw symbol or macro pattern is matched, then return the following token type. EXAMPLES</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Depending on the implementation, the lexer will usually wrap the token with location data and other goodies along with the token type. EXAMPLES</p>
+
+<h3 id="the-syntactic-analyzer">The Syntactic Analyzer</h3>
+
+<blockquote><h3>The syntactic analyzer uses a syntactic grammar, in combination with the tokens from the lexer, to create a parse tree of allowable expressions</h3></blockquote>
+
+<ul>
+  <li>The syntactic analyzer checks that the tokens form an allowable expression.</li>
+  <li>This is usually done with reference to a context-free grammar.</li>
+  <li>Maps allowable expressions to actions that you want to take when those expressions are found.</li>
+  <li>This creates your parse tree.</li>
+  <li>Grammar + Logic/Actions + composed of tokens from the lexer</li>
+  <li>The Syntactic Grammar recursively defines components that can make up an expression and the order in which they must appear</li>
+  <li>mention BNF Grammar</li>
+</ul>
+
+<hr />
+
+<h2 id="where-do-parsers-come-from">Where do Parsers Come From?</h2>
+
+<h2 id="parser-generators">Parser Generators</h2>
+
+<h2 id="jison">Jison</h2>
+
+<h2 id="lalr1-parsing-algorithms">LALR(1) Parsing Algorithms</h2>
+
+<h3 id="shift-reduce-algorithms">Shift-Reduce Algorithms</h3>
+
+<h3 id="top-down-vs-bottom-up-parsing-algorithms">Top-Down vs. Bottom-Up Parsing Algorithms</h3>
+
+<h2 id="using-jison-to-generate-a-parser">Using Jison to Generate a Parser</h2>
+
+<h3 id="example-small-something">Example: Small Something</h3>
+
+<h3 id="case-study-coffeescript">Case-Study: CoffeeScript</h3>
+
+<hr />
+
+<h3 id="i-generated-a-parser---what-now">I Generated a Parser - What Now?</h3>
+
+<h3 id="resources">Resources</h3>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/javascript">javascript</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/jison">jison</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/parser">parser</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/implementation examples">implementation examples</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/cognition-as-a-service">cognition-as-a-service</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/03/28/2015-03-28-building-parser-with-jison-introduction-to-parsers.html&t=Building a Parser with Jison: Parsers and Parser Generators" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/03/28/2015-03-28-building-parser-with-jison-introduction-to-parsers.html&text=Building a Parser with Jison: Parsers and Parser Generators&url=http://clarkfeusier.com/2015/03/28/2015-03-28-building-parser-with-jison-introduction-to-parsers.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/03/28/2015-03-28-building-parser-with-jison-introduction-to-parsers.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/03/22/sudoku-solution-validator.html"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+            <li class="next"><a href="http://clarkfeusier.com/2015/04/01/2015-04-01-language-features-and-closures-in-javascript.html"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
+            
+        </ul>
+    </div>
+</div>
+ </div>
+       <footer>
+            <div id="footer-quote">
+                <div class="container">
+                    <div class="contents">
+                        <div class="quote-icon">
+                            <i class="fa fa-quote-right"></i>
+                        </div>
+                        <span class="quote-name">Percy Bysshe Shelley</span>
+                        <div class="quote-text">
+                            The soul's joy lies in <span class="colored-text">doing</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <div class="container foot">
+                    <ul id="social-icons">
+                        <li><a href="http://github.com/cfeusier"><i class="fa fa-github"></i></a></li>
+                        <li><a href="http://twitter.com/clarkfeusier"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://facebook.com/cfeusier"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="http://linkedin.com/in/clarkfeusier"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                    <div id="copyright">© COPYRIGHT 2015 Clark Feusier</div>
+                    <a id="home-circle" href="http://clarkfeusier.com"><i class="fa fa-home"></i></a>
+                </div>
+            </div>
+       </footer>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/jquery-1.11.0.min.js"></script>
+       <script type="text/javascript" src="http://clarkfeusier.com/js/header_glitter.js"></script>
+    </body>
+</html>
