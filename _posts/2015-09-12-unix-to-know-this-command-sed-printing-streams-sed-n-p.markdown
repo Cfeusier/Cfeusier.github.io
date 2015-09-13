@@ -66,17 +66,22 @@ Nice! But, I am lazy and won't remember those patterns, so I want a simpler comm
 
 ### Sidenote: `grep`
 
-The same outcome can be achieved in different ways, as is usual in the Unix utilties world. So, even though this is a tutorial about the `sed` _print_ command, I want to mention the `grep -n pattern file` command. Here is the above `sed` example rewritten using `grep`:
+The same outcome can be achieved in different ways, as is usual in the Unix world. So, even though this tutorial is about the `sed` _print_ command, I want to mention the `grep -n pattern file` command. Here is the above `sed` example rewritten using `grep`:
 
 <script src="https://gist.github.com/Cfeusier/8574de6985468da61445.js"></script>
 
-I prefer the `grep` command for this use-case, but `sed` is an important tool, and I think it is easiest to learn by starting with a simple example like printing. So, I saved the easier `grep` command for last for pedagogical purposes.
+I prefer the `grep` command for this use-case, but `sed` is an important tool, and I think it is easiest to learn by starting with a simple example like printing. So, I saved the more practical `grep` command for last to force you to read about `sed`.
 
 ---
 
-SUMMARY / CLOSING
+### Summary
 
-- more about sed http://man.cx/sed
-- links to other _unix to know this command_ posts
+- `sed` is a powerful stream editor for searching and manipulating text from stdin or a file, using Regular Expression patterns
+- We learned to use `sed -n '/pattern/p' file` to search a file and print the matching text
+- Next, we learned to use `sed -n '/pattern/{=;p;}' file` to search a file and print the matching text and line numbers
+- Then, we looked at piping the result of the previous `sed` command into another `sed` command, in order to join the line numbers with the matching text &mdash; `sed -n '/pattern/{;=p;}' file | sed '{N;s/\n/ /}'`
+- Finally, we talked about using the simpler `grep -n pattern file` command to achieve our desired result
+
+To learn more about `sed` and it's myriad use-cases, check out `man sed` or [online `man sed`](http://man.cx/sed). If you like learning Unix commands, check out [my other Unix posts](/pages/collected-writings).
 
 Remember, it isn't just me that should know these scripting tools &mdash; ***unix to know these commands, too&#8482;***

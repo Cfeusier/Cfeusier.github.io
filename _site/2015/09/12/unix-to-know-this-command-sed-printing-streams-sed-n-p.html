@@ -128,20 +128,25 @@
 
 <h3 id="sidenote-grep">Sidenote: <code>grep</code></h3>
 
-<p>The same outcome can be achieved in different ways, as is usual in the Unix utilties world. So, even though this is a tutorial about the <code>sed</code> <em>print</em> command, I want to mention the <code>grep -n pattern file</code> command. Here is the above <code>sed</code> example rewritten using <code>grep</code>:</p>
+<p>The same outcome can be achieved in different ways, as is usual in the Unix world. So, even though this tutorial is about the <code>sed</code> <em>print</em> command, I want to mention the <code>grep -n pattern file</code> command. Here is the above <code>sed</code> example rewritten using <code>grep</code>:</p>
 
 <script src="https://gist.github.com/Cfeusier/8574de6985468da61445.js"></script>
 
-<p>I prefer the <code>grep</code> command for this use-case, but <code>sed</code> is an important tool, and I think it is easiest to learn by starting with a simple example like printing. So, I saved the easier <code>grep</code> command for last for pedagogical purposes.</p>
+<p>I prefer the <code>grep</code> command for this use-case, but <code>sed</code> is an important tool, and I think it is easiest to learn by starting with a simple example like printing. So, I saved the more practical <code>grep</code> command for last to force you to read about <code>sed</code>.</p>
 
 <hr />
 
-<p>SUMMARY / CLOSING</p>
+<h3 id="summary">Summary</h3>
 
 <ul>
-  <li>more about sed http://man.cx/sed</li>
-  <li>links to other <em>unix to know this command</em> posts</li>
+  <li><code>sed</code> is a powerful stream editor for searching and manipulating text from stdin or a file, using Regular Expression patterns</li>
+  <li>We learned to use <code>sed -n '/pattern/p' file</code> to search a file and print the matching text</li>
+  <li>Next, we learned to use <code>sed -n '/pattern/{=;p;}' file</code> to search a file and print the matching text and line numbers</li>
+  <li>Then, we looked at piping the result of the previous <code>sed</code> command into another <code>sed</code> command, in order to join the line numbers with the matching text — <code>sed -n '/pattern/{;=p;}' file | sed '{N;s/\n/ /}'</code></li>
+  <li>Finally, we talked about using the simpler <code>grep -n pattern file</code> command to achieve our desired result</li>
 </ul>
+
+<p>To learn more about <code>sed</code> and it’s myriad use-cases, check out <code>man sed</code> or <a href="http://man.cx/sed">online <code>man sed</code></a>. If you like learning Unix commands, check out <a href="/pages/collected-writings">my other Unix posts</a>.</p>
 
 <p>Remember, it isn’t just me that should know these scripting tools — <strong><em>unix to know these commands, too™</em></strong></p>
 
@@ -181,8 +186,6 @@
             
             <li class="separator"></li>
             
-            
-            <li class="next"><a href="http://clarkfeusier.com/2015/09/12/async-code.html"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
             
         </ul>
     </div>
