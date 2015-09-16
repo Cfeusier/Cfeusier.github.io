@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Collected Writings</title>
+    <title>Underramdash.js: the Usual Utility Functions in 2kb, Unminified</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -59,49 +59,63 @@
     </div>
 </header>
 <div id="main-contents">
-<div class="container">
-  <div class="page-contents">
-    <h1 class="page-title">Collected Writings</h1>
-    <h2>Popular Interview Question Series</h2>
-    <ul>
-      <li><a href="/2015/01/11/interview-question-function-bind" target="_blank">Higher-Order Functions and Function Binding</a></li>
-      <li><a href="/2015/01/16/interview-question-balanced-parentheses-stack" target="_blank">Balanced Parentheses and a Stack</a></li>
-      <li><a href="/2015/01/18/interview-question-asynchronous-map" target="_blank">Variations on Asynchronous Map</a></li>
-      <li><a href="/2015/03/22/sudoku-solution-validator" target="_blank">Sudoku Solution Validator in 1 Hour</a></li>
-    </ul>
-    <h2>Technology</h2>
-    <ul>
-      <li><a href="/2015/01/08/simple-node-server-api" target="_blank">Node Basics: How to Create a Simple Server and Router + Node Fundamentals</a></li>
-      <li><a href="/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt" target="_blank">Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt</a></li>
-      <li><a href="/2014/11/08/rake-task-generate-new-post-file-jekyll" target="_blank">Generate a New Jekyll Post with Boilerplate using Rake</a></li>
-    </ul>
-    <h2>JavaScript</h2>
-    <ul>
-      <li><a href="/2015/09/15/underramdash-helpers" target="_blank">Underramdash.js: the Usual Utility Functions in 2kb, Unminified</a></li>
-      <li><a href="/2015/09/08/function-prototype-bind-polyfill-coffeescript" target="_blank">CoffeeScript Polyfill for Function.prototype.bind</a></li>
-      <li><a href="http://raghuvirkasturi.com/2015/04/14/guest-post-object-prototype-valueof-coercion-and-comparison-hackery-in-javascript/" target="_blank">Object.prototype.valueOf, Coercion, and Comparison Hackery in JavaScript</a></li>
-      <li><a href="/2015/02/19/variable-hoisting-function-hoisting-javascript" target="_blank">Variable Hoisting and Function Hoisting in JavaScript</a></li>
-      <li><a href="/2014/12/12/object-oriented-javascript-functional-class" target="_blank">Object-Oriented JavaScript - Functional Class Pattern</a></li>
-      <li><a href="/2014/12/12/object-oriented-javascript-functional-shared-class" target="_blank">Object-Oriented JavaScript - Shared Functional Class Pattern</a></li>
-      <li><a href="/2014/12/13/object-oriented-javascript-prototypal-class" target="_blank">Object-Oriented JavaScript - Prototypal Class Pattern</a></li>
-      <li><a href="/2014/12/14/object-oriented-javascript-pseudo-classical-class" target="_blank">Object-Oriented JavaScript - Pseudo-Classical Class Pattern</a></li>
-    </ul>
-    <h2>Data Structures</h2>
-    <ul>
-      <li><a href="/2015/01/04/tree-data-structure-simple-binary-search-decision" target="_blank">Rollin' Trees, yo</a></li>
-    </ul>
-    <h2>Unix to Know this Command Series</h2>
-    <ul>
-      <li><a href="/2015/04/14/unix-to-know-this-command-reverse-i-search" target="_blank">Reverse-i-Search with CTRL-R</a></li>
-      <li><a href="/2015/09/12/unix-to-know-this-command-sed-printing-streams-sed-n-p" target="_blank">Printing from Streams with <em><strong>sed -n '/pattern/p' file</strong></em></a></li>
-    </ul>
-    <h2>Web Security</h2>
-    <ul>
-      <li><a href="/2015/09/07/browser-security-xss-csrf-injection-safety" target="_blank">An Introduction to Injection, XSS, CSRF, and Practicing Safe Security</a></li>
-    </ul>
-  </div>
-</div>
+<div class="single-post">
+    <div class="container">
+        <div class="post-item">
+            <div class="post-header">
+                <div class="blog-no-header"></div>
+            </div>
+            <div class="post-body">
+                <div class="meta">
+                    <span class="date">15 September 2015</span>
+                </div>
+                <h2 class="title">Underramdash.js: the Usual Utility Functions in 2kb, Unminified</h2>
+                <div class="content">
+                    <p>I have now been able to remove Underscore.js, Ramda, and Lodash from the dependencies of multiple projects, by using the following <strong>underramdash.js</strong> helpers. Note, this file is 2kb unminified and unzipped, whereas Underscore.js is 52kb unminified and unzipped…</p>
 
+<script src="https://gist.github.com/Cfeusier/e2d065c2216dacba2806.js"></script>
+
+
+                </div>
+            </div>
+            <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/polyfill">polyfill</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/underscore">underscore</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/ramda">ramda</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/lodash">lodash</a>
+                <span class="seperator">,</span>
+                
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/functional programming">functional programming</a>
+                <span class="seperator">,</span>
+                
+            </div>
+            <ul class="post-socials">
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/09/15/underramdash-helpers.html&t=Underramdash.js: the Usual Utility Functions in 2kb, Unminified" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/09/15/underramdash-helpers.html&text=Underramdash.js: the Usual Utility Functions in 2kb, Unminified&url=http://clarkfeusier.com/2015/09/15/underramdash-helpers.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/09/15/underramdash-helpers.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="blog-pagination">
+        <ul>
+        	
+            <li class="prev"><a href="http://clarkfeusier.com/2015/09/12/unix-to-know-this-command-sed-printing-streams-sed-n-p.html"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            
+            
+            <li class="separator"></li>
+            
+            
+        </ul>
+    </div>
+</div>
  </div>
        <footer>
             <div id="footer-quote">
