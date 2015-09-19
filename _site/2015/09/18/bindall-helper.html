@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Underramdash.js: the Usual Utility Functions in 2kb, Unminified</title>
+    <title>Helper Function .bindAll</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -67,14 +67,37 @@
             </div>
             <div class="post-body">
                 <div class="meta">
-                    <span class="date">15 September 2015</span>
+                    <span class="date">18 September 2015</span>
                 </div>
-                <h2 class="title">Underramdash.js: the Usual Utility Functions in 2kb, Unminified</h2>
+                <h2 class="title">Helper Function .bindAll</h2>
                 <div class="content">
-                    <p>I have now been able to remove Underscore.js, Ramda, and Lodash from the dependencies of multiple projects, by using the following <strong>underramdash.js</strong> helpers. Note, this file is 2kb unminified and unzipped, whereas Underscore.js is 52kb unminified and unzipped…</p>
+                    <p>Like most JavaScripters, I often find myself needing to manually control the <code>this</code>-binding of a function on invocation. Event handlers and callback functions are often re-bound to a different context than the caller — meaning that if those event handlers or callbacks reference <code>this</code>, they might be referencing the wrong object.</p>
 
-<script src="https://gist.github.com/Cfeusier/e2d065c2216dacba2806.js"></script>
+<p>These <em>context-switching</em> functions sometimes require an explicit binding, as in this next snippet.</p>
 
+<script src="https://gist.github.com/Cfeusier/d6ed570b51ceb9d858d3.js"></script>
+
+<p>Above, an event is fired when the <code>app</code> is <code>'ready'</code> — a callback function is registered to handle this <code>'ready'</code> event. Assuming the event handler (<code>this.startMainWindow</code>) uses <code>this</code> internally, it needs to be bound explicitly in order to preserve the <code>this</code>-binding that is desired. We do this by passing our desired <code>this</code>-binding into <code>.bind</code> as the first argument.</p>
+
+<p>Great, now imagine that we have these <em>context-switching</em> functions all over our codebase. Also, imagine that groups of these functions are all bound to the same object. Pretty soon, you have a stupid amount of <code>someObj.someFunc.bind(ctxObj)</code> in your codebase.</p>
+
+<p>Are you now motivated you to find a helper function for binding a bunch of functions at once? I am!</p>
+
+<p><strong>I FOUND ONE!</strong></p>
+
+<p><a href="http://underscorejs.org/#bindAll">Underscore.js</a> provides a <code>_.bindAll</code> method that binds a list of methods to one object. However, Underscore is a <em>1,500</em> line of code <strong>dependency</strong> that is <em><strong>outside of our control</strong></em>. I’d prefer <em>15</em> lines of code over which we have control.</p>
+
+<p>So, let’s implement our own <code>.bindAll</code> function!</p>
+
+<hr />
+
+<script src="https://gist.github.com/Cfeusier/2a1e2aa90f32850125cb.js"></script>
+
+<p>Here is one example using the <code>.bindAll</code> helper (line 6):</p>
+
+<script src="https://gist.github.com/Cfeusier/e9b79897a4202805dafb.js"></script>
+
+<p>Beautiful. We can simply pass <code>.bindAll</code> the object to which to bind, along with a list of method names in the current context which should be bound to the first argument.</p>
 
                 </div>
             </div>
@@ -87,10 +110,7 @@
                 <a class="tag_list_link" href="http://clarkfeusier.com/tag/underscore">underscore</a>
                 <span class="seperator">,</span>
                 
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/ramda">ramda</a>
-                <span class="seperator">,</span>
-                
-                <a class="tag_list_link" href="http://clarkfeusier.com/tag/lodash">lodash</a>
+                <a class="tag_list_link" href="http://clarkfeusier.com/tag/bindAll">bindAll</a>
                 <span class="seperator">,</span>
                 
                 <a class="tag_list_link" href="http://clarkfeusier.com/tag/functional programming">functional programming</a>
@@ -98,22 +118,20 @@
                 
             </div>
             <ul class="post-socials">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/09/15/underramdash-helpers.html&t=Underramdash.js: the Usual Utility Functions in 2kb, Unminified" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/09/15/underramdash-helpers.html&text=Underramdash.js: the Usual Utility Functions in 2kb, Unminified&url=http://clarkfeusier.com/2015/09/15/underramdash-helpers.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/09/15/underramdash-helpers.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://clarkfeusier.com/2015/09/18/bindall-helper.html&t=Helper Function .bindAll" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?original_referer=http://clarkfeusier.com/2015/09/18/bindall-helper.html&text=Helper Function .bindAll&url=http://clarkfeusier.com/2015/09/18/bindall-helper.html" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://plus.google.com/share?url=http://clarkfeusier.com/2015/09/18/bindall-helper.html" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </div>
     </div>
     <div id="blog-pagination">
         <ul>
         	
-            <li class="prev"><a href="http://clarkfeusier.com/2015/09/12/unix-to-know-this-command-sed-printing-streams-sed-n-p.html"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
+            <li class="prev"><a href="http://clarkfeusier.com/2015/09/15/underramdash-helpers.html"><i class="fa fa-angle-left"></i><span>Prev</span></a></li>
             
             
             <li class="separator"></li>
             
-            
-            <li class="next"><a href="http://clarkfeusier.com/2015/09/18/bindall-helper.html"><span>Next</span><i class="fa fa-angle-right"></i></a></li>
             
         </ul>
     </div>
