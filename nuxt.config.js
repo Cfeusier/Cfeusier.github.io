@@ -42,6 +42,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios'
   ],
+
   /*
   ** Axios module configuration
   */
@@ -49,7 +50,16 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
-  /*
+  render: { resourceHints: false },
+  hooks: {
+    'generate:page': page => {
+      const doc = cheerio.load(page.html);
+      doc(`body script`).remove();
+      page.html = doc.html();
+    },
+  },
+
+    /*
   ** Build configuration
   */
   build: {
