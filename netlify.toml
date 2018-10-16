@@ -1,0 +1,5 @@
+[[redirects]]
+from = "https://cfeusier.netlify.com/*"
+to = "https://clarkfeusier.com/:splat"
+status = 301
+force = true
