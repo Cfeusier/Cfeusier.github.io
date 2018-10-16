@@ -1,18 +1,8 @@
 <template>
   <div>
     <nuxt/>
-    <no-ssr placeholder="Loading..."><GTM /></no-ssr>
   </div>
 </template>
-
-<script>
-  import GTM from '~/components/GTM.vue'
-  export default {
-    components: {
-      GTM
-    }
-  }
-</script>
 
 <style>
 html {
