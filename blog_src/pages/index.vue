@@ -4,14 +4,15 @@
       <logo/>
       <h1 class="title">Clark Feusier</h1>
       <h2 class="subtitle">Software and Metalogic</h2>
+      <h3 class="heading">Under Construction</h3>
       <div class="links">
-        <a href="https://nuxtjs.org/"
+        <a href="https://www.linkedin.com/in/clarkfeusier/"
           target="_blank"
           rel="noopener"
           class="button--green">
-          Documentation
+          LinkedIn
         </a>
-        <a href="https://github.com/nuxt/nuxt.js"
+        <a href="https://github.com/Cfeusier"
           target="_blank"
           rel="noopener"
           class="button--grey">
@@ -54,6 +55,14 @@ export default {
 .subtitle {
   font-weight: 300;
   font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+.heading {
+  font-weight: 300;
+  font-size: 22px;
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;

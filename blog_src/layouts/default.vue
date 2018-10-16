@@ -1,7 +1,7 @@
 <template>
   <div>
     <nuxt/>
-    <GTM />
+    <no-ssr placeholder="Loading..."><GTM /></no-ssr>
   </div>
 </template>
 
