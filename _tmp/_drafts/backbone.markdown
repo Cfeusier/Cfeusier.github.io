@@ -1,3 +1,0 @@
-- Backbone Heuristics ('Secret Rules')
-- PartyList
-- MVC frameworks
