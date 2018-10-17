@@ -41,7 +41,7 @@ module.exports = {
 
   vuetify: {
     theme: {
-      primary: '#1976D2',
+      primary: '#546e7a',
       secondary: '#424242',
       accent: '#82B1FF',
       error: '#FF5252',

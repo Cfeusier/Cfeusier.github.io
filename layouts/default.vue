@@ -1,55 +1,63 @@
 <template>
-  <div>
-    <nuxt/>
-  </div>
+  <v-app>
+    <v-navigation-drawer stateless
+      :mini-variant.sync="mini"
+      value="true"
+      hide-overlay
+      class="transparent">
+      <v-toolbar flat class="primary">
+        <v-list class="pa-0">
+          <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <img src="https://randomuser.me/api/portraits/men/85.jpg">
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title>Clark Feusier</v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-btn icon
+                @click.stop="mini = !mini">
+                <v-icon>chevron_left</v-icon>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
+      <v-list class="pt-0" dense>
+        <v-divider></v-divider>
+        <v-list-tile v-for="item in navItems"
+          :key="item.title"
+          @click="">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-content>
+      <v-container fluid>
+      <nuxt/>
+      </v-container>
+    </v-content>
+    <v-footer app></v-footer>
+  </v-app>
 </template>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+<script>
+export default {
+  data () {
+    return {
+      mini: true,
+      right: null,
+      navItems: [
+        { title: 'Home', icon: 'dashboard' },
+        { title: 'About', icon: 'question_answer' }
+      ]
+    };
+  }
 }
+</script>
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
-</style>
