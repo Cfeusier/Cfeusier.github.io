@@ -1,4 +1,7 @@
-const pkg = require('./package')
+import * as pkg from './package';
+import cheerio from 'cheerio';
+
+console.log(pkg, cheerio)
 
 module.exports = {
   mode: 'universal',
@@ -40,7 +43,8 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'cheerio'
   ],
 
   /*
