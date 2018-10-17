@@ -5,7 +5,7 @@ module.exports = {
   mode: 'universal',
 
   head: {
-    title: pkg.name,
+    title: 'Clark Feusier | Software and Metalogic',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -46,10 +46,6 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-
-  //generate: {
-  //  fallback: 'index.html'
-  // },
 
   router: {
     scrollBehavior () {
