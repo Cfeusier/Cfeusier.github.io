@@ -1,14 +1,9 @@
 import * as pkg from './package';
 import cheerio from 'cheerio';
 
-console.log(pkg, cheerio)
-
 module.exports = {
   mode: 'universal',
 
-  /*
-  ** Headers of the page
-  */
   head: {
     title: pkg.name,
     meta: [
@@ -22,21 +17,19 @@ module.exports = {
   },
 
   /*
-  ** Customize the progress-bar color
+  ** Progress-bar color
   */
   loading: { color: '#fff' },
 
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [],
 
   /*
   ** Nuxt.js modules
@@ -54,6 +47,14 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
+  generate: {
+    fallback: 'index.html'
+  },
+
+  /*
+   ** remove the buggy preload/prefetch logic and strip html of nuxt files
+   ** as we are generating a static site that doesn't need nuxt after build
+  */
   render: { resourceHints: false },
   hooks: {
     'generate:page': page => {
@@ -63,15 +64,10 @@ module.exports = {
     },
   },
 
-    /*
-  ** Build configuration
-  */
   build: {
     /*
-    ** You can extend webpack config here
+    ** extend webpack config here
     */
-    extend(config, ctx) {
-
-    }
+    extend(config, ctx) {}
   }
 }
