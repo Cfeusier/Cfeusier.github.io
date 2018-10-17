@@ -47,8 +47,21 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
-  generate: {
-    fallback: 'index.html'
+  //generate: {
+  //  fallback: 'index.html'
+  // },
+
+  router: {
+    scrollBehavior () {
+      return { x: 0, y: 0 };
+    },
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: '404 Error Page',
+        path: '*',
+        component: resolve(__dirname, 'pages/404.vue')
+      })
+    }
   },
 
   /*
