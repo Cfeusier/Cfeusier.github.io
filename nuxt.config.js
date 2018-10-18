@@ -41,13 +41,21 @@ module.exports = {
 
   vuetify: {
     theme: {
-      primary: '#546e7a',
-      secondary: '#424242',
-      accent: '#82B1FF',
-      error: '#FF5252',
-      info: '#2196F3',
-      success: '#4CAF50',
-      warning: '#FFC107'
+      primary: {
+        base: '#546e7a',
+        darken1: '#29434e',
+        lighten1: '#819ca9'
+      },
+      secondary: {
+        base: '#f8bbd0',
+        darken1: '#c48b9f',
+        lighten1: '#ffeeff'
+      },
+      // accent: '#82B1FF',
+      // error: '#FF5252',
+      // info: '#2196F3',
+      // success: '#4CAF50',
+      // warning: '#FFC107'
     }
   },
 

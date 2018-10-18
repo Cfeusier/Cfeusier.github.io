@@ -12,12 +12,12 @@
               <img src="https://randomuser.me/api/portraits/men/85.jpg">
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>Clark Feusier</v-list-tile-title>
+              <v-list-tile-title class="secondary--text text--lighten-1">Clark Feusier</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon
                 @click.stop="mini = !mini">
-                <v-icon>chevron_left</v-icon>
+                <v-icon class="secondary--text text--lighten-4">chevron_left</v-icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
