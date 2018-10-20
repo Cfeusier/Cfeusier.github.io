@@ -40,6 +40,9 @@ module.exports = {
   ],
 
   vuetify: {
+    options: {
+      customProperties: true
+    },
     theme: {
       primary: {
         base: '#546e7a',
