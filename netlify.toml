@@ -7,5 +7,5 @@ force = true
 [[headers]]
   for="/*"
   [headers.values]
-    Link = '</assets/base.css>; rel=preload; as=style'
+    Link = '</base.css>; rel=preload; as=style'
 
