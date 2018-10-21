@@ -78,3 +78,13 @@ export default {
 }
 </script>
 
+<style scoped>
+.nav-drawer-border-bottom {
+  border-bottom-style: solid;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-width: thin;
+  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
+}
+</style>
+

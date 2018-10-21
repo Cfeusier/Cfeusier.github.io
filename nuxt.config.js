@@ -1,5 +1,4 @@
 import * as pkg from './package';
-import cheerio from 'cheerio';
 
 module.exports = {
   mode: 'universal',
@@ -35,13 +34,12 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    'cheerio',
     '@nuxtjs/vuetify'
   ],
 
   vuetify: {
     options: {
-      customProperties: true
+      customProperties: true // generate variables from theme colors
     },
     theme: {
       primary: {
@@ -80,13 +78,6 @@ module.exports = {
    ** as we are generating a static site that doesn't need nuxt after build
   */
   render: { resourceHints: false },
-  hooks: {
-    //'generate:page': page => {
-    //  const doc = cheerio.load(page.html);
-    //  doc(`body script`).remove();
-    //  page.html = doc.html();
-    //},
-  },
 
   build: {
     /*

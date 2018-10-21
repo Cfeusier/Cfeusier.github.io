@@ -19,9 +19,3 @@
   </section>
 </template>
 
-<style>
-.ml-n-10 {
-  margin-left: -10px !important;
-}
-</style>
-
