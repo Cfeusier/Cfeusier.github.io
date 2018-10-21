@@ -27,7 +27,7 @@
         </v-list-tile>
       </v-list>
     </v-toolbar>
-    <v-list class="pt-0" dense>
+    <v-list subheader dense>
       <v-divider></v-divider>
       <v-list-tile v-for="item in navItems"
         :key="item.title"
@@ -42,7 +42,52 @@
       </v-list-tile>
       <v-divider></v-divider>
     </v-list>
-    <v-subheader>Contact</v-subheader>
+    <v-list subheader dense v-if="!mini">
+      <v-subheader class="primary--text text--lighten-1">Contact</v-subheader>
+      <v-list-tile ripple href="mailto:cfeusier+web@gmail.com">
+        <v-list-tile-action>
+          <v-icon class="secondary--text text--darken-2">mail_outline</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title class="primary--text">Email</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile ripple href="http://linkedin.com/in/clarkfeusier" target="_blank" rel="noopener">
+        <v-list-tile-action>
+          <v-icon class="secondary--text text--darken-2">work_outline</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title class="primary--text">LinkedIn</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile ripple href="https://github.com/Cfeusier" target="_blank" rel="noopener">
+        <v-list-tile-action>
+          <v-icon class="secondary--text text--darken-2">build</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title class="primary--text">GitHub</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
+    <v-footer fixed class="transparent">
+      <v-flex text-xs-center>
+        <v-menu
+          v-model="copyright"
+          :close-on-content-click="false"
+          right
+          offset-x
+          transition="scale-transition">
+          <v-btn icon slot="activator">
+            <v-icon small class="primary--text">copyright</v-icon>
+          </v-btn>
+          <v-card tile width="220">
+            <v-toolbar color="primary" flat card dense height="20"></v-toolbar>
+            <v-toolbar color="secondary" flat card dense height="5"></v-toolbar>
+            <v-card-text class="primary--text text--darken-1">Copyright, Clark Feusier 2018</v-card-text>
+          </v-card>
+        </v-menu>
+      </v-flex>
+    </v-footer>
   </v-navigation-drawer>
 </template>
 
@@ -55,7 +100,7 @@ export default {
   data () {
     return {
       mini: true,
-      right: null,
+      copyright: false,
       navItems: this.items.slice()
     };
   },
