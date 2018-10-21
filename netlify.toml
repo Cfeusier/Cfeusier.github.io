@@ -4,8 +4,3 @@ to = "https://clarkfeusier.com/:splat"
 status = 301
 force = true
 
-[[headers]]
-  for="/*"
-  [headers.values]
-    Link = '</base.css>; rel=preload; as=style'
-
