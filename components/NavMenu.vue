@@ -62,7 +62,7 @@ export default {
   methods: {
     updateSelection () {
       this.navItems = this.navItems.map((i) => {
-        i.selected = this.$route.path === i.route;
+        i.selected = (this.$route.path === i.route || this.$route.path === `${i.route}/`);
         return i;
       });
     },
