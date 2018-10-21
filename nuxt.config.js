@@ -81,11 +81,11 @@ module.exports = {
   */
   render: { resourceHints: false },
   hooks: {
-    'generate:page': page => {
-      const doc = cheerio.load(page.html);
-      doc(`body script`).remove();
-      page.html = doc.html();
-    },
+    //'generate:page': page => {
+    //  const doc = cheerio.load(page.html);
+    //  doc(`body script`).remove();
+    //  page.html = doc.html();
+    //},
   },
 
   build: {
@@ -93,8 +93,5 @@ module.exports = {
     ** extend webpack config here
     */
     extend(config, ctx) {},
-    extractCSS: {
-      allChunks: true
-    }
   }
 }
