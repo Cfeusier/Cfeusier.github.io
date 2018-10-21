@@ -3,3 +3,9 @@ from = "https://cfeusier.netlify.com/*"
 to = "https://clarkfeusier.com/:splat"
 status = 301
 force = true
+
+[[headers]]
+  for="/*"
+  [headers.values]
+    Link = '</assets/base.css>; rel=preload; as=style'
+
