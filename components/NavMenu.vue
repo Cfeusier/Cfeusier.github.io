@@ -46,7 +46,7 @@
   </v-navigation-drawer>
 </template>
 
-<style scoped>
+<style>
 .nav-drawer-border-bottom {
   border-bottom-style: solid;
   border-bottom-left-radius: 2px;
