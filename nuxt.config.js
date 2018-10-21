@@ -93,5 +93,8 @@ module.exports = {
     ** extend webpack config here
     */
     extend(config, ctx) {},
+    extractCSS: {
+      allChunks: true
+    }
   }
 }
