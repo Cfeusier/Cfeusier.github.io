@@ -133,7 +133,7 @@
                     is my best friend. She makes every day better. She is 5 years old -- the longest relationship I've ever been had.
                   </span>
                 </p>
-                <v-card img="fiddle.jpg" height="600" class="primary--border-lighten-1">
+                <v-card img="/fiddle.jpg" height="600" class="primary--border-lighten-1">
                   <v-btn icon color="secondary" @click.stop="fiddle = false"><v-icon color="primary">cancel</v-icon></v-btn>
                 </v-card>
               </v-dialog>
