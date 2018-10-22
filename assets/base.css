@@ -1,6 +1,12 @@
 .ml-n-10 {
   margin-left: -10px !important;
 }
+.ml-20 {
+  margin-left: 20px !important;
+}
+.mt-10 {
+  margin-top: 10px !important;
+}
 .mt-20 {
   margin-top: 20px !important;
 }
@@ -14,11 +20,22 @@
   padding: 20px;
 }
 .hover {
-  cursor: pointer;
+  cursor: pointer !important;
+}
+.no-ptr {
+  cursor: default !important;
+}
+.v-dialog__activator * {
+  cursor: auto;
 }
 .nuxt-link-active {
   // TODO
   color: var(--v-primary-darken1);
   background-color: var(--v-secondary-base);
 }
-
+.primary--border {
+  border: 3px solid var(--v-primary-base);
+}
+.primary--border-lighten-1 {
+  border: 3px solid var(--v-primary-lighten1);
+}
