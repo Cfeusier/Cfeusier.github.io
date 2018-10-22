@@ -119,7 +119,7 @@
         <div>
           <v-icon left large class="primary--text text--lighten-1">cake</v-icon>
           <p>
-            I am 30 years old and male.
+            I am 30 years old and male. I like nice people, smart people, pretty people, and cool people.
           </p>
         </div>
         <no-ssr placeholder="fiddle">
@@ -142,26 +142,71 @@
         </no-ssr>
         <div>
           <v-icon left large class="primary--text text--lighten-1">favorite</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">wc</v-icon>
           <p>
             My family...
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">music_note</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">music_video</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">straighten</v-icon>
           <p>
             Playing: mainly piano...
           </p>
         </div>
         <div>
           <v-icon left large class="primary--text text--lighten-1">headset</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">album</v-icon>
           <p>
             Listening: fairly eclectic, but always leaning towards hip-hop, unless feeling nostalgic...
+          </p>
+        </div>
+        <div>
+          <v-icon left large class="primary--text text--lighten-1">local_bar</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">local_cafe</v-icon>
+          <p>
+            wine, beer, coffee, tea, whiskey
+          </p>
+        </div>
+        <div>
+          <v-icon left large class="primary--text text--lighten-1">book</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">chrome_reader_mode</v-icon>
+          <p>
+            Reading: ...
+          </p>
+        </div>
+        <div>
+          <v-icon left large class="primary--text text--lighten-1">movie</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">videocam</v-icon>
+          <p>
+            Movies: ...
+          </p>
+        </div>
+        <div>
+          <v-icon left large class="primary--text text--lighten-1">language</v-icon>
+          <p>
+            Languages: ...
+          </p>
+        </div>
+        <div>
+          <v-icon left large class="primary--text text--lighten-1">beach_access</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">filter_hdr</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">nature_people</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">pool</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">fitness_center</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">golf_course</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">directions_bike</v-icon>
+          <v-icon left large class="primary--text text--lighten-1">directions_run</v-icon>
+          <p>
+            Outdoors: ...
+          </p>
+          <p>
+            Fitness: ...
           </p>
         </div>
       </v-card-text>
     </v-card>
 
-<!--  wine, beer, coffee, tea, whiskey, bay area sports, nice people, smart people, pretty people, cool people, and hiking.</p> -->
 
     <h2>Past Life</h2>
     <h4>Caution: Braggy</h4>
