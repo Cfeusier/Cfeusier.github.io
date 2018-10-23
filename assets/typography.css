@@ -1,3 +1,8 @@
+.p-text {
+  color: var(--v-primary-base) !important;
+  caret-color: var(--v-primary-base) !important;
+}
+
 .p-text-dark {
   color: var(--v-primary-darken1) !important;
   caret-color: var(--v-primary-darken1) !important;

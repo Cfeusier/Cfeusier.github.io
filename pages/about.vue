@@ -2,8 +2,7 @@
   <section>
     <h1 class="p-text-dark display-4">About</h1>
     <v-card tile class="my-4">
-      <v-toolbar color="secondary" flat card dense height="15"></v-toolbar>
-      <v-toolbar color="primary" flat card dense height="5"></v-toolbar>
+      <stripes />
       <v-card-text class="p-text-dark">
         <p>
           <v-icon left class="p-text-light">place</v-icon>
@@ -25,9 +24,8 @@
         </p>
       </v-card-text>
     </v-card>
-    <v-card tile class="my-20">
-      <v-toolbar color="secondary" flat card dense height="15"></v-toolbar>
-      <v-toolbar color="primary" flat card dense height="5"></v-toolbar>
+    <v-card tile class="my-4">
+      <stripes />
       <v-card-text class="p-text-dark">
         <h2 class="p-text-dark display-1">Software</h2>
         <div>
@@ -71,9 +69,8 @@
         </div>
       </v-card-text>
     </v-card>
-    <v-card tile class="my-20">
-      <v-toolbar color="secondary" flat card dense height="15"></v-toolbar>
-      <v-toolbar color="primary" flat card dense height="5"></v-toolbar>
+    <v-card tile class="my-4">
+      <stripes />
       <v-card-text class="p-text-dark">
         <h2 class="p-text-dark display-1">Metalogic and Philosophy</h2>
         <div>
@@ -111,9 +108,8 @@
         </div>
       </v-card-text>
     </v-card>
-    <v-card tile class="my-20">
-      <v-toolbar color="secondary" flat card dense height="15"></v-toolbar>
-      <v-toolbar color="primary" flat card dense height="5"></v-toolbar>
+    <v-card tile class="my-4">
+      <stripes />
       <v-card-text class="p-text-dark">
         <h2 class="p-text-dark display-1">Life Outside the Mind</h2>
         <div>
@@ -247,7 +243,10 @@
 </template>
 
 <script>
+import Stripes from '~/components/Stripes.vue';
+
 export default {
+  components: { Stripes },
   data () {
     return {
       fiddle: false

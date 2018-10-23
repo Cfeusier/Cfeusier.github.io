@@ -11,7 +11,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
 
@@ -38,8 +39,9 @@ module.exports = {
   ],
 
   vuetify: {
+    materialIcons: false,
     options: {
-      customProperties: true // generate variables from theme colors
+      customProperties: true, // generate variables from theme colors
     },
     theme: {
       primary: {
@@ -52,11 +54,11 @@ module.exports = {
         darken1: '#c48b9f',
         lighten1: '#ffeeff'
       },
-      // accent: '#82B1FF',
-      // error: '#FF5252',
-      // info: '#2196F3',
-      // success: '#4CAF50',
-      // warning: '#FFC107'
+      // accent: '',
+      // error: '',
+      // info: '',
+      // success: '',
+      // warning: ''
     }
   },
 
