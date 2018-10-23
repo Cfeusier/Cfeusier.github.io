@@ -2,8 +2,8 @@
   <v-app>
     <nav-menu :items="navItems"></nav-menu>
     <v-content>
-      <v-container fluid>
-      <nuxt/>
+      <v-container fluid class="pl-5">
+        <nuxt/>
       </v-container>
     </v-content>
   </v-app>

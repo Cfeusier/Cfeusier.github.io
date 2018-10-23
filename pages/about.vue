@@ -1,43 +1,43 @@
 <template>
   <section>
-    <h1 class="primary--text text--darken-1 display-4">About</h1>
-    <v-card tile class="mt-20 mb-20">
+    <h1 class="p-text-dark display-4">About</h1>
+    <v-card tile class="my-4">
       <v-toolbar color="secondary" flat card dense height="15"></v-toolbar>
       <v-toolbar color="primary" flat card dense height="5"></v-toolbar>
-      <v-card-text class="primary--text text--darken-1">
+      <v-card-text class="p-text-dark">
         <p>
-          <v-icon left class="primary--text text--lighten-1">place</v-icon>
+          <v-icon left class="p-text-light">place</v-icon>
           <span>
             I work as a <strong>Software Architect and Engineer</strong> located in <em>California</em>
           </span>
         </p>
         <p>
-          <v-icon left class="primary--text text--lighten-1">school</v-icon>
+          <v-icon left class="p-text-light">school</v-icon>
           <span>
             <em>B.A.</em> from <strong>California Polytechnic State University</strong>, San Luis Obispo &mdash; studies in <a href="http://en.wikipedia.org/wiki/Philosophy" target="_blank">philosophy</a> and <a href="http://en.wikipedia.org/wiki/Physics" target="_blank" rel="noopener">physics</a>
           </span>
         </p>
         <p>
-          <v-icon left class="primary--text text--lighten-1">account_balance</v-icon>
+          <v-icon left class="p-text-light">account_balance</v-icon>
           <span>
             <em>M.A.</em> from the <strong>University of Chicago</strong> &mdash; research in <a href="http://en.wikipedia.org/wiki/Metalogic" target="_blank">metalogic</a> and <a href="http://en.wikipedia.org/wiki/Philosophy_of_science" target="_blank" rel="noopener">philosophy of science</a>
           </span>
         </p>
       </v-card-text>
     </v-card>
-    <v-card tile class="mt-20 mb-20">
+    <v-card tile class="my-20">
       <v-toolbar color="secondary" flat card dense height="15"></v-toolbar>
       <v-toolbar color="primary" flat card dense height="5"></v-toolbar>
-      <v-card-text class="primary--text text--darken-1">
-        <h2 class="primary--text text--darken-1 display-1">Software</h2>
+      <v-card-text class="p-text-dark">
+        <h2 class="p-text-dark display-1">Software</h2>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">code</v-icon>
+          <v-icon left large class="p-text-light">code</v-icon>
           <p>
             Software engineering satiates my desire to solve large problems with magic &mdash; symbols, semantic reference, circuitry, and a dash of electricity. I am rarely more satisfied than when building software.
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">devices_other</v-icon>
+          <v-icon left large class="p-text-light">devices_other</v-icon>
           <p>
             I tend to view most technologies as disposable, so I focus on the general and invariant principles behind the technologies. That being said, my current interests center around the following:
           </p>
@@ -61,7 +61,7 @@
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">call_split</v-icon>
+          <v-icon left large class="p-text-light">call_split</v-icon>
           <p>
             My open-source-interests include web application frameworks, dev tools, machine learning libraries, natural language processing libraries, knowledge representation frameworks, and anything cool.
           </p>
@@ -71,13 +71,13 @@
         </div>
       </v-card-text>
     </v-card>
-    <v-card tile class="mt-20 mb-20">
+    <v-card tile class="my-20">
       <v-toolbar color="secondary" flat card dense height="15"></v-toolbar>
       <v-toolbar color="primary" flat card dense height="5"></v-toolbar>
-      <v-card-text class="primary--text text--darken-1">
-        <h2 class="primary--text text--darken-1 display-1">Metalogic and Philosophy</h2>
+      <v-card-text class="p-text-dark">
+        <h2 class="p-text-dark display-1">Metalogic and Philosophy</h2>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">functions</v-icon>
+          <v-icon left large class="p-text-light">functions</v-icon>
           <p>
             It's no surprise that I enjoy building software, given my fascination with artificial symbolic languages. In my studies, this fascination manifested itself as a passion for complex systems, particularly those constructed in symbolic logic. My thought always seems to revolve around topics in and in-between metalogic, science, philosophy, and software engineering.
           </p>
@@ -89,19 +89,19 @@
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">category</v-icon>
+          <v-icon left large class="p-text-light">category</v-icon>
           <p>
             My thinking styles are heavily influenced by the sciences and philosophies of science. I think this is related to my fascination with complex systems that display emergent properties. I see the world through a filter of relativistic and quantum mechanical physics, neo-evolutionary biological theory, neurophysiological thought, and different perspectives from computer science.
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">library_books</v-icon>
+          <v-icon left large class="p-text-light">library_books</v-icon>
           <p>
             My 'classic' philosophical desires always come back to the dead German dudes &mdash; Kant, Nietzsche, and Wittgenstein. This is probably also where I get my flare for melodrama and eclectic thought.
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">bubble_chart</v-icon>
+          <v-icon left large class="p-text-light">bubble_chart</v-icon>
           <p>
             Finally, my philosophical wheelhouse is the pursuit of clarity around normativity, language, mind, science, and logic.
           </p>
@@ -111,24 +111,24 @@
         </div>
       </v-card-text>
     </v-card>
-    <v-card tile class="mt-20 mb-20">
+    <v-card tile class="my-20">
       <v-toolbar color="secondary" flat card dense height="15"></v-toolbar>
       <v-toolbar color="primary" flat card dense height="5"></v-toolbar>
-      <v-card-text class="primary--text text--darken-1">
-        <h2 class="primary--text text--darken-1 display-1">Life Outside the Mind</h2>
+      <v-card-text class="p-text-dark">
+        <h2 class="p-text-dark display-1">Life Outside the Mind</h2>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">cake</v-icon>
+          <v-icon left large class="p-text-light">cake</v-icon>
           <p>
             I am 30 years old and male. I like nice people, smart people, pretty people, and cool people.
           </p>
         </div>
         <no-ssr placeholder="fiddle">
           <div>
-            <v-icon left large class="primary--text text--lighten-1">pets</v-icon>
+            <v-icon left large class="p-text-light">pets</v-icon>
             <div>
               <v-dialog v-model="fiddle" max-width="50%">
                 <p slot="activator">
-                  My dog, <span class="primary--text text--lighten-1 hover">Fiddle</span>
+                  My dog, <span class="p-text-light hover">Fiddle</span>
                   <span>
                     is my best friend. She makes every day better. She is 5 years old -- the longest relationship I've ever been had.
                   </span>
@@ -141,62 +141,62 @@
           </div>
         </no-ssr>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">favorite</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">wc</v-icon>
+          <v-icon left large class="p-text-light">favorite</v-icon>
+          <v-icon left large class="p-text-light">wc</v-icon>
           <p>
             My family...
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">music_video</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">straighten</v-icon>
+          <v-icon left large class="p-text-light">music_video</v-icon>
+          <v-icon left large class="p-text-light">straighten</v-icon>
           <p>
             Playing: mainly piano...
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">headset</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">album</v-icon>
+          <v-icon left large class="p-text-light">headset</v-icon>
+          <v-icon left large class="p-text-light">album</v-icon>
           <p>
             Listening: fairly eclectic, but always leaning towards hip-hop, unless feeling nostalgic...
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">local_bar</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">local_cafe</v-icon>
+          <v-icon left large class="p-text-light">local_bar</v-icon>
+          <v-icon left large class="p-text-light">local_cafe</v-icon>
           <p>
             wine, beer, coffee, tea, whiskey
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">book</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">chrome_reader_mode</v-icon>
+          <v-icon left large class="p-text-light">book</v-icon>
+          <v-icon left large class="p-text-light">chrome_reader_mode</v-icon>
           <p>
             Reading: ...
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">movie</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">videocam</v-icon>
+          <v-icon left large class="p-text-light">movie</v-icon>
+          <v-icon left large class="p-text-light">videocam</v-icon>
           <p>
             Movies: ...
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">language</v-icon>
+          <v-icon left large class="p-text-light">language</v-icon>
           <p>
             Languages: ...
           </p>
         </div>
         <div>
-          <v-icon left large class="primary--text text--lighten-1">beach_access</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">filter_hdr</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">nature_people</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">pool</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">fitness_center</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">golf_course</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">directions_bike</v-icon>
-          <v-icon left large class="primary--text text--lighten-1">directions_run</v-icon>
+          <v-icon left large class="p-text-light">beach_access</v-icon>
+          <v-icon left large class="p-text-light">filter_hdr</v-icon>
+          <v-icon left large class="p-text-light">nature_people</v-icon>
+          <v-icon left large class="p-text-light">pool</v-icon>
+          <v-icon left large class="p-text-light">fitness_center</v-icon>
+          <v-icon left large class="p-text-light">golf_course</v-icon>
+          <v-icon left large class="p-text-light">directions_bike</v-icon>
+          <v-icon left large class="p-text-light">directions_run</v-icon>
           <p>
             Outdoors: ...
           </p>
