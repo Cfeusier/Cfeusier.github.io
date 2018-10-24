@@ -1,4 +1,3 @@
-// TODO: REFACTOR THIS CRAP
 .ml-n-10 {
   margin-left: -10px !important;
 }
@@ -33,7 +32,6 @@
   cursor: auto;
 }
 .nuxt-link-active {
-  // TODO
   color: var(--v-primary-darken1);
   background-color: var(--v-secondary-base);
 }
