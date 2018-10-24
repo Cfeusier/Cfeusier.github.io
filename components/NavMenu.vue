@@ -94,6 +94,7 @@
 <script>
 export default {
   mounted () {
+    // TODO: update this to use computed prop
     this.updateSelection();
     this.mobileWatch = this.$store.watch(
       () => this.$store.state.isMobile,

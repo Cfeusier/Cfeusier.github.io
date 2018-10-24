@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="p-text-dark display-4">Collected Writings</h1>
+    <h1 :class="titleClass">Collected Writings</h1>
     <v-card tile class="mt-4 mb-2" id="#toc">
       <stripes />
       <v-card-title class="display-1 p-text">Topics</v-card-title>
@@ -10,7 +10,7 @@
       </v-card-text>
     </v-card>
     <v-layout row>
-      <h2 class="p-text-light display-1 py-3" id="iqs">Popular Interview Question Series</h2>
+      <h2 :class="['py-3', subtitleClass]" id="iqs">Popular Interview Question Series</h2>
       <v-btn flat icon large color="primary" href="#toc" class="my-3">
         <v-icon>open_in_browser</v-icon>
       </v-btn>
@@ -31,7 +31,7 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
     <v-layout row>
-      <h2 class="p-text-light display-1 py-3" id="tech">Technology</h2>
+      <h2 :class="['py-3', subtitleClass]" id="tech">Technology</h2>
       <v-btn flat icon large color="primary" href="#toc" class="my-3">
         <v-icon>open_in_browser</v-icon>
       </v-btn>
@@ -82,52 +82,18 @@
 </template>
 
 <script>
+import { interviewQuestionPosts } from '~/assets/constants/interview_questions';
+import { techPosts } from '~/assets/constants/tech_posts';
 import Stripes from '~/components/Stripes.vue';
+import { mapState } from 'vuex';
 
 export default {
   components: { Stripes },
-  props: ['isMobile'],
+  computed: mapState(['isMobile', 'titleClass', 'subtitleClass']),
   data () {
     return {
-      interviewQuestionPosts: [
-        {
-          title: 'Higher-Order Functions and Function Binding',
-          description: 'TODO...',
-          ref: '/2015/01/11/interview-question-function-bind'
-        },
-        {
-          title: 'Balanced Parentheses and a Stack',
-          description: 'TODO...',
-          ref: '/2015/01/16/interview-question-balanced-parentheses-stack'
-        },
-        {
-          title: 'Variations on Asynchronous Map',
-          description: 'TODO...',
-          ref: '/2015/01/18/interview-question-asynchronous-map'
-        },
-        {
-          title: 'Sudoku Solution Validator in 1 Hour',
-          description: 'TODO...',
-          ref: '/2015/03/22/sudoku-solution-validator'
-        }
-      ],
-      techPosts: [
-        {
-          title: 'Node Basics: How to Create a Simple Server and Router + Node Fundamentals',
-          description: 'TODO...',
-          ref: '/2015/01/08/simple-node-server-api'
-        },
-        {
-          title: 'Concatenate and Minify JavaScripts and Stylesheets for Production with Grunt',
-          description: 'TODO...',
-          ref: '/2015/01/14/concatenate-minify-javascripts-stylesheets-grunt'
-        },
-        {
-          title: 'Generate a New Jekyll Post with Boilerplate using Rake',
-          description: 'TODO...',
-          ref: '/2014/11/08/rake-task-generate-new-post-file-jekyll'
-        }
-      ]
+      interviewQuestionPosts,
+      techPosts,
     };
   }
 }

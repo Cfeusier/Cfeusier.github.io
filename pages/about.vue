@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="p-text-dark display-4">About</h1>
+    <h1 :class="titleClass">About</h1>
     <v-card tile class="my-4">
       <stripes />
       <v-card-text class="p-text-dark">
@@ -244,6 +244,7 @@
 
 <script>
 import Stripes from '~/components/Stripes.vue';
+import { mapState } from 'vuex';
 
 export default {
   components: { Stripes },
@@ -251,7 +252,8 @@ export default {
     return {
       fiddle: false
     };
-  }
+  },
+  computed: mapState(['titleClass'])
 }
 </script>
 

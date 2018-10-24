@@ -2,7 +2,7 @@
   <v-app v-resize="onResize">
     <nav-menu :items="navItems"></nav-menu>
     <v-content>
-      <v-container fluid class="pl-5">
+      <v-container fluid :class="containerClass">
         <nuxt />
       </v-container>
     </v-content>
@@ -11,6 +11,7 @@
 
 <script>
 import NavMenu from '~/components/NavMenu.vue';
+import { mapState } from 'vuex';
 
 export default {
   components: { NavMenu },
@@ -46,9 +47,10 @@ export default {
   },
   methods: {
     onResize () {
-      this.$store.commit('toggleMobile', window.outerWidth < 645);
+      this.$store.dispatch('toggleMobile', window.outerWidth < 645);
     }
-  }
+  },
+  computed: mapState(['containerClass'])
 }
 </script>
 
