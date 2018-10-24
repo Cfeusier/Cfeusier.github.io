@@ -1,9 +1,9 @@
 <template>
-  <v-app>
+  <v-app v-resize="onResize">
     <nav-menu :items="navItems"></nav-menu>
     <v-content>
       <v-container fluid class="pl-5">
-        <nuxt/>
+        <nuxt />
       </v-container>
     </v-content>
   </v-app>
@@ -14,8 +14,12 @@ import NavMenu from '~/components/NavMenu.vue';
 
 export default {
   components: { NavMenu },
+  mounted () {
+    this.onResize();
+  },
   data () {
     return {
+      isMobile: false,
       navItems: [
         {
           title: 'Home',
@@ -39,6 +43,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    onResize () {
+      this.$store.commit('toggleMobile', window.outerWidth < 645);
+    }
   }
 }
 </script>

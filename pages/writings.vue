@@ -5,7 +5,7 @@
       <stripes />
       <v-card-title class="display-1 p-text">Topics</v-card-title>
       <v-card-text>
-        <v-btn flat href="#iqs" class="text-capitalize" outline>Popular Interview Question Series</v-btn>
+        <v-btn flat href="#iqs" class="text-capitalize" outline>Popular Interview Questions</v-btn>
         <v-btn flat href="#tech" class="text-capitalize" outline>Technology</v-btn>
       </v-card-text>
     </v-card>
@@ -86,6 +86,7 @@ import Stripes from '~/components/Stripes.vue';
 
 export default {
   components: { Stripes },
+  props: ['isMobile'],
   data () {
     return {
       interviewQuestionPosts: [

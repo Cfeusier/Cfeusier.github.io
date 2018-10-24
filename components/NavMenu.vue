@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer app
     stateless
-    :mini-variant.sync="mini"
+    :mini-variant="mini"
     value="true"
     hide-overlay
     class="transparent nav-drawer-border-bottom"
@@ -95,13 +95,25 @@
 export default {
   mounted () {
     this.updateSelection();
+    this.mobileWatch = this.$store.watch(
+      () => this.$store.state.isMobile,
+      isMobile => {
+        this.isMobile = isMobile;
+        this.mini = this.isMobile;
+      }
+    );
+  },
+  beforeDestroy () {
+    this.mobileWatch();
   },
   props: ['items'],
   data () {
     return {
       mini: true,
+      isMobile: false,
       copyright: false,
-      navItems: this.items.slice()
+      navItems: this.items.slice(),
+      mobileWatch: null
     };
   },
   methods: {
@@ -113,12 +125,14 @@ export default {
     },
     routeOrOpen (navItem) {
       this.$router.push({ path: navItem.route });
+      if (this.isMobile) return;
+      this.mini = false;
     }
   },
   watch: {
     '$route' () {
       this.updateSelection();
-    }
+    },
   }
 }
 </script>
