@@ -19,7 +19,10 @@ module.exports = {
   /*
   ** Progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: {
+    color: '#f8bbd0',
+    height: '5px'
+  },
 
   /*
   ** Global CSS
@@ -29,7 +32,17 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    {
+      src: '~/plugins/contentful_client.js',
+      ssr: false
+    }
+  ],
+
+  env: {
+    contentfulToken: process.env.CF_CONTENTFUL_TOKEN,
+    contentfulSpace: process.env.CF_CONTENTFUL_SPACE_ID
+  },
 
   /*
   ** Nuxt.js modules

@@ -57,6 +57,7 @@
           <p>
             <strong>Currently Exploring:</strong> Go, Scala, Clojure, Python, Java, Swift, C, Cython, Erlang, Lisp
           </p>
+          <h1>TODO: this site is built with...</h1>
         </div>
         <div>
           <v-icon left large class="p-text-light">call_split</v-icon>

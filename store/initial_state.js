@@ -9,7 +9,9 @@ export default function initialState () {
     isMobile: false,
     titleClass: DEFAULT_TITLE_CLASS,
     subtitleClass: DEFAULT_SUBTITLE_CLASS,
-    containerClass: DEFAULT_CONTAINER_CLASS
+    containerClass: DEFAULT_CONTAINER_CLASS,
+    postsCount: 0,
+    contentClient: null
   };
 }
 

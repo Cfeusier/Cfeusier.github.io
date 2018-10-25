@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/vuetify": "^0.4.3",
+    "contentful": "^7.0.5",
     "cross-env": "^5.2.0",
     "nuxt": "^2.0.0"
   },

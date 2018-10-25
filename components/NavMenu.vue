@@ -100,16 +100,11 @@ export default {
   },
   props: ['items'],
   computed: {
-    mini: {
-      get: function () {
-        return this.isMobile;
-      },
-      set: function () {}
-    },
     ...mapState(['isMobile'])
   },
   data () {
     return {
+      mini: false,
       copyright: false,
       navItems: this.items.slice(),
     };
@@ -134,6 +129,9 @@ export default {
     '$route' () {
       this.updateSelection();
     },
+    isMobile (update) {
+      this.mini = update;
+    }
   }
 }
 </script>
