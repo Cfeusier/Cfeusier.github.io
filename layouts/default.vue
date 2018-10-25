@@ -11,6 +11,7 @@
 
 <script>
 import NavMenu from '~/components/NavMenu.vue';
+import { navItems } from '~/assets/constants/navigation_items';
 import { mapState } from 'vuex';
 
 export default {
@@ -19,31 +20,7 @@ export default {
     this.onResize();
   },
   data () {
-    return {
-      isMobile: false,
-      navItems: [
-        {
-          title: 'Home',
-          route: '/',
-          icon: 'home'
-        },
-        {
-          title: 'About',
-          route: '/about',
-          icon: 'account_circle'
-        },
-        {
-          title: 'Writings',
-          route: '/writings',
-          icon: 'edit'
-        },
-        {
-          title: 'Portfolio',
-          route: '/portfolio',
-          icon: 'code'
-        }
-      ]
-    };
+    return { navItems };
   },
   methods: {
     onResize () {

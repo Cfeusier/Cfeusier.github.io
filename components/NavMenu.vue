@@ -92,35 +92,35 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   mounted () {
-    // TODO: update this to use computed prop
     this.updateSelection();
-    this.mobileWatch = this.$store.watch(
-      () => this.$store.state.isMobile,
-      isMobile => {
-        this.isMobile = isMobile;
-        this.mini = this.isMobile;
-      }
-    );
-  },
-  beforeDestroy () {
-    this.mobileWatch();
   },
   props: ['items'],
+  computed: {
+    mini: {
+      get: function () {
+        return this.isMobile;
+      },
+      set: function () {}
+    },
+    ...mapState(['isMobile'])
+  },
   data () {
     return {
-      mini: true,
-      isMobile: false,
       copyright: false,
       navItems: this.items.slice(),
-      mobileWatch: null
     };
   },
   methods: {
     updateSelection () {
       this.navItems = this.navItems.map((i) => {
         i.selected = (this.$route.path === i.route || this.$route.path === `${i.route}/`);
+        if (this.$route.path.includes('/blog/')) {
+          i.selected = i.route === '/writings';
+        }
         return i;
       });
     },
