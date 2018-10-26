@@ -7,11 +7,13 @@ import {
 export default function initialState () {
   return {
     isMobile: false,
+    isLoading: false,
     titleClass: DEFAULT_TITLE_CLASS,
     subtitleClass: DEFAULT_SUBTITLE_CLASS,
     containerClass: DEFAULT_CONTAINER_CLASS,
     postsCount: 0,
-    contentClient: null
+    contentClient: null,
+    currentPost: null
   };
 }
 

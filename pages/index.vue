@@ -15,11 +15,9 @@ export default {
   computed: mapState(['titleClass', 'subtitleClass', 'postsCount']),
 
   mounted () {
-    this.$nextTick(() => this.$nuxt.$loading.start());
     this.$store
       .dispatch('fetchPosts', { limit: 10, order: 'sys.createdAt' })
-      .then(() => console.log('first page of posts are fetched'))
-      .then(() => this.$nuxt.$loading.finish());
+      .then(() => console.log('first page of posts are fetched'));
   }
 }
 </script>

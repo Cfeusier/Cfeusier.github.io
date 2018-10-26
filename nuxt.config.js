@@ -19,12 +19,9 @@ module.exports = {
   },
 
   /*
-  ** Progress-bar color
+  ** Opt-out of nuxt progress-bar because it is buggy
   */
-  loading: {
-    color: '#f8bbd0',
-    height: '5px'
-  },
+  loading: false,
 
   /*
   ** Global CSS
@@ -78,15 +75,23 @@ module.exports = {
   },
 
   router: {
+    middleware: 'start_loader',
     scrollBehavior () {
       return { x: 0, y: 0 };
     },
     extendRoutes (routes, resolve) {
-      routes.push({
-        name: '404 Error Page',
-        path: '*',
-        component: resolve(__dirname, 'pages/404.vue')
-      })
+      routes.push(...[
+        {
+          name: 'Blog Post Dynamic',
+          path: '/blog/:slug',
+          component: resolve(__dirname, 'pages/blog/_post_dynamic.vue')
+        },
+        {
+          name: '404 Error Page',
+          path: '*',
+          component: resolve(__dirname, 'pages/404.vue')
+        }
+      ]);
     }
   },
 
