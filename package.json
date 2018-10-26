@@ -17,6 +17,7 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
+    "dotenv": "^6.1.0",
     "nodemon": "^1.11.0"
   }
 }

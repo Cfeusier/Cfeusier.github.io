@@ -1,5 +1,7 @@
 import * as pkg from './package';
 
+if (process.env.NODE_ENV !== 'production') require('dotenv').load();
+
 module.exports = {
   mode: 'universal',
 
