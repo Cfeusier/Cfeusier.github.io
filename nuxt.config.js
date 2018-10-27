@@ -83,7 +83,7 @@ module.exports = {
       routes.push(...[
         {
           name: 'Blog Post Dynamic',
-          path: '/blog/:slug',
+          path: '/blog/*',
           component: resolve(__dirname, 'pages/blog/_post_dynamic.vue')
         },
         {
