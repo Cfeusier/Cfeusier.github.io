@@ -101,7 +101,7 @@ module.exports = {
   */
   render: { resourceHints: false },
 
-  generate: { subFolders: false },
+  generate: { fallback: '~/pages/blog/_post_dynamic.vue' },
 
   build: {
     /*
