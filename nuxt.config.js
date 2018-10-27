@@ -80,8 +80,12 @@ module.exports = {
       return { x: 0, y: 0 };
     },
     extendRoutes (routes, resolve) {
-      console.log(routes)
       routes.splice(0, routes.length)
+      routes.push({
+        name: 'Blog Post Dynamic',
+        path: '/blog/:slug',
+        component: resolve(__dirname, 'pages/blog/_post_dynamic.vue')
+      });
       console.log(routes)
       //routes.push(...[
       //  {
