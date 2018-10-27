@@ -83,7 +83,7 @@ module.exports = {
       routes.push(...[
         {
           name: 'Blog Post Dynamic',
-          path: '/blog/*',
+          path: '/blog/:slug',
           component: resolve(__dirname, 'pages/blog/_post_dynamic.vue')
         },
         {
@@ -100,6 +100,8 @@ module.exports = {
    ** as we are generating a static site that doesn't need nuxt after build
   */
   render: { resourceHints: false },
+
+  generate: { subFolders: false },
 
   build: {
     /*
