@@ -85,12 +85,12 @@ module.exports = {
           name: 'Blog Post Dynamic',
           path: '/blog/:slug',
           component: resolve(__dirname, 'pages/blog/_post_dynamic.vue')
-        },
-        {
-          name: '404 Error Page',
-          path: '*',
-          component: resolve(__dirname, 'pages/404.vue')
         }
+//        {
+//          name: '404 Error Page',
+//          path: '*',
+//          component: resolve(__dirname, 'pages/404.vue')
+//        }
       ]);
     }
   },
@@ -101,7 +101,7 @@ module.exports = {
   */
   render: { resourceHints: false },
 
-  generate: { fallback: '~/pages/blog/_post_dynamic.vue' },
+  //generate: { fallback: '~/pages/blog/_post_dynamic.vue' },
 
   build: {
     /*
