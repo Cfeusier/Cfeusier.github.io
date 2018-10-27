@@ -94,7 +94,7 @@ module.exports = {
   */
   render: { resourceHints: false },
 
-  //generate: { fallback: '~/pages/blog/_post_dynamic.vue' },
+  generate: { fallback: false },
 
   build: {
     /*
