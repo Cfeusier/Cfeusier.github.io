@@ -3,7 +3,7 @@ import * as pkg from './package';
 if (process.env.NODE_ENV !== 'production') require('dotenv').load();
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
 
   head: {
     title: 'Clark Feusier | Software and Metalogic',
