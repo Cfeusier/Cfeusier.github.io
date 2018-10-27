@@ -17,7 +17,8 @@ export default {
   mounted () {
     this.$store
       .dispatch('fetchPosts', { limit: 10, order: 'sys.createdAt' })
-      .then(() => console.log('first page of posts are fetched'));
+      .then(() => console.log('first page of posts are fetched'))
+      .finally(() => this.$store.commit('toggleLoading', false));
   }
 }
 </script>

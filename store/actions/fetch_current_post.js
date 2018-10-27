@@ -12,6 +12,10 @@ export default function fetchCurrentPost (
       content_type: 'post',
       'fields.slug[in]': path
     }).then(entries => {
+      if (!entries.items[0]) {
+        commit('currentPost', null);
+        return reject('No post at the provided slug');
+      }
       commit('currentPost', new BasePost(entries.items[0]));
       resolve();
     });

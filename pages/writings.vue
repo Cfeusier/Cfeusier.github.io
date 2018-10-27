@@ -89,6 +89,7 @@ import { mapState } from 'vuex';
 
 export default {
   components: { Stripes },
+  mounted () { this.$store.commit('toggleLoading', false); },
   computed: mapState(['isMobile', 'titleClass', 'subtitleClass']),
   data () {
     return {

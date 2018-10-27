@@ -8,6 +8,7 @@
 import { mapState } from 'vuex';
 
 export default {
+  mounted () { this.$store.commit('toggleLoading', false); },
   computed: mapState(['titleClass'])
 }
 </script>
